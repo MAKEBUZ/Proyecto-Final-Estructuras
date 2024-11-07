@@ -1,5 +1,19 @@
 <script lang="ts" setup>
 import { onMounted, ref, nextTick } from 'vue';
+import Slider1 from '../assets/Slider/slider1.jpg';
+import Slider2 from '../assets/Slider/slider2.jpg';
+import Slider3 from '../assets/Slider/slider3.jpg';
+import Slider4 from '../assets/Slider/slider4.jpg';
+import Slider5 from '../assets/Slider/slider5.jpg';
+
+
+const images = [
+    Slider1,
+    Slider2,
+    Slider3,
+    Slider4,
+    Slider5,
+];
 
 const container = ref<HTMLElement | null>(null);
 
@@ -26,32 +40,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
-    <div class="box box-1" style="--img: url('@/assets/Slider/slider1.jpg');" data-text="hola1"></div>
-    <div class="box box-2" style="--img: url('@/assets/Slider/slider2.jpg');" data-text="hola2"></div>
-    <div class="box box-3" style="--img: url('@/assets/Slider/slider3.jpg');" data-text="hola3"></div>
-    <div class="box box-4" style="--img: url('@/assets/Slider/slider4.jpg');" data-text="hola4"></div>
-    <div class="box box-5" style="--img: url('@/assets/Slider/slider5.jpg');" data-text="hola5"></div>
+  <div ref="container" class="container">
+    <div 
+      v-for="(image, index) in images" 
+      :key="index"
+      class="box"
+      :class="`box-${index + 1}`"
+      :style="{ backgroundImage: `url(${image})` }"
+      :data-text="`hola${index + 1}`"
+    ></div>
   </div>
 </template>
   
-<style lang="css">
-@font-face {
-    font-family: "ja-med";
-    src: url("https://cdn.jsdelivr.net/gh/codetheworld-io/static-files/ja-med.otf");
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    place-content: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: #f9f9f9;
-    overflow: hidden;
-}
-
+<style scoped>
 .container {
     position: relative;
     width: 800px;
@@ -70,7 +71,7 @@ body {
 
 .box {
     position: relative;
-    background: var(--img) center center;
+    background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
     transition: all 400ms;

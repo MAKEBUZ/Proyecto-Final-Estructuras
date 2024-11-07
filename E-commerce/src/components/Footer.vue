@@ -45,7 +45,6 @@ export default {
     color: #fff;
     padding: 10px 0; /* Reduced padding */
     text-align: center;
-    position: fixed;
     bottom: 0;
     width: 100%;
 }

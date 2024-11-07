@@ -33,12 +33,23 @@ export default {
 
 <style lang="css">
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 2rem;
     background-color: #f4ece0;
     border-bottom: 1px solid #E9E1D5;
+    z-index: 100;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo img {
@@ -48,20 +59,31 @@ export default {
 .nav ul {
     list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .nav a {
     text-decoration: none;
     color: #333333;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #FF6F61;
 }
 
 .cart {
     position: relative;
+    cursor: pointer;
 }
 
 .cart img {
     height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.cart:hover img {
+    transform: scale(1.1);
 }
 
 .cart-count {

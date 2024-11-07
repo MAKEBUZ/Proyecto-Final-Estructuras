@@ -1,0 +1,9 @@
+Header: #f4ece0 
+Shadow-Header: #E9E1D5
+Backgroud: #f9f9f9
+Text: #333333
+Buttons v.1: #a8e6cf
+Alert: #ff6f61
+Buttons v.2: #e1bee7
+Footer: #b0b0b0
+Footer-Text: #ffffff 

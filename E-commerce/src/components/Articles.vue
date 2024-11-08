@@ -7,7 +7,6 @@ export default {
             articles: [
                 { id: 1, title: 'Article 1', content: 'Content for article 1' },
                 { id: 2, title: 'Article 2', content: 'Content for article 2' },
-                // Add more articles as needed
             ]
         };
     }

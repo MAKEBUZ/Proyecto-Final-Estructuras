@@ -1,12 +1,17 @@
 <script lang="ts">
+import { defineComponent } from 'vue';
+import About from '@/components/About.vue';
+
+export default defineComponent({
+    name: 'HomeView',
+    components: {
+        About,
+    },
+});
 </script>
 <template>
-  <div class="about">
-      <h1>About Us</h1>
-      <p>Welcome to our E-commerce site! We offer a wide range of products for all your needs.</p>
-  </div>
+  <About />
 </template>
 
 <style>
-
 </style>

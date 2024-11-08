@@ -1,31 +1,71 @@
-<script>
+<script lang="ts">
+import { mapState } from 'vuex';
+
 export default {
     name: 'Header',
     data() {
         return {
-            cartCount: 0,
+            isHovered: false,
+            isMobileMenuOpen: false
         };
     },
+    computed: {
+        ...mapState({
+            cartCount: (state: any) => state.cart.items.length
+        })
+    },
+    methods: {
+        toggleHover(value: boolean) {
+            this.isHovered = value;
+        },
+        toggleMobileMenu() {
+            this.isMobileMenuOpen = !this.isMobileMenuOpen;
+        }
+    }
 };
 </script>
 
 <template>
     <header class="header">
         <div class="logo">
-            <img src="@/assets/Logo/Logo-cuaso.png" alt="E-Commerce Logo" />
+            <img src="@/assets/Logo/Logo-cuaso.png" alt="E-Commerce Logo" class="logo-image" />
         </div>
-        <nav class="nav">
+
+        <button class="mobile-menu-button" @click="toggleMobileMenu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        <nav class="nav" :class="{ 'nav-open': isMobileMenuOpen }">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/shop">Shop</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li v-for="(item, index) in ['Home', 'Shop', 'About', 'Contact']" :key="index">
+                    <a 
+                        :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`" 
+                        class="nav-link"
+                        @click="isMobileMenuOpen = false"
+                    >
+                        <span class="link-text">{{ item }}</span>
+                        <span class="link-underline"></span>
+                    </a>
+                </li>
             </ul>
         </nav>
-        <div class="cart">
-            <a href="/cart">
-                <img src="@/assets/Icons/shop.png" alt="Cart" />
-                <span class="cart-count">{{ cartCount }}</span>
+
+        <div 
+            class="cart"
+            @mouseenter="toggleHover(true)"
+            @mouseleave="toggleHover(false)"
+        >
+            <a href="/cart" class="cart-link">
+                <img 
+                    src="@/assets/Icons/shop.png" 
+                    alt="Cart"
+                    :class="{ 'cart-bounce': isHovered }"
+                />
+                <span v-if="cartCount > 0" class="cart-count" :class="{ 'count-pulse': isHovered }">
+                    {{ cartCount }}
+                </span>
             </a>
         </div>
     </header>
@@ -42,39 +82,98 @@ export default {
     align-items: center;
     padding: 1rem 2rem;
     background-color: #f4ece0;
-    border-bottom: 1px solid #E9E1D5;
     z-index: 100;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    animation: slideDown 0.5s ease-out;
 }
 
-.header.scrolled {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.logo img {
+.logo-image {
     height: 50px;
+    transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-button {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background-color: #333333;
+    transition: all 0.3s ease;
 }
 
 .nav ul {
     list-style: none;
     display: flex;
     gap: 1.5rem;
+    margin: 0;
+    padding: 0;
 }
 
-.nav a {
+.nav-link {
     text-decoration: none;
     color: #333333;
+    position: relative;
+    padding: 0.5rem 0;
     transition: color 0.3s ease;
 }
 
-.nav a:hover {
+.link-text {
+    position: relative;
+    z-index: 1;
+}
+
+.link-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #FF6F61;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
     color: #FF6F61;
+}
+
+.nav-link:hover .link-underline {
+    width: 100%;
 }
 
 .cart {
     position: relative;
-    cursor: pointer;
+}
+
+.cart-link {
+    text-decoration: none;
+    display: block;
+    position: relative;
 }
 
 .cart img {
@@ -82,18 +181,98 @@ export default {
     transition: transform 0.3s ease;
 }
 
-.cart:hover img {
-    transform: scale(1.1);
+.cart-bounce {
+    animation: bounce 0.5s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 .cart-count {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -8px;
+    right: -8px;
     background-color: #FF6F61;
     color: white;
     border-radius: 50%;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.8rem;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    padding: 0 4px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.count-pulse {
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .mobile-menu-button {
+        display: flex;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: #f4ece0;
+        padding: 6rem 2rem 2rem 2rem;
+        transition: right 0.3s ease;
+    }
+
+    .nav-open {
+        right: 0;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+    }
+
+    .cart {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 1rem;
+    }
+
+    .logo-image {
+        height: 40px;
+    }
+
+    .nav {
+        width: 85%;
+    }
 }
 </style>

@@ -1,8 +1,14 @@
 import { createStore } from 'vuex';
 
+export interface CartItem {
+  id: number;
+  name: string;
+  quantity: number;
+}
+
 export interface State {
   cart: {
-    items: Array<{ id: number; name: string; quantity: number }>;
+    items: CartItem[];
   };
   user: {
     name: string;
@@ -10,18 +16,48 @@ export interface State {
   };
 }
 
-const state: State = {
-  cart: {
-    items: []
-  },
-  user: {
-    name: '',
-    isLoggedIn: false
+// Función para cargar el estado desde localStorage
+const loadState = (): State => {
+  try {
+    const savedState = localStorage.getItem('vuex-cart-state');
+    if (savedState) {
+      return JSON.parse(savedState);
+    }
+  } catch (e) {
+    console.error('Error loading state:', e);
   }
+  
+  return {
+    cart: {
+      items: []
+    },
+    user: {
+      name: '',
+      isLoggedIn: false
+    }
+  };
+};
+
+// Estado inicial cargado desde localStorage
+const state: State = loadState();
+
+// Plugin para guardar el estado en localStorage
+const persistStatePlugin = (store: any) => {
+  // Guardar estado inicial
+  localStorage.setItem('vuex-cart-state', JSON.stringify(store.state));
+
+  // Suscribirse a las mutaciones
+  store.subscribe((mutation: any, state: State) => {
+    try {
+      localStorage.setItem('vuex-cart-state', JSON.stringify(state));
+    } catch (e) {
+      console.error('Error saving state:', e);
+    }
+  });
 };
 
 const mutations = {
-  addToCart(state: State, item: { id: number; name: string; quantity: number }) {
+  addToCart(state: State, item: CartItem) {
     const existingItem = state.cart.items.find(i => i.id === item.id);
     if (existingItem) {
       existingItem.quantity = item.quantity;
@@ -29,33 +65,62 @@ const mutations = {
       state.cart.items.push(item);
     }
   },
+  
   removeFromCart(state: State, itemId: number) {
     state.cart.items = state.cart.items.filter(item => item.id !== itemId);
   },
+  
+  updateCartItemQuantity(state: State, { itemId, quantity }: { itemId: number; quantity: number }) {
+    const item = state.cart.items.find(i => i.id === itemId);
+    if (item) {
+      item.quantity = quantity;
+    }
+  },
+  
   setUser(state: State, userData: { name: string; isLoggedIn: boolean }) {
     state.user = userData;
+  },
+
+  // Mutation para restablecer el estado
+  resetState(state: State) {
+    const newState = loadState();
+    Object.assign(state, newState);
   }
 };
 
 const actions = {
-  addItemToCart({ commit }: any, item: { id: number; name: string; quantity: number }) {
+  addItemToCart({ commit }: any, item: CartItem) {
     commit('addToCart', item);
   },
+  
   removeItemFromCart({ commit }: any, itemId: number) {
     commit('removeFromCart', itemId);
   },
+  
+  updateItemQuantity({ commit }: any, payload: { itemId: number; quantity: number }) {
+    commit('updateCartItemQuantity', payload);
+  },
+  
   login({ commit }: any, userName: string) {
     commit('setUser', { name: userName, isLoggedIn: true });
   },
+  
   logout({ commit }: any) {
     commit('setUser', { name: '', isLoggedIn: false });
+  },
+
+  // Acción para inicializar el estado
+  initializeStore({ commit }: any) {
+    commit('resetState');
   }
 };
 
 const getters = {
-  cartItemCount: (state: State) => state.cart.items.length,
-  cartTotalItems: (state: State) => 
+  cartItemCount: (state: State) => 
     state.cart.items.reduce((total, item) => total + item.quantity, 0),
+  
+  cartItems: (state: State) => state.cart.items,
+  
   isLoggedIn: (state: State) => state.user.isLoggedIn
 };
 
@@ -63,5 +128,6 @@ export const store = createStore({
   state,
   mutations,
   actions,
-  getters
+  getters,
+  plugins: [persistStatePlugin]
 });

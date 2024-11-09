@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ContactView from '../views/ContactView.vue'
 import ShopView from '../views/ShopView.vue'
-import ProductList from '@/components/ProductList.vue'
+import CartView from '@/views/CartView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,11 +29,16 @@ const router = createRouter({
       component: ShopView
     },
     {
-      path: '/category/:Hombres/:Mujeres/:Niños',
-      name: 'category',
-      component: ProductList,
-      props: true, 
+      path: '/shop/:category/:id',
+      name: 'Category Shop',
+      component: ShopView
     },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: CartView
+    },
+
   ]
 })
 

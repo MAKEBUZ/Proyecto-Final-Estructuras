@@ -1,63 +1,3 @@
-<!-- ProductList.vue -->
-<template>
-  <div class="product-container">
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Filtros -->
-      <div class="filters">
-        <input 
-          type="text" 
-          v-model="searchQuery" 
-          placeholder="Buscar productos..."
-          class="search-input"
-        >
-        <select v-model="sortBy" class="sort-select">
-          <option value="name">Ordenar por nombre</option>
-          <option value="price">Ordenar por precio</option>
-        </select>
-      </div>
-
-      <!-- Grid de Productos -->
-      <div class="products-grid">
-        <div v-for="product in filteredProducts" :key="product.id" class="product-card">
-          <img :src="product.image" :alt="product.name" class="product-image">
-          <div class="product-info">
-            <h3>{{ product.name }}</h3>
-            <p class="price">${{ product.price.toFixed(2) }}</p>
-            <p class="description">{{ product.description }}</p>
-            <div class="product-actions">
-              <div class="quantity-controls" v-if="isInCart(product.id)">
-                <button 
-                  @click="decreaseQuantity(product)"
-                  class="quantity-btn"
-                  :disabled="getCartItemQuantity(product.id) <= 1"
-                >
-                  -
-                </button>
-                <span class="quantity">{{ getCartItemQuantity(product.id) }}</span>
-                <button 
-                  @click="increaseQuantity(product)"
-                  class="quantity-btn"
-                >
-                  +
-                </button>
-              </div>
-              <button 
-                v-else
-                @click="addToCart(product)"
-                class="add-to-cart-btn"
-                :class="{ 'adding': isAddingToCart === product.id }"
-              >
-                {{ isAddingToCart === product.id ? '¡Agregado!' : 'Agregar al carrito' }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
@@ -144,7 +84,6 @@ export default defineComponent({
         quantity: 1
       });
 
-      // Mostrar el mensaje "¡Agregado!" por 1 segundo
       setTimeout(() => {
         isAddingToCart.value = null;
       }, 1000);
@@ -184,6 +123,60 @@ export default defineComponent({
   }
 });
 </script>
+
+<template>
+  <div class="product-container">
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Filtros -->
+      <div class="filters">
+        <input 
+          type="text" 
+          v-model="searchQuery" 
+          placeholder="Buscar productos..."
+          class="search-input"
+        >
+        <select v-model="sortBy" class="sort-select">
+          <option value="name">Ordenar por nombre</option>
+          <option value="price">Ordenar por precio</option>
+        </select>
+      </div>
+
+      <!-- Grid de Productos -->
+      <div class="products-grid">
+        <div v-for="product in filteredProducts" :key="product.id" class="product-card">
+          <img :src="product.image" :alt="product.name" class="product-image">
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="price">${{ product.price.toFixed(2) }}</p>
+            <p class="description">{{ product.description }}</p>
+            <div class="product-actions">
+              <div class="quantity-controls" v-if="isInCart(product.id)">
+                <button 
+                  @click="decreaseQuantity(product)"
+                  class="quantity-btn"
+                  :disabled="getCartItemQuantity(product.id) <= 1"> -
+                </button>
+                <span class="quantity">{{ getCartItemQuantity(product.id) }}</span>
+                <button 
+                  @click="increaseQuantity(product)"
+                  class="quantity-btn"> +
+                </button>
+              </div>
+              <button 
+                v-else
+                @click="addToCart(product)"
+                class="add-to-cart-btn"
+                :class="{ 'adding': isAddingToCart === product.id }">
+                {{ isAddingToCart === product.id ? '¡Agregado!' : 'Agregar al carrito' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
 
 <style scoped>
 .product-container {
@@ -275,10 +268,12 @@ export default defineComponent({
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #95d1bc;
+  background-color: #ff6f61;
+  transform: translateY(-2px);
 }
 
 .add-to-cart-btn.adding {

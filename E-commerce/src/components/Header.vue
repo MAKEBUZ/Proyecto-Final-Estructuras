@@ -1,48 +1,59 @@
 <script lang="ts">
-import { mapState } from 'vuex';
+import { defineComponent, ref, computed, watch } from 'vue';
+import { useStore } from 'vuex';
 
-export default {
+export default defineComponent({
     name: 'Header',
-    data() {
-        return {
-            isHovered: false,
-            isMobileMenuOpen: false
-        };
-    },
-    computed: {
-        ...mapState({
-            cartCount: (state: any): number => state.cart.items.length // Asegúrate de que 'cart' exista en el estado de Vuex
-        })
-    },
-    methods: {
-        toggleHover(value: boolean) {
-            this.isHovered = value;
-        },
-        toggleMobileMenu() {
-            this.isMobileMenuOpen = !this.isMobileMenuOpen;
-        }
-    }
-};
-</script>
+    setup() {
+        const store = useStore();
+        const isHovered = ref(false);
+        const isMobileMenuOpen = ref(false);
+        const isCartUpdating = ref(false);
 
+        const totalItems = computed(() => store.getters.cartItemCount);
+
+        watch(totalItems, () => {
+            isCartUpdating.value = true;
+            setTimeout(() => {
+                isCartUpdating.value = false;
+            }, 300);
+        });
+
+        const toggleHover = (value: boolean) => {
+            isHovered.value = value;
+        };
+
+        const toggleMobileMenu = () => {
+            isMobileMenuOpen.value = !isMobileMenuOpen.value;
+        };
+
+        return {
+            isHovered,
+            isMobileMenuOpen,
+            isCartUpdating,
+            totalItems,
+            toggleHover,
+            toggleMobileMenu
+        };
+    }
+});
+</script>
 
 <template>
     <header class="header">
         <div class="logo">
             <img src="@/assets/Logo/Logo-cuaso.png" alt="E-Commerce Logo" class="logo-image" />
         </div>
-
         <button class="mobile-menu-button" @click="toggleMobileMenu">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
         </button>
-
         <nav class="nav" :class="{ 'nav-open': isMobileMenuOpen }">
             <ul>
                 <li v-for="(item, index) in ['Home', 'Shop', 'About', 'Contact']" :key="index">
                     <a 
-                        :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`" 
+                        :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`"
                         class="nav-link"
                         @click="isMobileMenuOpen = false"
                     >
@@ -52,7 +63,6 @@ export default {
                 </li>
             </ul>
         </nav>
-
         <div 
             class="cart"
             @mouseenter="toggleHover(true)"
@@ -62,10 +72,17 @@ export default {
                 <img 
                     src="@/assets/Icons/shop.png" 
                     alt="Cart"
-                    :class="{ 'cart-bounce': isHovered }"
+                    :class="{ 'cart-bounce': isHovered || isCartUpdating }"
                 />
-                <span v-if="cartCount > 0" class="cart-count" :class="{ 'count-pulse': isHovered }">
-                    {{ cartCount }}
+                <span 
+                    v-if="totalItems > 0" 
+                    class="cart-count" 
+                    :class="{ 
+                        'count-pulse': isHovered,
+                        'count-update': isCartUpdating 
+                    }"
+                >
+                    {{ totalItems }}
                 </span>
             </a>
         </div>

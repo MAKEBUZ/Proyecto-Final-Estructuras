@@ -22,7 +22,15 @@ const state: State = {
 
 const mutations = {
   addToCart(state: State, item: { id: number; name: string; quantity: number }) {
-    state.cart.items.push(item);
+    const existingItem = state.cart.items.find(i => i.id === item.id);
+    if (existingItem) {
+      existingItem.quantity = item.quantity;
+    } else {
+      state.cart.items.push(item);
+    }
+  },
+  removeFromCart(state: State, itemId: number) {
+    state.cart.items = state.cart.items.filter(item => item.id !== itemId);
   },
   setUser(state: State, userData: { name: string; isLoggedIn: boolean }) {
     state.user = userData;
@@ -32,6 +40,9 @@ const mutations = {
 const actions = {
   addItemToCart({ commit }: any, item: { id: number; name: string; quantity: number }) {
     commit('addToCart', item);
+  },
+  removeItemFromCart({ commit }: any, itemId: number) {
+    commit('removeFromCart', itemId);
   },
   login({ commit }: any, userName: string) {
     commit('setUser', { name: userName, isLoggedIn: true });
@@ -43,6 +54,8 @@ const actions = {
 
 const getters = {
   cartItemCount: (state: State) => state.cart.items.length,
+  cartTotalItems: (state: State) => 
+    state.cart.items.reduce((total, item) => total + item.quantity, 0),
   isLoggedIn: (state: State) => state.user.isLoggedIn
 };
 

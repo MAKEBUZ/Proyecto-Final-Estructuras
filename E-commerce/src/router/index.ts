@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ContactView from '../views/ContactView.vue'
 import ShopView from '../views/ShopView.vue'
+import ProductList from '@/components/ProductList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +27,13 @@ const router = createRouter({
       path: '/shop',
       name: 'shop',
       component: ShopView
-    }
+    },
+    {
+      path: '/category/:Hombres/:Mujeres/:Niños',
+      name: 'category',
+      component: ProductList,
+      props: true, 
+    },
   ]
 })
 

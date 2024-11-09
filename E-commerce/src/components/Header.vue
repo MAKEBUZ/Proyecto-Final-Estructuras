@@ -11,7 +11,7 @@ export default {
     },
     computed: {
         ...mapState({
-            cartCount: (state: any) => state.cart.items.length
+            cartCount: (state: any): number => state.cart.items.length // Asegúrate de que 'cart' exista en el estado de Vuex
         })
     },
     methods: {
@@ -24,6 +24,7 @@ export default {
     }
 };
 </script>
+
 
 <template>
     <header class="header">

@@ -17,20 +17,20 @@ export default defineComponent({
 
     const categories: Category[] = [
       {
-        name: "Hombres",
-        subcategories: ["Camisetas", "Zapatos", "Pantalones", "Abrigos", "Colonias", "Variado"]
+        name: "Mens",
+        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies"]
       },
       {
-        name: "Mujeres",
-        subcategories: ["Camisetas", "Zapatos", "Pantalones", "Abrigos", "Colonias", "Variado"]
+        name: "Womens",
+        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies",]
       },
       {
-        name: "Niños",
-        subcategories: ["Camisetas", "Zapatos", "Pantalones", "Abrigos", "Colonias", "Variado"]
+        name: "Kid",
+        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies",]
       },
       {
         name: "Unisex",
-        subcategories: ["Camisetas", "Zapatos", "Pantalones", "Abrigos", "Colonias", "Variado"]
+        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies"]
       }
     ];
 
@@ -45,7 +45,7 @@ export default defineComponent({
     };
 
     const navigateToSubcategory = (category: string, subcategory: string) => {
-      const route = `/productos/${category.toLowerCase()}/${subcategory.toLowerCase()}`;
+      const route = `/shop/${category.toLowerCase()}/${subcategory.toLowerCase()}`;
       router.push(route);
       expandedCategory.value = null;
       isMouseOverDropdown.value = false;
@@ -364,12 +364,10 @@ export default defineComponent({
   }
 }
 
-/* Ajustes para el contenido principal */
 main {
   padding-top: 140px;
 }
 
-/* Prevenir scroll cuando el menú móvil está abierto */
 :root.menu-open {
   overflow: hidden;
 }

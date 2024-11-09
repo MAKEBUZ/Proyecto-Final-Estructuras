@@ -25,6 +25,12 @@ export default defineComponent({
 
         const toggleMobileMenu = () => {
             isMobileMenuOpen.value = !isMobileMenuOpen.value;
+            // Añadir/remover clase al body para prevenir scroll
+            if (isMobileMenuOpen.value) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         };
 
         return {
@@ -40,51 +46,56 @@ export default defineComponent({
 </script>
 
 <template>
-    <header class="header">
-        <div class="logo">
-            <img src="@/assets/Logo/Logo-cuaso.png" alt="E-Commerce Logo" class="logo-image" />
-        </div>
-        <button class="mobile-menu-button" @click="toggleMobileMenu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-        <nav class="nav" :class="{ 'nav-open': isMobileMenuOpen }">
-            <ul>
-                <li v-for="(item, index) in ['Home', 'Shop', 'About', 'Contact']" :key="index">
-                    <a 
-                        :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`"
-                        class="nav-link"
-                        @click="isMobileMenuOpen = false"
+    <header class="header" :class="{ 'menu-open': isMobileMenuOpen }">
+        <div class="header-container">
+            <div class="logo">
+                <img src="@/assets/Logo/Logo-cuaso.png" alt="E-Commerce Logo" class="logo-image" />
+            </div>
+            
+            <button class="mobile-menu-button" @click="toggleMobileMenu" :class="{ 'is-active': isMobileMenuOpen }">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav class="nav" :class="{ 'nav-open': isMobileMenuOpen }">
+                <ul>
+                    <li v-for="(item, index) in ['Home', 'Shop', 'About', 'Contact']" :key="index">
+                        <a 
+                            :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`"
+                            class="nav-link"
+                            @click="toggleMobileMenu"
+                        >
+                            <span class="link-text">{{ item }}</span>
+                            <span class="link-underline"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div 
+                class="cart"
+                @mouseenter="toggleHover(true)"
+                @mouseleave="toggleHover(false)"
+            >
+                <a href="/cart" class="cart-link">
+                    <img 
+                        src="@/assets/Icons/shop.png" 
+                        alt="Cart"
+                        :class="{ 'cart-bounce': isHovered || isCartUpdating }"
+                    />
+                    <span 
+                        v-if="totalItems > 0" 
+                        class="cart-count" 
+                        :class="{ 
+                            'count-pulse': isHovered,
+                            'count-update': isCartUpdating 
+                        }"
                     >
-                        <span class="link-text">{{ item }}</span>
-                        <span class="link-underline"></span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div 
-            class="cart"
-            @mouseenter="toggleHover(true)"
-            @mouseleave="toggleHover(false)"
-        >
-            <a href="/cart" class="cart-link">
-                <img 
-                    src="@/assets/Icons/shop.png" 
-                    alt="Cart"
-                    :class="{ 'cart-bounce': isHovered || isCartUpdating }"
-                />
-                <span 
-                    v-if="totalItems > 0" 
-                    class="cart-count" 
-                    :class="{ 
-                        'count-pulse': isHovered,
-                        'count-update': isCartUpdating 
-                    }"
-                >
-                    {{ totalItems }}
-                </span>
-            </a>
+                        {{ totalItems }}
+                    </span>
+                </a>
+            </div>
         </div>
     </header>
 </template>
@@ -95,13 +106,19 @@ export default defineComponent({
     top: 0;
     left: 0;
     right: 0;
+    background-color: #f4ece0;
+    box-shadow: 0 2px 8px rgba(233, 225, 213, 0.5);
+    z-index: 100;
+    animation: slideDown 0.5s ease-out;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: #f4ece0;
-    z-index: 100;
-    animation: slideDown 0.5s ease-out;
 }
 
 @keyframes slideDown {
@@ -124,7 +141,6 @@ export default defineComponent({
     transform: rotate(5deg) scale(1.05);
 }
 
-/* Mobile Menu Button */
 .mobile-menu-button {
     display: none;
     flex-direction: column;
@@ -143,6 +159,18 @@ export default defineComponent({
     height: 3px;
     background-color: #333333;
     transition: all 0.3s ease;
+}
+
+.mobile-menu-button.is-active .hamburger-line:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.mobile-menu-button.is-active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-button.is-active .hamburger-line:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
 }
 
 .nav ul {
@@ -247,8 +275,14 @@ export default defineComponent({
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .header-container {
+        padding: 0.75rem 1.5rem;
+    }
+
     .mobile-menu-button {
         display: flex;
+        margin-left: auto;
+        margin-right: 1rem;
     }
 
     .nav {
@@ -259,11 +293,12 @@ export default defineComponent({
         height: 100vh;
         background-color: #f4ece0;
         padding: 6rem 2rem 2rem 2rem;
-        transition: right 0.3s ease;
+        transition: transform 0.3s ease;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
     }
 
     .nav-open {
-        right: 0;
+        transform: translateX(-100%);
     }
 
     .nav ul {
@@ -273,16 +308,22 @@ export default defineComponent({
 
     .nav-link {
         font-size: 1.2rem;
+        display: block;
+        padding: 0.5rem 0;
     }
 
     .cart {
-        margin-left: auto;
+        margin-left: 0;
+    }
+
+    .menu-open .hamburger-line {
+        background-color: #333333;
     }
 }
 
 @media (max-width: 480px) {
-    .header {
-        padding: 1rem;
+    .header-container {
+        padding: 0.75rem 1rem;
     }
 
     .logo-image {

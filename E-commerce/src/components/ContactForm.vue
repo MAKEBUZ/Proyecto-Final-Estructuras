@@ -1,113 +1,640 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'ContactForm',
-
-  data() {
-    return {
-      form: {
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-      },
-      submitted: false,
-    };
-  },
-  methods: {
-    submitForm() {
-      console.log('Formulario enviado:', this.form);
-      this.submitted = true;
-
-      this.form.name = '';
-      this.form.email = '';
-      this.form.phone = '';
-      this.form.message = '';
-    }
-  }
-});
-</script>
-
 <template>
-  <div class="contact">
-    <h2>Formulario de Contacto</h2>
-    <form @submit.prevent="submitForm">
-      <div class="form-group">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" v-model="form.name" required />
+  <div class="contact-container">
+    <div class="animated-background"></div>
+    
+    <div class="contact-content">
+      <!-- Formulario de Contacto -->
+      <div class="contact-form-container">
+        <div class="form-card">
+          <div class="form-header">
+            <h2>
+              <span class="icon-wrapper">
+                <Mail :size="20" />
+              </span>
+              Contáctanos
+            </h2>
+          </div>
+          
+          <form @submit.prevent="handleSubmit">
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input type="text" v-model="formData.name" :class="{ filled: formData.name }">
+                <span class="floating-label">Nombre</span>
+                <div class="input-underline"></div>
+              </div>
+              
+              <div class="input-wrapper">
+                <input type="email" v-model="formData.email" :class="{ filled: formData.email }">
+                <span class="floating-label">Email</span>
+                <div class="input-underline"></div>
+              </div>
+              
+              <div class="input-wrapper">
+                <textarea v-model="formData.message" :class="{ filled: formData.message }"></textarea>
+                <span class="floating-label">Mensaje</span>
+                <div class="input-underline"></div>
+              </div>
+              
+              <button type="submit" class="submit-btn" :disabled="loading">
+                <span v-if="!loading">Enviar Mensaje</span>
+                <span v-else class="spinner"></span>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="email">Correo Electrónico: </label>
-        <input type="email" id="email" v-model="form.email" required />
+      
+      <!-- Información de Contacto -->
+      <div class="contact-info-container">
+        <div class="info-card">
+          <h2>
+            <span class="icon-wrapper">
+              <Info :size="20" />
+            </span>
+            Información de Contacto
+          </h2>
+          
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon">
+                <MapPin />
+              </div>
+              <div class="info-text">
+                <h3>Ubicación</h3>
+                <p>Tu dirección aquí</p>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">
+                <Phone />
+              </div>
+              <div class="info-text">
+                <h3>Teléfono</h3>
+                <p>+34 123 456 789</p>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">
+                <Mail />
+              </div>
+              <div class="info-text">
+                <h3>Email</h3>
+                <p>contacto@ejemplo.com</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="social-media">
+            <h3>Síguenos</h3>
+            <div class="social-icons">
+              <a href="#" class="social-icon">
+                <Facebook />
+                <span class="social-tooltip">Facebook</span>
+              </a>
+              <a href="#" class="social-icon">
+                <Twitter />
+                <span class="social-tooltip">Twitter</span>
+              </a>
+              <a href="#" class="social-icon">
+                <Instagram />
+                <span class="social-tooltip">Instagram</span>
+              </a>
+              <a href="#" class="social-icon">
+                <Linkedin />
+                <span class="social-tooltip">LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="phone">Teléfono de Contacto:</label>
-        <input type="tel" id="phone" v-model="form.phone" required />
-      </div>
-      <div class="form-group">
-        <label for="message">Mensaje:</label>
-        <textarea id="message" v-model="form.message" required></textarea>
-      </div>
-      <button type="submit">Enviar</button>
-      <p v-if="submitted" class="thank-you">Gracias por tu mensaje, {{ form.name }}. Te responderemos pronto.</p>
-    </form>
+    </div>
   </div>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { 
+  Mail, 
+  Info, 
+  MapPin, 
+  Phone, 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin 
+} from 'lucide-vue-next'
+
+interface FormData {
+  name: string
+  email: string
+  message: string
+}
+
+const loading = ref(false)
+const formData = ref<FormData>({
+  name: '',
+  email: '',
+  message: ''
+})
+
+const handleSubmit = async () => {
+  loading.value = true
+  try {
+    // Aquí iría tu lógica de envío
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    // Resetear formulario
+    formData.value = {
+      name: '',
+      email: '',
+      message: ''
+    }
+  } catch (error) {
+    console.error('Error al enviar:', error)
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
 <style scoped>
-.contact {
-  max-width: 600px;
-  margin: auto;
-  background-color: #f4ece0;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(233, 225, 213, 0.5); 
-  margin-bottom: 1rem;
+/* Contenedor Principal */
+.contact-container {
+  min-height: 100vh;
+  position: relative;
+  padding: 2rem;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
 }
 
-h2 {
+/* Fondo Animado */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #f9f9f9, #f4ece0, #a8e6cf25, #f4ece0);
+  z-index: -1;
+  animation: gradientAnimation 15s ease infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Grid Layout */
+.contact-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Contenedores de Formulario e Info */
+.contact-form-container,
+.contact-info-container {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.contact-form-container.active,
+.contact-info-container.active {
+  transform: scale(1.02);
+  z-index: 2;
+}
+
+/* Tarjetas */
+.form-card,
+.info-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+/* Encabezados */
+.form-header {
+  margin-bottom: 2.5rem;
+}
+
+.form-header h2,
+.info-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   color: #333333;
-  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
+/* Iconos en Encabezados */
+.icon-wrapper {
+  background: #a8e6cf;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.icon-wrapper:hover {
+  transform: rotate(15deg);
+}
+
+/* Grupos de Formulario */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: #333333;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-input, textarea {
-  width: 97%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+/* Contenedor de Input */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
 }
 
-button {
-  background-color: #a8e6cf; 
-  color: #333333; 
+/* Inputs y TextArea */
+input,
+textarea {
+  width: 100%;
+  padding: 0.75rem 0;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
+  background: transparent;
+  color: #333333;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* Etiquetas Flotantes */
+.floating-label {
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  pointer-events: none;
+  transition: 0.3s ease all;
+  color: #666;
+}
+
+input:focus ~ .floating-label,
+input.filled ~ .floating-label,
+textarea:focus ~ .floating-label,
+textarea.filled ~ .floating-label {
+  transform: translateY(-20px);
+  font-size: 0.8em;
+  color: #a8e6cf;
+}
+
+/* Línea de Input */
+.input-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ddd;
+}
+
+.input-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #a8e6cf;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+input:focus ~ .input-underline::after,
+textarea:focus ~ .input-underline::after {
+  transform: scaleX(1);
+}
+
+/* Botón de Envío */
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #a8e6cf;
+  border: none;
+  border-radius: 30px;
+  color: #333333;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-button:hover {
-  background-color: #ff6f61;
+.submit-btn:hover {
+  background: #e1bee7;
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(168, 230, 207, 0.4);
 }
 
-.thank-you {
-  margin-top: 15px;
-  color: #333333; 
-  text-align: center;
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner de Carga */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Items de Información */
+.info-items {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.info-item:hover {
+  background: rgba(168, 230, 207, 0.1);
+  transform: translateX(10px);
+}
+
+.info-icon {
+  background: #a8e6cf;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.info-item:hover .info-icon {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.info-text h3 {
+  color: #333333;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.info-text p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Redes Sociales */
+.social-media {
+  margin-top: 2.5rem;
+}
+
+.social-media h3 {
+  color: #333333;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #f4ece0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.social-icon:hover {
+  background: #a8e6cf;
+  color: white;
+  transform: translateY(-5px);
+}
+
+/* Sistema de Notificaciones */
+.notification-system {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.notification {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideIn 0.3s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.notification.success {
+  border-left: 4px solid #a8e6cf;
+}
+
+.notification.error {
+  border-left: 4px solid #ff6f61;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #a8e6cf;
+  animation: progress linear forwards;
+}
+
+@keyframes progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Mensajes de Error */
+.error-message {
+  color: #ff6f61;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-form-container,
+  .contact-info-container {
+    transform: none !important;
+  }
+
+  .form-card,
+  .info-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 1rem;
+  }
+
+  .form-header h2,
+  .info-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+/* Animaciones Adicionales */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Estados de Hover y Focus */
+.form-card:hover,
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para estados de error */
+input.error,
+textarea.error {
+  border-color: #ff6f61;
+}
+
+input.error ~ .input-underline::after,
+textarea.error ~ .input-underline::after {
+  background: #ff6f61;
+}
+
+/* Tooltips para redes sociales */
+.social-tooltip {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333333;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover .social-tooltip {
+  opacity: 1;
+  visibility: visible;
+  bottom: -40px;
 }
 </style>

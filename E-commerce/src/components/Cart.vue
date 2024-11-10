@@ -46,7 +46,7 @@
               </div>
 
               <button 
-                @click="removeFromCart(item.id)"
+                @click="removeFromCart(item)"
                 class="remove-btn"
                 :disabled="removingItem === item.id"
               >
@@ -95,6 +95,10 @@
           {{ isProcessing ? 'Procesando...' : 'Proceder al pago' }}
         </button>
 
+        <button @click="undoLastAction" class="undo-btn" :disabled="actionStack.length === 0">
+          Deshacer última acción
+        </button>
+
         <router-link to="/shop" class="continue-shopping-link">
           Continuar comprando
         </router-link>
@@ -107,7 +111,7 @@
 import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import type { CartItem } from '@/store'; // Asegúrate de importar el tipo desde donde esté definido
+import type { CartItem } from '@/store';
 
 interface Product {
   id: number;
@@ -129,18 +133,12 @@ export default defineComponent({
     const isProcessing = ref(false);
     const removingItem = ref<number | null>(null);
 
-    // Base de datos de productos (en producción vendría de una API)
+    // Pila de acciones para deshacer (undo)
+    const actionStack = ref<{ type: string; item: CartItem }[]>([]);
+
     const productsDatabase = ref<Product[]>([
-      {
-        id: 1,
-        price: 99.99,
-        image: '/api/placeholder/200/200'
-      },
-      {
-        id: 2,
-        price: 149.99,
-        image: '/api/placeholder/200/200'
-      },
+      { id: 1, price: 99.99, image: '/api/placeholder/200/200' },
+      { id: 2, price: 149.99, image: '/api/placeholder/200/200' },
     ]);
 
     const cartItems = computed(() => store.getters.cartItems);
@@ -166,10 +164,11 @@ export default defineComponent({
     const updateQuantity = async (itemId: number, newQuantity: number) => {
       if (newQuantity < 1) return;
       
-      await store.dispatch('updateItemQuantity', {
-        itemId,
-        quantity: newQuantity
-      });
+      const item = cartItems.value.find((i: CartItem) => i.id === itemId);
+      if (item) {
+        actionStack.value.push({ type: 'update', item: { ...item } });
+        await store.dispatch('updateItemQuantity', { itemId, quantity: newQuantity });
+      }
     };
 
     const handleQuantityInput = (item: EnrichedCartItem) => {
@@ -181,39 +180,41 @@ export default defineComponent({
       }
     };
 
-    const removeFromCart = async (itemId: number) => {
-      removingItem.value = itemId;
+    const removeFromCart = async (item: CartItem) => {
+      actionStack.value.push({ type: 'remove', item: { ...item } });
+      removingItem.value = item.id;
       await new Promise(resolve => setTimeout(resolve, 300));
-      await store.dispatch('removeItemFromCart', itemId);
+      await store.dispatch('removeItemFromCart', item.id);
       removingItem.value = null;
     };
 
+    const undoLastAction = async () => {
+      const lastAction = actionStack.value.pop();
+      if (!lastAction) return;
+
+      if (lastAction.type === 'remove') {
+        await store.dispatch('addItemToCart', lastAction.item);
+      } else if (lastAction.type === 'update') {
+        await store.dispatch('updateItemQuantity', {
+          itemId: lastAction.item.id,
+          quantity: lastAction.item.quantity,
+        });
+      }
+    };
+
     const subtotal = computed(() => {
-      return enrichedCartItems.value.reduce((total: number, item: EnrichedCartItem) => {
-        return total + (getProductPrice(item.id) * item.quantity);
-      }, 0);
+      return enrichedCartItems.value.reduce((total: number, item: EnrichedCartItem) => total + item.price * item.quantity, 0);
     });
 
-    const shipping = computed(() => {
-      return subtotal.value > 100 ? 0 : 10;
-    });
-
-    const discount = computed(() => {
-      return subtotal.value > 200 ? subtotal.value * 0.1 : 0;
-    });
-
-    const total = computed(() => {
-      return subtotal.value + shipping.value - discount.value;
-    });
+    const shipping = computed(() => (subtotal.value > 100 ? 0 : 10));
+    const discount = computed(() => (subtotal.value > 200 ? subtotal.value * 0.1 : 0));
+    const total = computed(() => subtotal.value + shipping.value - discount.value);
 
     const proceedToCheckout = async () => {
       isProcessing.value = true;
       try {
-        // Aquí iría la lógica de checkout
         await new Promise(resolve => setTimeout(resolve, 1500));
         router.push('/checkout');
-      } catch (error) {
-        console.error('Error en el checkout:', error);
       } finally {
         isProcessing.value = false;
       }
@@ -233,7 +234,9 @@ export default defineComponent({
       updateQuantity,
       handleQuantityInput,
       removeFromCart,
-      proceedToCheckout
+      proceedToCheckout,
+      undoLastAction,
+      actionStack
     };
   }
 });

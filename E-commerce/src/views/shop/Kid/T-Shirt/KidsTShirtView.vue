@@ -1,18 +1,23 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import APanel from '@/components/ArticlesPanel.vue'
-import ProductList from '@/components/ProductList.vue'
+import ProductList from '@/components/ProductList.vue';
+import APanel from '@/components/ArticlesPanel.vue';
 
 export default defineComponent({
+  name: 'KidsTShirtView',
   components: {
-    APanel,
     ProductList,
+    APanel
   },
 });
 </script>
+
 <template>
-    <ProductList />
-    <APanel />
+  <div>
+    <APanel/>
+    <ProductList category="Kids" subcategory="T-Shirt" />
+  </div>
 </template>
+
 <style lang="css">
 </style>

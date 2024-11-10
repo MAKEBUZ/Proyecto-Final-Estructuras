@@ -1,233 +1,254 @@
 <template>
-    <div class="slider-wrapper">
-      <div ref="container" class="container">
-        <div
-          v-for="(slide, index) in slides"
-          :key="index"
-          class="box"
-          :class="[`box-${index + 1}`, {'active': currentSlide === index}]"
-          :style="{ backgroundImage: `url(${slide.image})` }"
-          @click="navigateToRoute(slide.route)"
-        >
-          <div class="slide-content">
-            <h2>{{ slide.title }}</h2>
-            <span class="view-more">
-              <ArrowRight class="icon" />
-              {{ slide.buttonText }}
-            </span>
-          </div>
+  <div class="slider-container">
+    <div class="slider" ref="slider">
+      <div 
+        v-for="(slide, index) in slides" 
+        :key="index"
+        class="slide"
+        :class="{ active: currentSlide === index }"
+        :style="{ transform: `translateX(${100 * (index - currentSlide)}%)` }"
+      >
+        <img :src="slide.image" :alt="slide.title">
+        <div class="slide-content">
+          <h2>{{ slide.title }}</h2>
+          <p>{{ slide.description }}</p>
+          <button class="shop-now-btn" @click="$emit('shop-now', slide)">
+            Comprar Ahora
+          </button>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script setup lang="ts">
-  import { ref, onMounted, nextTick } from 'vue';
-  import { ArrowRight } from 'lucide-vue-next';
-  import { useRouter } from 'vue-router';
-  import Slider1 from '../assets/Slider/slider1.jpg';
-  import Slider2 from '../assets/Slider/slider2.jpg';
-  import Slider3 from '../assets/Slider/slider3.jpg';
-  import Slider4 from '../assets/Slider/slider4.jpg';
-  import Slider5 from '../assets/Slider/slider5.jpg';
-  
-  interface Slide {
-    image: string;
-    title: string;
-    buttonText: string;
-    route: string;
-  }
-  
-  const router = useRouter();
-  const slides: Slide[] = [
-    {
-      image: Slider1,
-      title: "Nueva Colección",
-      buttonText: "Ver Colección",
-      route: "/collection"
+
+    <button class="slider-btn prev" @click="prevSlide" aria-label="Previous slide">
+      &#10094;
+    </button>
+    <button class="slider-btn next" @click="nextSlide" aria-label="Next slide">
+      &#10095;
+    </button>
+
+    <div class="slider-dots">
+      <button 
+        v-for="(_, index) in slides" 
+        :key="index"
+        class="dot"
+        :class="{ active: currentSlide === index }"
+        @click="goToSlide(index)"
+        :aria-label="'Go to slide ' + (index + 1)"
+      ></button>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
+
+interface Slide {
+  image: string;
+  title: string;
+  description: string;
+  link: string;
+}
+
+export default defineComponent({
+  name: 'ProductSlider',
+  props: {
+    slides: {
+      type: Array as () => Slide[],
+      required: true
     },
-    {
-      image: Slider2,
-      title: "Ofertas Especiales",
-      buttonText: "Ver Ofertas",
-      route: "/offers"
-    },
-    {
-      image: Slider3,
-      title: "Accesorios",
-      buttonText: "Explorar",
-      route: "/accessories"
-    },
-    {
-      image: Slider4,
-      title: "Categorías",
-      buttonText: "Ver Categorías",
-      route: "/categories"
-    },
-    {
-      image: Slider5,
-      title: "Novedades",
-      buttonText: "Descubrir",
-      route: "/new-arrivals"
+    autoplayInterval: {
+      type: Number,
+      default: 5000
     }
-  ];
-  
-  const container = ref<HTMLElement | null>(null);
-  const currentSlide = ref(0);
-  
-  const navigateToRoute = (route: string) => {
-    router.push(route);
-  };
-  
-  onMounted(() => {
-    nextTick(() => {
-      document.querySelectorAll<HTMLElement>('.box').forEach((box, index) => {
-        box.addEventListener('mouseover', () => {
-          if (container.value) {
-            container.value.style.gridTemplateColumns = getComputedStyle(document.documentElement)
-              .getPropertyValue(`--layout-${index + 1}`);
-          }
-        });
-      });
-  
-      if (container.value) {
-        container.value.addEventListener('mouseleave', () => {
-          if (container.value) {
-            container.value.style.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr';
-          }
-        });
+  },
+  setup(props) {
+    const currentSlide = ref(0);
+    const autoplayTimer = ref<number | null>(null);
+    const touchStart = ref(0);
+    const touchEnd = ref(0);
+
+    const nextSlide = () => {
+      currentSlide.value = (currentSlide.value + 1) % props.slides.length;
+    };
+
+    const prevSlide = () => {
+      currentSlide.value = currentSlide.value === 0 
+        ? props.slides.length - 1 
+        : currentSlide.value - 1;
+    };
+
+    const goToSlide = (index: number) => {
+      currentSlide.value = index;
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      autoplayTimer.value = window.setInterval(nextSlide, props.autoplayInterval);
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer.value) {
+        clearInterval(autoplayTimer.value);
+        autoplayTimer.value = null;
       }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStart.value = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEnd.value = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+      const difference = touchStart.value - touchEnd.value;
+      if (Math.abs(difference) > 50) {
+        if (difference > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    };
+
+    onMounted(() => {
+      startAutoplay();
     });
-  });
-  </script>
-  
-  <style scoped>
-  .slider-wrapper {
-    position: relative;
-    width: 60rem;
+
+    onUnmounted(() => {
+      stopAutoplay();
+    });
+
+    return {
+      currentSlide,
+      nextSlide,
+      prevSlide,
+      goToSlide,
+      handleTouchStart,
+      handleTouchMove,
+      handleTouchEnd
+    };
   }
-  
-  .container {
-    position: relative;
-    width: 100%;
-    height: 70vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 0.5em;
-    transition: all 400ms;
-    padding: 0.5em;
-    --layout-1: 3fr 1fr 1fr 1fr 1fr;
-    --layout-2: 1fr 3fr 1fr 1fr 1fr;
-    --layout-3: 1fr 1fr 3fr 1fr 1fr;
-    --layout-4: 1fr 1fr 1fr 3fr 1fr;
-    --layout-5: 1fr 1fr 1fr 1fr 3fr;
+});
+</script>
+
+<style scoped>
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.slider {
+  height: 100%;
+  touch-action: pan-y pinch-zoom;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: white;
+  transform: translateY(100%);
+  transition: transform 0.5s ease;
+}
+
+.slide.active .slide-content {
+  transform: translateY(0);
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.slider-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+  left: 1rem;
+}
+
+.next {
+  right: 1rem;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background: white;
+}
+
+.shop-now-btn {
+  background: #a8e6cf;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.shop-now-btn:hover {
+  transform: scale(1.05);
+  background: #95d6bf;
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    height: 300px;
   }
-  
-  .box {
-    position: relative;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: all 400ms;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  
-  .box:nth-child(odd) {
-    transform: translateY(-16px);
-  }
-  
-  .box:nth-child(even) {
-    transform: translateY(16px);
-  }
-  
-  .container:hover .box {
-    filter: grayscale(100%) opacity(24%);
-  }
-  
-  .container .box:hover {
-    filter: grayscale(0%) opacity(100%);
-  }
-  
+
   .slide-content {
-    position: absolute;
-    bottom: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 10px 14px;
-    transform: translateY(100px);
-    transition: all 400ms;
-    opacity: 0;
-    width: auto;
-    text-align: center;
+    padding: 1rem;
   }
-  
-  .box:hover .slide-content {
-    transform: translateY(0);
-    opacity: 1;
-    transition-delay: 200ms;
-  }
-  
+
   .slide-content h2 {
-    font-size: 1.2rem;
-    margin: 0 0 8px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 1.5rem;
   }
-  
-  .view-more {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    color: #a8e6cf;
-  }
-  
-  .icon {
-    width: 16px;
-    height: 16px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .container {
-      height: 70vh;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      height: 60vh;
-    }
-    
-    .box:nth-child(odd),
-    .box:nth-child(even) {
-      transform: none;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .container {
-      height: 50vh;
-      grid-template-columns: 1fr;
-      --layout-1: 1fr;
-      --layout-2: 1fr;
-      --layout-3: 1fr;
-      --layout-4: 1fr;
-      --layout-5: 1fr;
-    }
-  
-    .slide-content {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  
-    .box {
-      height: 200px;
-    }
-  }
-  </style>
-  
+}
+</style>
+

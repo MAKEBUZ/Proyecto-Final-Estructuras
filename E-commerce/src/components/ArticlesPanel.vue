@@ -1,11 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
-
-interface Category {
-  name: string;
-  subcategories: string[];
-}
+import type { CategoryNode } from '@/types';
 
 export default defineComponent({
   name: 'TopNavigation',
@@ -13,34 +9,72 @@ export default defineComponent({
     const router = useRouter();
     const expandedCategory = ref<string | null>(null);
     const isMobileMenuOpen = ref(false);
-    const isMouseOverDropdown = ref(false);
+    const closeTimeout = ref<number | null>(null);
 
-    const categories: Category[] = [
+    const categories: CategoryNode[] = [
       {
-        name: "Mens",
-        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies"]
+        name: "Men",
+        subcategories: [
+          { name: "T-Shirt", subcategories: [] },
+          { name: "Shoes", subcategories: [] },
+          { name: "Pants", subcategories: [] },
+          { name: "Coats", subcategories: [] },
+          { name: "Colonies", subcategories: [] }
+        ]
       },
       {
-        name: "Womens",
-        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies",]
+        name: "Women",
+        subcategories: [
+          { name: "T-Shirt", subcategories: [] },
+          { name: "Shoes", subcategories: [] },
+          { name: "Pants", subcategories: [] },
+          { name: "Coats", subcategories: [] },
+          { name: "Colonies", subcategories: [] }
+        ]
       },
       {
         name: "Kid",
-        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies",]
+        subcategories: [
+          { name: "T-Shirt", subcategories: [] },
+          { name: "Shoes", subcategories: [] },
+          { name: "Pants", subcategories: [] },
+          { name: "Coats", subcategories: [] },
+          { name: "Colonies", subcategories: [] }
+        ]
       },
       {
         name: "Unisex",
-        subcategories: ["T-Shirt", "Shoes", "Pants", "Coats", "Colonies"]
+        subcategories: [
+          { name: "T-Shirt", subcategories: [] },
+          { name: "Shoes", subcategories: [] },
+          { name: "Pants", subcategories: [] },
+          { name: "Coats", subcategories: [] },
+          { name: "Colonies", subcategories: [] }
+        ]
       }
     ];
 
-    const toggleCategory = (categoryName: string) => {
+    const openCategory = (categoryName: string) => {
+      if (closeTimeout.value) {
+        window.clearTimeout(closeTimeout.value);
+        closeTimeout.value = null;
+      }
       expandedCategory.value = categoryName;
     };
 
-    const handleMouseLeave = (categoryName: string) => {
-      if (!isMouseOverDropdown.value && !isMobileMenuOpen.value) {
+    const closeCategory = () => {
+      closeTimeout.value = window.setTimeout(() => {
         expandedCategory.value = null;
+      }, 300);
+    };
+
+    // Nueva función para navegar a la categoría principal
+    const navigateToMainCategory = (category: string) => {
+      const route = `/shop/${category.toLowerCase()}`;
+      router.push(route);
+      expandedCategory.value = null;
+      if (window.innerWidth <= 768) {
+        isMobileMenuOpen.value = false;
       }
     };
 
@@ -48,7 +82,6 @@ export default defineComponent({
       const route = `/shop/${category.toLowerCase()}/${subcategory.toLowerCase()}`;
       router.push(route);
       expandedCategory.value = null;
-      isMouseOverDropdown.value = false;
       if (window.innerWidth <= 768) {
         isMobileMenuOpen.value = false;
       }
@@ -63,18 +96,17 @@ export default defineComponent({
       expandedCategory,
       categories,
       isMobileMenuOpen,
-      isMouseOverDropdown,
-      toggleCategory,
-      handleMouseLeave,
+      openCategory,
+      closeCategory,
+      navigateToMainCategory,
       navigateToSubcategory,
-      toggleMobileMenu
+      toggleMobileMenu,
     };
   }
 });
 </script>
 
 <template>
-  <!-- Botón hamburguesa para móvil -->
   <button 
     class="categories-menu-button"
     @click="toggleMobileMenu"
@@ -83,44 +115,62 @@ export default defineComponent({
     <span class="hamburger-icon"></span>
   </button>
 
-  <!-- Barra de navegación de categorías -->
   <nav class="categories-nav" :class="{ 'mobile-open': isMobileMenuOpen }">
     <ul class="category-list">
       <li v-for="category in categories" 
           :key="category.name" 
           class="category-item"
-          @mouseover="!isMobileMenuOpen && toggleCategory(category.name)"
-          @mouseleave="handleMouseLeave(category.name)"
+          @mouseover="!isMobileMenuOpen && openCategory(category.name)"
+          @mouseleave="!isMobileMenuOpen && closeCategory()"
       >
-        <button 
-          class="category-button"
-          :class="{ 'active': expandedCategory === category.name }"
-          @click="isMobileMenuOpen && toggleCategory(category.name)"
-        >
-          {{ category.name }}
-          <span class="arrow" :class="{ 'arrow-down': expandedCategory === category.name }">
-            ▼
-          </span>
-        </button>
-        
+        <div class="category-container">
+          <button 
+            class="category-button"
+            :class="{ 'active': expandedCategory === category.name }"
+            @click="navigateToMainCategory(category.name)"
+          >
+            {{ category.name }}
+          </button>
+          <button 
+            class="dropdown-toggle"
+            @click.stop="openCategory(category.name)"
+          >
+            <span class="arrow" :class="{ 'arrow-down': expandedCategory === category.name }">
+              ▼
+            </span>
+          </button>
+        </div>
+
         <div v-if="expandedCategory === category.name" 
              class="subcategory-dropdown"
              :class="{ 'mobile': isMobileMenuOpen }"
-             @mouseover="isMouseOverDropdown = true"
-             @mouseleave="isMouseOverDropdown = false"
+             @mouseover="openCategory(category.name)"
+             @mouseleave="closeCategory()"
         >
           <ul class="subcategory-list">
             <li v-for="subcategory in category.subcategories" 
-                :key="subcategory" 
-                class="subcategory-item"
-            >
-              <a 
-                @click.prevent="navigateToSubcategory(category.name, subcategory)"
-                href="#"
+                :key="subcategory.name"
+                class="subcategory-item">
+              <button 
+                @click="navigateToSubcategory(category.name, subcategory.name)" 
                 class="subcategory-link"
               >
-                {{ subcategory }}
-              </a>
+                {{ subcategory.name }}
+              </button>
+              <div v-if="subcategory.subcategories.length > 0">
+                <ul class="subcategory-list">
+                  <li v-for="child in subcategory.subcategories" 
+                      :key="child.name"
+                      class="subcategory-item">
+                    <button 
+                      @click="navigateToSubcategory(category.name, child.name)" 
+                      class="subcategory-link"
+                    >
+                      {{ child.name }}
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>
@@ -128,7 +178,6 @@ export default defineComponent({
     </ul>
   </nav>
 
-  <!-- Overlay para móvil -->
   <div 
     v-if="isMobileMenuOpen" 
     class="mobile-overlay"
@@ -137,9 +186,43 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.category-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.category-button {
+  background: none;
+  border: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: #333333;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0.75rem 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.category-button:hover,
+.category-button.active {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.03);
+}
 .categories-nav {
-  background-color: #f4ece0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f4ece0 ;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: fixed;
   top: 80px;
   left: 0;
@@ -149,6 +232,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   padding: 0 2rem;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .category-list {
@@ -156,7 +240,7 @@ export default defineComponent({
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   width: 100%;
   justify-content: center;
 }
@@ -168,61 +252,76 @@ export default defineComponent({
 .category-button {
   background: none;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   cursor: pointer;
   color: #333333;
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border-radius: 0.375rem;
+  font-size: 0.95rem;
   transition: all 0.2s ease;
+  border-radius: 4px;
 }
 
 .category-button:hover,
 .category-button.active {
-  background-color: #E9E1D5;
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 .arrow {
   font-size: 0.7rem;
   transition: transform 0.3s ease;
+  opacity: 0.5;
 }
 
 .arrow-down {
   transform: rotate(180deg);
 }
 
+/* Estilos mejorados para el menú desplegable */
 .subcategory-dropdown {
   position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #f4ece0;
-  min-width: 200px;
-  border-radius: 0.375rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  min-width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 0;
   z-index: 95;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.subcategory-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  transform: translateX(-50%) rotate(45deg);
 }
 
 .subcategory-dropdown.mobile {
   position: static;
+  transform: none;
   background-color: transparent;
   box-shadow: none;
+  border: none;
   margin-top: 0.5rem;
   padding-left: 1rem;
   animation: slideDown 0.3s ease-out;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.subcategory-dropdown.mobile::before {
+  display: none;
 }
 
 .subcategory-list {
@@ -232,24 +331,30 @@ export default defineComponent({
 }
 
 .subcategory-item {
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.75rem;
 }
 
 .subcategory-link {
   display: block;
-  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 1rem;
   text-decoration: none;
-  color: #333333;
+  color: #666666;
   transition: all 0.2s ease;
-  border-radius: 0.25rem;
+  border-radius: 4px;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .subcategory-link:hover {
-  background-color: #E9E1D5;
-  transform: translateX(5px);
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* Estilos móviles */
+/* Estilos móviles mejorados */
 .categories-menu-button {
   display: none;
   position: fixed;
@@ -310,7 +415,8 @@ export default defineComponent({
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
   z-index: 89;
 }
 
@@ -320,21 +426,23 @@ export default defineComponent({
   }
 
   .categories-nav {
-    transform: translateY(-100%);
+    transform: translateX(-100%);
     top: 80px;
     height: calc(100vh - 80px);
     padding: 1rem;
     transition: transform 0.3s ease;
     overflow-y: auto;
+    background-color: #ffffff;
   }
 
   .categories-nav.mobile-open {
-    transform: translateY(0);
+    transform: translateX(0);
   }
 
   .category-list {
     flex-direction: column;
     padding-top: 4rem;
+    gap: 0.5rem;
   }
 
   .category-item {
@@ -354,8 +462,7 @@ export default defineComponent({
   }
 
   .subcategory-link {
-    padding: 0.75rem 2rem;
-    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
   }
 
   .mobile-overlay {

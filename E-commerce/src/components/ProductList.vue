@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
 interface Product {
@@ -8,6 +8,8 @@ interface Product {
   price: number;
   description: string;
   image: string;
+  category: string;
+  subcategory: string;
 }
 
 interface CartItem {
@@ -15,6 +17,165 @@ interface CartItem {
   name: string;
   quantity: number;
 }
+
+// Clase para implementar la tabla hash de productos
+class ProductHashTable {
+  private table: Map<string, Product[]>;
+  private nameIndex: Map<string, Product>;
+  private categoryIndex: Map<string, Set<Product>>;
+  private subcategoryIndex: Map<string, Set<Product>>;
+
+  constructor(products: Product[]) {
+    this.table = new Map();
+    this.nameIndex = new Map();
+    this.categoryIndex = new Map();
+    this.subcategoryIndex = new Map();
+    this.initializeTable(products);
+  }
+
+  private initializeTable(products: Product[]): void {
+    // Indexar por nombre (para búsqueda rápida)
+    products.forEach(product => {
+      this.nameIndex.set(product.name.toLowerCase(), product);
+      
+      // Indexar por categoría
+      if (!this.categoryIndex.has(product.category.toLowerCase())) {
+        this.categoryIndex.set(product.category.toLowerCase(), new Set());
+      }
+      this.categoryIndex.get(product.category.toLowerCase())?.add(product);
+      
+      // Indexar por subcategoría
+      const subcategoryKey = `${product.category.toLowerCase()}-${product.subcategory.toLowerCase()}`;
+      if (!this.subcategoryIndex.has(subcategoryKey)) {
+        this.subcategoryIndex.set(subcategoryKey, new Set());
+      }
+      this.subcategoryIndex.get(subcategoryKey)?.add(product);
+    });
+  }
+
+  public searchProducts(query: string, category: string, subcategory: string = ''): Product[] {
+    const results = new Set<Product>();
+    const searchQuery = query.toLowerCase();
+    
+    // Primero filtramos por categoría y subcategoría
+    let baseProducts: Set<Product> | undefined;
+    
+    if (subcategory) {
+      const subcategoryKey = `${category.toLowerCase()}-${subcategory.toLowerCase()}`;
+      baseProducts = this.subcategoryIndex.get(subcategoryKey);
+    } else {
+      baseProducts = this.categoryIndex.get(category.toLowerCase());
+    }
+    
+    if (!baseProducts) return [];
+    
+    // Si no hay query de búsqueda, retornamos todos los productos de la categoría/subcategoría
+    if (!searchQuery) {
+      return Array.from(baseProducts);
+    }
+    
+    // Buscar coincidencias en los productos filtrados
+    baseProducts.forEach(product => {
+      if (
+        product.name.toLowerCase().includes(searchQuery) ||
+        product.description.toLowerCase().includes(searchQuery)
+      ) {
+        results.add(product);
+      }
+    });
+    
+    return Array.from(results);
+  }
+
+  public getProductById(id: number): Product | undefined {
+    for (const products of this.categoryIndex.values()) {
+      for (const product of products) {
+        if (product.id === id) return product;
+      }
+    }
+    return undefined;
+  }
+}
+
+
+// Catálogo de productos organizados por categoría y subcategoría
+const productCatalog: Product[] = [
+  // Kids
+  {
+    id: 1,
+    name: "Kid's Basic T-Shirt",
+    price: 19.99,
+    description: "Comfortable cotton t-shirt for children",
+    image: "https://via.placeholder.com/200?text=Kid+TShirt",
+    category: "Kids",
+    subcategory: "T-Shirt"
+  },
+  {
+    id: 2,
+    name: "Kid's Graphic T-Shirt",
+    price: 24.99,
+    description: "Fun graphic t-shirt with cartoon prints",
+    image: "https://via.placeholder.com/200?text=Kid+Graphic",
+    category: "Kids",
+    subcategory: "T-Shirt"
+  },
+  {
+    id: 3,
+    name: "Kid's Jeans",
+    price: 29.99,
+    description: "Durable denim jeans for active kids",
+    image: "https://via.placeholder.com/200?text=Kid+Jeans",
+    category: "Kids",
+    subcategory: "Pants"
+  },
+  {
+    id: 4,
+    name: "Kid's Jeans-Pro",
+    price: 39.99,
+    description: "Durable denim jeans for active kids",
+    image: "https://via.placeholder.com/200?text=Kid+Jeans",
+    category: "Kids",
+    subcategory: "Pants"
+  },
+  // Men
+  {
+    id: 4,
+    name: "Men's Classic T-Shirt",
+    price: 24.99,
+    description: "Classic fit cotton t-shirt for men",
+    image: "https://via.placeholder.com/200?text=Men+TShirt",
+    category: "Men",
+    subcategory: "T-Shirt"
+  },
+  {
+    id: 5,
+    name: "Men's Slim Jeans",
+    price: 49.99,
+    description: "Modern slim fit denim jeans",
+    image: "https://via.placeholder.com/200?text=Men+Jeans",
+    category: "Men",
+    subcategory: "Pants"
+  },
+  // Women
+  {
+    id: 6,
+    name: "Women's Fashion T-Shirt",
+    price: 29.99,
+    description: "Trendy and comfortable women's t-shirt",
+    image: "https://via.placeholder.com/200?text=Women+TShirt",
+    category: "Women",
+    subcategory: "T-Shirt"
+  },
+  {
+    id: 7,
+    name: "Women's Skinny Jeans",
+    price: 54.99,
+    description: "Stylish high-waisted skinny jeans",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Women",
+    subcategory: "Pants"
+  }
+];
 
 export default defineComponent({
   name: 'ProductList',
@@ -28,62 +189,37 @@ export default defineComponent({
       default: ''
     }
   },
-  setup() {
+  setup(props) {
     const store = useStore();
     const searchQuery = ref('');
     const sortBy = ref('name');
     const isAddingToCart = ref<number | null>(null);
     const currentPage = ref(1);
-    const itemsPerPage = 15; // 3 columnas x 5 filas
-
-    // Productos de ejemplo
-    const products = ref<Product[]>([
-      {
-        id: 1,
-        name: 'Producto 1',
-        price: 99.99,
-        description: 'Descripción del producto 1',
-        image: 'https://via.placeholder.com/200'
-      },
-      {
-        id: 2,
-        name: 'Producto 2',
-        price: 149.99,
-        description: 'Descripción del producto 2',
-        image: 'https://via.placeholder.com/200'
-      },
-      {
-        id: 3,
-        name: 'Producto 3',
-        price: 199.99,
-        description: 'Descripción del producto 3',
-        image: 'https://via.placeholder.com/200'
-      },
-      // ... Añade más productos aquí hasta tener al menos 15 para llenar la primera página
-    ]);
-
+    const itemsPerPage = 6;
+    
+    // Inicializar la tabla hash con el catálogo de productos
+    const productHashTable = new ProductHashTable(productCatalog);
+    
+    // Productos filtrados usando la tabla hash
     const filteredProducts = computed(() => {
-      let result = [...products.value];
+      let results = productHashTable.searchProducts(
+        searchQuery.value,
+        props.category,
+        props.subcategory
+      );
       
-      // Aplicar búsqueda
-      if (searchQuery.value) {
-        const query = searchQuery.value.toLowerCase();
-        result = result.filter(product => 
-          product.name.toLowerCase().includes(query) ||
-          product.description.toLowerCase().includes(query)
-        );
-      }
-
       // Aplicar ordenamiento
-      result.sort((a, b) => {
+      results.sort((a, b) => {
         if (sortBy.value === 'price') {
           return a.price - b.price;
         }
         return a.name.localeCompare(b.name);
       });
-
-      return result;
+      
+      return results;
     });
+
+    const totalPages = computed(() => Math.ceil(filteredProducts.value.length / itemsPerPage));
 
     const displayedProducts = computed(() => {
       const start = (currentPage.value - 1) * itemsPerPage;
@@ -91,113 +227,62 @@ export default defineComponent({
       return filteredProducts.value.slice(start, end);
     });
 
-    const totalPages = computed(() => {
-      return Math.ceil(filteredProducts.value.length / itemsPerPage);
-    });
-
-    const isInCart = (productId: number): boolean => {
+    const isInCart = (productId: number) => {
       return store.state.cart.items.some((item: CartItem) => item.id === productId);
     };
 
-    const getCartItemQuantity = (productId: number): number => {
+    const getCartItemQuantity = (productId: number) => {
       const item = store.state.cart.items.find((item: CartItem) => item.id === productId);
       return item ? item.quantity : 0;
     };
 
-    const addToCart = async (product: Product): Promise<void> => {
+    const addToCart = async (product: Product) => {
       isAddingToCart.value = product.id;
       
-      try {
-        await store.dispatch('addItemToCart', {
-          id: product.id,
-          name: product.name,
-          quantity: 1
-        });
+      await store.dispatch('addItemToCart', {
+        id: product.id,
+        name: product.name,
+        quantity: 1
+      });
 
-        // Mostrar el mensaje de éxito por 1 segundo
-        setTimeout(() => {
-          isAddingToCart.value = null;
-        }, 1000);
-      } catch (error) {
-        console.error('Error al añadir al carrito:', error);
+      setTimeout(() => {
         isAddingToCart.value = null;
-      }
+      }, 1000);
     };
 
-    const increaseQuantity = async (product: Product): Promise<void> => {
+    const increaseQuantity = (product: Product) => {
       const currentQuantity = getCartItemQuantity(product.id);
-      try {
-        await store.dispatch('addItemToCart', {
-          id: product.id,
-          name: product.name,
-          quantity: currentQuantity + 1
-        });
-      } catch (error) {
-        console.error('Error al aumentar cantidad:', error);
-      }
+      store.dispatch('addItemToCart', {
+        id: product.id,
+        name: product.name,
+        quantity: currentQuantity + 1
+      });
     };
 
-    const decreaseQuantity = async (product: Product): Promise<void> => {
+    const decreaseQuantity = (product: Product) => {
       const currentQuantity = getCartItemQuantity(product.id);
       if (currentQuantity > 1) {
-        try {
-          await store.dispatch('addItemToCart', {
-            id: product.id,
-            name: product.name,
-            quantity: currentQuantity - 1
-          });
-        } catch (error) {
-          console.error('Error al disminuir cantidad:', error);
-        }
+        store.dispatch('addItemToCart', {
+          id: product.id,
+          name: product.name,
+          quantity: currentQuantity - 1
+        });
       }
     };
-
-    const changePage = (newPage: number): void => {
-      if (newPage >= 1 && newPage <= totalPages.value) {
-        currentPage.value = newPage;
-        // Opcional: Hacer scroll al inicio de la lista de productos
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    };
-
-    const handleSearch = (): void => {
-      // Resetear a la primera página cuando se realiza una búsqueda
-      currentPage.value = 1;
-    };
-
-    const handleSort = (): void => {
-      // Opcional: Resetear a la primera página cuando se cambia el ordenamiento
-      currentPage.value = 1;
-    };
-
-    // Watchers para búsqueda y ordenamiento
-    watch(searchQuery, () => {
-      handleSearch();
-    });
-
-    watch(sortBy, () => {
-      handleSort();
-    });
 
     return {
-      // Estado
-      searchQuery,
-      sortBy,
-      currentPage,
-      isAddingToCart,
-      
-      // Computed
       filteredProducts,
       displayedProducts,
       totalPages,
-      
-      // Métodos
-      isInCart,
+      searchQuery,
+      sortBy,
+      currentPage,
       getCartItemQuantity,
+      isAddingToCart,
+      isInCart,
       addToCart,
       increaseQuantity,
-      decreaseQuantity,
-      changePage
+      decreaseQuantity
     };
   }
 });
@@ -349,6 +434,7 @@ export default defineComponent({
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 

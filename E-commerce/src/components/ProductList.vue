@@ -149,6 +149,15 @@ const productCatalog: Product[] = [
   },
   {
     id: 5,
+    name: "Men's Classic T-Shirt",
+    price: 24.99,
+    description: "Classic fit cotton t-shirt for men",
+    image: "https://via.placeholder.com/200?text=Men+TShirt",
+    category: "Men",
+    subcategory: "T-Shirt"
+  },
+  {
+    id: 6,
     name: "Men's Slim Jeans",
     price: 49.99,
     description: "Modern slim fit denim jeans",
@@ -158,7 +167,7 @@ const productCatalog: Product[] = [
   },
   // Women
   {
-    id: 6,
+    id: 7,
     name: "Women's Fashion T-Shirt",
     price: 29.99,
     description: "Trendy and comfortable women's t-shirt",
@@ -167,7 +176,7 @@ const productCatalog: Product[] = [
     subcategory: "T-Shirt"
   },
   {
-    id: 7,
+    id: 8,
     name: "Women's Skinny Jeans",
     price: 54.99,
     description: "Stylish high-waisted skinny jeans",

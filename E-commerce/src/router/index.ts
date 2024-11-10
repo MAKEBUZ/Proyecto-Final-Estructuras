@@ -5,6 +5,7 @@ import ContactView from '../views/ContactView.vue'
 import ShopView from '../views/ShopView.vue'
 import CartView from '../views/CartView.vue'
 import MenShopView from '../views/shop/Mens/MenShopView.vue'
+import MenTShirtView from '../views/shop/Mens/T-Shirt/MenTShirtView.vue'
 import KidsTShirtView from '../views/shop/Kid/T-Shirt/KidsTShirtView.vue'
 import KidsCoatsView from '../views/shop/Kid/Coats/KidsCoatsView.vue'
 import KidsPantsView from '../views/shop/Kid/Pants/KidsPantsView.vue'
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/shop/men',
       name: 'men', 
       component: MenShopView,
+    },
+    {
+      path: '/shop/men/t-shirt',
+      name: 'men-tshirt', 
+      component: MenTShirtView,
     },
     {
       path: '/shop/kid/t-shirt',

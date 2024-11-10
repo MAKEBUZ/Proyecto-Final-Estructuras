@@ -4,7 +4,7 @@ import ProductList from '@/components/ProductList.vue';
 import APanel from '@/components/ArticlesPanel.vue';
 
 export default defineComponent({
-  name: 'KidsCoatsView',
+  name: 'MenTShirtView',
   components: {
     ProductList,
     APanel
@@ -15,7 +15,7 @@ export default defineComponent({
 <template>
   <div>
     <APanel/>
-    <ProductList category="Kids" subcategory="Coat" />
+    <ProductList category="Men" subcategory="T-Shirt" />
   </div>
 </template>
 

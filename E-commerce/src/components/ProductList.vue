@@ -149,25 +149,44 @@ const productCatalog: Product[] = [
   },
   {
     id: 5,
-    name: "Men's Classic T-Shirt",
-    price: 24.99,
-    description: "Classic fit cotton t-shirt for men",
+    name: "Men's Shoes",
+    price: 64.99,
+    description: "comfortable shoes for men",
     image: "https://via.placeholder.com/200?text=Men+TShirt",
     category: "Men",
-    subcategory: "T-Shirt"
+    subcategory: "Shoes"
   },
+
   {
     id: 6,
-    name: "Men's Slim Jeans",
-    price: 49.99,
-    description: "Modern slim fit denim jeans",
-    image: "https://via.placeholder.com/200?text=Men+Jeans",
+    name: "Men's Classic Pants",
+    price: 54.99,
+    description: "classic pants for men",
+    image: "https://via.placeholder.com/200?text=Men+TShirt",
     category: "Men",
     subcategory: "Pants"
   },
-  // Women
   {
     id: 7,
+    name: "Men's Colonies",
+    price: 39.99,
+    description: "fragrances for men",
+    image: "https://via.placeholder.com/200?text=Men+Jeans",
+    category: "Men",
+    subcategory: "Colonies"
+  },
+  {
+    id: 8,
+    name: "Men's Coats",
+    price: 79.99,
+    description: "delicate cotton coats",
+    image: "https://via.placeholder.com/200?text=Men+Jeans",
+    category: "Men",
+    subcategory: "Coats"
+  },
+  // Women
+  {
+    id: 9,
     name: "Women's Fashion T-Shirt",
     price: 29.99,
     description: "Trendy and comfortable women's t-shirt",
@@ -176,14 +195,90 @@ const productCatalog: Product[] = [
     subcategory: "T-Shirt"
   },
   {
-    id: 8,
+    id: 10,
+    name: "Women's Shoes",
+    price: 89.99,
+    description: "elegant shoes for women",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Women",
+    subcategory: "Shoes"
+  },
+  {
+    id: 11,
     name: "Women's Skinny Jeans",
     price: 54.99,
     description: "Stylish high-waisted skinny jeans",
     image: "https://via.placeholder.com/200?text=Women+Jeans",
     category: "Women",
     subcategory: "Pants"
-  }
+  },
+  {
+    id: 12,
+    name: "Women's Colonies",
+    price: 54.99,
+    description: "delicate fragrance for women",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Women",
+    subcategory: "Colonies"
+  },
+  {
+    id: 12,
+    name: "Women's Coats",
+    price: 54.99,
+    description: "Faux fur coats for women",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Women",
+    subcategory: "Coats"
+  },
+
+  
+  //Unisex
+  {
+    id: 13,
+    name: "Unisex T-Shirt",
+    price: 34.99,
+    description: "classic cotton t-shirt",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Unisex",
+    subcategory: "T-Shirt"
+  },
+  {
+    id: 14,
+    name: "Unisex Shoes",
+    price: 69.99,
+    description: "comfortable leather shoes",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Unisex",
+    subcategory: "Shoes"
+  },
+  {
+    id: 15,
+    name: "Unisex Pants",
+    price: 49.99,
+    description: "straight and wide pants",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Unisex",
+    subcategory: "Pants"
+  },
+  {
+    id: 16,
+    name: "Unisex Colonies",
+    price: 49.99,
+    description: "delicious fragrance",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Unisex",
+    subcategory: "Colonies"
+  },
+  {
+    id: 17,
+    name: "Unisex Coats",
+    price: 79.99,
+    description: "long cotton coats",
+    image: "https://via.placeholder.com/200?text=Women+Jeans",
+    category: "Unisex",
+    subcategory: "Coats"
+  },
+
 ];
 
 export default defineComponent({

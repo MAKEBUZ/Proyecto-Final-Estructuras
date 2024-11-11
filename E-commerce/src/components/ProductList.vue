@@ -1,296 +1,7 @@
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, watch } from 'vue';
 import { useStore } from 'vuex';
-
-import ShoesKid1 from '../assets/Prodcuts/Kids/Shoes/shoes1.jpg';
-import TShirtKid1 from '../assets/Prodcuts/Kids/TShirt/tshirt1.jpg';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-  category: string;
-  subcategory: string;
-}
-
-interface CartItem {
-  id: number;
-  name: string;
-  quantity: number;
-}
-
-// Clase para implementar la tabla hash de productos
-class ProductHashTable {
-  private nameIndex: Map<string, Product>;
-  private categoryIndex: Map<string, Set<Product>>;
-  private subcategoryIndex: Map<string, Set<Product>>;
-
-  constructor(products: Product[]) {
-    this.nameIndex = new Map();
-    this.categoryIndex = new Map();
-    this.subcategoryIndex = new Map();
-    this.initializeTable(products);
-  }
-
-  private initializeTable(products: Product[]): void {
-    // Indexar por nombre (para búsqueda rápida)
-    products.forEach(product => {
-      this.nameIndex.set(product.name.toLowerCase(), product);
-      
-      // Indexar por categoría
-      if (!this.categoryIndex.has(product.category.toLowerCase())) {
-        this.categoryIndex.set(product.category.toLowerCase(), new Set());
-      }
-      this.categoryIndex.get(product.category.toLowerCase())?.add(product);
-      
-      // Indexar por subcategoría
-      const subcategoryKey = `${product.category.toLowerCase()}-${product.subcategory.toLowerCase()}`;
-      if (!this.subcategoryIndex.has(subcategoryKey)) {
-        this.subcategoryIndex.set(subcategoryKey, new Set());
-      }
-      this.subcategoryIndex.get(subcategoryKey)?.add(product);
-    });
-  }
-
-  public searchProducts(query: string, category: string, subcategory: string = ''): Product[] {
-    const results = new Set<Product>();
-    const searchQuery = query.toLowerCase();
-    
-    // Primero filtramos por categoría y subcategoría
-    let baseProducts: Set<Product> | undefined;
-    
-    if (subcategory) {
-      const subcategoryKey = `${category.toLowerCase()}-${subcategory.toLowerCase()}`;
-      baseProducts = this.subcategoryIndex.get(subcategoryKey);
-    } else {
-      baseProducts = this.categoryIndex.get(category.toLowerCase());
-    }
-    
-    if (!baseProducts) return [];
-    
-    // Si no hay query de búsqueda, retornamos todos los productos de la categoría/subcategoría
-    if (!searchQuery) {
-      return Array.from(baseProducts);
-    }
-    
-    // Buscar coincidencias en los productos filtrados
-    baseProducts.forEach(product => {
-      if (
-        product.name.toLowerCase().includes(searchQuery) ||
-        product.description.toLowerCase().includes(searchQuery)
-      ) {
-        results.add(product);
-      }
-    });
-    
-    return Array.from(results);
-  }
-
-  public getProductById(id: number): Product | undefined {
-    for (const products of this.categoryIndex.values()) {
-      for (const product of products) {
-        if (product.id === id) return product;
-      }
-    }
-    return undefined;
-  }
-}
-
-
-// Catálogo de productos organizados por categoría y subcategoría
-const productCatalog: Product[] = [
-  // Kids
-  {
-    id: 1,
-    name: "Kid's Basic T-Shirt",
-    price: 19.99,
-    description: "Comfortable cotton t-shirt for children",
-    image: TShirtKid1,
-    category: "Kids",
-    subcategory: "T-Shirt"
-  },
-  {
-    id: 2,
-    name: "Kid's Graphic T-Shirt",
-    price: 24.99,
-    description: "Fun graphic t-shirt with cartoon prints",
-    image: "https://via.placeholder.com/200?text=Kid+Graphic",
-    category: "Kids",
-    subcategory: "T-Shirt"
-  },
-  {
-    id: 3,
-    name: "Kid's Jeans",
-    price: 29.99,
-    description: "Durable denim jeans for active kids",
-    image: "https://via.placeholder.com/200?text=Kid+Jeans",
-    category: "Kids",
-    subcategory: "Pants"
-  },
-  {
-    id: 4,
-    name: "Kid's Jeans-Pro",
-    price: 39.99,
-    description: "Durable denim jeans for active kids",
-    image: "https://via.placeholder.com/200?text=Kid+Jeans",
-    category: "Kids",
-    subcategory: "Pants"
-  },
-  {
-    id: 20,
-    name: "Air Jordan-mini",
-    price: 59.99,
-    description: "Durable denim jeans for active kids",
-    image: ShoesKid1,
-    category: "Kids",
-    subcategory: "Shoes"
-  },
-  
-  // Men
-  {
-    id: 5,
-    name: "Men's Classic T-Shirt",
-    price: 24.99,
-    description: "Classic fit cotton t-shirt for men",
-    image: "https://via.placeholder.com/200?text=Men+TShirt",
-    category: "Mens",
-    subcategory: "T-Shirt"
-  },
-  {
-    id: 6,
-    name: "Men's Shoes",
-    price: 64.99,
-    description: "comfortable shoes for men",
-    image: "https://via.placeholder.com/200?text=Men+TShirt",
-    category: "Mens",
-    subcategory: "Shoes"
-  },
-
-  {
-    id: 7,
-    name: "Men's Classic Pants",
-    price: 54.99,
-    description: "classic pants for men",
-    image: "https://via.placeholder.com/200?text=Men+TShirt",
-    category: "Mens",
-    subcategory: "Pants"
-  },
-  {
-    id: 8,
-    name: "Men's Colonies",
-    price: 39.99,
-    description: "fragrances for men",
-    image: "https://via.placeholder.com/200?text=Men+Jeans",
-    category: "Mens",
-    subcategory: "Colonies"
-  },
-  {
-    id: 9,
-    name: "Men's Coats",
-    price: 79.99,
-    description: "delicate cotton coats",
-    image: "https://via.placeholder.com/200?text=Men+Jeans",
-    category: "Mens",
-    subcategory: "Coats"
-  },
-  // Women
-  {
-    id: 10,
-    name: "Women's Fashion T-Shirt",
-    price: 29.99,
-    description: "Trendy and comfortable women's t-shirt",
-    image: "https://via.placeholder.com/200?text=Women+TShirt",
-    category: "Women",
-    subcategory: "T-Shirt"
-  },
-  {
-    id: 11,
-    name: "Women's Shoes",
-    price: 89.99,
-    description: "elegant shoes for women",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Women",
-    subcategory: "Shoes"
-  },
-  {
-    id: 12,
-    name: "Women's Skinny Jeans",
-    price: 54.99,
-    description: "Stylish high-waisted skinny jeans",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Women",
-    subcategory: "Pants"
-  },
-  {
-    id: 13,
-    name: "Women's Colonies",
-    price: 54.99,
-    description: "delicate fragrance for women",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Women",
-    subcategory: "Colonies"
-  },
-  {
-    id: 14,
-    name: "Women's Coats",
-    price: 54.99,
-    description: "Faux fur coats for women",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Women",
-    subcategory: "Coats"
-  },
-
-  
-  //Unisex
-  {
-    id: 15,
-    name: "Unisex T-Shirt",
-    price: 34.99,
-    description: "classic cotton t-shirt",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Unisex",
-    subcategory: "T-Shirt"
-  },
-  {
-    id: 16,
-    name: "Unisex Shoes",
-    price: 69.99,
-    description: "comfortable leather shoes",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Unisex",
-    subcategory: "Shoes"
-  },
-  {
-    id: 17,
-    name: "Unisex Pants",
-    price: 49.99,
-    description: "straight and wide pants",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Unisex",
-    subcategory: "Pants"
-  },
-  {
-    id: 18,
-    name: "Unisex Colonies",
-    price: 49.99,
-    description: "delicious fragrance",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Unisex",
-    subcategory: "Colonies"
-  },
-  {
-    id: 19,
-    name: "Unisex Coats",
-    price: 79.99,
-    description: "long cotton coats",
-    image: "https://via.placeholder.com/200?text=Women+Jeans",
-    category: "Unisex",
-    subcategory: "Coats"
-  },
-
-];
+import { productCatalog, type Product, type CartItem } from '../data/productCatalog';
 
 export default defineComponent({
   name: 'ProductList',
@@ -311,30 +22,44 @@ export default defineComponent({
     const isAddingToCart = ref<number | null>(null);
     const currentPage = ref(1);
     const itemsPerPage = 6;
-    
-    // Inicializar la tabla hash con el catálogo de productos
-    const productHashTable = new ProductHashTable(productCatalog);
-    
-    // Productos filtrados usando la tabla hash
+
+    // Reemplazar la definición local de productos por el catálogo importado
+    const products = computed(() => {
+      return productCatalog.filter(product => {
+        const categoryMatch = product.category.toLowerCase() === props.category.toLowerCase();
+        if (props.subcategory) {
+          return categoryMatch && product.subcategory.toLowerCase() === props.subcategory.toLowerCase();
+        }
+        return categoryMatch;
+      });
+    });
+
     const filteredProducts = computed(() => {
-      let results = productHashTable.searchProducts(
-        searchQuery.value,
-        props.category,
-        props.subcategory
-      );
+      let result = [...products.value];
       
+      // Aplicar búsqueda
+      if (searchQuery.value) {
+        const query = searchQuery.value.toLowerCase();
+        result = result.filter(product => 
+          product.name.toLowerCase().includes(query) ||
+          product.description.toLowerCase().includes(query)
+        );
+      }
+
       // Aplicar ordenamiento
-      results.sort((a, b) => {
+      result.sort((a, b) => {
         if (sortBy.value === 'price') {
           return a.price - b.price;
         }
         return a.name.localeCompare(b.name);
       });
-      
-      return results;
+
+      return result;
     });
 
-    const totalPages = computed(() => Math.ceil(filteredProducts.value.length / itemsPerPage));
+    const totalPages = computed(() => 
+      Math.ceil(filteredProducts.value.length / itemsPerPage)
+    );
 
     const displayedProducts = computed(() => {
       const start = (currentPage.value - 1) * itemsPerPage;
@@ -367,9 +92,8 @@ export default defineComponent({
 
     const increaseQuantity = (product: Product) => {
       const currentQuantity = getCartItemQuantity(product.id);
-      store.dispatch('addItemToCart', {
-        id: product.id,
-        name: product.name,
+      store.dispatch('updateItemQuantity', {
+        itemId: product.id,
         quantity: currentQuantity + 1
       });
     };
@@ -377,24 +101,28 @@ export default defineComponent({
     const decreaseQuantity = (product: Product) => {
       const currentQuantity = getCartItemQuantity(product.id);
       if (currentQuantity > 1) {
-        store.dispatch('addItemToCart', {
-          id: product.id,
-          name: product.name,
+        store.dispatch('updateItemQuantity', {
+          itemId: product.id,
           quantity: currentQuantity - 1
         });
       }
     };
 
+    // Reset página cuando cambian los filtros
+    watch([searchQuery, sortBy], () => {
+      currentPage.value = 1;
+    });
+
     return {
       filteredProducts,
-      displayedProducts,
       totalPages,
+      displayedProducts,
+      getCartItemQuantity,
       searchQuery,
       sortBy,
-      currentPage,
-      getCartItemQuantity,
       isAddingToCart,
       isInCart,
+      currentPage,
       addToCart,
       increaseQuantity,
       decreaseQuantity
@@ -455,7 +183,7 @@ export default defineComponent({
       </div>
 
       <!-- Paginación -->
-      <div class="pagination">
+      <div class="pagination" v-if="totalPages > 1">
         <button 
           @click="currentPage--" 
           :disabled="currentPage === 1"
@@ -518,7 +246,7 @@ export default defineComponent({
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s;
-  box-shadow: 0 2px 4px #E9E1D5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .product-card:hover {
@@ -535,14 +263,20 @@ export default defineComponent({
   padding: 1rem;
 }
 
+.product-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333333;
+}
+
 .price {
   color: #333333;
   font-weight: bold;
   font-size: 1.2rem;
+  margin: 0.5rem 0;
 }
 
 .description {
-  color: #333333;
+  color: #666;
   margin: 0.5rem 0;
   height: 3em;
   overflow: hidden;
@@ -553,6 +287,10 @@ export default defineComponent({
   -webkit-box-orient: vertical;
 }
 
+.product-actions {
+  margin-top: 1rem;
+}
+
 .add-to-cart-btn {
   width: 100%;
   padding: 0.5rem;
@@ -561,16 +299,18 @@ export default defineComponent({
   border-radius: 4px;
   cursor: pointer;
   color: #333333;
+  font-weight: 500;
   transition: all 0.3s ease-in-out;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #ff6f61;
+  background-color: #95d1bc;
   transform: translateY(-2px);
 }
 
 .add-to-cart-btn.adding {
-  background-color: #e1bee7;
+  background-color: #95d1bc;
+  pointer-events: none;
 }
 
 .quantity-controls {
@@ -602,14 +342,12 @@ export default defineComponent({
 .quantity-btn:disabled {
   background-color: #b0b0b0;
   cursor: not-allowed;
-  color: #ffffff;
 }
 
 .quantity {
   font-weight: bold;
   min-width: 30px;
   text-align: center;
-  color: #333333;
 }
 
 .pagination {
@@ -638,18 +376,26 @@ export default defineComponent({
 .pagination-btn:disabled {
   background-color: #b0b0b0;
   cursor: not-allowed;
-  color: #ffffff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .products-grid {
     grid-template-columns: 1fr;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .search-input,
+  .sort-select {
+    width: 100%;
   }
 }
 </style>

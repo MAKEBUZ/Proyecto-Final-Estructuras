@@ -1,6 +1,5 @@
 import { createStore } from 'vuex';
 
-
 export interface CartItem {
   id: number;
   name: string;
@@ -125,11 +124,14 @@ const getters = {
   isLoggedIn: (state: State) => state.user.isLoggedIn
 };
 
+// Crear el store con el módulo `cart`
 export const store = createStore({
   state,
   mutations,
   actions,
   getters,
+  modules: {
+  },
   plugins: [persistStatePlugin]
 });
 
@@ -141,13 +143,4 @@ export interface Offer {
   oldPrice: number;
   discount: number;
   image: string;
-}
-
-export interface CartState {
-  items: CartItem[];
-}
-
-export interface RootState {
-  // Add other module states as needed
-  cart?: CartState;
 }

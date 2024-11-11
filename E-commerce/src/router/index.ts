@@ -5,15 +5,17 @@ import ContactView from '../views/ContactView.vue'
 import ShopView from '../views/ShopView.vue'
 import CartView from '../views/CartView.vue'
 import MenShopView from '../views/shop/Mens/MenShopView.vue'
-import MenTShirtView from '../views/shop/Mens/T-Shirt/MenTShirtView.vue'
+import MenTShirtView from '@/views/shop/Mens/T-Shirt/MenTShirtView.vue'
 import MenShoesView from '@/views/shop/Mens/Shoes/MenShoesView.vue'
 import MenPantsView from '@/views/shop/Mens/Pants/MenPantsView.vue'
 import MenCoatsView from '@/views/shop/Mens/Coats/MenCoatsView.vue'
+import UnisexShopView from '@/views/shop/Unisex/UnisexShopView.vue'
 import UnisexTShirtView from '@/views/shop/Unisex/T-Shirt/UnisexTShirtView.vue'
 import UnisexShoesView from '@/views/shop/Unisex/Shoes/UnisexShoesView.vue'
 import UnisexPantsView from '@/views/shop/Unisex/Pants/UnisexPantsView.vue'
 import UnisexColoniesView from '@/views/shop/Unisex/Colonies/UnisexColoniesView.vue'
 import UnisexCoatsView from '@/views/shop/Unisex/Coats/UnisexCoatsView.vue'
+import WomenShopView from '@/views/shop/Women/WomenShopView.vue'
 import WomenTShirtView from '@/views/shop/Women/T-Shirt/WomenTShirtView.vue'
 import WomenShoesView from '@/views/shop/Women/Shoes/WomenShoesView.vue'
 import WomenPantsView from '@/views/shop/Women/Pants/WomenPantsView.vue'
@@ -53,7 +55,7 @@ const router = createRouter({
     },
     {
       path: '/shop/men',
-      name: 'men', 
+      name: 'men-shop', 
       component: MenShopView,
     },
     {
@@ -62,78 +64,88 @@ const router = createRouter({
       component: MenTShirtView,
     },
     {
-      path: '/shop/men/Shoes',
+      path: '/shop/men/shoes',
       name: 'men-shoes', 
       component: MenShoesView,
     },
     {
-      path: '/shop/men/Colonies',
+      path: '/shop/men/colonies',
       name: 'men-colonies', 
       component: MenColoniesView,
     },
     {
-      path: '/shop/men/Pants',
+      path: '/shop/men/pants',
       name: 'men-pants', 
       component: MenPantsView,
     },
     {
-      path: '/shop/men/Coats',
-      name: 'men-coats', 
+      path: '/shop/men/coats',
+      name: 'men-coat',
       component: MenCoatsView,
     },
     {
-      path: '/shop/Unisex/T-Shirt',
-      name: 'men-tshirt', 
+      path: '/shop/unisex',
+      name: 'unisex-shop', 
+      component: UnisexShopView,
+    },
+    {
+      path: '/shop/unisex/t-shirt',
+      name: 'unisex-tshirt', 
       component: UnisexTShirtView,
     },
     {
-      path: '/shop/Unisex/Shoes',
-      name: 'men-shoes', 
+      path: '/shop/unisex/shoes',
+      name: 'unisex-shoes', 
       component: UnisexShoesView,
     },
     {
-      path: '/shop/Unisex/Pants',
-      name: 'men-pants', 
+      path: '/shop/unisex/sants',
+      name: 'unisex-pants', 
       component: UnisexPantsView,
     },
     {
-      path: '/shop/Unisex/Colonies',
-      name: 'men-colonies', 
+      path: '/shop/unisex/colonies',
+      name: 'unisex-colonies', 
       component: UnisexColoniesView,
     },
     {
-      path: '/shop/Unisex/Coats',
-      name: 'men-coats', 
+      path: '/shop/unisex/coats',
+      name: 'unisex-coats', 
       component: UnisexCoatsView,
     },
     {
-      path: '/shop/Women/T-Shirt',
-      name: 'men-tshirt', 
+      path: '/shop/women/',
+      name: 'women-shop', 
+      component: WomenShopView,
+    },
+    {
+      path: '/shop/women/t-shirt',
+      name: 'women-tshirt', 
       component: WomenTShirtView,
     },
     {
-      path: '/shop/Women/Shoes',
-      name: 'men-shoes', 
+      path: '/shop/women/shoes',
+      name: 'women-shoes', 
       component: WomenShoesView,
     },
     {
-      path: '/shop/Women/Pants',
-      name: 'men-pants', 
+      path: '/shop/women/pants',
+      name: 'women-pants', 
       component: WomenPantsView,
     },
     {
-      path: '/shop/Women/Colonies',
-      name: 'men-colonies', 
+      path: '/shop/women/colonies',
+      name: 'women-colonies', 
       component: WomenColoniesView,
     },
     {
-      path: '/shop/Women/Coats',
-      name: 'men-coats', 
+      path: '/shop/women/coats',
+      name: 'women-coats', 
       component: WomenCoatsView,
     },
     {
       path: '/shop/kid',
-      name: 'men-coats', 
+      name: 'kid-shop', 
       component: KidShopView,
     },
     {
@@ -142,7 +154,7 @@ const router = createRouter({
       component: KidsTShirtView,
     },
     {
-      path: '/shop/kid/coat',
+      path: '/shop/kid/coats',
       name: 'kid-coat',
       component: KidsCoatsView,
     },

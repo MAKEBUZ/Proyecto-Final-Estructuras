@@ -12,7 +12,12 @@
       <div class="cart-items">
         <div v-for="item in enrichedCartItems" :key="item.id" class="cart-item" :class="{ 'removing': removingItem === item.id }">
           <div class="item-image">
-            <img :src="getProductImage(item.id)" :alt="item.name">
+            <img 
+              :src="getProductImage(item.id)" 
+              :alt="item.name"
+              @error="handleImageError"
+              class="product-image"
+            >
           </div>
           
           <div class="item-details">
@@ -113,10 +118,13 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import type { CartItem } from '@/store';
 
+// Asumiendo que tienes esta estructura para un producto
 interface Product {
   id: number;
   price: number;
   image: string;
+  category: string;
+  subcategory: string;
 }
 
 interface EnrichedCartItem extends CartItem {
@@ -132,13 +140,25 @@ export default defineComponent({
     const router = useRouter();
     const isProcessing = ref(false);
     const removingItem = ref<number | null>(null);
-
-    // Pila de acciones para deshacer (undo)
     const actionStack = ref<{ type: string; item: CartItem }[]>([]);
 
+    // Modificamos la base de datos de productos para incluir la información de categoría
     const productsDatabase = ref<Product[]>([
-      { id: 1, price: 99.99, image: '/api/placeholder/200/200' },
-      { id: 2, price: 149.99, image: '/api/placeholder/200/200' },
+      { 
+        id: 1, 
+        price: 99.99, 
+        category: 'categoria1',
+        subcategory: 'subcategoria1',
+        image: new URL(`../assets/Products/categoria1/subcategoria1/producto1.jpg`, import.meta.url).href
+      },
+      { 
+        id: 2, 
+        price: 149.99, 
+        category: 'categoria2',
+        subcategory: 'subcategoria2',
+        image: new URL(`../assets/Products/categoria2/subcategoria2/producto2.jpg`, import.meta.url).href
+      },
+      // Agrega más productos según necesites
     ]);
 
     const cartItems = computed(() => store.getters.cartItems);
@@ -151,11 +171,26 @@ export default defineComponent({
       }));
     });
 
+    // Función modificada para manejar errores de imagen
     const getProductImage = (productId: number): string => {
       const product = productsDatabase.value.find(p => p.id === productId);
-      return product?.image || '/api/placeholder/200/200';
+      if (!product) {
+        return new URL('../assets/Products/default-product.jpg', import.meta.url).href;
+      }
+      try {
+        return product.image;
+      } catch (error) {
+        console.error(`Error loading image for product ${productId}:`, error);
+        return new URL('../assets/Products/default-product.jpg', import.meta.url).href;
+      }
     };
 
+    const handleImageError = (event: Event) => {
+      const img = event.target as HTMLImageElement;
+      img.src = new URL('../assets/Products/default-product.jpg', import.meta.url).href;
+    };
+
+    // El resto de las funciones permanecen igual
     const getProductPrice = (productId: number): number => {
       const product = productsDatabase.value.find(p => p.id === productId);
       return product?.price || 0;
@@ -236,7 +271,8 @@ export default defineComponent({
       removeFromCart,
       proceedToCheckout,
       undoLastAction,
-      actionStack
+      actionStack,
+      handleImageError
     };
   }
 });
@@ -493,4 +529,16 @@ export default defineComponent({
       align-self: flex-end;
     }
   }
+
+  .product-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: #f5f5f5; /* Color de fondo mientras carga la imagen */
+}
+
+.product-image[src=''] {
+  display: none;
+}
   </style>

@@ -2,6 +2,9 @@
 import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
+import ShoesKid1 from '../assets/Prodcuts/Kids/Shoes/shoes1.jpg';
+import TShirtKid1 from '../assets/Prodcuts/Kids/TShirt/tshirt1.jpg';
+
 interface Product {
   id: number;
   name: string;
@@ -20,13 +23,11 @@ interface CartItem {
 
 // Clase para implementar la tabla hash de productos
 class ProductHashTable {
-  private table: Map<string, Product[]>;
   private nameIndex: Map<string, Product>;
   private categoryIndex: Map<string, Set<Product>>;
   private subcategoryIndex: Map<string, Set<Product>>;
 
   constructor(products: Product[]) {
-    this.table = new Map();
     this.nameIndex = new Map();
     this.categoryIndex = new Map();
     this.subcategoryIndex = new Map();
@@ -106,7 +107,7 @@ const productCatalog: Product[] = [
     name: "Kid's Basic T-Shirt",
     price: 19.99,
     description: "Comfortable cotton t-shirt for children",
-    image: "https://via.placeholder.com/200?text=Kid+TShirt",
+    image: TShirtKid1,
     category: "Kids",
     subcategory: "T-Shirt"
   },
@@ -137,56 +138,66 @@ const productCatalog: Product[] = [
     category: "Kids",
     subcategory: "Pants"
   },
+  {
+    id: 20,
+    name: "Air Jordan-mini",
+    price: 59.99,
+    description: "Durable denim jeans for active kids",
+    image: ShoesKid1,
+    category: "Kids",
+    subcategory: "Shoes"
+  },
+  
   // Men
   {
-    id: 4,
+    id: 5,
     name: "Men's Classic T-Shirt",
     price: 24.99,
     description: "Classic fit cotton t-shirt for men",
     image: "https://via.placeholder.com/200?text=Men+TShirt",
-    category: "Men",
+    category: "Mens",
     subcategory: "T-Shirt"
   },
   {
-    id: 5,
+    id: 6,
     name: "Men's Shoes",
     price: 64.99,
     description: "comfortable shoes for men",
     image: "https://via.placeholder.com/200?text=Men+TShirt",
-    category: "Men",
+    category: "Mens",
     subcategory: "Shoes"
   },
 
   {
-    id: 6,
+    id: 7,
     name: "Men's Classic Pants",
     price: 54.99,
     description: "classic pants for men",
     image: "https://via.placeholder.com/200?text=Men+TShirt",
-    category: "Men",
+    category: "Mens",
     subcategory: "Pants"
   },
   {
-    id: 7,
+    id: 8,
     name: "Men's Colonies",
     price: 39.99,
     description: "fragrances for men",
     image: "https://via.placeholder.com/200?text=Men+Jeans",
-    category: "Men",
+    category: "Mens",
     subcategory: "Colonies"
   },
   {
-    id: 8,
+    id: 9,
     name: "Men's Coats",
     price: 79.99,
     description: "delicate cotton coats",
     image: "https://via.placeholder.com/200?text=Men+Jeans",
-    category: "Men",
+    category: "Mens",
     subcategory: "Coats"
   },
   // Women
   {
-    id: 9,
+    id: 10,
     name: "Women's Fashion T-Shirt",
     price: 29.99,
     description: "Trendy and comfortable women's t-shirt",
@@ -195,7 +206,7 @@ const productCatalog: Product[] = [
     subcategory: "T-Shirt"
   },
   {
-    id: 10,
+    id: 11,
     name: "Women's Shoes",
     price: 89.99,
     description: "elegant shoes for women",
@@ -204,7 +215,7 @@ const productCatalog: Product[] = [
     subcategory: "Shoes"
   },
   {
-    id: 11,
+    id: 12,
     name: "Women's Skinny Jeans",
     price: 54.99,
     description: "Stylish high-waisted skinny jeans",
@@ -213,7 +224,7 @@ const productCatalog: Product[] = [
     subcategory: "Pants"
   },
   {
-    id: 12,
+    id: 13,
     name: "Women's Colonies",
     price: 54.99,
     description: "delicate fragrance for women",
@@ -222,7 +233,7 @@ const productCatalog: Product[] = [
     subcategory: "Colonies"
   },
   {
-    id: 12,
+    id: 14,
     name: "Women's Coats",
     price: 54.99,
     description: "Faux fur coats for women",
@@ -234,7 +245,7 @@ const productCatalog: Product[] = [
   
   //Unisex
   {
-    id: 13,
+    id: 15,
     name: "Unisex T-Shirt",
     price: 34.99,
     description: "classic cotton t-shirt",
@@ -243,7 +254,7 @@ const productCatalog: Product[] = [
     subcategory: "T-Shirt"
   },
   {
-    id: 14,
+    id: 16,
     name: "Unisex Shoes",
     price: 69.99,
     description: "comfortable leather shoes",
@@ -252,7 +263,7 @@ const productCatalog: Product[] = [
     subcategory: "Shoes"
   },
   {
-    id: 15,
+    id: 17,
     name: "Unisex Pants",
     price: 49.99,
     description: "straight and wide pants",
@@ -261,7 +272,7 @@ const productCatalog: Product[] = [
     subcategory: "Pants"
   },
   {
-    id: 16,
+    id: 18,
     name: "Unisex Colonies",
     price: 49.99,
     description: "delicious fragrance",
@@ -270,7 +281,7 @@ const productCatalog: Product[] = [
     subcategory: "Colonies"
   },
   {
-    id: 17,
+    id: 19,
     name: "Unisex Coats",
     price: 79.99,
     description: "long cotton coats",

@@ -15,7 +15,7 @@ export default defineComponent({
 <template>
   <div>
     <APanel/>
-    <ProductList category="Men" subcategory="Coats" />
+    <ProductList category="Men" subcategory="Coat" />
   </div>
 </template>
 

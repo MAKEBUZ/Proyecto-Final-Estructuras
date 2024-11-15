@@ -1,4 +1,208 @@
-import CoatsKids1 from '../assets/Prodcuts/Kids/Coats/CoatsKids1.jpg'
+import TShirtKid1 from '../assets/Prodcuts/Kids/TShirt/TShirtKid1.jpg';
+import TShirtKid2 from '../assets/Prodcuts/Kids/TShirt/TShirtKid2.jpg';
+import TShirtKid3 from '../assets/Prodcuts/Kids/TShirt/TShirtKid3.jpg';
+import TShirtKid4 from '../assets/Prodcuts/Kids/TShirt/TShirtKid4.jpg';
+import TShirtKid5 from '../assets/Prodcuts/Kids/TShirt/TShirtKid5.jpg';
+import TShirtKid6 from '../assets/Prodcuts/Kids/TShirt/TShirtKid6.jpg';
+import TShirtKid7 from '../assets/Prodcuts/Kids/TShirt/TShirtKid7.jpg';
+import TShirtKid8 from '../assets/Prodcuts/Kids/TShirt/TShirtKid8.jpg';
+import TShirtKid9 from '../assets/Prodcuts/Kids/TShirt/TShirtKid9.jpg';
+import TShirtKid10 from '../assets/Prodcuts/Kids/TShirt/TShirtKid10.jpg';
+import ShoesKids1 from '../assets/Prodcuts/kids/Shoes/ShoesKids1.jpg';
+import ShoesKids2 from '../assets/Prodcuts/kids/Shoes/ShoesKids2.jpg';
+import ShoesKids3 from '../assets/Prodcuts/kids/Shoes/ShoesKids3.jpg';
+import ShoesKids4 from '../assets/Prodcuts/kids/Shoes/ShoesKids4.jpg';
+import ShoesKids5 from '../assets/Prodcuts/kids/Shoes/ShoesKids5.jpg';
+import ShoesKids6 from '../assets/Prodcuts/kids/Shoes/ShoesKids6.jpg';
+import ShoesKids7 from '../assets/Prodcuts/kids/Shoes/ShoesKids7.jpg';
+import ShoesKids8 from '../assets/Prodcuts/kids/Shoes/ShoesKids8.jpg';
+import ShoesKids9 from '../assets/Prodcuts/kids/Shoes/ShoesKids9.jpg';
+import ShoesKids10 from '../assets/Prodcuts/kids/Shoes/ShoesKids10.jpg';
+import PantsKids1 from '../assets/Prodcuts/Kids/Pants/PantsKids1.jpg';
+import PantsKids2 from '../assets/Prodcuts/Kids/Pants/PantsKids2.jpg';
+import PantsKids3 from '../assets/Prodcuts/Kids/Pants/PantsKids3.jpg';
+import PantsKids4 from '../assets/Prodcuts/Kids/Pants/PantsKids4.jpg';
+import PantsKids5 from '../assets/Prodcuts/Kids/Pants/PantsKids5.jpg';
+import PantsKids6 from '../assets/Prodcuts/Kids/Pants/PantsKids6.jpg';
+import PantsKids7 from '../assets/Prodcuts/Kids/Pants/PantsKids7.jpg';
+import PantsKids8 from '../assets/Prodcuts/Kids/Pants/PantsKids8.jpg';
+import PantsKids9 from '../assets/Prodcuts/Kids/Pants/PantsKids9.jpg';
+import PantsKids10 from '../assets/Prodcuts/Kids/Pants/PantsKids10.jpg';
+import ColoniesKids1 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids1.jpg';
+import ColoniesKids2 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids2.jpg';
+import ColoniesKids3 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids3.jpg';
+import ColoniesKids4 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids4.jpg';
+import ColoniesKids5 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids5.jpg';
+import ColoniesKids6 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids6.jpg';
+import ColoniesKids7 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids7.jpg';
+import ColoniesKids8 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids8.jpg';
+import ColoniesKids9 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids9.jpg';
+import ColoniesKids10 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids10.jpg';
+import CoatsKids1 from '../assets/Prodcuts/kids/Coats/CoatsKids1.jpg';
+import CoatsKids2 from '../assets/Prodcuts/kids/Coats/CoatsKids2.jpg';
+import CoatsKids3 from '../assets/Prodcuts/kids/Coats/CoatsKids3.jpg';
+import CoatsKids4 from '../assets/Prodcuts/kids/Coats/CoatsKids4.jpg';
+import CoatsKids5 from '../assets/Prodcuts/kids/Coats/CoatsKids5.jpg';
+import CoatsKids6 from '../assets/Prodcuts/kids/Coats/CoatsKids6.jpg';
+import CoatsKids7 from '../assets/Prodcuts/kids/Coats/CoatsKids7.jpg';
+import CoatsKids8 from '../assets/Prodcuts/kids/Coats/CoatsKids8.jpg';
+import CoatsKids9 from '../assets/Prodcuts/kids/Coats/CoatsKids9.jpg';
+import CoatsKids10 from '../assets/Prodcuts/kids/Coats/CoatsKids10.jpg';
+import TShirtMen1 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen1.jpg';
+import TShirtMen2 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen2.jpg';
+import TShirtMen3 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen3.jpg';
+import TShirtMen4 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen4.jpg';
+import TShirtMen5 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen5.jpg';
+import TShirtMen6 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen6.jpg';
+import TShirtMen7 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen7.jpg';
+import TShirtMen8 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen8.jpg';
+import TShirtMen9 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen9.jpg';
+import TShirtMen10 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen10.jpg';
+import ShoesMen1 from '../assets/Prodcuts/Mens/Shoes/ShoesMens1.jpg';
+import ShoesMen2 from '../assets/Prodcuts/Mens/Shoes/ShoesMens2.jpg';
+import ShoesMen3 from '../assets/Prodcuts/Mens/Shoes/ShoesMens3.jpg';
+import ShoesMen4 from '../assets/Prodcuts/Mens/Shoes/ShoesMens4.jpg';
+import ShoesMen5 from '../assets/Prodcuts/Mens/Shoes/ShoesMens5.jpg';
+import ShoesMen6 from '../assets/Prodcuts/Mens/Shoes/ShoesMens6.jpg';
+import ShoesMen7 from '../assets/Prodcuts/Mens/Shoes/ShoesMens7.jpg';
+import ShoesMen8 from '../assets/Prodcuts/Mens/Shoes/ShoesMens8.jpg';
+import ShoesMen9 from '../assets/Prodcuts/Mens/Shoes/ShoesMens9.jpg';
+import ShoesMen10 from '../assets/Prodcuts/Mens/Shoes/ShoesMens10.jpg';
+import PantsMen1 from '../assets/Prodcuts/Mens/Pants/PantsMens1.jpg';
+import PantsMen2 from '../assets/Prodcuts/Mens/Pants/PantsMens2.jpg';
+import PantsMen3 from '../assets/Prodcuts/Mens/Pants/PantsMens3.jpg';
+import PantsMen4 from '../assets/Prodcuts/Mens/Pants/PantsMens4.jpg';
+import PantsMen5 from '../assets/Prodcuts/Mens/Pants/PantsMens5.jpg';
+import PantsMen6 from '../assets/Prodcuts/Mens/Pants/PantsMens6.jpg';
+import PantsMen7 from '../assets/Prodcuts/Mens/Pants/PantsMens7.jpg';
+import PantsMen8 from '../assets/Prodcuts/Mens/Pants/PantsMens8.jpg';
+import PantsMen9 from '../assets/Prodcuts/Mens/Pants/PantsMens9.jpg';
+import PantsMen10 from '../assets/Prodcuts/Mens/Pants/PantsMens10.jpg';
+import ColoniesMen1 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens1.jpg';
+import ColoniesMen2 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens2.jpg';
+import ColoniesMen3 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens3.jpg';
+import ColoniesMen4 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens4.jpg';
+import ColoniesMen5 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens5.jpg';
+import ColoniesMen6 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens6.jpg';
+import ColoniesMen7 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens7.jpg';
+import ColoniesMen8 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens8.jpg';
+import ColoniesMen9 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens9.jpg';
+import ColoniesMen10 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens10.jpg';
+import CoatsMen1 from '../assets/Prodcuts/Mens/Coats/CoatsMens1.jpg';
+import CoatsMen2 from '../assets/Prodcuts/Mens/Coats/CoatsMens2.jpg';
+import CoatsMen3 from '../assets/Prodcuts/Mens/Coats/CoatsMens3.jpg';
+import CoatsMen4 from '../assets/Prodcuts/Mens/Coats/CoatsMens4.jpg';
+import CoatsMen5 from '../assets/Prodcuts/Mens/Coats/CoatsMens5.jpg';
+import CoatsMen6 from '../assets/Prodcuts/Mens/Coats/CoatsMens6.jpg';
+import CoatsMen7 from '../assets/Prodcuts/Mens/Coats/CoatsMens7.jpg';
+import CoatsMen8 from '../assets/Prodcuts/Mens/Coats/CoatsMens8.jpg';
+import CoatsMen9 from '../assets/Prodcuts/Mens/Coats/CoatsMens9.jpg';
+import CoatsMen10 from '../assets/Prodcuts/Mens/Coats/CoatsMens10.jpg';
+import TShirtUnisex1 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex1.jpg';
+import TShirtUnisex2 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex2.jpg';
+import TShirtUnisex3 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex3.jpg';
+import TShirtUnisex4 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex4.jpg';
+import TShirtUnisex5 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex5.jpg';
+import TShirtUnisex6 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex6.jpg';
+import TShirtUnisex7 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex7.jpg';
+import TShirtUnisex8 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex8.jpg';
+import TShirtUnisex9 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex9.jpg';
+import TShirtUnisex10 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex10.jpg';
+import ShoesUnisex1 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex1.jpg';
+import ShoesUnisex2 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex2.jpg';
+import ShoesUnisex3 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex3.jpg';
+import ShoesUnisex4 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex4.jpg';
+import ShoesUnisex5 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex5.jpg';
+import ShoesUnisex6 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex6.jpg';
+import ShoesUnisex7 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex7.jpg';
+import ShoesUnisex8 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex8.jpg';
+import ShoesUnisex9 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex9.jpg';
+import ShoesUnisex10 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex10.jpg';
+import PantsUnisex1 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex1.jpg';
+import PantsUnisex2 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex2.jpg';
+import PantsUnisex3 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex3.jpg';
+import PantsUnisex4 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex4.jpg';
+import PantsUnisex5 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex5.jpg';
+import PantsUnisex6 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex6.jpg';
+import PantsUnisex7 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex7.jpg';
+import PantsUnisex8 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex8.jpg';
+import PantsUnisex9 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex9.jpg';
+import PantsUnisex10 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex10.jpg';
+import ColoniesUnisex1 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex1.jpg';
+import ColoniesUnisex2 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex2.jpg';
+import ColoniesUnisex3 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex3.jpg';
+import ColoniesUnisex4 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex4.jpg';
+import ColoniesUnisex5 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex5.jpg';
+import ColoniesUnisex6 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex6.jpg';
+import ColoniesUnisex7 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex7.jpg';
+import ColoniesUnisex8 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex8.jpg';
+import ColoniesUnisex9 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex9.jpg';
+import ColoniesUnisex10 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex10.jpg';
+import CoatsUnisex1 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex1.jpg';
+import CoatsUnisex2 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex2.jpg';
+import CoatsUnisex3 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex3.jpg';
+import CoatsUnisex4 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex4.jpg';
+import CoatsUnisex5 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex5.jpg';
+import CoatsUnisex6 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex6.jpg';
+import CoatsUnisex7 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex7.jpg';
+import CoatsUnisex8 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex8.jpg';
+import CoatsUnisex9 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex9.jpg';
+import CoatsUnisex10 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex10.jpg';
+import TShirtWomen1 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen1.jpg';
+import TShirtWomen2 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen2.jpg';
+import TShirtWomen3 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen3.jpg';
+import TShirtWomen4 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen4.jpg';
+import TShirtWomen5 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen5.jpg';
+import TShirtWomen6 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen6.jpg';
+import TShirtWomen7 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen7.jpg';
+import TShirtWomen8 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen8.jpg';
+import TShirtWomen9 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen9.jpg';
+import TShirtWomen10 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen10.jpg';
+import ShoesWomen1 from '../assets/Prodcuts/Women/Shoes/ShoesWomen1.jpg';
+import ShoesWomen2 from '../assets/Prodcuts/Women/Shoes/ShoesWomen2.jpg';
+import ShoesWomen3 from '../assets/Prodcuts/Women/Shoes/ShoesWomen3.jpg';
+import ShoesWomen4 from '../assets/Prodcuts/Women/Shoes/ShoesWomen4.jpg';
+import ShoesWomen5 from '../assets/Prodcuts/Women/Shoes/ShoesWomen5.jpg';
+import ShoesWomen6 from '../assets/Prodcuts/Women/Shoes/ShoesWomen6.jpg';
+import ShoesWomen7 from '../assets/Prodcuts/Women/Shoes/ShoesWomen7.jpg';
+import ShoesWomen8 from '../assets/Prodcuts/Women/Shoes/ShoesWomen8.jpg';
+import ShoesWomen9 from '../assets/Prodcuts/Women/Shoes/ShoesWomen9.jpg';
+import ShoesWomen10 from '../assets/Prodcuts/Women/Shoes/ShoesWomen10.jpg';
+import PantsWomen1 from '../assets/Prodcuts/Women/Pants/PantsWomen1.jpg';
+import PantsWomen2 from '../assets/Prodcuts/Women/Pants/PantsWomen2.jpg';
+import PantsWomen3 from '../assets/Prodcuts/Women/Pants/PantsWomen3.jpg';
+import PantsWomen4 from '../assets/Prodcuts/Women/Pants/PantsWomen4.jpg';
+import PantsWomen5 from '../assets/Prodcuts/Women/Pants/PantsWomen5.jpg';
+import PantsWomen6 from '../assets/Prodcuts/Women/Pants/PantsWomen6.jpg';
+import PantsWomen7 from '../assets/Prodcuts/Women/Pants/PantsWomen7.jpg';
+import PantsWomen8 from '../assets/Prodcuts/Women/Pants/PantsWomen8.jpg';
+import PantsWomen9 from '../assets/Prodcuts/Women/Pants/PantsWomen9.jpg';
+import PantsWomen10 from '../assets/Prodcuts/Women/Pants/PantsWomen10.jpg';
+import ColoniesWomen1 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen1.jpg';
+import ColoniesWomen2 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen2.jpg';
+import ColoniesWomen3 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen3.jpg';
+import ColoniesWomen4 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen4.jpg';
+import ColoniesWomen5 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen5.jpg';
+import ColoniesWomen6 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen6.jpg';
+import ColoniesWomen7 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen7.jpg';
+import ColoniesWomen8 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen8.jpg';
+import ColoniesWomen9 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen9.jpg';
+import ColoniesWomen10 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen10.jpg';
+import CoatsWomen1 from '../assets/Prodcuts/Women/Coats/CoatsWomen1.jpg';
+import CoatsWomen2 from '../assets/Prodcuts/Women/Coats/CoatsWomen2.jpg';
+import CoatsWomen3 from '../assets/Prodcuts/Women/Coats/CoatsWomen3.jpg';
+import CoatsWomen4 from '../assets/Prodcuts/Women/Coats/CoatsWomen4.jpg';
+import CoatsWomen5 from '../assets/Prodcuts/Women/Coats/CoatsWomen5.jpg';
+import CoatsWomen6 from '../assets/Prodcuts/Women/Coats/CoatsWomen6.jpg';
+import CoatsWomen7 from '../assets/Prodcuts/Women/Coats/CoatsWomen7.jpg';
+import CoatsWomen8 from '../assets/Prodcuts/Women/Coats/CoatsWomen8.jpg';
+import CoatsWomen9 from '../assets/Prodcuts/Women/Coats/CoatsWomen9.jpg';
+import CoatsWomen10 from '../assets/Prodcuts/Women/Coats/CoatsWomen10.jpg';
+
+
+
+
+
 
 
 export interface Product {
@@ -29,7 +233,7 @@ export const productCatalog: Product[] = [
       name: "classic white t-shirt kids",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
-      image: CoatsKids1,
+      image: TShirtKid1,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -38,7 +242,7 @@ export const productCatalog: Product[] = [
       name: "classic black t-shirt for kidst",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid2,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -47,7 +251,7 @@ export const productCatalog: Product[] = [
       name: "green t-shirt kids",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid3,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -56,7 +260,7 @@ export const productCatalog: Product[] = [
       name: "printed t-shirt",
       price: 24.99,
       description: "spiderman print t-shirt",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid4,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -65,7 +269,7 @@ export const productCatalog: Product[] = [
       name: "printed t-shirt",
       price: 24.99,
       description: "dragon ball z printed t-shirt",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid5,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -74,7 +278,7 @@ export const productCatalog: Product[] = [
       name: "blue t-shirt",
       price: 19.99,
       description: "Blue cotton t-shirt",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid6,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -83,7 +287,7 @@ export const productCatalog: Product[] = [
       name: "Round neck t-shirt",
       price: 19.99,
       description: "Yellow round neck children's t-shirt",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid7,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -92,7 +296,7 @@ export const productCatalog: Product[] = [
       name: "Striped T-shirt",
       price: 19.99,
       description: "Red and white striped t-shirt",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid8,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -101,7 +305,7 @@ export const productCatalog: Product[] = [
       name: "Football team t-shirt",
       price: 19.99,
       description: "Argentina team shirt",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid9,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -110,7 +314,7 @@ export const productCatalog: Product[] = [
       name: "printed t-shirt",
       price: 19.99,
       description: "Argentina team shirt",
-      image: "https://via.placeholder.com/200?text=Kid+Graphic",
+      image: TShirtKid10,
       category: "Kids",
       subcategory: "T-Shirt"
     },
@@ -120,7 +324,7 @@ export const productCatalog: Product[] = [
       name: "summer sports",
       price: 29.99,
       description: "sports shoes for summer",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids1,
       category: "Kids",
       subcategory: "Shoes"
     },
@@ -129,7 +333,7 @@ export const productCatalog: Product[] = [
       name: "breathable shoe",
       price: 39.99,
       description: "sporty fashion casual non-slip",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids2,
       category: "Kids",
       subcategory: "Shoes"
     },
@@ -138,7 +342,7 @@ export const productCatalog: Product[] = [
       name: "oxford shoe",
       price: 59.99,
       description: "children's oxford shoes",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids3,
       category: "Kids",
       subcategory: "Shoes"
     },
@@ -147,7 +351,7 @@ export const productCatalog: Product[] = [
       name: "sports kids cord",
       price: 59.99,
       description: "Kids core blue leather shoes",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids4,
       category: "Kids",
       subcategory: "Shoes"
     },
@@ -156,7 +360,7 @@ export const productCatalog: Product[] = [
       name: "school shoe",
       price: 29.99,
       description: "brown school shoe",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids5,
       category: "Kids",
       subcategory: "Shoes"
     },
@@ -165,16 +369,16 @@ export const productCatalog: Product[] = [
       name: "Rechargeable shoes with LED lights",
       price: 89.99,
       description: "Shoes with lights and wheels",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids6,
       category: "Kids",
       subcategory: "Shoes"
     },
     {
       id: 17,
-      name: "Rechargeable shoes with LED lights",
+      name: "Shoes with lightss",
       price: 79.99,
       description: "Shoes with lightss",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids7,
       category: "Kids",
       subcategory: "shoes"
     },
@@ -183,7 +387,7 @@ export const productCatalog: Product[] = [
       name: "sports shoes",
       price: 29.99,
       description: "puma sports shoes",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids8,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -192,7 +396,7 @@ export const productCatalog: Product[] = [
       name: "sports shoes",
       price: 29.99,
       description: "black sports shoes",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids9,
       category: "Kids",
       subcategory: "Shoes"
     },
@@ -201,7 +405,7 @@ export const productCatalog: Product[] = [
       name: "tennis boot",
       price: 59.99,
       description: "Black and brown boot-type tennis shoes",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ShoesKids10,
       category: "Kids",
       subcategory: "Shoes"
     },
@@ -211,7 +415,7 @@ export const productCatalog: Product[] = [
       name: "Kid's Jeans",
       price: 29.99,
       description: "Durable denim jeans for active kids",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids1,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -220,7 +424,7 @@ export const productCatalog: Product[] = [
       name: "black pants",
       price: 29.99,
       description: "straight black tube pants",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids2,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -229,7 +433,7 @@ export const productCatalog: Product[] = [
       name: "green jeans",
       price: 29.99,
       description: "green cargo jean",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids3,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -238,7 +442,7 @@ export const productCatalog: Product[] = [
       name: "beige jeans",
       price: 29.99,
       description: "beige cargo jeans",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids4,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -247,7 +451,7 @@ export const productCatalog: Product[] = [
       name: "sleep pants",
       price: 29.99,
       description: "blue sleep pants for kids",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids5,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -256,7 +460,7 @@ export const productCatalog: Product[] = [
       name: "kids leggings",
       price: 39.99,
       description: "green kids leggings",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids6,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -265,7 +469,7 @@ export const productCatalog: Product[] = [
       name: "Drill pants",
       price: 49.99,
       description: "Brown drill pants for kids",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids7,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -274,7 +478,7 @@ export const productCatalog: Product[] = [
       name: "camouflage drill pants",
       price: 69.99,
       description: "beige camouflage drill pants",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids8,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -283,7 +487,7 @@ export const productCatalog: Product[] = [
       name: "jean for boy",
       price: 59.99,
       description: "blue jeans for kids",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids9,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -292,7 +496,7 @@ export const productCatalog: Product[] = [
       name: "mini panda pants",
       price: 79.99,
       description: "blue or brown panda mini pants",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: PantsKids10,
       category: "Kids",
       subcategory: "Pants"
     },
@@ -302,7 +506,7 @@ export const productCatalog: Product[] = [
       name: "puchini colony",
       price: 29.99,
       description: "puchini colony for children",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids1,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -311,7 +515,7 @@ export const productCatalog: Product[] = [
       name: "bvlgari cologne",
       price: 59.99,
       description: "bvlgari cologne always clean",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids2,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -320,7 +524,7 @@ export const productCatalog: Product[] = [
       name: "spider man colony",
       price: 39.99,
       description: "spider man colony",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids3,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -329,7 +533,7 @@ export const productCatalog: Product[] = [
       name: "esika colony",
       price: 29.99,
       description: "esika colony of force command",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids4,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -338,7 +542,7 @@ export const productCatalog: Product[] = [
       name: "lightning mcqueen colony",
       price: 39.99,
       description: "lightning mcqueen colony",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids5,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -347,7 +551,7 @@ export const productCatalog: Product[] = [
       name: "chicco cologne",
       price: 69.99,
       description: "chicco cologne for kids",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids6,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -356,7 +560,7 @@ export const productCatalog: Product[] = [
       name: "mini chics colony",
       price: 69.99,
       description: "cologne for mini chics girls",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids7,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -365,7 +569,7 @@ export const productCatalog: Product[] = [
       name: "duo colonies",
       price: 49.99,
       description: "duo avon colonies, boy and girl",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids8,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -374,7 +578,7 @@ export const productCatalog: Product[] = [
       name: "Kid princess cologne",
       price: 59.99,
       description: "Kid cologne princess snow white",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids9,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -383,7 +587,7 @@ export const productCatalog: Product[] = [
       name: "blue fragrances for kids",
       price: 29.99,
       description: "blue fragrances for kids",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: ColoniesKids10,
       category: "Kids",
       subcategory: "Colonies"
     },
@@ -393,7 +597,7 @@ export const productCatalog: Product[] = [
       name: "Green coat",
       price: 29.99,
       description: "Green winter coat",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids1,
       category: "Kids",
       subcategory: "Coat"
     },
@@ -402,7 +606,7 @@ export const productCatalog: Product[] = [
       name: "Children's down coat",
       price: 29.99,
       description: "Children's blue down coat",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids2,
       category: "Kids",
       subcategory: "Coat"
     },
@@ -411,7 +615,7 @@ export const productCatalog: Product[] = [
       name: "hooded jacket",
       price: 29.99,
       description: "blue hooded jacket",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids3,
       category: "Kids",
       subcategory: "Coat"
     },
@@ -420,63 +624,63 @@ export const productCatalog: Product[] = [
       name: "boy coat",
       price: 29.99,
       description: "boy coat",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids4,
       category: "Kids",
-      subcategory: "Coats"
+      subcategory: "Coat"
     },
     {
       id: 45,
       name: " girl coat",
       price: 29.99,
       description: "Pink girl coat",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids5,
       category: "Kids",
-      subcategory: "Coats"
+      subcategory: "Coat"
     },
     {
       id: 46,
       name: "winter coat girl",
       price: 29.99,
       description: "pink winter coat for girls",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids6,
       category: "Kids",
-      subcategory: "Coats"
+      subcategory: "Coat"
     },
     {
       id: 47,
       name: "wool coat",
       price: 29.99,
       description: "children's wool coat",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids7,
       category: "Kids",
-      subcategory: "Coats"
+      subcategory: "Coat"
     },
     {
       id: 48,
       name: "children's wool coat",
       price: 29.99,
       description: "Dark green long wool coat for kids",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids8,
       category: "Kids",
-      subcategory: "Coats"
+      subcategory: "Coat"
     },
     {
       id: 49,
       name: "Winter coat for children",
       price: 29.99,
       description: "Children's winter hooded coat",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids9,
       category: "Kids",
-      subcategory: "Coats"
+      subcategory: "Coat"
     },
     {
       id: 50,
       name: "Duo coats in wool",
       price: 29.99,
       description: "Duo wool and furry coats for boys and girls",
-      image: "https://via.placeholder.com/200?text=Kid+Jeans",
+      image: CoatsKids10,
       category: "Kids",
-      subcategory: "Coats"
+      subcategory: "Coat"
     },
     
     // Men
@@ -486,7 +690,7 @@ export const productCatalog: Product[] = [
       name: "men's t-shirt",
       price: 24.99,
       description: "Men's short-sleeved plain t-shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen1,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -495,7 +699,7 @@ export const productCatalog: Product[] = [
       name: "Men's Classic T-Shirt",
       price: 19.99,
       description: "white basic t-shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen2,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -504,7 +708,7 @@ export const productCatalog: Product[] = [
       name: "texture t-shirt",
       price: 24.99,
       description: "plain textured t-shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen3,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -513,7 +717,7 @@ export const productCatalog: Product[] = [
       name: "polo shirt",
       price: 24.99,
       description: "Classic polo shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen4,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -522,7 +726,7 @@ export const productCatalog: Product[] = [
       name: "elegant men's t-shirt",
       price: 24.99,
       description: "elegant men's t-shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen5,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -531,7 +735,7 @@ export const productCatalog: Product[] = [
       name: "short sleeve t-shirt",
       price: 24.99,
       description: "Short sleeve cotton t-shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen6,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -540,7 +744,7 @@ export const productCatalog: Product[] = [
       name: "v neck t-shirt",
       price: 24.99,
       description: "v neck t-shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen7,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -549,7 +753,7 @@ export const productCatalog: Product[] = [
       name: "black polo shirt",
       price: 24.99,
       description: "black polo shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen8,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -558,7 +762,7 @@ export const productCatalog: Product[] = [
       name: "Skull grey t-shirt",
       price: 24.99,
       description: "Skull grey t-shirt",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen9,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -567,7 +771,7 @@ export const productCatalog: Product[] = [
       name: "Men's Classic T-Shirt",
       price: 24.99,
       description: "Classic fit cotton t-shirt for men",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: TShirtMen10,
       category: "Mens",
       subcategory: "T-Shirt"
     },
@@ -577,7 +781,7 @@ export const productCatalog: Product[] = [
       name: "black pants men",
       price: 64.99,
       description: "black pants men",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: PantsMen1,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -586,7 +790,7 @@ export const productCatalog: Product[] = [
       name: "duo jean man",
       price: 64.99,
       description: "duo jean man",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:PantsMen2,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -595,7 +799,7 @@ export const productCatalog: Product[] = [
       name: "basic pants for men",
       price: 64.99,
       description: "basic pants for men",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: PantsMen3,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -604,7 +808,7 @@ export const productCatalog: Product[] = [
       name: "men's sports pants",
       price: 64.99,
       description: "men's sports pants",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: PantsMen4,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -613,7 +817,7 @@ export const productCatalog: Product[] = [
       name: "sports pants",
       price: 64.99,
       description: "green sports pants",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: PantsMen5,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -622,7 +826,7 @@ export const productCatalog: Product[] = [
       name: "black pants",
       price: 64.99,
       description: "black north face pants",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: PantsMen5,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -631,7 +835,7 @@ export const productCatalog: Product[] = [
       name: "sports pants",
       price: 64.99,
       description: "grey fleece lined sports pants",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:PantsMen7,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -640,7 +844,7 @@ export const productCatalog: Product[] = [
       name: "wandering pants",
       price: 64.99,
       description: "blue wander pants",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: PantsMen8,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -649,16 +853,16 @@ export const productCatalog: Product[] = [
       name: "sports pants",
       price: 64.99,
       description: "box ns north face sports pants",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image: PantsMen9,
       category: "Mens",
       subcategory: "Pants"
     },
     {
       id: 70,
-      name: "men's jeans",
-      price: 64.99,
-      description: "blue men's jeans",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      name: "means jeans",
+      price: 74.99,
+      description: "means jeans",
+      image: PantsMen10,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -668,7 +872,7 @@ export const productCatalog: Product[] = [
       name: "MMen's leather shoes",
       price: 54.99,
       description: "Men's leather shoes",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen1,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -677,7 +881,7 @@ export const productCatalog: Product[] = [
       name: "leather shoes",
       price: 54.99,
       description: "sand-colored leather shoes",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen2,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -686,7 +890,7 @@ export const productCatalog: Product[] = [
       name: "adidas sneakers",
       price: 54.99,
       description: "white adidas sneakers",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen3,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -695,7 +899,7 @@ export const productCatalog: Product[] = [
       name: "adidas men's shoes",
       price: 54.99,
       description: "adidas men's shoes yeezy",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen4,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -704,7 +908,7 @@ export const productCatalog: Product[] = [
       name: "Brahma boots",
       price: 54.99,
       description: "brown brahma boots",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen5,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -713,7 +917,7 @@ export const productCatalog: Product[] = [
       name: "men's sneakers",
       price: 54.99,
       description: "retro boots 1",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen6,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -722,7 +926,7 @@ export const productCatalog: Product[] = [
       name: "Jordan 4 boots",
       price: 54.99,
       description: "nike jordan 4 boots",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen7,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -731,7 +935,7 @@ export const productCatalog: Product[] = [
       name: "jordan boots",
       price: 54.99,
       description: "black and white jordan boots",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen8,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -740,7 +944,7 @@ export const productCatalog: Product[] = [
       name: "Jordan sneakers",
       price: 54.99,
       description: "Jordan sneakers",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen9,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -749,7 +953,7 @@ export const productCatalog: Product[] = [
       name: "nike jordan 1",
       price: 54.99,
       description: "nike jordan 1 mid retro milan shoes",
-      image: "https://via.placeholder.com/200?text=Men+TShirt",
+      image:  ShoesMen10,
       category: "Mens",
       subcategory: "Shoes"
     },
@@ -759,7 +963,7 @@ export const productCatalog: Product[] = [
       name: "blue intense perfume",
       price: 39.99,
       description: "blue intense perfume",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen1,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -768,7 +972,7 @@ export const productCatalog: Product[] = [
       name: "Guio water cologne",
       price: 39.99,
       description: "Guio water cologne",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen2,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -777,7 +981,7 @@ export const productCatalog: Product[] = [
       name: "Chanel Blue Perfume",
       price: 39.99,
       description: "Chanel Blue Perfume",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen3,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -786,7 +990,7 @@ export const productCatalog: Product[] = [
       name: "Wild perfume",
       price: 39.99,
       description: "Wild perfume",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen4,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -795,7 +999,7 @@ export const productCatalog: Product[] = [
       name: "Parma water perfume",
       price: 39.99,
       description: "Parma water perfume",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen5,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -804,7 +1008,7 @@ export const productCatalog: Product[] = [
       name: "perfume srn",
       price: 39.99,
       description: "Fine and exclusive srn perfume",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen6,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -813,7 +1017,7 @@ export const productCatalog: Product[] = [
       name: "perfume Stronger with you intensely",
       price: 39.99,
       description: "perfume Stronger with you intensely",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen7,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -822,7 +1026,7 @@ export const productCatalog: Product[] = [
       name: "vintage heroes perfume",
       price: 39.99,
       description: "vintage heroes perfume",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen8,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -831,7 +1035,7 @@ export const productCatalog: Product[] = [
       name: "perfume nature mood",
       price: 39.99,
       description: "perfume nature mood green",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen9,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -840,7 +1044,7 @@ export const productCatalog: Product[] = [
       name: "signature perfume L'bel",
       price: 39.99,
       description: "signature perfume L'bel",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image: ColoniesMen10,
       category: "Mens",
       subcategory: "Colonies"
     },
@@ -850,7 +1054,7 @@ export const productCatalog: Product[] = [
       name: "gray coat",
       price: 79.99,
       description: "gray coat",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen1,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -859,7 +1063,7 @@ export const productCatalog: Product[] = [
       name: "long sand coat",
       price: 79.99,
       description: "long sand coat",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen2,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -868,7 +1072,7 @@ export const productCatalog: Product[] = [
       name: "green coat",
       price: 79.99,
       description: "green hooded coat",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen3,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -877,7 +1081,7 @@ export const productCatalog: Product[] = [
       name: "long grey coat",
       price: 79.99,
       description: "long grey coat",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen4,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -886,7 +1090,7 @@ export const productCatalog: Product[] = [
       name: "blue jacket",
       price: 79.99,
       description: "blue jacket",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen5,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -895,7 +1099,7 @@ export const productCatalog: Product[] = [
       name: "long white coat",
       price: 79.99,
       description: "long white coat",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen6,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -904,7 +1108,7 @@ export const productCatalog: Product[] = [
       name: "green rain jacket",
       price: 59.99,
       description: "green rain jacket",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen7,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -913,7 +1117,7 @@ export const productCatalog: Product[] = [
       name: "formal plaid coat",
       price: 89.99,
       description: "formal plaid coat",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen8,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -922,7 +1126,7 @@ export const productCatalog: Product[] = [
       name: "Men's Coats",
       price: 79.99,
       description: "delicate cotton coats",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen9,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -931,7 +1135,7 @@ export const productCatalog: Product[] = [
       name: "black coat",
       price: 99.99,
       description: "black coat",
-      image: "https://via.placeholder.com/200?text=Men+Jeans",
+      image:  CoatsMen10,
       category: "Mens",
       subcategory: "Coats"
     },
@@ -942,7 +1146,7 @@ export const productCatalog: Product[] = [
       name: "Women's Fashion T-Shirt",
       price: 19.99,
       description: "Trendy and comfortable women's t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen1,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -951,7 +1155,7 @@ export const productCatalog: Product[] = [
       name: "black basic t-shirt",
       price: 19.99,
       description: "black basic t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen2,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -961,7 +1165,7 @@ export const productCatalog: Product[] = [
       name: "red basic t-shirt",
       price: 29.99,
       description: "red basic t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image:TShirtWomen3,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -970,7 +1174,7 @@ export const productCatalog: Product[] = [
       name: "women's printed t-shirt",
       price: 29.99,
       description: "Pink Panther Women's Printed T-Shirt",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen4,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -979,7 +1183,7 @@ export const productCatalog: Product[] = [
       name: "elegant women's t-shirt",
       price: 59.99,
       description: "elegant women's t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen5,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -988,7 +1192,7 @@ export const productCatalog: Product[] = [
       name: "women's sports t-shirt",
       price: 39.99,
       description: "women's sports t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen6,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -997,7 +1201,7 @@ export const productCatalog: Product[] = [
       name: "elegant blouse",
       price: 69.99,
       description: "elegant blouse",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen7,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -1006,7 +1210,7 @@ export const productCatalog: Product[] = [
       name: "red elegant blouse",
       price: 49.99,
       description: "Elegant blouse",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen8,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -1015,7 +1219,7 @@ export const productCatalog: Product[] = [
       name: "elegant white blouse",
       price: 29.99,
       description: "Elegant white open neck blouset",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen9,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -1024,7 +1228,7 @@ export const productCatalog: Product[] = [
       name: "printed blouse",
       price: 29.99,
       description: "printed blouse",
-      image: "https://via.placeholder.com/200?text=Women+TShirt",
+      image: TShirtWomen10,
       category: "Women",
       subcategory: "T-Shirt"
     },
@@ -1034,7 +1238,7 @@ export const productCatalog: Product[] = [
       name: "sports shoes",
       price: 79.99,
       description: "sports shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen1,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1043,7 +1247,7 @@ export const productCatalog: Product[] = [
       name: "pink women's heels",
       price: 89.99,
       description: "pink women's heels",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen2,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1052,7 +1256,7 @@ export const productCatalog: Product[] = [
       name: "black strap shoes",
       price: 89.99,
       description: "black strap shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen3,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1061,7 +1265,7 @@ export const productCatalog: Product[] = [
       name: "white casual sneakers",
       price: 99.99,
       description: "white casual sneakers",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen4,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1070,7 +1274,7 @@ export const productCatalog: Product[] = [
       name: "Women's open-toed sneakers",
       price: 79.99,
       description: "Women's open-toed sneakers",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen5,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1079,7 +1283,7 @@ export const productCatalog: Product[] = [
       name: "lace-up sandals",
       price: 89.99,
       description: "lace-up sandals",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen6,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1088,7 +1292,7 @@ export const productCatalog: Product[] = [
       name: "Women's Shoes",
       price: 69.99,
       description: "Women's Shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen7,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1097,7 +1301,7 @@ export const productCatalog: Product[] = [
       name: "cream colored ballet flats",
       price: 79.99,
       description: "cream colored ballet flats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen8,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1106,7 +1310,7 @@ export const productCatalog: Product[] = [
       name: "black leather shoes",
       price: 109.99,
       description: "black leather shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen9,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1115,7 +1319,7 @@ export const productCatalog: Product[] = [
       name: "elegant red sneakers",
       price: 100.99,
       description: "elegant red sneakers",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesWomen10,
       category: "Women",
       subcategory: "Shoes"
     },
@@ -1125,7 +1329,7 @@ export const productCatalog: Product[] = [
       name: "white cargo pants",
       price: 74.99,
       description: "white cargo pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen1,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1134,7 +1338,7 @@ export const productCatalog: Product[] = [
       name: "jeans",
       price: 74.99,
       description: "jeans blue",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen2,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1143,7 +1347,7 @@ export const productCatalog: Product[] = [
       name: "oversized pants",
       price: 84.99,
       description: "green oversized pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen3,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1152,7 +1356,7 @@ export const productCatalog: Product[] = [
       name: "cowboy pants",
       price: 64.99,
       description: "cowboy pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen4,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1161,7 +1365,7 @@ export const productCatalog: Product[] = [
       name: "blue skinny jeans",
       price: 54.99,
       description: "Stylish high-waisted skinny jeans",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen5,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1170,7 +1374,7 @@ export const productCatalog: Product[] = [
       name: "baggy ripped",
       price: 54.99,
       description: "pants baggy ripped",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen6,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1179,7 +1383,7 @@ export const productCatalog: Product[] = [
       name: "wide leg pants women",
       price: 54.99,
       description: "wide leg pants women",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen7,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1188,7 +1392,7 @@ export const productCatalog: Product[] = [
       name: "black skinny pants",
       price: 44.99,
       description: "black skinny pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen8,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1197,7 +1401,7 @@ export const productCatalog: Product[] = [
       name: "beach pants",
       price: 54.99,
       description: "beach pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen9,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1206,7 +1410,7 @@ export const productCatalog: Product[] = [
       name: "cream straight trousers",
       price: 54.99,
       description: "cream straight trousers",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsWomen10,
       category: "Women",
       subcategory: "Pants"
     },
@@ -1216,7 +1420,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 54.99,
       description: "Telva colony",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen1,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1225,7 +1429,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 94.99,
       description: "coco chanel cologne",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen2,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1234,7 +1438,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 54.99,
       description: "esika vibrance cologne",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen3,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1243,7 +1447,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 94.99,
       description: "gucci bloom cologne",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen4,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1252,7 +1456,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 54.99,
       description: "Chanel cologne",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen5,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1261,7 +1465,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 104.99,
       description: "2v rose cologne",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen6,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1270,7 +1474,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 54.99,
       description: "Grazzia Esika colony",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen7,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1279,7 +1483,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 54.99,
       description: "delicate fragrance dream esika colony",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen8,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1288,7 +1492,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 54.99,
       description: "delicate fragrance Dorsay women's cologne",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen9,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1297,7 +1501,7 @@ export const productCatalog: Product[] = [
       name: "Women's Colonies",
       price: 54.99,
       description: "delicate fragrance magnat woman colony",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesWomen10,
       category: "Women",
       subcategory: "Colonies"
     },
@@ -1307,7 +1511,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 74.99,
       description: "long sand coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen1,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1316,7 +1520,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 84.99,
       description: "long white coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen2,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1325,7 +1529,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 54.99,
       description: "green short coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen3,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1334,7 +1538,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 54.99,
       description: "short black jacket",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen4,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1343,7 +1547,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 104.99,
       description: "long printed coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen5,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1352,7 +1556,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 94.99,
       description: "long brown coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen6,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1361,7 +1565,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 84.99,
       description: "pink long coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen7,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1370,7 +1574,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 94.99,
       description: "long green coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen8,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1379,7 +1583,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 94.99,
       description: "long black coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen9,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1388,7 +1592,7 @@ export const productCatalog: Product[] = [
       name: "Women's Coats",
       price: 84.99,
       description: "short grey coat",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsWomen10,
       category: "Women",
       subcategory: "Coats"
     },
@@ -1400,7 +1604,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 44.99,
       description: "basic color t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex1,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1409,7 +1613,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 34.99,
       description: "white t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex2,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1418,7 +1622,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 54.99,
       description: "T-shirt top corner print",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex3,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1427,7 +1631,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 34.99,
       description: "round neck t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex4,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1436,7 +1640,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 64.99,
       description: "colored t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex5,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1445,7 +1649,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 34.99,
       description: "orange t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex6,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1454,7 +1658,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 34.99,
       description: "combined printed t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex7,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1463,7 +1667,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 34.99,
       description: "combined printed t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex8,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1472,7 +1676,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 34.99,
       description: "combined printed t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex9,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1481,7 +1685,7 @@ export const productCatalog: Product[] = [
       name: "Unisex T-Shirt",
       price: 34.99,
       description: "combined printed t-shirt",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: TShirtUnisex10,
       category: "Unisex",
       subcategory: "T-Shirt"
     },
@@ -1491,7 +1695,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 79.99,
       description: "sports shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex1,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1500,7 +1704,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 79.99,
       description: "sports shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex2,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1509,7 +1713,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 89.99,
       description: "sports shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex3,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1518,7 +1722,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 69.99,
       description: "sports shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex4,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1527,7 +1731,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 69.99,
       description: "sports shoes",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex5,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1536,7 +1740,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 69.99,
       description: "comfortable school shoe",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex6,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1545,7 +1749,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 79.99,
       description: "light colored boots",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex7,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1554,7 +1758,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 59.99,
       description: "light colored boots",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex8,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1563,7 +1767,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 89.99,
       description: "light colored boots",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex9,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1572,7 +1776,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Shoes",
       price: 109.99,
       description: "light colored boots",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ShoesUnisex10,
       category: "Unisex",
       subcategory: "Shoes"
     },
@@ -1584,7 +1788,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 49.99,
       description: "skinny jeans",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex1,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1593,7 +1797,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 49.99,
       description: "skinny jeans",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex2,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1602,7 +1806,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 49.99,
       description: "skinny jeans",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex3,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1611,7 +1815,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 49.99,
       description: "skinny jeans",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex4,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1620,7 +1824,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 49.99,
       description: "skinny jeans",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex5,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1629,7 +1833,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 49.99,
       description: "light colored skinny cargo pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex6,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1638,7 +1842,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 49.99,
       description: "light colored skinny cargo pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex7,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1647,7 +1851,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 89.99,
       description: "light colored skinny cargo pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex8,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1656,7 +1860,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 59.99,
       description: "light colored skinny cargo pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image:PantsUnisex9 ,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1665,7 +1869,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Pants",
       price: 69.99,
       description: "light colored skinny cargo pants",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: PantsUnisex10,
       category: "Unisex",
       subcategory: "Pants"
     },
@@ -1675,7 +1879,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 49.99,
       description: "delicate women's fragrances from esika",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex1,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1684,7 +1888,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 49.99,
       description: "delicate women's fragrances from esika",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex2,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1693,7 +1897,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 59.99,
       description: "delicate women's fragrances from esika",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex3,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1702,7 +1906,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 69.99,
       description: "delicate women's fragrances from esika",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex4,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1711,7 +1915,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 59.99,
       description: "delicate women's fragrances from esika",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex5,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1720,7 +1924,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 99.99,
       description: "delicious exclusive fragrances",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex6,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1729,7 +1933,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 99.99,
       description: "delicious exclusive fragrances",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex7,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1738,7 +1942,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 99.99,
       description: "delicious exclusive fragrances",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex8,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1747,7 +1951,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 99.99,
       description: "delicious exclusive fragrances",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex9,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1756,7 +1960,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Colonies",
       price: 99.99,
       description: "delicious exclusive fragrances",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: ColoniesUnisex10,
       category: "Unisex",
       subcategory: "Colonies"
     },
@@ -1767,7 +1971,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 89.99,
       description: "long wool coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex1 ,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1776,7 +1980,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 89.99,
       description: "long cotton coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex2,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1785,7 +1989,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 89.99,
       description: "long cotton coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex3,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1794,7 +1998,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 79.99,
       description: "long cotton coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex4,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1803,7 +2007,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 79.99,
       description: "long cotton coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex5,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1812,7 +2016,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 79.99,
       description: "cute short coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image:CoatsUnisex6,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1821,7 +2025,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 79.99,
       description: "cute short coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex7,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1830,7 +2034,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 79.99,
       description: "cute short coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex8,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1839,7 +2043,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 79.99,
       description: "cute short coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex9,
       category: "Unisex",
       subcategory: "Coats"
     },
@@ -1848,7 +2052,7 @@ export const productCatalog: Product[] = [
       name: "Unisex Coats",
       price: 79.99,
       description: "cute short coats",
-      image: "https://via.placeholder.com/200?text=Women+Jeans",
+      image: CoatsUnisex10,
       category: "Unisex",
       subcategory: "Coats"
     },

@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import ProductSlider from '../components/Slider.vue';
-import Slider1 from '../assets/Slider/slider1.jpg';
-import Slider2 from '../assets/Slider/slider2.jpg';
-import Slider3 from '../assets/Slider/slider3.jpg';
-import Slider4 from '../assets/Slider/slider4.jpg';
-import Slider5 from '../assets/Slider/slider5.jpg';
+import Colletion0 from '../assets/Slider/Colletion0.jpg';
+import Colletion1 from '../assets/Slider/Colletion1.jpg';
+import Colletion2 from '../assets/Slider/Colletion2.jpg';
+import Colletion3 from '../assets/Slider/Colletion3.jpg';
+import Colletion4 from '../assets/Slider/Colletion4.jpg';
 
 export default defineComponent({
   name: 'HomePage',
@@ -16,31 +16,31 @@ export default defineComponent({
     return {
       slides: [
         {
-          image: Slider1,
+          image: Colletion0,
           title: 'Nueva Colección',
           description: 'Descubre las últimas tendencias',
           link: '/collection/new'
         },
         {
-          image: Slider2,
+          image: Colletion1,
           title: 'Colección de Verano',
           description: 'Descubre las últimas tendencias',
           link: '/collection/summer'
         },
         {
-          image: Slider3,
+          image: Colletion2,
           title: 'Colección de Invierno',
           description: 'Descubre las últimas tendencias',
           link: '/collection/winter'
         },
         {
-          image: Slider4,
+          image: Colletion3,
           title: 'Colección de Primavera',
           description: 'Descubre las últimas tendencias',
           link: '/collection/spring'
         },
         {
-          image: Slider5,
+          image: Colletion4,
           title: 'Colección de Otoño',
           description: 'Descubre las últimas tendencias',
           link: '/collection/autumn'

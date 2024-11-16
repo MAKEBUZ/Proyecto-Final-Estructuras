@@ -27,20 +27,5 @@ export type Product = {
     image: string;          
   };
   
-  interface CartItem {
-    id: number;
-    name: string;
-    quantity: number;
-  }
-  
-  interface Invoice {
-    id: string;
-    date: Date;
-    items: CartItem[];
-    subtotal: number;
-    shipping: number;
-    discount: number;
-    total: number;
-    status: 'pending' | 'processing' | 'completed';
-  }
+
   

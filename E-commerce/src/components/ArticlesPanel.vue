@@ -3,6 +3,7 @@ import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { CategoryNode } from '@/types';
 
+
 export default defineComponent({
   name: 'TopNavigation',
   setup() {
@@ -68,7 +69,7 @@ export default defineComponent({
       }, 300);
     };
 
-    // Nueva función para navegar a la categoría principal
+
     const navigateToMainCategory = (category: string) => {
       const route = `/shop/${category.toLowerCase()}`;
       router.push(route);
@@ -185,7 +186,7 @@ export default defineComponent({
   ></div>
 </template>
 
-<style scoped>
+<style lang="css">
 .category-container {
   display: flex;
   align-items: center;
@@ -217,11 +218,12 @@ export default defineComponent({
 
 .category-button:hover,
 .category-button.active {
-  color: #000000;
-  background-color: rgba(0, 0, 0, 0.03);
+  color: #333333;
+  background-color: #e8d6c0;
 }
+
 .categories-nav {
-  background-color: #f4ece0 ;
+  background-color: #F4ECE0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: fixed;
   top: 80px;
@@ -232,7 +234,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   padding: 0 2rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #d9bb98;
 }
 
 .category-list {
@@ -266,8 +268,8 @@ export default defineComponent({
 
 .category-button:hover,
 .category-button.active {
-  color: #000000;
-  background-color: rgba(0, 0, 0, 0.03);
+  color: #333333;
+  background-color: #e8d6c0;
 }
 
 .arrow {
@@ -292,7 +294,7 @@ export default defineComponent({
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   padding: 0.75rem 0;
   z-index: 95;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid #e8d6c0;
 }
 
 .subcategory-dropdown::before {
@@ -304,8 +306,8 @@ export default defineComponent({
   width: 12px;
   height: 12px;
   background: #ffffff;
-  border-left: 1px solid rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-left: 1px solid #e8d6c0;
+  border-top: 1px solid #e8d6c0;
   transform: translateX(-50%) rotate(45deg);
 }
 
@@ -340,7 +342,7 @@ export default defineComponent({
   text-align: left;
   padding: 0.65rem 1rem;
   text-decoration: none;
-  color: #666666;
+  color: #5d554d;
   transition: all 0.2s ease;
   border-radius: 4px;
   border: none;
@@ -350,8 +352,8 @@ export default defineComponent({
 }
 
 .subcategory-link:hover {
-  color: #000000;
-  background-color: rgba(0, 0, 0, 0.03);
+  color: #333333;
+  background-color: #e8d6c0;
 }
 
 /* Estilos móviles mejorados */
@@ -367,11 +369,16 @@ export default defineComponent({
   padding: 0.5rem;
 }
 
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+  background: #333333;
+}
+
 .hamburger-icon {
   display: block;
   width: 24px;
   height: 2px;
-  background: #333;
   position: relative;
   transition: background 0.3s;
 }
@@ -382,7 +389,6 @@ export default defineComponent({
   position: absolute;
   width: 24px;
   height: 2px;
-  background: #333;
   transition: all 0.3s;
 }
 
@@ -407,7 +413,7 @@ export default defineComponent({
   transform: rotate(-45deg);
   bottom: 0;
 }
-
+ 
 .mobile-overlay {
   display: none;
   position: fixed;

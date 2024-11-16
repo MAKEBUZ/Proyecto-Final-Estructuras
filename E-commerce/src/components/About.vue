@@ -147,14 +147,14 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="css">
 .about-container {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   color: #333333;
 }
 
 .hero-section {
-  background-color: #f4ece0;
+  background-color: #F4ECE0;
   padding: 6rem 2rem;
   text-align: center;
   position: relative;
@@ -168,7 +168,7 @@ export default defineComponent({
 
 .subtitle {
   font-size: 1.5rem;
-  color: #666;
+  color: #5d554d;
 }
 
 .features-section {
@@ -181,10 +181,10 @@ export default defineComponent({
 }
 
 .feature-card {
-  background: white;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px #E9E1D5;
+  box-shadow: 0 2px 4px #e8d6c0;
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -194,7 +194,7 @@ export default defineComponent({
 }
 
 .icon-wrapper {
-  background-color: #a8e6cf;
+  background-color: #e8d6c0;
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -212,7 +212,7 @@ export default defineComponent({
 
 .story-section {
   padding: 4rem 2rem;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .story-content {
@@ -230,8 +230,8 @@ export default defineComponent({
 }
 
 .learn-more-btn {
-  background-color: #a8e6cf;
-  color: #333333;
+  background-color: #BE8151;
+  color: #ffffff;
   border: none;
   padding: 1rem 2rem;
   border-radius: 4px;
@@ -241,7 +241,7 @@ export default defineComponent({
 }
 
 .learn-more-btn:hover {
-  background-color: #ff6f61;
+  background-color: #B06D46;
 }
 
 .stats-container {
@@ -256,13 +256,13 @@ export default defineComponent({
 
 .stat-item h3 {
   font-size: 2.5rem;
-  color: #ff6f61;
+  color: #BE8151;
   margin: 0;
 }
 
 .values-section {
   padding: 4rem 2rem;
-  background-color: #f4ece0;
+  background-color: #F4ECE0;
 }
 
 .values-grid {
@@ -275,10 +275,10 @@ export default defineComponent({
 }
 
 .value-card {
-  background: white;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px #E9E1D5;
+  box-shadow: 0 2px 4px #d9bb98;
   text-align: center;
 }
 

@@ -3,6 +3,8 @@ import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import type { Offer } from '@/types';
 
+import Offer1 from '@/assets/Offer/offer1.jpg';
+
 interface CartItem {
   id: number;
   quantity: number;
@@ -18,13 +20,13 @@ export default defineComponent({
 
     const offers = ref<Offer[]>([
       {
-        id: 1,
-        title: "Oferta Especial 1",
-        description: "Descripción de la oferta especial 1",
-        price: 99.99,
-        oldPrice: 149.99,
-        discount: 33,
-        image: "/images/offer1.jpg"
+        id: 10000,
+        title: "Camiseta del Deportivo Pasto",
+        description: "Camiseta del Deportivo Pasto edicion especial 'La del Ascenso'",
+        price: 100.00,
+        oldPrice: 130.00,
+        discount: 23,
+        image: Offer1
       },
     ]);
 
@@ -140,22 +142,15 @@ export default defineComponent({
   padding: 2rem;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 3rem;
-  opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-}
-
 .title {
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: #333333;
   margin-bottom: 0.5rem;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  color: #666;
+  color: #5d554d;
 }
 
 .offers-grid {
@@ -165,7 +160,7 @@ export default defineComponent({
 }
 
 .offer-card {
-  background: white;
+  background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -181,14 +176,13 @@ export default defineComponent({
 
 .offer-image {
   position: relative;
-  height: 200px;
   overflow: hidden;
 }
 
 .offer-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; 
+  display: block; 
   transition: transform 0.3s ease;
 }
 
@@ -200,12 +194,12 @@ export default defineComponent({
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: #ff6f61;
-  color: white;
+  background: #BE8151;
+  color: #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: bold;
-  box-shadow: 0 2px 4px rgba(255, 111, 97, 0.3);
+  box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -218,14 +212,14 @@ export default defineComponent({
 }
 
 .offer-content h2 {
-  color: #2c3e50;
+  color: #333333;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   transition: color 0.3s ease;
 }
 
 .offer-content p {
-  color: #666;
+  color: #5d554d;
   line-height: 1.5;
   margin-bottom: 1rem;
 }
@@ -238,13 +232,13 @@ export default defineComponent({
 }
 
 .old-price {
-  color: #999;
+  color: #ff0000;
   text-decoration: line-through;
   font-size: 1.1rem;
 }
 
 .current-price {
-  color: #2ecc71;
+  color: #BE8151;
   font-size: 1.8rem;
   font-weight: bold;
   transition: transform 0.3s ease;
@@ -257,8 +251,8 @@ export default defineComponent({
 .buy-button {
   width: 100%;
   padding: 1rem;
-  background: #a8e6cf;
-  color: #333333;
+  background: #BE8151;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -267,7 +261,7 @@ export default defineComponent({
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(168, 230, 207, 0.3);
+  box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
 }
 
 .buy-button::before {
@@ -289,18 +283,18 @@ export default defineComponent({
 }
 
 .buy-button:hover {
-  background: #95d1bc;
+  background: #B06D46;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(168, 230, 207, 0.4);
+  box-shadow: 0 4px 8px rgba(190, 129, 81, 0.4);
 }
 
 .buy-button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(168, 230, 207, 0.3);
+  box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
 }
 
 .buy-button.is-adding {
-  background: #95d1bc;
+  background: #B06D46;
   cursor: not-allowed;
   animation: pulse 1.5s infinite;
 }
@@ -311,7 +305,6 @@ export default defineComponent({
   transform: none;
 }
 
-/* Animaciones */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -340,11 +333,11 @@ export default defineComponent({
   }
   50% {
     transform: scale(0.98);
-    box-shadow: 0 2px 4px rgba(168, 230, 207, 0.2);
+    box-shadow: 0 2px 4px rgba(190, 129, 81, 0.2);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 2px 4px rgba(168, 230, 207, 0.3);
+    box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
   }
 }
 
@@ -353,8 +346,8 @@ export default defineComponent({
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #a8e6cf;
-  color: #333333;
+  background-color: #BE8151;
+  color: #ffffff;
   padding: 1rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -423,7 +416,7 @@ export default defineComponent({
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .offer-card {
-    background: #2c3e50;
+    background: #5d554d;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
 
@@ -432,26 +425,26 @@ export default defineComponent({
   }
 
   .offer-content p {
-    color: #b8c2cc;
+    color: #e8d6c0;
   }
 
   .buy-button {
-    color: #333333;
+    color: #ffffff;
   }
 
   .success-alert {
-    background-color: #95d1bc;
-    color: #333333;
+    background-color: #BE8151;
+    color: #ffffff;
   }
 }
 
-/* Añade los estilos del error alert */
+/* Alerta de error */
 .error-alert {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #ff6f61;
-  color: white;
+  background-color: #764836;
+  color: #ffffff;
   padding: 1rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -461,5 +454,15 @@ export default defineComponent({
 
 .error-alert.fade-out {
   animation: slideOut 0.3s ease-in forwards;
+}
+
+@media (max-width: 768px) {
+  .error-alert {
+    top: auto;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+  }
 }
 </style>

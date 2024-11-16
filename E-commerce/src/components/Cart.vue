@@ -1,118 +1,10 @@
-<template>
-  <div class="cart-container">
-    <div class="cart-header">
-      <h1>Tu Carrito</h1>
-      <p v-if="cartItems.length === 0" class="empty-cart-message">
-        Tu carrito está vacío. <router-link to="/shop" class="continue-shopping">Continuar comprando</router-link>
-      </p>
-    </div>
-
-    <div v-if="cartItems.length > 0" class="cart-content">
-      <!-- Lista de productos -->
-      <div class="cart-items">
-        <div v-for="item in enrichedCartItems" :key="item.id" class="cart-item" :class="{ 'removing': removingItem === item.id }">
-          <div class="item-image">
-            <img :src="getProductImage(item.id)" :alt="item.name">
-          </div>
-          
-          <div class="item-details">
-            <div class="item-info">
-              <h3>{{ item.name }}</h3>
-              <p class="item-price">${{ getProductPrice(item.id).toFixed(2) }}</p>
-            </div>
-
-            <div class="item-actions">
-              <div class="quantity-controls">
-                <button 
-                  @click="updateQuantity(item.id, item.quantity - 1)"
-                  class="quantity-btn"
-                  :disabled="item.quantity <= 1"
-                >
-                  -
-                </button>
-                <input 
-                  type="number" 
-                  v-model.number="item.quantity"
-                  @change="handleQuantityInput(item)"
-                  class="quantity-input"
-                  min="1"
-                >
-                <button 
-                  @click="updateQuantity(item.id, item.quantity + 1)"
-                  class="quantity-btn"
-                >
-                  +
-                </button>
-              </div>
-
-              <button 
-                @click="removeFromCart(item)"
-                class="remove-btn"
-                :disabled="removingItem === item.id"
-              >
-                <span class="remove-icon">×</span>
-              </button>
-            </div>
-
-            <div class="item-subtotal">
-              Subtotal: ${{ (getProductPrice(item.id) * item.quantity).toFixed(2) }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Resumen del carrito -->
-      <div class="cart-summary">
-        <h2>Resumen del pedido</h2>
-        
-        <div class="summary-details">
-          <div class="summary-line">
-            <span>Subtotal</span>
-            <span>${{ subtotal.toFixed(2) }}</span>
-          </div>
-          
-          <div class="summary-line">
-            <span>Envío</span>
-            <span>${{ shipping.toFixed(2) }}</span>
-          </div>
-
-          <div v-if="discount > 0" class="summary-line discount">
-            <span>Descuento</span>
-            <span>-${{ discount.toFixed(2) }}</span>
-          </div>
-
-          <div class="summary-total">
-            <span>Total</span>
-            <span>${{ total.toFixed(2) }}</span>
-          </div>
-        </div>
-
-        <button 
-          @click="proceedToCheckout"
-          class="checkout-btn"
-          :disabled="isProcessing"
-        >
-          {{ isProcessing ? 'Procesando...' : 'Proceder al pago' }}
-        </button>
-
-        <button @click="undoLastAction" class="undo-btn" :disabled="actionStack.length === 0">
-          Deshacer última acción
-        </button>
-
-        <router-link to="/shop" class="continue-shopping-link">
-          Continuar comprando
-        </router-link>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import type { CartItem } from '@/store';
-import getProductById from '../data/productCatalog';
+import getProductById, { getDiscountedPrice } from '../data/productCatalog';
+
 
 interface EnrichedCartItem extends CartItem {
   price: number;
@@ -230,27 +122,146 @@ export default defineComponent({
 });
 </script>
 
-  <style scoped>
+<template>
+  <div class="cart-container">
+    <div class="cart-header">
+      <h1>Tu Carrito</h1>
+      <p v-if="cartItems.length === 0" class="empty-cart-message">
+        Tu carrito está vacío. <router-link to="/shop" class="continue-shopping">Continuar comprando</router-link>
+      </p>
+    </div>
+
+    <div v-if="cartItems.length > 0" class="cart-content">
+      <!-- Lista de productos -->
+      <div class="cart-items">
+        <div v-for="item in enrichedCartItems" :key="item.id" class="cart-item" :class="{ 'removing': removingItem === item.id }">
+          <div class="item-image">
+            <img :src="getProductImage(item.id)" :alt="item.name">
+          </div>
+          
+          <div class="item-details">
+            <div class="item-info">
+              <h3>{{ item.name }}</h3>
+              <div class="price-info">
+                <p class="item-price" :class="{ 'offer-price': item.isOffer }">
+                  ${{ getProductPrice(item.id).toFixed(2) }}
+                </p>
+                <p v-if="item.isOffer" class="old-price">
+                  ${{ item.oldPrice?.toFixed(2) }}
+                </p>
+                <span v-if="item.discount" class="discount-badge">
+                  -{{ item.discount }}%
+                </span>
+              </div>
+            </div>
+
+            <div class="item-actions">
+              <div class="quantity-controls">
+                <button 
+                  @click="updateQuantity(item.id, item.quantity - 1)"
+                  class="quantity-btn"
+                  :disabled="item.quantity <= 1"
+                >
+                  -
+                </button>
+                <input 
+                  type="number" 
+                  v-model.number="item.quantity"
+                  @change="handleQuantityInput(item)"
+                  class="quantity-input"
+                  min="1"
+                >
+                <button 
+                  @click="updateQuantity(item.id, item.quantity + 1)"
+                  class="quantity-btn"
+                >
+                  +
+                </button>
+              </div>
+
+              <button 
+                @click="removeFromCart(item)"
+                class="remove-btn"
+                :disabled="removingItem === item.id"
+              >
+                <span class="remove-icon">×</span>
+              </button>
+            </div>
+
+            <div class="item-subtotal">
+              Subtotal: ${{ (getProductPrice(item.id) * item.quantity).toFixed(2) }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen del carrito -->
+      <div class="cart-summary">
+        <h2>Resumen del pedido</h2>
+        
+        <div class="summary-details">
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <span>${{ subtotal.toFixed(2) }}</span>
+          </div>
+          
+          <div class="summary-line">
+            <span>Envío</span>
+            <span>${{ shipping.toFixed(2) }}</span>
+          </div>
+
+          <div v-if="discount > 0" class="summary-line discount">
+            <span>Descuento</span>
+            <span>-${{ discount.toFixed(2) }}</span>
+          </div>
+
+          <div class="summary-total">
+            <span>Total</span>
+            <span>${{ total.toFixed(2) }}</span>
+          </div>
+        </div>
+
+        <button 
+          @click="proceedToCheckout"
+          class="checkout-btn"
+          :disabled="isProcessing"
+        >
+          {{ isProcessing ? 'Procesando...' : 'Proceder al pago' }}
+        </button>
+
+        <button @click="undoLastAction" class="undo-btn" :disabled="actionStack.length === 0">
+          Deshacer última acción
+        </button>
+
+        <router-link to="/shop" class="continue-shopping-link">
+          Continuar comprando
+        </router-link>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="css">
   .cart-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
   
   .cart-header {
     margin-bottom: 2rem;
   }
   
   .cart-header h1 {
-    color: #333333;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
+  color: #333333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
   
-  .empty-cart-message {
-    color: #666;
-    font-size: 1.1rem;
-  }
+.empty-cart-message {
+  color: #5d554d;
+  font-size: 1.1rem;
+}
   
   .cart-content {
     display: grid;
@@ -259,17 +270,17 @@ export default defineComponent({
   }
   
   .cart-items {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
   
   .cart-item {
     display: grid;
     grid-template-columns: 120px 1fr;
     gap: 1rem;
     padding: 1rem;
-    border-bottom: 1px solid #f4ece0;
+    border-bottom: 1px solid #F4ECE0;
     transition: opacity 0.3s, transform 0.3s;
   }
   
@@ -302,15 +313,14 @@ export default defineComponent({
   }
   
   .item-info h3 {
-    color: #333333;
-    margin: 0;
-  }
+  color: #333333;
+}
   
-  .item-price {
-    color: #333333;
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
+.item-price {
+  color: #333333;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
   
   .item-actions {
     display: flex;
@@ -325,58 +335,60 @@ export default defineComponent({
   }
   
   .quantity-btn {
-    background-color: #a8e6cf;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
-  }
+  background-color: #BE8151;
+  color: #ffffff;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
   
-  .quantity-btn:hover {
-    background-color: #95d1bc;
-  }
+.quantity-btn:hover {
+  background-color: #B06D46;
+}
   
-  .quantity-btn:disabled {
-    background-color: #b0b0b0;
-    cursor: not-allowed;
-  }
+.quantity-btn:disabled {
+  background-color: #d9bb98;
+  cursor: not-allowed;
+}
   
   .quantity-input {
     width: 50px;
     text-align: center;
     padding: 0.25rem;
-    border: 1px solid #ddd;
+    border-radius: 4px;
+    border: 1px solid #e8d6c0;
     border-radius: 4px;
   }
   
   .remove-btn {
-    background: none;
-    border: none;
-    color: #ff6f61;
-    cursor: pointer;
-    font-size: 1.5rem;
-    padding: 0.25rem;
-    transition: color 0.3s;
-  }
+  background: none;
+  border: none;
+  color: #5d554d;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  transition: color 0.3s;
+}
   
-  .remove-btn:hover {
-    color: #ff5546;
-  }
+.remove-btn:hover {
+  color: #333333;
+}
   
   .item-subtotal {
-    color: #666;
+    color: #5d554d;
     font-size: 0.9rem;
     text-align: right;
   }
   
   .cart-summary {
-    background: white;
+    background: #ffffff;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -393,11 +405,11 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-    color: #666;
+    color: #5d554d;
   }
   
   .summary-line.discount {
-    color: #ff6f61;
+    color: #764836;
   }
   
   .summary-total {
@@ -405,7 +417,7 @@ export default defineComponent({
     justify-content: space-between;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 2px solid #f4ece0;
+    border-top: 2px solid #F4ECE0;
     font-weight: bold;
     font-size: 1.2rem;
     color: #333333;
@@ -414,28 +426,27 @@ export default defineComponent({
   .checkout-btn {
     width: 100%;
     padding: 1rem;
-    background-color: #a8e6cf;
+    background-color: #BE8151;
     border: none;
     border-radius: 4px;
-    color: #333333;
+    color: #ffffff;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-bottom: 1rem;
   }
   
   .checkout-btn:hover {
-    background-color: #95d1bc;
+    background-color: #B06D46;
   }
   
   .checkout-btn:disabled {
-    background-color: #b0b0b0;
+    background-color: #d9bb98;
     cursor: not-allowed;
   }
   
   .continue-shopping,
   .continue-shopping-link {
-    color: #666;
+    color: #5d554d;
     text-decoration: none;
     display: inline-block;
     margin-top: 1rem;

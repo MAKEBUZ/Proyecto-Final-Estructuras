@@ -60,7 +60,7 @@ export default defineComponent({
 
             <nav class="nav" :class="{ 'nav-open': isMobileMenuOpen }">
                 <ul>
-                    <li v-for="(item, index) in ['Home', 'Shop', 'About', 'Contact']" :key="index">
+                    <li v-for="(item, index) in ['Home', 'Shop', 'About', 'Contact', 'Admin']" :key="index">
                         <a 
                             :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`"
                             class="nav-link"
@@ -106,7 +106,7 @@ export default defineComponent({
     top: 0;
     left: 0;
     right: 0;
-    background-color: #f4ece0;
+    background-color: #F4ECE0;
     box-shadow: 0 2px 8px rgba(233, 225, 213, 0.5);
     z-index: 100;
     animation: slideDown 0.5s ease-out;
@@ -200,12 +200,12 @@ export default defineComponent({
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #FF6F61;
+    background-color: #BE8151;
     transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #FF6F61;
+    color: #BE8151;
 }
 
 .nav-link:hover .link-underline {
@@ -244,8 +244,8 @@ export default defineComponent({
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: #FF6F61;
-    color: white;
+    background-color: #BE8151;
+    color: #ffffff;
     border-radius: 50%;
     min-width: 20px;
     height: 20px;
@@ -273,7 +273,6 @@ export default defineComponent({
     }
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
     .header-container {
         padding: 0.75rem 1.5rem;
@@ -291,7 +290,7 @@ export default defineComponent({
         right: -100%;
         width: 70%;
         height: 100vh;
-        background-color: #f4ece0;
+        background-color: #F4ECE0;
         padding: 6rem 2rem 2rem 2rem;
         transition: transform 0.3s ease;
         box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);

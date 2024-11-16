@@ -200,23 +200,30 @@ import CoatsWomen9 from '../assets/Prodcuts/Women/Coats/CoatsWomen9.jpg';
 import CoatsWomen10 from '../assets/Prodcuts/Women/Coats/CoatsWomen10.jpg';
 
 
-
-
-
+import Offer1 from '@/assets/Offer/offer1.jpg';
 
 
 export interface Product {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-    image: string;
-    category: string;
-    subcategory: string;
-  }
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
+  subcategory: string;
+  isOffer?: boolean;
+  oldPrice?: number;
+  discount?: number;
+}
+
+export interface CartItem {
+  id: number;
+  name: string;
+  quantity: number;
+}
 
 const getProductById = (id: number): Product | undefined => {
-    return productCatalog.find(product => product.id === id);
+  return productCatalog.find(product => product.id === id);
 };
 
 export interface CartItem {
@@ -826,7 +833,7 @@ export const productCatalog: Product[] = [
       name: "black pants",
       price: 64.99,
       description: "black north face pants",
-      image: PantsMen5,
+      image: PantsMen6,
       category: "Mens",
       subcategory: "Pants"
     },
@@ -2056,7 +2063,27 @@ export const productCatalog: Product[] = [
       category: "Unisex",
       subcategory: "Coats"
     },
+    //Offer
+    {
+      id: 10000,
+      name: "Camiseta del Deportivo Pasto",
+      price: 100.00,
+      oldPrice: 129.99,
+      discount: 33,
+      description: "Camiseta del Deportivo Pasto edicion especial 'La del Ascenso'",
+      image: Offer1,
+      category: "Offers",
+      subcategory: "Special",
+      isOffer: true
+    },
   
   ];
+
+  export const getDiscountedPrice = (product: Product): number => {
+    if (product.isOffer && product.discount) {
+        return product.oldPrice ? product.oldPrice * (1 - product.discount / 100) : product.price;
+    }
+    return product.price;
+};
 
   export default getProductById;

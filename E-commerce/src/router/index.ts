@@ -5,30 +5,33 @@ import ContactView from '../views/ContactView.vue'
 import ShopView from '../views/ShopView.vue'
 import CartView from '../views/CartView.vue'
 import MenShopView from '../views/shop/Mens/MenShopView.vue'
-import MenTShirtView from '@/views/shop/Mens/T-Shirt/MenTShirtView.vue'
-import MenShoesView from '@/views/shop/Mens/Shoes/MenShoesView.vue'
-import MenPantsView from '@/views/shop/Mens/Pants/MenPantsView.vue'
-import MenCoatsView from '@/views/shop/Mens/Coats/MenCoatsView.vue'
-import UnisexShopView from '@/views/shop/Unisex/UnisexShopView.vue'
-import UnisexTShirtView from '@/views/shop/Unisex/T-Shirt/UnisexTShirtView.vue'
-import UnisexShoesView from '@/views/shop/Unisex/Shoes/UnisexShoesView.vue'
-import UnisexPantsView from '@/views/shop/Unisex/Pants/UnisexPantsView.vue'
-import UnisexColoniesView from '@/views/shop/Unisex/Colonies/UnisexColoniesView.vue'
-import UnisexCoatsView from '@/views/shop/Unisex/Coats/UnisexCoatsView.vue'
-import WomenShopView from '@/views/shop/Women/WomenShopView.vue'
-import WomenTShirtView from '@/views/shop/Women/T-Shirt/WomenTShirtView.vue'
-import WomenShoesView from '@/views/shop/Women/Shoes/WomenShoesView.vue'
-import WomenPantsView from '@/views/shop/Women/Pants/WomenPantsView.vue'
-import WomenColoniesView from '@/views/shop/Women/Colonies/WomenColoniesView.vue'
-import WomenCoatsView from '@/views/shop/Women/Coats/WomenCoatsView.vue'
+import MenTShirtView from '../views/shop/Mens/T-Shirt/MenTShirtView.vue'
+import MenShoesView from '../views/shop/Mens/Shoes/MenShoesView.vue'
+import MenPantsView from '../views/shop/Mens/Pants/MenPantsView.vue'
+import MenCoatsView from '../views/shop/Mens/Coats/MenCoatsView.vue'
+import UnisexShopView from '../views/shop/Unisex/UnisexShopView.vue'
+import UnisexTShirtView from '../views/shop/Unisex/T-Shirt/UnisexTShirtView.vue'
+import UnisexShoesView from '../views/shop/Unisex/Shoes/UnisexShoesView.vue'
+import UnisexPantsView from '../views/shop/Unisex/Pants/UnisexPantsView.vue'
+import UnisexColoniesView from '../views/shop/Unisex/Colonies/UnisexColoniesView.vue'
+import UnisexCoatsView from '../views/shop/Unisex/Coats/UnisexCoatsView.vue'
+import WomenShopView from '../views/shop/Women/WomenShopView.vue'
+import WomenTShirtView from '../views/shop/Women/T-Shirt/WomenTShirtView.vue'
+import WomenShoesView from '../views/shop/Women/Shoes/WomenShoesView.vue'
+import WomenPantsView from '../views/shop/Women/Pants/WomenPantsView.vue'
+import WomenColoniesView from '../views/shop/Women/Colonies/WomenColoniesView.vue'
+import WomenCoatsView from '../views/shop/Women/Coats/WomenCoatsView.vue'
 import KidsTShirtView from '../views/shop/Kid/T-Shirt/KidsTShirtView.vue'
-import MenColoniesView from '@/views/shop/Mens/Colonies/MenColoniesView.vue'
+import MenColoniesView from '../views/shop/Mens/Colonies/MenColoniesView.vue'
 import KidsCoatsView from '../views/shop/Kid/Coats/KidsCoatsView.vue'
 import KidsPantsView from '../views/shop/Kid/Pants/KidsPantsView.vue'
 import KidsShoesView from '../views/shop/Kid/Shoes/KidsShoesView.vue'
 import KidsColoniesView from '../views/shop/Kid/Colonies/KidsColoniesView.vue'
 import BillView from '../views/BillView.vue'
-import KidShopView from '@/views/shop/Kid/KidShopView.vue'
+import KidShopView from '../views/shop/Kid/KidShopView.vue'
+import CommentsView from '../views/CommentsView.vue'
+import AdminView from '../views/AdminView.vue'
+import AdminForm from '../components/AdminForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +42,16 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/admin',
+      name: 'admin',
+      component: AdminForm,
+    },
+    {
+      path: '/admin/manager',
+      name: 'admin-manager',
+      component: AdminView,
+    },
+    {
       path: '/about',
       name: 'about',
       component: AboutView,
@@ -47,6 +60,11 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactView,
+    },
+    {
+      path: '/comments',
+      name: 'comments',
+      component: CommentsView,
     },
     {
       path: '/shop',
@@ -99,7 +117,7 @@ const router = createRouter({
       component: UnisexShoesView,
     },
     {
-      path: '/shop/unisex/sants',
+      path: '/shop/unisex/pants',
       name: 'unisex-pants', 
       component: UnisexPantsView,
     },

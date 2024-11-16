@@ -1,6 +1,5 @@
 import { createStore } from 'vuex';
 
-
 export interface CartItem {
   id: number;
   name: string;
@@ -17,7 +16,6 @@ export interface State {
   };
 }
 
-// Función para cargar el estado desde localStorage
 const loadState = (): State => {
   try {
     const savedState = localStorage.getItem('vuex-cart-state');
@@ -39,15 +37,12 @@ const loadState = (): State => {
   };
 };
 
-// Estado inicial cargado desde localStorage
 const state: State = loadState();
 
-// Plugin para guardar el estado en localStorage
 const persistStatePlugin = (store: any) => {
-  // Guardar estado inicial
+
   localStorage.setItem('vuex-cart-state', JSON.stringify(store.state));
 
-  // Suscribirse a las mutaciones
   store.subscribe((mutation: any, state: State) => {
     try {
       localStorage.setItem('vuex-cart-state', JSON.stringify(state));
@@ -82,7 +77,6 @@ const mutations = {
     state.user = userData;
   },
 
-  // Mutation para restablecer el estado
   resetState(state: State) {
     const newState = loadState();
     Object.assign(state, newState);

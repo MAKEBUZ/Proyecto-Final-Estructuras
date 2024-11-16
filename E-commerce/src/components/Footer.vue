@@ -79,7 +79,7 @@ export default defineComponent({
   
 <style lang="css">
 .footer {
-    background-color: #b0b0b0;
+    background-color: #764836;
     color: #ffffff;
     padding: 3rem 0 1rem 0;
     font-family: Arial, sans-serif;
@@ -110,6 +110,7 @@ export default defineComponent({
     margin-bottom: 1.2rem;
     font-size: 1.2rem;
     font-weight: 600;
+    color: #F4ECE0;
 }
 
 .footer-section ul {
@@ -123,13 +124,14 @@ export default defineComponent({
 }
 
 .footer-section a {
-    color: #ffffff;
+    color: #e8d6c0;
     text-decoration: none;
     transition: opacity 0.3s ease;
 }
 
 .footer-section a:hover {
     opacity: 0.8;
+    color: #ffffff;
 }
 
 .social-media-container {
@@ -158,12 +160,30 @@ export default defineComponent({
     display: block;
 }
 
+.social-media a {
+    background-color: #BE8151;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.social-media a:hover {
+    background-color: #B06D46;
+}
+
 .footer-bottom {
     text-align: center;
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(232, 214, 192, 0.2);
     width: 100%;
+}
+
+.footer-bottom p {
+    color: #d9bb98;
 }
 
 @media (max-width: 768px) {

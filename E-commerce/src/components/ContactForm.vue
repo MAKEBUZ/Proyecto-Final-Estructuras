@@ -3,7 +3,6 @@
     <div class="animated-background"></div>
     
     <div class="contact-content">
-      <!-- Formulario de Contacto -->
       <div class="contact-form-container">
         <div class="form-card">
           <div class="form-header">
@@ -158,8 +157,7 @@ const handleSubmit = async () => {
 }
 </script>
 
-<style scoped>
-/* Contenedor Principal */
+<style lang="css">
 .contact-container {
   min-height: 100vh;
   position: relative;
@@ -175,7 +173,7 @@ const handleSubmit = async () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, #f9f9f9, #f4ece0, #a8e6cf25, #f4ece0);
+  background: linear-gradient(45deg, #F4ECE0, #e8d6c0, #d9bb98, #e8d6c0);
   z-index: -1;
   animation: gradientAnimation 15s ease infinite;
   background-size: 400% 400%;
@@ -241,14 +239,14 @@ const handleSubmit = async () => {
 
 /* Iconos en Encabezados */
 .icon-wrapper {
-  background: #a8e6cf;
+  background: #BE8151;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #ffffff;
   transition: all 0.3s ease;
 }
 
@@ -302,15 +300,15 @@ textarea:focus {
   outline: none;
 }
 
-/* Etiquetas Flotantes */
 .floating-label {
   position: absolute;
   left: 0;
   top: 0.75rem;
   pointer-events: none;
   transition: 0.3s ease all;
-  color: #666;
+  color: #5d554d;
 }
+
 
 input:focus ~ .floating-label,
 input.filled ~ .floating-label,
@@ -318,17 +316,16 @@ textarea:focus ~ .floating-label,
 textarea.filled ~ .floating-label {
   transform: translateY(-20px);
   font-size: 0.8em;
-  color: #a8e6cf;
+  color: #BE8151;
 }
 
-/* Línea de Input */
 .input-underline {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: #ddd;
+  background: #d9bb98;
 }
 
 .input-underline::after {
@@ -338,7 +335,7 @@ textarea.filled ~ .floating-label {
   left: 0;
   right: 0;
   height: 2px;
-  background: #a8e6cf;
+  background: #BE8151;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -348,14 +345,13 @@ textarea:focus ~ .input-underline::after {
   transform: scaleX(1);
 }
 
-/* Botón de Envío */
 .submit-btn {
   width: 100%;
   padding: 1rem;
-  background: #a8e6cf;
+  background: #BE8151;
+  color: #ffffff;
   border: none;
   border-radius: 30px;
-  color: #333333;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -364,9 +360,9 @@ textarea:focus ~ .input-underline::after {
 }
 
 .submit-btn:hover {
-  background: #e1bee7;
+  background: #B06D46;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(168, 230, 207, 0.4);
+  box-shadow: 0 5px 15px rgba(190, 129, 81, 0.4);
 }
 
 .submit-btn:disabled {
@@ -374,7 +370,6 @@ textarea:focus ~ .input-underline::after {
   cursor: not-allowed;
 }
 
-/* Spinner de Carga */
 .spinner {
   display: inline-block;
   width: 20px;
@@ -389,11 +384,11 @@ textarea:focus ~ .input-underline::after {
   to { transform: rotate(360deg); }
 }
 
-/* Items de Información */
 .info-items {
   display: grid;
   gap: 1.5rem;
   margin-bottom: 2.5rem;
+  background: rgba(232, 214, 192, 0.5);
 }
 
 .info-item {
@@ -407,19 +402,19 @@ textarea:focus ~ .input-underline::after {
 }
 
 .info-item:hover {
-  background: rgba(168, 230, 207, 0.1);
   transform: translateX(10px);
+  background: rgba(190, 129, 81, 0.1);
 }
 
 .info-icon {
-  background: #a8e6cf;
+  background: #BE8151;
+  color: #ffffff;
   width: 45px;
   height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   font-size: 1.2rem;
   transition: all 0.3s ease;
 }
@@ -435,11 +430,10 @@ textarea:focus ~ .input-underline::after {
 }
 
 .info-text p {
-  color: #666;
+  color: #5d554d;
   font-size: 0.95rem;
 }
 
-/* Redes Sociales */
 .social-media {
   margin-top: 2.5rem;
 }
@@ -458,14 +452,14 @@ textarea:focus ~ .input-underline::after {
 
 .social-icon {
   position: relative;
+  background: #F4ECE0;
+  color: #333333;
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: #f4ece0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #333333;
   text-decoration: none;
   font-size: 1.2rem;
   transition: all 0.3s ease;
@@ -473,12 +467,11 @@ textarea:focus ~ .input-underline::after {
 }
 
 .social-icon:hover {
-  background: #a8e6cf;
-  color: white;
+  background: #BE8151;
+  color: #ffffff;
   transform: translateY(-5px);
 }
 
-/* Sistema de Notificaciones */
 .notification-system {
   position: fixed;
   top: 20px;
@@ -501,11 +494,11 @@ textarea:focus ~ .input-underline::after {
 }
 
 .notification.success {
-  border-left: 4px solid #a8e6cf;
+  border-left: 4px solid #BE8151;
 }
 
 .notification.error {
-  border-left: 4px solid #ff6f61;
+  border-left: 4px solid #B06D46;
 }
 
 .notification-content {
@@ -539,7 +532,6 @@ textarea:focus ~ .input-underline::after {
   }
 }
 
-/* Mensajes de Error */
 .error-message {
   color: #ff6f61;
   font-size: 0.85rem;
@@ -553,7 +545,6 @@ textarea:focus ~ .input-underline::after {
   75% { transform: translateX(5px); }
 }
 
-/* Responsive Design */
 @media (max-width: 968px) {
   .contact-content {
     grid-template-columns: 1fr;
@@ -586,7 +577,6 @@ textarea:focus ~ .input-underline::after {
   }
 }
 
-/* Animaciones Adicionales */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -598,14 +588,12 @@ textarea:focus ~ .input-underline::after {
   to { opacity: 1; }
 }
 
-/* Estados de Hover y Focus */
 .form-card:hover,
 .info-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(93, 85, 77, 0.1);
 }
 
-/* Estilos para estados de error */
 input.error,
 textarea.error {
   border-color: #ff6f61;
@@ -613,17 +601,16 @@ textarea.error {
 
 input.error ~ .input-underline::after,
 textarea.error ~ .input-underline::after {
-  background: #ff6f61;
+  background: #B06D46;
 }
 
-/* Tooltips para redes sociales */
 .social-tooltip {
   position: absolute;
   bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
   background: #333333;
-  color: white;
+  color: #ffffff;
   padding: 0.5rem 0.75rem;
   border-radius: 5px;
   font-size: 0.8rem;

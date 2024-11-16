@@ -207,7 +207,7 @@ export default defineComponent({
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9;
+  background-color: #F4ECE0;
 }
 
 .main-content {
@@ -227,10 +227,10 @@ export default defineComponent({
 .search-input,
 .sort-select {
   padding: 0.5rem;
-  border: 1px solid #E9E1D5;
+  border: 1px solid #d9bb98;
   border-radius: 4px;
   min-width: 200px;
-  background-color: #f4ece0;
+  background-color: #ffffff;
   color: #333333;
 }
 
@@ -242,7 +242,7 @@ export default defineComponent({
 }
 
 .product-card {
-  background: white;
+  background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s;
@@ -269,14 +269,14 @@ export default defineComponent({
 }
 
 .price {
-  color: #333333;
+  color: #BE8151;
   font-weight: bold;
   font-size: 1.2rem;
   margin: 0.5rem 0;
 }
 
 .description {
-  color: #666;
+  color: #5d554d;
   margin: 0.5rem 0;
   height: 3em;
   overflow: hidden;
@@ -294,22 +294,22 @@ export default defineComponent({
 .add-to-cart-btn {
   width: 100%;
   padding: 0.5rem;
-  background-color: #a8e6cf;
+  background-color: #BE8151;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  color: #333333;
+  color: #ffffff;
   font-weight: 500;
   transition: all 0.3s ease-in-out;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #95d1bc;
+  background-color: #B06D46;
   transform: translateY(-2px);
 }
 
 .add-to-cart-btn.adding {
-  background-color: #95d1bc;
+  background-color: #B06D46;
   pointer-events: none;
 }
 
@@ -321,7 +321,7 @@ export default defineComponent({
 }
 
 .quantity-btn {
-  background-color: #a8e6cf;
+  background-color: #BE8151;
   border: none;
   width: 30px;
   height: 30px;
@@ -332,15 +332,15 @@ export default defineComponent({
   justify-content: center;
   font-size: 1.2rem;
   transition: background-color 0.3s;
-  color: #333333;
+  color: #ffffff;
 }
 
 .quantity-btn:hover {
-  background-color: #95d1bc;
+  background-color: #B06D46;
 }
 
 .quantity-btn:disabled {
-  background-color: #b0b0b0;
+  background-color: #e8d6c0;
   cursor: not-allowed;
 }
 
@@ -348,6 +348,7 @@ export default defineComponent({
   font-weight: bold;
   min-width: 30px;
   text-align: center;
+  color: #333333;
 }
 
 .pagination {
@@ -361,20 +362,20 @@ export default defineComponent({
 
 .pagination-btn {
   padding: 0.5rem 1rem;
-  background-color: #a8e6cf;
+  background-color: #BE8151;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  color: #333333;
+  color: #ffffff;
   transition: background-color 0.3s;
 }
 
 .pagination-btn:hover {
-  background-color: #95d1bc;
+  background-color: #B06D46;
 }
 
 .pagination-btn:disabled {
-  background-color: #b0b0b0;
+  background-color: #e8d6c0;
   cursor: not-allowed;
 }
 

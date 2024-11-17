@@ -1,19 +1,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import About from '../components/About.vue';
-import Comments from '../components/Comments.vue';
+import Payment from '../components/Payment.vue';
 
 export default defineComponent({
     name: 'HomeView',
     components: {
-        About,
-        Comments
+        Payment
     },
 });
 </script>
 <template>
-  <About />
-  <Comments />
+  <Payment />
 </template>
 
 <style>

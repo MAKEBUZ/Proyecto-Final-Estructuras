@@ -1,133 +1,329 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
-    name: 'LoginForm',
-    setup() {
-        const store = useStore();
-        const router = useRouter();
-        const username = ref('');
-        const password = ref('');
-        const error = ref('');
+  name: 'LoginForm',
+  setup() {
+    const router = useRouter();
+    const username = ref('');
+    const password = ref('');
+    const showError = ref(false);
+    const isLoading = ref(false);
+    const errorMessage = ref('');
 
-        const handleLogin = async () => {
-            error.value = '';
-            if (!username.value || !password.value) {
-                error.value = 'Por favor complete todos los campos';
-                return;
-            }
+    const generateSessionToken = (username: string): string => {
+      const timestamp = Date.now();
+      return btoa(`${username}_${timestamp}`);
+    };
 
-            const success = await store.dispatch('login', {
-                username: username.value,
-                password: password.value
-            });
+    const emitLoginEvent = () => {
+      const event = new CustomEvent('login-status-changed', {
+        detail: { status: 'logged-in' }
+      });
+      window.dispatchEvent(event);
+    };
 
-            if (success) {
-                router.push('/admin/manager');
-            } else {
-                error.value = 'Credenciales inválidas';
-            }
-        };
+    const login = async () => {
+      try {
+        isLoading.value = true;
+        errorMessage.value = '';
+        
+        if (username.value === 'admin6618' && password.value === '277353') {
+          const sessionToken = generateSessionToken(username.value);
+          localStorage.setItem('session', JSON.stringify({
+            username: username.value,
+            token: sessionToken,
+            role: 'admin'
+          }));
+          emitLoginEvent();
+          router.push('/admin/manager');
+        } else {
+          errorMessage.value = 'Credenciales inválidas';
+          showError.value = true;
+          setTimeout(() => {
+            showError.value = false;
+          }, 3000);
+        }
+      } catch (error) {
+        errorMessage.value = 'Error al iniciar sesión';
+        console.error(error);
+      } finally {
+        isLoading.value = false;
+      }
+    };
 
-        return {
-            username,
-            password,
-            error,
-            handleLogin
-        };
-    }
+    onMounted(() => {
+      const session = localStorage.getItem('session');
+      if (session) {
+        router.push('/admin/manager');
+      }
+    });
+
+    return {
+      username,
+      password,
+      login,
+      showError,
+      isLoading,
+      errorMessage,
+    };
+  },
 });
 </script>
 
 <template>
-    <div class="login-container">
-        <form @submit.prevent="handleLogin" class="login-form">
-            <h2>Admin Login</h2>
-            
-            <div class="form-group">
-                <label for="username">Usuario:</label>
-                <input 
-                    id="username"
-                    v-model="username"
-                    type="text"
-                    class="form-input"
-                    placeholder="Ingrese su usuario"
-                />
-            </div>
+  <div class="login-container">
+    <div class="background-animation"></div>
+    <form @submit.prevent="login" class="login-form" :class="{ 'shake': showError }">
+      <h2>Iniciar Sesión</h2>
+      
+      <div class="form-group">
+        <input
+          type="text"
+          v-model="username"
+          placeholder="Usuario"
+          :class="{ 'error': showError }"
+          required
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input 
-                    id="password"
-                    v-model="password"
-                    type="password"
-                    class="form-input"
-                    placeholder="Ingrese su contraseña"
-                />
-            </div>
+      <div class="form-group">
+        <input
+          type="password"
+          v-model="password"
+          placeholder="Contraseña"
+          :class="{ 'error': showError }"
+          required
+        />
+      </div>
 
-            <p v-if="error" class="error-message">{{ error }}</p>
+      <button type="submit" :disabled="isLoading">
+        <span class="button-content">
+          {{ isLoading ? 'Cargando...' : 'Ingresar' }}
+        </span>
+      </button>
 
-            <button type="submit" class="login-button">
-                Ingresar
-            </button>
-        </form>
-    </div>
+      <transition name="fade">
+        <p v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </p>
+      </transition>
+    </form>
+  </div>
 </template>
 
-<style scoped>
+<style lang="css">
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F4ECE0;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.background-animation {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: linear-gradient(45deg, #e8d6c0, #d9bb98, #BE8151);
+  background-size: 200% 200%;
+  animation: gradientBG 15s ease infinite;
+  z-index: 1;
+  transform: scale(1.5);
 }
 
 .login-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(190, 129, 81, 0.15);
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.login-form:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(190, 129, 81, 0.2);
+}
+
+h2 {
+  color: #5d554d;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
+  position: relative;
+  width: 100%;
 }
 
-.form-input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    margin-top: 0.5rem;
+input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e8d6c0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: rgba(255, 255, 255, 0.9);
+  cursor: text !important; /* Forzar el cursor de texto */
+  display: block; /* Asegurar que el input es block */
+  box-sizing: border-box; /* Incluir padding y border en el ancho */
 }
 
-.login-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #BE8151;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+input:hover {
+  border-color: #d9bb98;
 }
 
-.login-button:hover {
-    background-color: #a36b3f;
+input:focus {
+  outline: none;
+  border-color: #BE8151;
+  box-shadow: 0 0 0 3px rgba(190, 129, 81, 0.15);
+  background-color: white;
+}
+
+input.error {
+  border-color: #ff4444;
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+button {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: #BE8151;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  display: block; /* Asegurar que el botón es block */
+  box-sizing: border-box; /* Incluir padding y border en el ancho */
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  transition: transform 0.5s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #B06D46;
+  transform: translateY(-1px);
+}
+
+button:hover:not(:disabled)::before {
+  transform: translateX(200%);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-color: #d9bb98;
 }
 
 .error-message {
-    color: #dc3545;
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
+  color: #ff4444;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* Animaciones */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translateX(-1px);
+  }
+  20%, 80% {
+    transform: translateX(2px);
+  }
+  30%, 50%, 70% {
+    transform: translateX(-4px);
+  }
+  40%, 60% {
+    transform: translateX(4px);
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-form {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  input,
+  button {
+    padding: 0.75rem;
+  }
 }
 </style>

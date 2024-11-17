@@ -6,6 +6,7 @@ export interface CartItem {
   quantity: number;
 }
 
+
 export interface State {
   cart: {
     items: CartItem[];
@@ -72,10 +73,6 @@ const mutations = {
       item.quantity = quantity;
     }
   },
-  
-  setUser(state: State, userData: { name: string; isLoggedIn: boolean }) {
-    state.user = userData;
-  },
 
   resetState(state: State) {
     const newState = loadState();
@@ -95,16 +92,7 @@ const actions = {
   updateItemQuantity({ commit }: any, payload: { itemId: number; quantity: number }) {
     commit('updateCartItemQuantity', payload);
   },
-  
-  login({ commit }: any, userName: string) {
-    commit('setUser', { name: userName, isLoggedIn: true });
-  },
-  
-  logout({ commit }: any) {
-    commit('setUser', { name: '', isLoggedIn: false });
-  },
 
-  // Acción para inicializar el estado
   initializeStore({ commit }: any) {
     commit('resetState');
   }
@@ -142,6 +130,6 @@ export interface CartState {
 }
 
 export interface RootState {
-  // Add other module states as needed
   cart?: CartState;
 }
+

@@ -45,11 +45,4 @@ body {
         margin-top: 7rem;
         flex: 1;
 }
-.header-main {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-                z-index: 1000;
-        }
 </style>

@@ -190,7 +190,10 @@ export default defineComponent({
 .category-container {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0;  /* Eliminamos el gap para que no haya espacio entre el botón y la flecha */
+  min-width: 120px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 .category-button {
@@ -202,9 +205,13 @@ export default defineComponent({
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.2s ease;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px; /* Redondear solo las esquinas izquierdas */
   flex-grow: 1;
   text-align: left;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  min-width: 80px;
 }
 
 .dropdown-toggle {
@@ -214,6 +221,11 @@ export default defineComponent({
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  border-radius: 0 4px 4px 0; /* Redondear solo las esquinas derechas */
+  transition: all 0.2s ease;
 }
 
 .category-button:hover,
@@ -242,47 +254,27 @@ export default defineComponent({
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem; /* Reducido el gap para dar más espacio */
   width: 100%;
   justify-content: center;
 }
 
 .category-item {
   position: relative;
-}
-
-.category-button {
-  background: none;
-  border: none;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  color: #333333;
-  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-  border-radius: 4px;
-}
-
-.category-button:hover,
-.category-button.active {
-  color: #333333;
-  background-color: #e8d6c0;
 }
 
 .arrow {
   font-size: 0.7rem;
   transition: transform 0.3s ease;
-  opacity: 0.5;
+  opacity: 0.7; /* Aumentado la opacidad para mejor visibilidad */
 }
 
 .arrow-down {
   transform: rotate(180deg);
 }
 
-/* Estilos mejorados para el menú desplegable */
 .subcategory-dropdown {
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -302,13 +294,12 @@ export default defineComponent({
   position: absolute;
   top: -6px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
   background: #ffffff;
   border-left: 1px solid #e8d6c0;
   border-top: 1px solid #e8d6c0;
-  transform: translateX(-50%) rotate(45deg);
 }
 
 .subcategory-dropdown.mobile {
@@ -356,7 +347,7 @@ export default defineComponent({
   background-color: #e8d6c0;
 }
 
-/* Estilos móviles mejorados */
+/* Mobile Styles */
 .categories-menu-button {
   display: none;
   position: fixed;
@@ -367,6 +358,12 @@ export default defineComponent({
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+}
+
+.category-button:hover,
+.category-button.active {
+  color: #333333;
+  background-color: #e8d6c0;
 }
 
 .hamburger-icon,
@@ -413,7 +410,7 @@ export default defineComponent({
   transform: rotate(-45deg);
   bottom: 0;
 }
- 
+
 .mobile-overlay {
   display: none;
   position: fixed;
@@ -427,8 +424,8 @@ export default defineComponent({
 }
 
 @media (max-width: 768px) {
-  .categories-menu-button {
-    display: block;
+  .category-container {
+    min-width: 100%; /* En móvil ocupará todo el ancho */
   }
 
   .categories-nav {
@@ -456,9 +453,8 @@ export default defineComponent({
   }
 
   .category-button {
-    width: 100%;
-    justify-content: space-between;
     padding: 1rem;
+    min-width: auto;
   }
 
   .subcategory-dropdown {
@@ -474,6 +470,10 @@ export default defineComponent({
   .mobile-overlay {
     display: block;
     top: 80px;
+  }
+
+  .dropdown-toggle {
+    padding: 1rem 0.5rem;
   }
 }
 

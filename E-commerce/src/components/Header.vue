@@ -1,16 +1,55 @@
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from 'vue';
+import { defineComponent, ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
     name: 'Header',
     setup() {
         const store = useStore();
+        const router = useRouter();
         const isHovered = ref(false);
         const isMobileMenuOpen = ref(false);
         const isCartUpdating = ref(false);
+        const loginStatus = ref(false);
 
         const totalItems = computed(() => store.getters.cartItemCount);
+        
+        const isLoggedIn = computed(() => {
+            const session = localStorage.getItem('session');
+            return loginStatus.value || !!session;
+        });
+
+        const navItems = computed(() => {
+            const items = ['Home', 'Shop', 'About', 'Contact'];
+            if (!isLoggedIn.value) {
+                items.push('Admin');
+            }
+            return items;
+        });
+
+        const handleLoginStatusChange = () => {
+            loginStatus.value = true;
+        };
+
+        const handleLogoutStatusChange = () => {
+            loginStatus.value = false;
+        };
+
+        onMounted(() => {
+            window.addEventListener('login-status-changed', handleLoginStatusChange);
+            window.addEventListener('logout-status-changed', handleLogoutStatusChange);
+
+            const session = localStorage.getItem('session');
+            if (session) {
+                loginStatus.value = true;
+            }
+        });
+
+        onUnmounted(() => {
+            window.removeEventListener('login-status-changed', handleLoginStatusChange);
+            window.removeEventListener('logout-status-changed', handleLogoutStatusChange);
+        });
 
         watch(totalItems, () => {
             isCartUpdating.value = true;
@@ -25,7 +64,6 @@ export default defineComponent({
 
         const toggleMobileMenu = () => {
             isMobileMenuOpen.value = !isMobileMenuOpen.value;
-            // Añadir/remover clase al body para prevenir scroll
             if (isMobileMenuOpen.value) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -33,13 +71,37 @@ export default defineComponent({
             }
         };
 
+        const handleLogout = () => {
+            localStorage.removeItem('session');
+            loginStatus.value = false;
+
+            const event = new CustomEvent('logout-status-changed');
+            window.dispatchEvent(event);
+            
+            router.push('/');
+            toggleMobileMenu();
+        };
+
+        const getUserName = computed(() => {
+            const session = localStorage.getItem('session');
+            if (session) {
+                const userData = JSON.parse(session);
+                return userData.username;
+            }
+            return '';
+        });
+
         return {
             isHovered,
             isMobileMenuOpen,
             isCartUpdating,
             totalItems,
+            isLoggedIn,
+            navItems,
+            getUserName,
             toggleHover,
-            toggleMobileMenu
+            toggleMobileMenu,
+            handleLogout
         };
     }
 });
@@ -59,8 +121,9 @@ export default defineComponent({
             </button>
 
             <nav class="nav" :class="{ 'nav-open': isMobileMenuOpen }">
-                <ul>
-                    <li v-for="(item, index) in ['Home', 'Shop', 'About', 'Contact', 'Admin']" :key="index">
+                <ul class="nav-list">
+                    <!-- Elementos de navegación normales -->
+                    <li v-for="(item, index) in navItems" :key="index" class="nav-item">
                         <a 
                             :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`"
                             class="nav-link"
@@ -70,6 +133,29 @@ export default defineComponent({
                             <span class="link-underline"></span>
                         </a>
                     </li>
+                    
+                    <!-- Opciones de administrador cuando está logueado -->
+                    <template v-if="isLoggedIn">
+                        <li class="nav-item">
+                            <a 
+                                href="/admin/manager"
+                                class="nav-link admin-link"
+                                @click="toggleMobileMenu"
+                            >
+                                <span class="link-text">Admin</span>
+                                <span class="link-underline"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <button 
+                                @click="handleLogout" 
+                                class="nav-link logout-button"
+                            >
+                                <span class="link-text">Cerrar Sesión ({{ getUserName }})</span>
+                                <span class="link-underline"></span>
+                            </button>
+                        </li>
+                    </template>
                 </ul>
             </nav>
 
@@ -101,6 +187,12 @@ export default defineComponent({
 </template>
 
 <style lang="css">
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -131,7 +223,6 @@ export default defineComponent({
         opacity: 1;
     }
 }
-
 .logo-image {
     height: 50px;
     transition: transform 0.3s ease;
@@ -172,7 +263,20 @@ export default defineComponent({
 .mobile-menu-button.is-active .hamburger-line:nth-child(3) {
     transform: translateY(-11px) rotate(-45deg);
 }
-
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    height: 100%;
+}
+.nav-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
 .nav ul {
     list-style: none;
     display: flex;
@@ -187,6 +291,28 @@ export default defineComponent({
     position: relative;
     padding: 0.5rem 0;
     transition: color 0.3s ease;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.admin-link,
+.logout-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.5rem 0;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    white-space: nowrap;
+}
+
+.logout-button {
+    color: #BE8151;
 }
 
 .link-text {
@@ -214,6 +340,8 @@ export default defineComponent({
 
 .cart {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .cart-link {
@@ -333,4 +461,37 @@ export default defineComponent({
         width: 85%;
     }
 }
+
+.admin-link,
+.logout-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.5rem 0;
+    color: #333333;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+}
+
+.logout-button {
+    color: #BE8151;
+}
+
+.admin-link:hover,
+.logout-button:hover {
+    color: #BE8151;
+}
+
+@media (max-width: 768px) {
+    .admin-link,
+    .logout-button {
+        font-size: 1.2rem;
+        padding: 0.5rem 0;
+    }
+}
+
 </style>

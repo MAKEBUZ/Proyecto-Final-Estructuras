@@ -2,9 +2,8 @@
 import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import type { CartItem } from '@/store';
-import getProductById, { getDiscountedPrice } from '../data/productCatalog';
-
+import type { CartItem } from '../store';
+import getProductById from '../data/productCatalog';
 
 interface EnrichedCartItem extends CartItem {
   price: number;
@@ -116,7 +115,7 @@ export default defineComponent({
       removeFromCart,
       proceedToCheckout,
       undoLastAction,
-      actionStack
+      actionStack,
     };
   }
 });
@@ -224,7 +223,7 @@ export default defineComponent({
         <button 
           @click="proceedToCheckout"
           class="checkout-btn"
-          :disabled="isProcessing"
+          :disabled="isProcessing || cartItems.length === 0"
         >
           {{ isProcessing ? 'Procesando...' : 'Proceder al pago' }}
         </button>

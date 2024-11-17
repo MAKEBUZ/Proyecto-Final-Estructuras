@@ -1,19 +1,19 @@
 <template>
-  <div class="invoice-container" :class="{ 'processing': isProcessing }">
+  <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
     <div class="invoice-content" ref="invoiceRef">
       <!-- Cabecera de la factura -->
       <div class="invoice-header">
         <div class="invoice-title">
-          <h2>Factura #{{ invoiceNumber }}</h2>
-          <p class="date">Fecha: {{ formattedDate }}</p>
+          <h2>Factura #{{ orderDetails.orderId }}</h2>
+          <p class="date">Fecha: {{ formatDate(orderDetails.date) }}</p>
         </div>
       </div>
 
       <!-- Detalles del cliente -->
       <div class="customer-details">
-        <h3>Detalles del Cliente</h3>
-        <p>{{ customerName }}</p>
-        <p>{{ customerEmail }}</p>
+        <h3>Detalles del Pago</h3>
+        <p>Tarjeta terminada en: **** **** **** {{ orderDetails.paymentDetails.cardNumber }}</p>
+        <p>Titular: {{ orderDetails.paymentDetails.cardHolder }}</p>
       </div>
 
       <!-- Lista de productos -->
@@ -28,7 +28,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in enrichedCartItems" :key="item.id">
+            <tr v-for="item in enrichedItems" :key="item.id">
               <td>
                 <div class="product-info">
                   <img :src="item.image" :alt="item.name" class="product-thumbnail">
@@ -59,7 +59,7 @@
         </div>
         <div class="summary-total">
           <span>Total</span>
-          <span>${{ total.toFixed(2) }}</span>
+          <span>${{ orderDetails.total.toFixed(2) }}</span>
         </div>
       </div>
     </div>
@@ -73,23 +73,29 @@
       >
         {{ isProcessing ? 'Generando PDF...' : 'Descargar PDF' }}
       </button>
+      <router-link to="/" class="btn-secondary">
+        Volver al inicio
+      </router-link>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useStore } from 'vuex';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import html2pdf from 'html2pdf.js';
-import { v4 as uuidv4 } from 'uuid';
 import getProductById from '../data/productCatalog';
 
-const props = defineProps<{
-  customerName?: string;
-  customerEmail?: string;
-}>();
-
-const store = useStore();
+interface OrderDetails {
+  orderId: string;
+  items: any[];
+  total: number;
+  date: string;
+  paymentDetails: {
+    cardNumber: string;
+    cardHolder: string;
+  };
+}
 
 interface EnrichedCartItem {
   id: number;
@@ -99,37 +105,57 @@ interface EnrichedCartItem {
   image: string;
 }
 
+const router = useRouter();
 const invoiceRef = ref<HTMLElement | null>(null);
 const isProcessing = ref(false);
+const orderDetails = ref<OrderDetails | null>(null);
 
-const invoiceNumber = computed(() => uuidv4().slice(0, 8));
-const formattedDate = computed(() => new Date().toLocaleDateString());
-
-// Obtener items del carrito enriquecidos con información del producto
-const enrichedCartItems = computed(() => {
-  const cartItems = store.getters.cartItems;
+// Verificar si existe una orden pagada y obtener sus detalles
+onMounted(() => {
+  const lastOrder = localStorage.getItem('lastOrder');
   
-  return cartItems.map((item: { id: number; quantity: number; name: string }) => {
+  if (!lastOrder) {
+    // Si no hay orden, redirigir al carrito
+    router.replace('/cart');
+    return;
+  }
+
+  try {
+    orderDetails.value = JSON.parse(lastOrder);
+  } catch (error) {
+    console.error('Error parsing order details:', error);
+    router.replace('/cart');
+  }
+});
+
+// Enriquecer items con información del producto
+const enrichedItems = computed(() => {
+  if (!orderDetails.value) return [];
+  
+  return orderDetails.value.items.map(item => {
     const product = getProductById(item.id);
     return {
       ...item,
       price: product?.price || 0,
       image: product?.image || '/api/placeholder/200/200',
-      name: product?.name || item.name
+      name: product?.name || 'Producto no encontrado'
     };
   });
 });
 
 // Cálculos
 const subtotal = computed(() => {
-  return enrichedCartItems.value.reduce((total: number, item: EnrichedCartItem) => {
+  return enrichedItems.value.reduce((total: number, item: EnrichedCartItem) => {
     return total + (item.price * item.quantity);
   }, 0);
 });
 
 const shipping = computed(() => subtotal.value > 100 ? 0 : 10);
 const discount = computed(() => subtotal.value > 200 ? subtotal.value * 0.1 : 0);
-const total = computed(() => subtotal.value + shipping.value - discount.value);
+
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString();
+};
 
 const generatePDF = async () => {
   if (!invoiceRef.value) return;
@@ -138,7 +164,7 @@ const generatePDF = async () => {
   
   const options = {
     margin: 1,
-    filename: `factura-${invoiceNumber.value}.pdf`,
+    filename: `factura-${orderDetails.value?.orderId}.pdf`,
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },
     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -157,119 +183,182 @@ const generatePDF = async () => {
 <style scoped>
 .invoice-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 20px;
   background-color: #f9f9f9;
 }
 
 .invoice-content {
   background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
 .invoice-header {
   background-color: #f4ece0;
-  padding: 20px;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 2px 4px #E9E1D5;
-  margin-bottom: 20px;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.invoice-title h2 {
+  color: #333;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.invoice-title .date {
+  color: #666;
+  margin-top: 0.5rem;
 }
 
 .customer-details {
-  margin-bottom: 20px;
-  padding: 15px;
-  border-bottom: 1px solid #f4ece0;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #f4ece0;
+  border-radius: 8px;
+  background-color: #fdfbf8;
+}
+
+.customer-details h3 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .invoice-items table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 1.5rem 0;
 }
 
-.invoice-items th,
-.invoice-items td {
-  padding: 12px;
+.invoice-items th {
+  background-color: #f8f4ed;
+  padding: 1rem;
   text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+
+.invoice-items td {
+  padding: 1rem;
   border-bottom: 1px solid #f4ece0;
 }
 
 .product-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .product-thumbnail {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 8px;
+  border: 1px solid #f4ece0;
 }
 
 .invoice-summary {
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 2rem;
+  padding: 1.5rem;
   border-top: 2px solid #f4ece0;
+  background-color: #fdfbf8;
+  border-radius: 8px;
 }
 
 .summary-line {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
+  color: #666;
 }
 
 .summary-line.discount {
-  color: #ff6f61;
+  color: #be8151;
+  background-color: #fdf6f0;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
 }
 
 .summary-total {
-  margin-top: 15px;
-  padding-top: 15px;
+  margin-top: 1rem;
+  padding-top: 1rem;
   border-top: 2px solid #f4ece0;
-  font-weight: bold;
-  font-size: 1.2em;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .invoice-actions {
-  margin-top: 20px;
+  margin-top: 2rem;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   justify-content: flex-end;
 }
 
 .btn-primary {
-  background-color: #a8e6cf;
+  background-color: #be8151;
+  color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: #b06d46;
+  transform: translateY(-1px);
 }
 
 .btn-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* Responsive Design */
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #be8151;
+  color: #be8151;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #fdf6f0;
+}
+
 @media (max-width: 768px) {
   .invoice-container {
-    padding: 10px;
+    margin: 1rem;
+    padding: 1rem;
   }
 
   .invoice-content {
-    padding: 15px;
+    padding: 1.5rem;
   }
 
   .invoice-actions {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .btn-primary {
-    width: 100%;
+  .btn-primary,
+  .btn-secondary {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .invoice-items th:nth-child(3),
+  .invoice-items td:nth-child(3) {
+    display: none;
   }
 
   .product-info {
@@ -280,16 +369,9 @@ const generatePDF = async () => {
   .product-thumbnail {
     margin: 0 auto;
   }
-}
 
-@media (max-width: 480px) {
-  .invoice-items th:nth-child(3),
-  .invoice-items td:nth-child(3) {
-    display: none;
-  }
-
-  .customer-details {
-    padding: 10px;
+  .invoice-content {
+    padding: 1rem;
   }
 }
 </style>

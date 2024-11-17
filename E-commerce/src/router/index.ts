@@ -31,7 +31,8 @@ import BillView from '../views/BillView.vue'
 import KidShopView from '../views/shop/Kid/KidShopView.vue'
 import CommentsView from '../views/CommentsView.vue'
 import AdminView from '../views/AdminView.vue'
-import AdminForm from '../components/AdminForm.vue'
+import AdminForm from '../views/AdminFormView.vue'
+import CheckoutView from '../views/CheckoutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +51,7 @@ const router = createRouter({
       path: '/admin/manager',
       name: 'admin-manager',
       component: AdminView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/about',
@@ -198,10 +200,40 @@ const router = createRouter({
     },
     {
       path: '/checkout',
-      name: 'checkout',
+      name: 'Checkout',
+      component: CheckoutView,
+    },
+    {
+      path: '/bill',
+      name: 'Bill',
       component: BillView,
-    }
+    },
   ],
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const session = localStorage.getItem('session');
+    if (!session) {
+      next('/admin');
+      return;
+    }
+    try {
+      JSON.parse(session);
+      next();
+    } catch (error) {
+      console.error('Error parsing session:', error);
+      next('/admin');
+    }
+  } else {
+    next();
+  }
+});
+
+// Guard global para rutas protegidas
+router.beforeEach((to, from, next) => {
+  // Puedes agregar lógica adicional aquí si es necesario
+  next();
+});
+
+export default router;

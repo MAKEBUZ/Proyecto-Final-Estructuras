@@ -1,19 +1,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import About from '../components/About.vue';
-import Comments from '../components/Comments.vue';
+import AdminForm from '../components/AdminForm.vue';
 
 export default defineComponent({
     name: 'HomeView',
     components: {
-        About,
-        Comments
+        AdminForm
     },
 });
 </script>
 <template>
-  <About />
-  <Comments />
+  <AdminForm />
 </template>
 
 <style>

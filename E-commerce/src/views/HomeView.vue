@@ -1,90 +1,110 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import ProductSlider from '../components/Slider.vue';
-import Colletion0 from '../assets/Slider/Colletion0.jpg';
-import Colletion1 from '../assets/Slider/Colletion1.jpg';
-import Colletion2 from '../assets/Slider/Colletion2.jpg';
-import Colletion3 from '../assets/Slider/Colletion3.jpg';
-import Colletion4 from '../assets/Slider/Colletion4.jpg';
+import type { Offer } from '@/types';
+
+import Offer1 from '../assets/Offer/offer1.jpg';
+import Offer2 from '../assets/Offer/offer2.jpg';
+import Offer3 from '../assets/Offer/offer3.jpg';
+import Offer4 from '../assets/Offer/offer4.jpg';
 
 export default defineComponent({
   name: 'HomePage',
   components: {
     ProductSlider,
   },
-  data() {
+  setup() {
+    const offers = ref<Offer[]>([
+      {
+        id: 10000,
+        title: "Camiseta del Deportivo Pasto",
+        price: 100.00,
+        oldPrice: 129.99,
+        discount: 33,
+        description: "Camiseta del Deportivo Pasto edicion especial 'La del Ascenso'",
+        image: Offer1,
+      },
+      {
+        id: 10001,
+        title: "Camiseta Arquero Pasto",
+        description: "Camiseta de Arquero del Deportivo Pasto",
+        price: 89.99,
+        oldPrice: 119.99,
+        discount: 25,
+        image: Offer2 
+      },
+      {
+        id: 10002,
+        title: "Camiseta Seleccion Colombia - Local",
+        description: "Camiseta Seleccion Colombia - Local",
+        price: 150.00,
+        oldPrice: 199.99,
+        discount: 20,
+        image: Offer3
+      },
+      {
+        id: 10003,
+        title: "Camiseta Seleccion Colombia - Visitante",
+        description: "Camiseta Seleccion Colombia - Visitante",
+        price: 150.00,
+        oldPrice: 199.99,
+        discount: 20,
+        image: Offer4
+      }
+    ]);
+
     return {
-      slides: [
-        {
-          image: Colletion0,
-          title: 'Nueva Colección',
-          description: 'Descubre las últimas tendencias',
-          link: '/collection/new'
-        },
-        {
-          image: Colletion1,
-          title: 'Colección de Verano',
-          description: 'Descubre las últimas tendencias',
-          link: '/collection/summer'
-        },
-        {
-          image: Colletion2,
-          title: 'Colección de Invierno',
-          description: 'Descubre las últimas tendencias',
-          link: '/collection/winter'
-        },
-        {
-          image: Colletion3,
-          title: 'Colección de Primavera',
-          description: 'Descubre las últimas tendencias',
-          link: '/collection/spring'
-        },
-        {
-          image: Colletion4,
-          title: 'Colección de Otoño',
-          description: 'Descubre las últimas tendencias',
-          link: '/collection/autumn'
-        },
-      ],
+      offers
     };
-  },
-  methods: {
-    handleShopNow(slide: any) {
-      this.$router.push(slide.link);
-    },
-    handleCategorySelect(category: any) {
-      this.$router.push(`/category/${category.id}`);
-    }
   }
 });
 </script>
 
 <template>
-    <div class="home">
-        <h1>Home Page</h1>
-        <p>Welcome to the home page</p>
+  <div class="home-container">
+    <div class="home-header">
+      <h1>Home Page</h1>
+      <p>Welcome to the home page</p>
     </div>
-    <div class="home-page">
-    <ProductSlider 
-      :slides="slides"
-      @shop-now="handleShopNow"
-    />
+    <div class="slider-section">
+      <ProductSlider 
+        :offers="offers" 
+        :autoplayInterval="5000"
+      />
+    </div>
   </div>
 </template>
 
 <style lang="css">
-.home {
+.home-container {
+  min-height: 100vh;
   background: #f9f9f9;
-  display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-    text-align: center;
 }
 
-.slider-container {
-    margin-top: 2rem;
+.home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.slider-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .home-header {
+    padding: 1rem 0;
+  }
+
+  .slider-section {
+    margin: 1rem auto;
+  }
 }
 </style>
-

@@ -1,18 +1,20 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
+import { useStore } from 'vuex';
+import type { Offer } from '@/types';
 
-interface Slide {
-  image: string;
-  title: string;
-  description: string;
-  link: string;
+interface CartItem {
+  id: number;
+  quantity: number;
+  name: string;
+  price: number;
 }
 
 export default defineComponent({
   name: 'ProductSlider',
   props: {
-    slides: {
-      type: Array as () => Slide[],
+    offers: {
+      type: Array as () => Offer[],
       required: true
     },
     autoplayInterval: {
@@ -21,18 +23,20 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const store = useStore();
     const currentSlide = ref(0);
     const autoplayTimer = ref<number | null>(null);
     const touchStart = ref(0);
     const touchEnd = ref(0);
+    const isAdding = ref<number | null>(null);
 
     const nextSlide = () => {
-      currentSlide.value = (currentSlide.value + 1) % props.slides.length;
+      currentSlide.value = (currentSlide.value + 1) % props.offers.length;
     };
 
     const prevSlide = () => {
       currentSlide.value = currentSlide.value === 0 
-        ? props.slides.length - 1 
+        ? props.offers.length - 1 
         : currentSlide.value - 1;
     };
 
@@ -71,6 +75,58 @@ export default defineComponent({
       }
     };
 
+    const addToCart = async (offer: Offer) => {
+      if (isAdding.value) return;
+
+      isAdding.value = offer.id;
+      try {
+        const cartItem: CartItem = {
+          id: offer.id,
+          quantity: 1,
+          name: offer.title,
+          price: offer.price
+        };
+
+        await store.dispatch('addItemToCart', cartItem);
+        showSuccessAlert(offer.title);
+      } catch (error) {
+        console.error('Error adding to cart:', error);
+        showErrorAlert();
+      } finally {
+        setTimeout(() => {
+          isAdding.value = null;
+        }, 500);
+      }
+    };
+
+    const showSuccessAlert = (title: string) => {
+      const alert = document.createElement('div');
+      alert.className = 'success-alert';
+      alert.textContent = `¡${title} añadido al carrito!`;
+      document.body.appendChild(alert);
+      
+      setTimeout(() => {
+        alert.classList.add('fade-out');
+        setTimeout(() => {
+          document.body.removeChild(alert);
+        }, 300);
+      }, 2000);
+    };
+
+    const showErrorAlert = () => {
+      const alert = document.createElement('div');
+      alert.className = 'error-alert';
+      alert.textContent = 'Error al añadir al carrito. Inténtalo de nuevo.';
+      document.body.appendChild(alert);
+      
+      setTimeout(() => {
+        alert.classList.add('fade-out');
+        setTimeout(() => {
+          document.body.removeChild(alert);
+        }, 300);
+      }, 2000);
+    };
+
     onMounted(() => {
       startAutoplay();
     });
@@ -86,7 +142,9 @@ export default defineComponent({
       goToSlide,
       handleTouchStart,
       handleTouchMove,
-      handleTouchEnd
+      handleTouchEnd,
+      isAdding,
+      addToCart
     };
   }
 });
@@ -94,36 +152,53 @@ export default defineComponent({
 
 <template>
   <div class="slider-container">
-    <div class="slider" ref="slider">
+    <div 
+      class="slider" 
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+    >
       <div 
-        v-for="(slide, index) in slides" 
-        :key="index"
+        v-for="(offer, index) in offers" 
+        :key="offer.id"
         class="slide"
         :class="{ active: currentSlide === index }"
         :style="{ transform: `translateX(${100 * (index - currentSlide)}%)` }"
       >
-        <img :src="slide.image" :alt="slide.title">
+        <img :src="offer.image" :alt="offer.title">
         <div class="slide-content">
-          <h2>{{ slide.title }}</h2>
-          <p>{{ slide.description }}</p>
-          <button class="shop-now-btn" @click="$emit('shop-now', slide)">
-            Comprar Ahora
+          <span class="discount-badge" v-if="offer.discount">-{{ offer.discount }}%</span>
+          <h2>{{ offer.title }}</h2>
+          <p>{{ offer.description }}</p>
+          <div class="price-container">
+            <span class="old-price" v-if="offer.oldPrice">€{{ offer.oldPrice }}</span>
+            <span class="current-price">€{{ offer.price }}</span>
+          </div>
+          <button 
+            class="shop-now-btn" 
+            :class="{ 'is-adding': isAdding === offer.id }"
+            @click="addToCart(offer)"
+            :disabled="isAdding === offer.id"
+          >
+            {{ isAdding === offer.id ? 'Añadiendo...' : 'Comprar Ahora' }}
           </button>
         </div>
       </div>
     </div>
 
-    <button class="slider-btn prev" @click="prevSlide" aria-label="Previous slide">
-      &#10094;
-    </button>
-    <button class="slider-btn next" @click="nextSlide" aria-label="Next slide">
-      &#10095;
-    </button>
+    <div class="slider-controls">
+      <button class="slider-btn prev" @click="prevSlide" aria-label="Previous slide">
+        &#10094;
+      </button>
+      <button class="slider-btn next" @click="nextSlide" aria-label="Next slide">
+        &#10095;
+      </button>
+    </div>
 
     <div class="slider-dots">
       <button 
-        v-for="(_, index) in slides" 
-        :key="index"
+        v-for="(offer, index) in offers" 
+        :key="offer.id"
         class="dot"
         :class="{ active: currentSlide === index }"
         @click="goToSlide(index)"
@@ -139,7 +214,7 @@ export default defineComponent({
     width: 100%;
     height: 500px;
     overflow: hidden;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem; /* Aumentado para dar espacio al título */
 }
 
 .slider {
@@ -157,7 +232,8 @@ export default defineComponent({
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Cambiado a contain para mantener la proporción */
+    background: #f5f5f5; /* Fondo para imágenes que no ocupen todo el espacio */
 }
 
 .slide-content {
@@ -166,89 +242,127 @@ export default defineComponent({
     left: 0;
     right: 0;
     padding: 2rem;
-    background: linear-gradient(transparent, rgba(93, 85, 77, 0.9));
+    background: rgba(0, 0, 0, 0.7); /* Fondo más oscuro y opaco */
     color: #ffffff;
-    transform: translateY(100%);
-    transition: transform 0.5s ease;
+    transform: translateY(0); /* Quitado el transform inicial */
+    transition: transform 0.3s ease;
 }
 
-.slide.active .slide-content {
-    transform: translateY(0);
+/* Títulos fuera del slider */
+.slide h2 {
+    position: absolute;
+    bottom: -60px; /* Posición debajo del slider */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #333; /* Color oscuro para el título */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 1rem 0;
 }
 
+/* Flechas estilizadas */
 .slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(190, 129, 81, 0.7);
-    color: #ffffff;
+    background: rgba(190, 129, 81, 0.8); /* Color que coincide con tu esquema */
     border: none;
-    padding: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
 }
 
 .slider-btn:hover {
-    background: rgba(176, 109, 70, 0.9);
+    background: rgba(190, 129, 81, 1);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.prev {
-    left: 1rem;
+.slider-btn.prev {
+    left: 20px;
 }
 
-.next {
-    right: 1rem;
+.slider-btn.next {
+    right: 20px;
 }
 
+/* Estilo para las flechas usando pseudo-elementos */
+.slider-btn::before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    position: absolute;
+}
+
+.slider-btn.prev::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+}
+
+.slider-btn.next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
+/* Puntos indicadores */
 .slider-dots {
     position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: -30px;
+    left: 0;
+    right: 0;
     display: flex;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 10px;
+    padding: 1rem 0;
 }
 
 .dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(232, 214, 192, 0.5);
+    background: #ccc;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .dot.active {
-    background: #e8d6c0;
-}
-
-.shop-now-btn {
     background: #BE8151;
-    color: #ffffff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
+    transform: scale(1.2);
 }
 
-.shop-now-btn:hover {
-    transform: scale(1.05);
-    background: #B06D46;
-}
-
+/* Ajustes responsive */
 @media (max-width: 768px) {
     .slider-container {
         height: 300px;
+        margin-bottom: 4rem; /* Más espacio para el título en móvil */
     }
 
-    .slide-content {
-        padding: 1rem;
+    .slide h2 {
+        font-size: 1.2rem;
+        bottom: -50px;
     }
 
-    .slide-content h2 {
-        font-size: 1.5rem;
+    .slider-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .slider-btn::before {
+        width: 8px;
+        height: 8px;
     }
 }
 </style>

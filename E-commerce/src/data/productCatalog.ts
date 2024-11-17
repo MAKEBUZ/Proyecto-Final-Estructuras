@@ -201,6 +201,9 @@ import CoatsWomen10 from '../assets/Prodcuts/Women/Coats/CoatsWomen10.jpg';
 
 
 import Offer1 from '@/assets/Offer/offer1.jpg';
+import Offer2 from '../assets/Offer/offer2.jpg';
+import Offer3 from '../assets/Offer/offer3.jpg';
+import Offer4 from '../assets/Offer/offer4.jpg';
 
 
 export interface Product {
@@ -2076,6 +2079,42 @@ export const productCatalog: Product[] = [
       subcategory: "Special",
       isOffer: true
     },
+    {
+      id: 10001,
+      name: "Camiseta Arquero Pasto",
+      description: "Camiseta de Arquero del Deportivo Pasto",
+      price: 89.99,
+      oldPrice: 119.99,
+      discount: 25,
+      image: Offer2,
+      category: "Offers",
+      subcategory: "Special",
+      isOffer: true
+    },
+    {
+      id: 10002,
+      name: "Camiseta Seleccion Colombia - Local",
+      description: "Camiseta Seleccion Colombia - Local",
+      price: 150.00,
+      oldPrice: 199.99,
+      discount: 20,
+      image: Offer3,
+      category: "Offers",
+      subcategory: "Special",
+      isOffer: true
+    },
+    {
+      id: 10003,
+      name: "Camiseta Seleccion Colombia - Visitante",
+      description: "Camiseta Seleccion Colombia - Visitante",
+      price: 150.00,
+      oldPrice: 199.99,
+      discount: 20,
+      image: Offer4,
+      category: "Offers",
+      subcategory: "Special",
+      isOffer: true
+    }
   
   ];
 

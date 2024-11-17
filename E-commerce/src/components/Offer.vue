@@ -1,9 +1,11 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import type { Offer } from '@/types';
-
-import Offer1 from '@/assets/Offer/offer1.jpg';
+import Offer1 from '../assets/Offer/offer1.jpg';
+import Offer2 from '../assets/Offer/offer2.jpg';
+import Offer3 from '../assets/Offer/offer3.jpg';
+import Offer4 from '../assets/Offer/offer4.jpg';
 
 interface CartItem {
   id: number;
@@ -14,9 +16,19 @@ interface CartItem {
 
 export default defineComponent({
   name: 'OffersPage',
-  setup() {
+  props: {
+    autoplayInterval: {
+      type: Number,
+      default: 5000
+    }
+  },
+  setup(props) {
     const store = useStore();
     const isAdding = ref<number | null>(null);
+    const currentSlide = ref(0);
+    const autoplayTimer = ref<number | null>(null);
+    const touchStart = ref(0);
+    const touchEnd = ref(0);
 
     const offers = ref<Offer[]>([
       {
@@ -24,22 +36,87 @@ export default defineComponent({
         title: "Camiseta del Deportivo Pasto",
         description: "Camiseta del Deportivo Pasto edicion especial 'La del Ascenso'",
         price: 100.00,
-        oldPrice: 130.00,
-        discount: 23,
+        oldPrice: 129.99,
+        discount: 33,
         image: Offer1
       },
+      {
+      id: 10001,
+      title: "Camiseta Arquero Pasto",
+      description: "Camiseta de Arquero del Deportivo Pasto",
+      price: 89.99,
+      oldPrice: 119.99,
+      discount: 25,
+      image: Offer2,
+    },
+    {
+      id: 10002,
+      title: "Camiseta Seleccion Colombia - Local",
+      description: "Camiseta Seleccion Colombia - Local",
+      price: 150.00,
+      oldPrice: 199.99,
+      discount: 20,
+      image: Offer3,
+    },
+    {
+      id: 10003,
+      title: "Camiseta Seleccion Colombia - Visitante",
+      description: "Camiseta Seleccion Colombia - Visitante", 
+      price: 150.00,
+      oldPrice: 199.99,
+      discount: 20,
+      image: Offer4,
+    }
     ]);
 
-    const isVisible = ref(false);
-
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-        }
-      });
+    // Funciones del slider
+    const nextSlide = () => {
+      currentSlide.value = (currentSlide.value + 1) % offers.value.length;
     };
 
+    const prevSlide = () => {
+      currentSlide.value = currentSlide.value === 0 
+        ? offers.value.length - 1 
+        : currentSlide.value - 1;
+    };
+
+    const goToSlide = (index: number) => {
+      currentSlide.value = index;
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      autoplayTimer.value = window.setInterval(nextSlide, props.autoplayInterval);
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer.value) {
+        clearInterval(autoplayTimer.value);
+        autoplayTimer.value = null;
+      }
+    };
+
+    // Manejo de eventos táctiles
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStart.value = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEnd.value = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+      const difference = touchStart.value - touchEnd.value;
+      if (Math.abs(difference) > 50) {
+        if (difference > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    };
+
+    // Funciones del carrito
     const addToCart = async (offer: Offer) => {
       if (isAdding.value) return;
 
@@ -49,7 +126,7 @@ export default defineComponent({
           id: offer.id,
           quantity: 1,
           name: offer.title,
-          price: offer.price // Precio con descuento ya aplicado
+          price: offer.price
         };
 
         await store.dispatch('addItemToCart', cartItem);
@@ -67,7 +144,7 @@ export default defineComponent({
     const showSuccessAlert = (title: string) => {
       const alert = document.createElement('div');
       alert.className = 'success-alert';
-      alert.textContent = `¡${title} añadido al carrito!`;
+      alert.textContent = `${title} añadido al carrito!`;
       document.body.appendChild(alert);
       
       setTimeout(() => {
@@ -92,11 +169,24 @@ export default defineComponent({
       }, 2000);
     };
 
+    onMounted(() => {
+      startAutoplay();
+    });
+
+    onUnmounted(() => {
+      stopAutoplay();
+    });
+
     return {
       offers,
-      isVisible,
+      currentSlide,
       isAdding,
-      handleIntersection,
+      nextSlide,
+      prevSlide,
+      goToSlide,
+      handleTouchStart,
+      handleTouchMove,
+      handleTouchEnd,
       addToCart
     };
   }
@@ -105,31 +195,65 @@ export default defineComponent({
 
 <template>
   <div class="offers-page">
-    <div class="offers-grid">
-      <div v-for="offer in offers" 
-           :key="offer.id" 
-           class="offer-card"
-           v-intersection-observer="handleIntersection">
-        <div class="offer-image">
-          <img :src="offer.image" :alt="offer.title">
-          <span class="discount-badge">-{{ offer.discount }}%</span>
-        </div>
-        <div class="offer-content">
-          <h2>{{ offer.title }}</h2>
-          <p>{{ offer.description }}</p>
-          <div class="price-container">
-            <span class="old-price">€{{ offer.oldPrice }}</span>
-            <span class="current-price">€{{ offer.price }}</span>
+    <div class="slider-container">
+      <div 
+        class="slider" 
+        @touchstart="handleTouchStart"
+        @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
+      >
+        <div 
+          v-for="(offer, index) in offers" 
+          :key="offer.id"
+          class="slide"
+          :class="{ active: currentSlide === index }"
+          :style="{ transform: `translateX(${100 * (index - currentSlide)}%)` }"
+        >
+          <div class="slide-inner">
+            <div class="offer-image">
+              <img :src="offer.image" :alt="offer.title">
+              <span class="discount-badge">-{{ offer.discount }}%</span>
+            </div>
+            <div class="offer-content">
+              <h2>{{ offer.title }}</h2>
+              <p>{{ offer.description }}</p>
+              <div class="price-container">
+                <span class="old-price">€{{ offer.oldPrice }}</span>
+                <span class="current-price">€{{ offer.price }}</span>
+              </div>
+              <button 
+                class="buy-button" 
+                :class="{ 'is-adding': isAdding === offer.id }"
+                @click="addToCart(offer)"
+                :disabled="isAdding === offer.id"
+              >
+                <span class="button-text">
+                  {{ isAdding === offer.id ? 'Añadiendo...' : 'Comprar Ahora' }}
+                </span>
+              </button>
+            </div>
           </div>
-          <button 
-            class="buy-button" 
-            :class="{ 'is-adding': isAdding === offer.id }"
-            @click="addToCart(offer)"
-            :disabled="isAdding === offer.id"
-          >
-            <span class="button-text">{{ isAdding === offer.id ? 'Añadiendo...' : 'Comprar Ahora' }}</span>
-          </button>
         </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-btn prev" @click="prevSlide" aria-label="Previous slide">
+          &#10094;
+        </button>
+        <button class="slider-btn next" @click="nextSlide" aria-label="Next slide">
+          &#10095;
+        </button>
+      </div>
+
+      <div class="slider-dots">
+        <button 
+          v-for="(offer, index) in offers" 
+          :key="offer.id"
+          class="dot"
+          :class="{ active: currentSlide === index }"
+          @click="goToSlide(index)"
+          :aria-label="'Go to slide ' + (index + 1)"
+        ></button>
       </div>
     </div>
   </div>
@@ -137,57 +261,58 @@ export default defineComponent({
 
 <style lang="css">
 .offers-page {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-.title {
-  font-size: 2.5rem;
-  color: #333333;
-  margin-bottom: 0.5rem;
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  color: #5d554d;
-}
-
-.offers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.offer-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0;
-  animation: slideUp 0.6s ease-out forwards;
+  margin-bottom: 3rem;
+  background: #F4ECE0;
 }
 
-.offer-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+.slider {
+  height: 100%;
+  touch-action: pan-y pinch-zoom;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slide-inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px; /* Espacio para los dots */
 }
 
 .offer-image {
   position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F4ECE0;
   overflow: hidden;
 }
 
 .offer-image img {
-  width: 100%;
-  height: auto; 
-  display: block; 
-  transition: transform 0.3s ease;
-}
-
-.offer-card:hover .offer-image img {
-  transform: scale(1.05);
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .discount-badge {
@@ -195,274 +320,160 @@ export default defineComponent({
   top: 1rem;
   right: 1rem;
   background: #BE8151;
-  color: #ffffff;
+  color: #F4ECE0;
   padding: 0.5rem 1rem;
-  border-radius: 20px;
+  border-radius: 4px;
   font-weight: bold;
-  box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.offer-card:hover .discount-badge {
-  transform: scale(1.1);
 }
 
 .offer-content {
-  padding: 1.5rem;
+  width: 100%;
+  background: #764836;
+  padding: 1rem 1.5rem;
+  position: relative;
 }
 
 .offer-content h2 {
-  color: #333333;
+  color: #e8d6c0;
+  margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  transition: color 0.3s ease;
+  font-weight: bold;
 }
 
 .offer-content p {
-  color: #5d554d;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  color: #d9bb98;
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
 }
 
 .price-container {
-  margin: 1rem 0;
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .old-price {
-  color: #ff0000;
   text-decoration: line-through;
-  font-size: 1.1rem;
+  color: #d9bb98;
 }
 
 .current-price {
-  color: #BE8151;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.offer-card:hover .current-price {
-  transform: scale(1.05);
+  color: #BE8151;
 }
 
 .buy-button {
-  width: 100%;
-  padding: 1rem;
   background: #BE8151;
-  color: #ffffff;
+  color: #F4ECE0;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
-}
-
-.buy-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
-}
-
-.buy-button:hover::before {
-  width: 300px;
-  height: 300px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .buy-button:hover {
   background: #B06D46;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(190, 129, 81, 0.4);
-}
-
-.buy-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
 }
 
 .buy-button.is-adding {
-  background: #B06D46;
-  cursor: not-allowed;
-  animation: pulse 1.5s infinite;
-}
-
-.buy-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-  transform: none;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.slider-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40px; /* Ajustado para no interferir con los dots */
+  pointer-events: none;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(190, 129, 81, 0.8);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F4ECE0;
+  font-size: 1.2rem;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.98);
-    box-shadow: 0 2px 4px rgba(190, 129, 81, 0.2);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 2px 4px rgba(190, 129, 81, 0.3);
-  }
+.slider-btn:hover {
+  background: #B06D46;
+  transform: translateY(-50%) scale(1.1);
 }
 
-/* Alerta de éxito */
-.success-alert {
-  position: fixed;
-  top: 20px;
+.slider-btn.prev {
+  left: 20px;
+}
+
+.slider-btn.next {
   right: 20px;
-  background-color: #BE8151;
-  color: #ffffff;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  animation: slideIn 0.3s ease-out forwards;
-  font-weight: 500;
 }
 
-.success-alert.fade-out {
-  animation: slideOut 0.3s ease-in forwards;
+.slider-dots {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #764836;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d9bb98;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
 }
 
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+.dot.active {
+  background: #BE8151;
+  transform: scale(1.2);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-  .offers-page {
-    padding: 1rem;
+  .slider-container {
+    height: 500px;
   }
 
-  .title {
-    font-size: 2rem;
-  }
-
-  .offers-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .offer-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .current-price {
-    font-size: 1.5rem;
-  }
-
-  .success-alert {
-    top: auto;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    text-align: center;
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .offer-card {
-    background: #5d554d;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  .offer-content {
+    padding: 0.8rem;
   }
 
   .offer-content h2 {
-    color: #ffffff;
+    font-size: 1.2rem;
   }
 
   .offer-content p {
-    color: #e8d6c0;
+    font-size: 0.9rem;
   }
 
-  .buy-button {
-    color: #ffffff;
-  }
-
-  .success-alert {
-    background-color: #BE8151;
-    color: #ffffff;
-  }
-}
-
-/* Alerta de error */
-.error-alert {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #764836;
-  color: #ffffff;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  animation: slideIn 0.3s ease-out forwards;
-}
-
-.error-alert.fade-out {
-  animation: slideOut 0.3s ease-in forwards;
-}
-
-@media (max-width: 768px) {
-  .error-alert {
-    top: auto;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    text-align: center;
+  .slider-btn {
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

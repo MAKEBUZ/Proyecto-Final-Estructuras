@@ -8,6 +8,7 @@ import getProductById from '../data/productCatalog';
 interface EnrichedCartItem extends CartItem {
   price: number;
   image: string;
+  isOffer?: boolean;
 }
 
 export default defineComponent({
@@ -23,11 +24,15 @@ export default defineComponent({
     const cartItems = computed(() => store.getters.cartItems);
 
     const enrichedCartItems = computed(() => {
-      return cartItems.value.map((item: CartItem) => ({
-        ...item,
-        price: getProductPrice(item.id),
-        image: getProductImage(item.id)
-      }));
+      return cartItems.value.map((item: CartItem) => {
+        const product = getProductById(item.id);
+        return {
+          ...item,
+          price: getProductPrice(item.id),
+          image: getProductImage(item.id),
+          isOffer: product?.isOffer
+        };
+      });
     });
 
     const getProductImage = (productId: number): string => {
@@ -40,8 +45,13 @@ export default defineComponent({
       return product?.price || 0;
     };
 
-    const updateQuantity = async (itemId: number, newQuantity: number) => {
-      if (newQuantity < 1) return;
+    const getMaxQuantity = (isOffer: boolean | undefined): number => {
+      return isOffer ? 5 : 99;
+    };
+
+    const updateQuantity = async (itemId: number, newQuantity: number, isOffer: boolean | undefined) => {
+      const maxQuantity = getMaxQuantity(isOffer);
+      if (newQuantity < 1 || newQuantity > maxQuantity) return;
       
       const item = cartItems.value.find((i: CartItem) => i.id === itemId);
       if (item) {
@@ -52,10 +62,14 @@ export default defineComponent({
 
     const handleQuantityInput = (item: EnrichedCartItem) => {
       const quantity = parseInt(String(item.quantity));
+      const maxQuantity = getMaxQuantity(item.isOffer);
+      
       if (isNaN(quantity) || quantity < 1) {
-        updateQuantity(item.id, 1);
+        updateQuantity(item.id, 1, item.isOffer);
+      } else if (quantity > maxQuantity) {
+        updateQuantity(item.id, maxQuantity, item.isOffer);
       } else {
-        updateQuantity(item.id, quantity);
+        updateQuantity(item.id, quantity, item.isOffer);
       }
     };
 
@@ -82,7 +96,8 @@ export default defineComponent({
     };
 
     const subtotal = computed(() => {
-      return enrichedCartItems.value.reduce((total: number, item: EnrichedCartItem) => total + item.price * item.quantity, 0);
+      return enrichedCartItems.value.reduce((total: number, item: EnrichedCartItem) => 
+        total + item.price * item.quantity, 0);
     });
 
     const shipping = computed(() => (subtotal.value > 100 ? 0 : 10));
@@ -116,6 +131,7 @@ export default defineComponent({
       proceedToCheckout,
       undoLastAction,
       actionStack,
+      getMaxQuantity
     };
   }
 });
@@ -131,7 +147,6 @@ export default defineComponent({
     </div>
 
     <div v-if="cartItems.length > 0" class="cart-content">
-      <!-- Lista de productos -->
       <div class="cart-items">
         <div v-for="item in enrichedCartItems" :key="item.id" class="cart-item" :class="{ 'removing': removingItem === item.id }">
           <div class="item-image">
@@ -157,7 +172,7 @@ export default defineComponent({
             <div class="item-actions">
               <div class="quantity-controls">
                 <button 
-                  @click="updateQuantity(item.id, item.quantity - 1)"
+                  @click="updateQuantity(item.id, item.quantity - 1, item.isOffer)"
                   class="quantity-btn"
                   :disabled="item.quantity <= 1"
                 >
@@ -168,14 +183,20 @@ export default defineComponent({
                   v-model.number="item.quantity"
                   @change="handleQuantityInput(item)"
                   class="quantity-input"
+                  :max="getMaxQuantity(item.isOffer)"
                   min="1"
                 >
                 <button 
-                  @click="updateQuantity(item.id, item.quantity + 1)"
+                  @click="updateQuantity(item.id, item.quantity + 1, item.isOffer)"
                   class="quantity-btn"
+                  :disabled="item.quantity >= getMaxQuantity(item.isOffer)"
                 >
                   +
                 </button>
+              </div>
+
+              <div v-if="item.quantity >= getMaxQuantity(item.isOffer)" class="max-quantity-warning">
+                Cantidad máxima alcanzada
               </div>
 
               <button 
@@ -194,7 +215,6 @@ export default defineComponent({
         </div>
       </div>
 
-      <!-- Resumen del carrito -->
       <div class="cart-summary">
         <h2>Resumen del pedido</h2>
         
@@ -228,7 +248,11 @@ export default defineComponent({
           {{ isProcessing ? 'Procesando...' : 'Proceder al pago' }}
         </button>
 
-        <button @click="undoLastAction" class="undo-btn" :disabled="actionStack.length === 0">
+        <button 
+          @click="undoLastAction" 
+          class="undo-btn" 
+          :disabled="actionStack.length === 0"
+        >
           Deshacer última acción
         </button>
 

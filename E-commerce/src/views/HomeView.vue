@@ -1,62 +1,12 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import ProductSlider from '../components/Slider.vue';
-import type { Offer } from '@/types';
-
-import Offer1 from '../assets/Offer/offer1.jpg';
-import Offer2 from '../assets/Offer/offer2.jpg';
-import Offer3 from '../assets/Offer/offer3.jpg';
-import Offer4 from '../assets/Offer/offer4.jpg';
+import OfferSlider from '../components/Offer.vue';
 
 export default defineComponent({
   name: 'HomePage',
   components: {
-    ProductSlider,
+    OfferSlider,
   },
-  setup() {
-    const offers = ref<Offer[]>([
-      {
-        id: 10000,
-        title: "Camiseta del Deportivo Pasto",
-        price: 100.00,
-        oldPrice: 129.99,
-        discount: 33,
-        description: "Camiseta del Deportivo Pasto edicion especial 'La del Ascenso'",
-        image: Offer1,
-      },
-      {
-        id: 10001,
-        title: "Camiseta Arquero Pasto",
-        description: "Camiseta de Arquero del Deportivo Pasto",
-        price: 89.99,
-        oldPrice: 119.99,
-        discount: 25,
-        image: Offer2 
-      },
-      {
-        id: 10002,
-        title: "Camiseta Seleccion Colombia - Local",
-        description: "Camiseta Seleccion Colombia - Local",
-        price: 150.00,
-        oldPrice: 199.99,
-        discount: 20,
-        image: Offer3
-      },
-      {
-        id: 10003,
-        title: "Camiseta Seleccion Colombia - Visitante",
-        description: "Camiseta Seleccion Colombia - Visitante",
-        price: 150.00,
-        oldPrice: 199.99,
-        discount: 20,
-        image: Offer4
-      }
-    ]);
-
-    return {
-      offers
-    };
-  }
 });
 </script>
 
@@ -67,10 +17,7 @@ export default defineComponent({
       <p>Welcome to the home page</p>
     </div>
     <div class="slider-section">
-      <ProductSlider 
-        :offers="offers" 
-        :autoplayInterval="5000"
-      />
+      <OfferSlider :autoplayInterval="5000"/>
     </div>
   </div>
 </template>

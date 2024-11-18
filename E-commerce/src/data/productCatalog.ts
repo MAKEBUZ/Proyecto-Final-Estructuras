@@ -8,6 +8,7 @@ import TShirtKid7 from '../assets/Products/Kids/TShirt/TShirtKid7.jpg';
 import TShirtKid8 from '../assets/Products/Kids/TShirt/TShirtKid8.jpg';
 import TShirtKid9 from '../assets/Products/Kids/TShirt/TShirtKid9.jpg';
 import TShirtKid10 from '../assets/Products/Kids/TShirt/TShirtKid10.jpg';
+
 import ShoesKids1 from '../assets/Products/Kids/Shoes/ShoesKids1.jpg';
 import ShoesKids2 from '../assets/Products/Kids/Shoes/ShoesKids2.jpg';
 import ShoesKids3 from '../assets/Products/Kids/Shoes/ShoesKids3.jpg';
@@ -18,6 +19,7 @@ import ShoesKids7 from '../assets/Products/Kids/Shoes/ShoesKids7.jpg';
 import ShoesKids8 from '../assets/Products/Kids/Shoes/ShoesKids8.jpg';
 import ShoesKids9 from '../assets/Products/Kids/Shoes/ShoesKids9.jpg';
 import ShoesKids10 from '../assets/Products/Kids/Shoes/ShoesKids10.jpg';
+
 import PantsKids1 from '../assets/Products/Kids/Pants/PantsKids1.jpg';
 import PantsKids2 from '../assets/Products/Kids/Pants/PantsKids2.jpg';
 import PantsKids3 from '../assets/Products/Kids/Pants/PantsKids3.jpg';
@@ -28,6 +30,7 @@ import PantsKids7 from '../assets/Products/Kids/Pants/PantsKids7.jpg';
 import PantsKids8 from '../assets/Products/Kids/Pants/PantsKids8.jpg';
 import PantsKids9 from '../assets/Products/Kids/Pants/PantsKids9.jpg';
 import PantsKids10 from '../assets/Products/Kids/Pants/PantsKids10.jpg';
+
 import ColoniesKids1 from '../assets/Products/Kids/Colonies/ColoniesKids1.jpg';
 import ColoniesKids2 from '../assets/Products/Kids/Colonies/ColoniesKids2.jpg';
 import ColoniesKids3 from '../assets/Products/Kids/Colonies/ColoniesKids3.jpg';
@@ -38,6 +41,7 @@ import ColoniesKids7 from '../assets/Products/Kids/Colonies/ColoniesKids7.jpg';
 import ColoniesKids8 from '../assets/Products/Kids/Colonies/ColoniesKids8.jpg';
 import ColoniesKids9 from '../assets/Products/Kids/Colonies/ColoniesKids9.jpg';
 import ColoniesKids10 from '../assets/Products/Kids/Colonies/ColoniesKids10.jpg';
+
 import CoatsKids1 from '../assets/Products/Kids/Coats/CoatsKids1.jpg';
 import CoatsKids2 from '../assets/Products/Kids/Coats/CoatsKids2.jpg';
 import CoatsKids3 from '../assets/Products/Kids/Coats/CoatsKids3.jpg';
@@ -48,6 +52,7 @@ import CoatsKids7 from '../assets/Products/Kids/Coats/CoatsKids7.jpg';
 import CoatsKids8 from '../assets/Products/Kids/Coats/CoatsKids8.jpg';
 import CoatsKids9 from '../assets/Products/Kids/Coats/CoatsKids9.jpg';
 import CoatsKids10 from '../assets/Products/Kids/Coats/CoatsKids10.jpg';
+
 import TShirtMen1 from '../assets/Products/Mens/T-Shirt/TShirtMen1.jpg';
 import TShirtMen2 from '../assets/Products/Mens/T-Shirt/TShirtMen2.jpg';
 import TShirtMen3 from '../assets/Products/Mens/T-Shirt/TShirtMen3.jpg';
@@ -58,6 +63,7 @@ import TShirtMen7 from '../assets/Products/Mens/T-Shirt/TShirtMen7.jpg';
 import TShirtMen8 from '../assets/Products/Mens/T-Shirt/TShirtMen8.jpg';
 import TShirtMen9 from '../assets/Products/Mens/T-Shirt/TShirtMen9.jpg';
 import TShirtMen10 from '../assets/Products/Mens/T-Shirt/TShirtMen10.jpg';
+
 import ShoesMen1 from '../assets/Products/Mens/Shoes/ShoesMens1.jpg';
 import ShoesMen2 from '../assets/Products/Mens/Shoes/ShoesMens2.jpg';
 import ShoesMen3 from '../assets/Products/Mens/Shoes/ShoesMens3.jpg';
@@ -68,6 +74,7 @@ import ShoesMen7 from '../assets/Products/Mens/Shoes/ShoesMens7.jpg';
 import ShoesMen8 from '../assets/Products/Mens/Shoes/ShoesMens8.jpg';
 import ShoesMen9 from '../assets/Products/Mens/Shoes/ShoesMens9.jpg';
 import ShoesMen10 from '../assets/Products/Mens/Shoes/ShoesMens10.jpg';
+
 import PantsMen1 from '../assets/Products/Mens/Pants/PantsMens1.jpg';
 import PantsMen2 from '../assets/Products/Mens/Pants/PantsMens2.jpg';
 import PantsMen3 from '../assets/Products/Mens/Pants/PantsMens3.jpg';
@@ -78,6 +85,7 @@ import PantsMen7 from '../assets/Products/Mens/Pants/PantsMens7.jpg';
 import PantsMen8 from '../assets/Products/Mens/Pants/PantsMens8.jpg';
 import PantsMen9 from '../assets/Products/Mens/Pants/PantsMens9.jpg';
 import PantsMen10 from '../assets/Products/Mens/Pants/PantsMens10.jpg';
+
 import ColoniesMen1 from '../assets/Products/Mens/Colonies/ColoniesMens1.jpg';
 import ColoniesMen2 from '../assets/Products/Mens/Colonies/ColoniesMens2.jpg';
 import ColoniesMen3 from '../assets/Products/Mens/Colonies/ColoniesMens3.jpg';
@@ -88,6 +96,7 @@ import ColoniesMen7 from '../assets/Products/Mens/Colonies/ColoniesMens7.jpg';
 import ColoniesMen8 from '../assets/Products/Mens/Colonies/ColoniesMens8.jpg';
 import ColoniesMen9 from '../assets/Products/Mens/Colonies/ColoniesMens9.jpg';
 import ColoniesMen10 from '../assets/Products/Mens/Colonies/ColoniesMens10.jpg';
+
 import CoatsMen1 from '../assets/Products/Mens/Coats/CoatsMens1.jpg';
 import CoatsMen2 from '../assets/Products/Mens/Coats/CoatsMens2.jpg';
 import CoatsMen3 from '../assets/Products/Mens/Coats/CoatsMens3.jpg';
@@ -98,6 +107,7 @@ import CoatsMen7 from '../assets/Products/Mens/Coats/CoatsMens7.jpg';
 import CoatsMen8 from '../assets/Products/Mens/Coats/CoatsMens8.jpg';
 import CoatsMen9 from '../assets/Products/Mens/Coats/CoatsMens9.jpg';
 import CoatsMen10 from '../assets/Products/Mens/Coats/CoatsMens10.jpg';
+
 import TShirtUnisex1 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex1.jpg';
 import TShirtUnisex2 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex2.jpg';
 import TShirtUnisex3 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex3.jpg';
@@ -108,6 +118,7 @@ import TShirtUnisex7 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex7.jpg';
 import TShirtUnisex8 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex8.jpg';
 import TShirtUnisex9 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex9.jpg';
 import TShirtUnisex10 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex10.jpg';
+
 import ShoesUnisex1 from '../assets/Products/Unisex/Shoes/ShoesUnisex1.jpg';
 import ShoesUnisex2 from '../assets/Products/Unisex/Shoes/ShoesUnisex2.jpg';
 import ShoesUnisex3 from '../assets/Products/Unisex/Shoes/ShoesUnisex3.jpg';
@@ -118,6 +129,7 @@ import ShoesUnisex7 from '../assets/Products/Unisex/Shoes/ShoesUnisex7.jpg';
 import ShoesUnisex8 from '../assets/Products/Unisex/Shoes/ShoesUnisex8.jpg';
 import ShoesUnisex9 from '../assets/Products/Unisex/Shoes/ShoesUnisex9.jpg';
 import ShoesUnisex10 from '../assets/Products/Unisex/Shoes/ShoesUnisex10.jpg';
+
 import PantsUnisex1 from '../assets/Products/Unisex/Pants/PantsUnisex1.jpg';
 import PantsUnisex2 from '../assets/Products/Unisex/Pants/PantsUnisex2.jpg';
 import PantsUnisex3 from '../assets/Products/Unisex/Pants/PantsUnisex3.jpg';
@@ -128,6 +140,7 @@ import PantsUnisex7 from '../assets/Products/Unisex/Pants/PantsUnisex7.jpg';
 import PantsUnisex8 from '../assets/Products/Unisex/Pants/PantsUnisex8.jpg';
 import PantsUnisex9 from '../assets/Products/Unisex/Pants/PantsUnisex9.jpg';
 import PantsUnisex10 from '../assets/Products/Unisex/Pants/PantsUnisex10.jpg';
+
 import ColoniesUnisex1 from '../assets/Products/Unisex/Colonies/ColoniesUnisex1.jpg';
 import ColoniesUnisex2 from '../assets/Products/Unisex/Colonies/ColoniesUnisex2.jpg';
 import ColoniesUnisex3 from '../assets/Products/Unisex/Colonies/ColoniesUnisex3.jpg';
@@ -138,6 +151,7 @@ import ColoniesUnisex7 from '../assets/Products/Unisex/Colonies/ColoniesUnisex7.
 import ColoniesUnisex8 from '../assets/Products/Unisex/Colonies/ColoniesUnisex8.jpg';
 import ColoniesUnisex9 from '../assets/Products/Unisex/Colonies/ColoniesUnisex9.jpg';
 import ColoniesUnisex10 from '../assets/Products/Unisex/Colonies/ColoniesUnisex10.jpg';
+
 import CoatsUnisex1 from '../assets/Products/Unisex/Coats/CoatsUnisex1.jpg';
 import CoatsUnisex2 from '../assets/Products/Unisex/Coats/CoatsUnisex2.jpg';
 import CoatsUnisex3 from '../assets/Products/Unisex/Coats/CoatsUnisex3.jpg';
@@ -148,6 +162,7 @@ import CoatsUnisex7 from '../assets/Products/Unisex/Coats/CoatsUnisex7.jpg';
 import CoatsUnisex8 from '../assets/Products/Unisex/Coats/CoatsUnisex8.jpg';
 import CoatsUnisex9 from '../assets/Products/Unisex/Coats/CoatsUnisex9.jpg';
 import CoatsUnisex10 from '../assets/Products/Unisex/Coats/CoatsUnisex10.jpg';
+
 import TShirtWomen1 from '../assets/Products/Women/T-Shirt/TShirtWomen1.jpg';
 import TShirtWomen2 from '../assets/Products/Women/T-Shirt/TShirtWomen2.jpg';
 import TShirtWomen3 from '../assets/Products/Women/T-Shirt/TShirtWomen3.jpg';
@@ -158,6 +173,7 @@ import TShirtWomen7 from '../assets/Products/Women/T-Shirt/TShirtWomen7.jpg';
 import TShirtWomen8 from '../assets/Products/Women/T-Shirt/TShirtWomen8.jpg';
 import TShirtWomen9 from '../assets/Products/Women/T-Shirt/TShirtWomen9.jpg';
 import TShirtWomen10 from '../assets/Products/Women/T-Shirt/TShirtWomen10.jpg';
+
 import ShoesWomen1 from '../assets/Products/Women/Shoes/ShoesWomen1.jpg';
 import ShoesWomen2 from '../assets/Products/Women/Shoes/ShoesWomen2.jpg';
 import ShoesWomen3 from '../assets/Products/Women/Shoes/ShoesWomen3.jpg';
@@ -168,6 +184,7 @@ import ShoesWomen7 from '../assets/Products/Women/Shoes/ShoesWomen7.jpg';
 import ShoesWomen8 from '../assets/Products/Women/Shoes/ShoesWomen8.jpg';
 import ShoesWomen9 from '../assets/Products/Women/Shoes/ShoesWomen9.jpg';
 import ShoesWomen10 from '../assets/Products/Women/Shoes/ShoesWomen10.jpg';
+
 import PantsWomen1 from '../assets/Products/Women/Pants/PantsWomen1.jpg';
 import PantsWomen2 from '../assets/Products/Women/Pants/PantsWomen2.jpg';
 import PantsWomen3 from '../assets/Products/Women/Pants/PantsWomen3.jpg';
@@ -178,6 +195,7 @@ import PantsWomen7 from '../assets/Products/Women/Pants/PantsWomen7.jpg';
 import PantsWomen8 from '../assets/Products/Women/Pants/PantsWomen8.jpg';
 import PantsWomen9 from '../assets/Products/Women/Pants/PantsWomen9.jpg';
 import PantsWomen10 from '../assets/Products/Women/Pants/PantsWomen10.jpg';
+
 import ColoniesWomen1 from '../assets/Products/Women/Colonies/ColoniesWomen1.jpg';
 import ColoniesWomen2 from '../assets/Products/Women/Colonies/ColoniesWomen2.jpg';
 import ColoniesWomen3 from '../assets/Products/Women/Colonies/ColoniesWomen3.jpg';
@@ -188,6 +206,7 @@ import ColoniesWomen7 from '../assets/Products/Women/Colonies/ColoniesWomen7.jpg
 import ColoniesWomen8 from '../assets/Products/Women/Colonies/ColoniesWomen8.jpg';
 import ColoniesWomen9 from '../assets/Products/Women/Colonies/ColoniesWomen9.jpg';
 import ColoniesWomen10 from '../assets/Products/Women/Colonies/ColoniesWomen10.jpg';
+
 import CoatsWomen1 from '../assets/Products/Women/Coats/CoatsWomen1.jpg';
 import CoatsWomen2 from '../assets/Products/Women/Coats/CoatsWomen2.jpg';
 import CoatsWomen3 from '../assets/Products/Women/Coats/CoatsWomen3.jpg';

@@ -148,75 +148,154 @@ export default defineComponent({
 </script>
 
 <style lang="css">
-.about-container {
-  background-color: #ffffff;
-  color: #333333;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Reset y estilos base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* Contenedor principal */
+.about-container {
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #ffffff;
+}
+
+/* Estilos generales de secciones */
+section {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  color: #333333;
+  font-weight: 600;
+}
+
+/* Hero Section */
 .hero-section {
   background-color: #F4ECE0;
-  padding: 6rem 2rem;
+  padding: 8rem 2rem;
   text-align: center;
   position: relative;
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
 .title {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+  color: #333333;
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 800px;
 }
 
 .subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   color: #5d554d;
+  max-width: 800px;
+  margin: 0 auto;
+  font-weight: 400;
 }
 
+/* Features Section */
 .features-section {
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
+  gap: 3rem;
+  max-width: 1400px;
   margin: 0 auto;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 2;
 }
 
 .feature-card {
   background: #ffffff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px #e8d6c0;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .feature-card:hover {
   transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card h2 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: #333333;
+}
+
+.feature-card p {
+  color: #666666;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .icon-wrapper {
   background-color: #e8d6c0;
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.5rem;
+  transition: all 0.3s ease;
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   color: #333333;
+  transition: all 0.3s ease;
 }
 
+.feature-card:hover .icon-wrapper {
+  transform: scale(1.1);
+  background-color: #BE8151;
+}
+
+.feature-card:hover .icon {
+  color: #ffffff;
+}
+
+/* Story Section */
 .story-section {
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;
   background-color: #ffffff;
+  position: relative;
+  z-index: 1;
 }
 
 .story-content {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -226,7 +305,12 @@ export default defineComponent({
 
 .story-text {
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.8;
+  color: #333333;
+}
+
+.story-text p {
+  margin-bottom: 1.5rem;
 }
 
 .learn-more-btn {
@@ -234,52 +318,117 @@ export default defineComponent({
   color: #ffffff;
   border: none;
   padding: 1rem 2rem;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
   margin-top: 2rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .learn-more-btn:hover {
   background-color: #B06D46;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Stats Container */
 .stats-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 2rem;
+  width: 100%;
 }
 
 .stat-item {
   text-align: center;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
 }
 
 .stat-item h3 {
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   color: #BE8151;
   margin: 0;
+  line-height: 1.2;
+  font-weight: 700;
+  width: 100%;
+  word-break: break-word;
 }
 
+.stat-item p {
+  color: #666666;
+  margin-top: 0.5rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  width: 100%;
+  word-wrap: break-word;
+}
+
+/* Values Section */
 .values-section {
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;
   background-color: #F4ECE0;
+  position: relative;
+  z-index: 1;
 }
 
 .values-grid {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
   padding: 2rem 0;
 }
 
 .value-card {
   background: #ffffff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px #d9bb98;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.value-card h3 {
+  font-size: 1.5rem;
+  color: #333333;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.value-card p {
+  color: #666666;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 /* Animaciones */
@@ -318,9 +467,55 @@ export default defineComponent({
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .features-section,
+  .story-content,
+  .values-grid {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .story-content {
+    gap: 3rem;
+  }
+  
+  .values-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .story-content {
     grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .stats-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .stat-item {
+    padding: 1.25rem;
+    min-height: 120px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .feature-card {
+    padding: 2rem;
+  }
+
+  .hero-section {
+    padding: 6rem 1.5rem;
   }
 
   .title {
@@ -328,7 +523,120 @@ export default defineComponent({
   }
 
   .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
+
+  .icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 4rem 1rem;
+    min-height: 50vh;
+  }
+
+  .features-section,
+  .story-section,
+  .values-section {
+    padding: 4rem 1rem;
+  }
+
+  .feature-card,
+  .value-card {
+    padding: 1.5rem;
+  }
+
+  .stats-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-item {
+    padding: 1rem;
+    min-height: 100px;
+  }
+
+  .learn-more-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Fix para el scroll horizontal */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix para los containers */
+.container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Fix para z-index y posicionamiento */
+.relative {
+  position: relative;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
 }
 </style>

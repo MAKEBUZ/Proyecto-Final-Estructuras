@@ -1,267 +1,363 @@
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { 
+  MapPin, 
+  Phone, 
+  Mail,
+  Facebook, 
+  Instagram, 
+  Linkedin, 
+  Github,
+  Send,
+  User,
+  MessageSquare
+} from 'lucide-vue-next';
+
+interface ContactForm {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  date: string;
+}
+
+export default defineComponent({
+  name: 'ContactForm',
+  components: {
+    MapPin,
+    Phone,
+    Mail,
+    Facebook,
+    Instagram,
+    Linkedin,
+    Github,
+    Send,
+    User,
+    MessageSquare
+  },
+  setup() {
+    const form = ref({
+      name: '',
+      email: '',
+      message: ''
+    });
+
+    const saveContact = () => {
+      const newContact: ContactForm = {
+        id: crypto.randomUUID(),
+        name: form.value.name,
+        email: form.value.email,
+        message: form.value.message,
+        date: new Date().toISOString()
+      };
+
+      const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+      contacts.push(newContact);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+
+      form.value.name = '';
+      form.value.email = '';
+      form.value.message = '';
+      alert('Mensaje enviado correctamente');
+    };
+
+    return {
+      form,
+      saveContact
+    };
+  }
+});
+</script>
+
 <template>
-  <div class="contact-container">
-    <div class="animated-background"></div>
-    
-    <div class="contact-content">
-      <div class="contact-form-container">
-        <div class="form-card">
-          <div class="form-header">
-            <h2>
-              <span class="icon-wrapper">
-                <Mail :size="20" />
-              </span>
-              Contáctanos
-            </h2>
+  <div class="contact-wrapper">
+    <div class="contact-container">
+      <div class="form-card">
+        <h2 class="title">Contáctanos</h2>
+        <form @submit.prevent="saveContact" class="contact-form">
+          <div class="form-group">
+            <label>
+              <User class="input-icon" :size="18" />
+              Nombre:
+            </label>
+            <input 
+              type="text" 
+              v-model="form.name" 
+              required
+              class="input-field"
+              placeholder="Tu nombre"
+            />
           </div>
-          
-          <form @submit.prevent="handleSubmit">
-            <div class="form-group">
-              <div class="input-wrapper">
-                <input type="text" v-model="formData.name" :class="{ filled: formData.name }">
-                <span class="floating-label">Nombre</span>
-                <div class="input-underline"></div>
-              </div>
-              
-              <div class="input-wrapper">
-                <input type="email" v-model="formData.email" :class="{ filled: formData.email }">
-                <span class="floating-label">Email</span>
-                <div class="input-underline"></div>
-              </div>
-              
-              <div class="input-wrapper">
-                <textarea v-model="formData.message" :class="{ filled: formData.message }"></textarea>
-                <span class="floating-label">Mensaje</span>
-                <div class="input-underline"></div>
-              </div>
-              
-              <button type="submit" class="submit-btn" :disabled="loading">
-                <span v-if="!loading">Enviar Mensaje</span>
-                <span v-else class="spinner"></span>
-              </button>
-            </div>
-          </form>
-        </div>
+          <div class="form-group">
+            <label>
+              <Mail class="input-icon" :size="18" />
+              Email:
+            </label>
+            <input 
+              type="email" 
+              v-model="form.email" 
+              required
+              class="input-field"
+              placeholder="tu@email.com"
+            />
+          </div>
+          <div class="form-group">
+            <label>
+              <MessageSquare class="input-icon" :size="18" />
+              Mensaje:
+            </label>
+            <textarea 
+              v-model="form.message" 
+              required
+              class="input-field message-field"
+              placeholder="Escribe tu mensaje aquí..."
+              rows="4"
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            <Send class="icon" :size="20" />
+            Enviar Mensaje
+          </button>
+        </form>
       </div>
-      
-      <!-- Información de Contacto -->
-      <div class="contact-info-container">
-        <div class="info-card">
-          <h2>
-            <span class="icon-wrapper">
-              <Info :size="20" />
-            </span>
-            Información de Contacto
-          </h2>
-          
-          <div class="info-items">
-            <div class="info-item">
-              <div class="info-icon">
-                <MapPin />
-              </div>
-              <div class="info-text">
-                <h3>Ubicación</h3>
-                <p>Tu dirección aquí</p>
-              </div>
-            </div>
-            
-            <div class="info-item">
-              <div class="info-icon">
-                <Phone />
-              </div>
-              <div class="info-text">
-                <h3>Teléfono</h3>
-                <p>+34 123 456 789</p>
-              </div>
-            </div>
-            
-            <div class="info-item">
-              <div class="info-icon">
-                <Mail />
-              </div>
-              <div class="info-text">
-                <h3>Email</h3>
-                <p>contacto@ejemplo.com</p>
-              </div>
+
+      <div class="info-card">
+        <h2 class="title">Información de Contacto</h2>
+        <div class="contact-info">
+          <div class="info-item">
+            <MapPin class="icon" />
+            <div>
+              <strong>Ubicación:</strong>
+              <p>Ciudad, País</p>
             </div>
           </div>
-          
-          <div class="social-media">
-            <h3>Síguenos</h3>
-            <div class="social-icons">
-              <a href="#" class="social-icon">
-                <Facebook />
-                <span class="social-tooltip">Facebook</span>
-              </a>
-              <a href="#" class="social-icon">
-                <Twitter />
-                <span class="social-tooltip">Twitter</span>
-              </a>
-              <a href="#" class="social-icon">
-                <Instagram />
-                <span class="social-tooltip">Instagram</span>
-              </a>
-              <a href="#" class="social-icon">
-                <Linkedin />
-                <span class="social-tooltip">LinkedIn</span>
-              </a>
+          <div class="info-item">
+            <Phone class="icon" />
+            <div>
+              <strong>Teléfono:</strong>
+              <p>+1234567890</p>
             </div>
           </div>
+          <div class="info-item">
+            <Mail class="icon" />
+            <div>
+              <strong>Email:</strong>
+              <p>contacto@empresa.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank" class="social-link">
+            <Facebook class="social-icon" />
+          </a>
+          <a href="https://instagram.com" target="_blank" class="social-link">
+            <Instagram class="social-icon" />
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="social-link">
+            <Linkedin class="social-icon" />
+          </a>
+          <a href="https://github.com" target="_blank" class="social-link">
+            <Github class="social-icon" />
+          </a>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import { 
-  Mail, 
-  Info, 
-  MapPin, 
-  Phone, 
-  Facebook, 
-  Twitter, 
-  Instagram, 
-  Linkedin 
-} from 'lucide-vue-next'
-
-interface FormData {
-  name: string
-  email: string
-  message: string
-}
-
-const loading = ref(false)
-const formData = ref<FormData>({
-  name: '',
-  email: '',
-  message: ''
-})
-
-const handleSubmit = async () => {
-  loading.value = true
-  try {
-    // Aquí iría tu lógica de envío
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    // Resetear formulario
-    formData.value = {
-      name: '',
-      email: '',
-      message: ''
-    }
-  } catch (error) {
-    console.error('Error al enviar:', error)
-  } finally {
-    loading.value = false
-  }
-}
-</script>
-
-<style lang="css">
-.contact-container {
+<style scoped>
+.contact-wrapper {
+  background-color: #ffffff;
   min-height: 100vh;
-  position: relative;
-  padding: 2rem;
-  overflow: hidden;
-  font-family: 'Inter', sans-serif;
+  padding: 3rem 1rem;
 }
 
-/* Fondo Animado */
-.animated-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, #F4ECE0, #e8d6c0, #d9bb98, #e8d6c0);
-  z-index: -1;
-  animation: gradientAnimation 15s ease infinite;
-  background-size: 400% 400%;
-}
-
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Grid Layout */
-.contact-content {
-  max-width: 1400px;
-  margin: 0 auto;
+.contact-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-card, .info-card {
+  background: #F4ECE0;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-card:hover, .info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+}
+
+.title {
+  font-size: 1.75rem;
+  color: #5d554d;
+  margin-bottom: 1.5rem;
   position: relative;
-  perspective: 1000px;
+  padding-bottom: 0.5rem;
 }
 
-/* Contenedores de Formulario e Info */
-.contact-form-container,
-.contact-info-container {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: #BE8151;
+  transition: width 0.3s ease;
 }
 
-.contact-form-container.active,
-.contact-info-container.active {
-  transform: scale(1.02);
-  z-index: 2;
+.form-card:hover .title::after,
+.info-card:hover .title::after {
+  width: 100px;
 }
 
-/* Tarjetas */
-.form-card,
-.info-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  height: 100%;
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
-/* Encabezados */
-.form-header {
-  margin-bottom: 2.5rem;
-}
-
-.form-header h2,
-.info-card h2 {
+label {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  color: #333333;
-  font-size: 1.75rem;
-  font-weight: 600;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
+  color: #5d554d;
+  font-weight: 500;
 }
 
-/* Iconos en Encabezados */
-.icon-wrapper {
+.input-icon {
+  color: #BE8151;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #d9bb98;
+  border-radius: 8px;
+  background: #fff;
+  transition: all 0.3s ease;
+  color: #5d554d;
+}
+
+.message-field {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #BE8151;
+  box-shadow: 0 0 0 3px rgba(190, 129, 81, 0.2);
+}
+
+.input-field::placeholder {
+  color: #d9bb98;
+}
+
+.submit-btn {
   background: #BE8151;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+  background: #B06D46;
+  transform: translateY(-2px);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.contact-info {
+  margin-bottom: 2rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.info-item:hover {
+  transform: translateX(10px);
+}
+
+.icon {
+  color: #BE8151;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #fff;
+  color: #BE8151;
   transition: all 0.3s ease;
 }
 
-.icon-wrapper:hover {
-  transform: rotate(15deg);
+.social-link:hover {
+  background: #BE8151;
+  color: white;
+  transform: translateY(-5px);
 }
 
-/* Grupos de Formulario */
-.form-group {
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeInUp 0.5s ease forwards;
+.social-icon {
+  width: 20px;
+  height: 20px;
 }
 
-@keyframes fadeInUp {
+@media (max-width: 768px) {
+  .contact-wrapper {
+    padding: 1rem;
+  }
+
+  .form-card, .info-card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+  }
+}
+
+@keyframes slideIn {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -272,356 +368,7 @@ const handleSubmit = async () => {
   }
 }
 
-/* Contenedor de Input */
-.input-wrapper {
-  position: relative;
-  margin-bottom: 1.5rem;
-}
-
-/* Inputs y TextArea */
-input,
-textarea {
-  width: 100%;
-  padding: 0.75rem 0;
-  border: none;
-  background: transparent;
-  color: #333333;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-}
-
-.floating-label {
-  position: absolute;
-  left: 0;
-  top: 0.75rem;
-  pointer-events: none;
-  transition: 0.3s ease all;
-  color: #5d554d;
-}
-
-
-input:focus ~ .floating-label,
-input.filled ~ .floating-label,
-textarea:focus ~ .floating-label,
-textarea.filled ~ .floating-label {
-  transform: translateY(-20px);
-  font-size: 0.8em;
-  color: #BE8151;
-}
-
-.input-underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #d9bb98;
-}
-
-.input-underline::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #BE8151;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-input:focus ~ .input-underline::after,
-textarea:focus ~ .input-underline::after {
-  transform: scaleX(1);
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 1rem;
-  background: #BE8151;
-  color: #ffffff;
-  border: none;
-  border-radius: 30px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.submit-btn:hover {
-  background: #B06D46;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(190, 129, 81, 0.4);
-}
-
-.submit-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.info-items {
-  display: grid;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  background: rgba(232, 214, 192, 0.5);
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.25rem;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.info-item:hover {
-  transform: translateX(10px);
-  background: rgba(190, 129, 81, 0.1);
-}
-
-.info-icon {
-  background: #BE8151;
-  color: #ffffff;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-}
-
-.info-item:hover .info-icon {
-  transform: scale(1.1) rotate(10deg);
-}
-
-.info-text h3 {
-  color: #333333;
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-}
-
-.info-text p {
-  color: #5d554d;
-  font-size: 0.95rem;
-}
-
-.social-media {
-  margin-top: 2.5rem;
-}
-
-.social-media h3 {
-  color: #333333;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-}
-
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.social-icon {
-  position: relative;
-  background: #F4ECE0;
-  color: #333333;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.social-icon:hover {
-  background: #BE8151;
-  color: #ffffff;
-  transform: translateY(-5px);
-}
-
-.notification-system {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
-.notification {
-  background: white;
-  border-radius: 10px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  animation: slideIn 0.3s ease forwards;
-  position: relative;
-  overflow: hidden;
-}
-
-.notification.success {
-  border-left: 4px solid #BE8151;
-}
-
-.notification.error {
-  border-left: 4px solid #B06D46;
-}
-
-.notification-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.notification-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  background: #a8e6cf;
-  animation: progress linear forwards;
-}
-
-@keyframes progress {
-  from { width: 100%; }
-  to { width: 0%; }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.error-message {
-  color: #ff6f61;
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-  animation: shake 0.5s ease;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-@media (max-width: 968px) {
-  .contact-content {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .contact-form-container,
-  .contact-info-container {
-    transform: none !important;
-  }
-
-  .form-card,
-  .info-card {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-container {
-    padding: 1rem;
-  }
-
-  .form-header h2,
-  .info-card h2 {
-    font-size: 1.5rem;
-  }
-
-  .social-icons {
-    justify-content: center;
-  }
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.form-card:hover,
-.info-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(93, 85, 77, 0.1);
-}
-
-input.error,
-textarea.error {
-  border-color: #ff6f61;
-}
-
-input.error ~ .input-underline::after,
-textarea.error ~ .input-underline::after {
-  background: #B06D46;
-}
-
-.social-tooltip {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333333;
-  color: #ffffff;
-  padding: 0.5rem 0.75rem;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover .social-tooltip {
-  opacity: 1;
-  visibility: visible;
-  bottom: -40px;
+.contact-form {
+  animation: slideIn 0.5s ease-out;
 }
 </style>

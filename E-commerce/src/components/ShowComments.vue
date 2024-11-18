@@ -328,33 +328,34 @@ export default defineComponent({
 </script>
 
 <style lang="css">
-/* Variables CSS para la paleta de colores */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
-  --primary: #764836;          /* Color del Footer - como color principal */
-  --primary-light: #BE8151;    /* Color de Botones - versión más clara del primary */
+  --primary: #764836;          
+  --primary-light: #BE8151;    
   
-  --secondary: #B06D46;        /* Color de Botones After */
-  --secondary-light: #e8d6c0;  /* Primer color extra */
+  --secondary: #B06D46;        
+  --secondary-light: #e8d6c0;  
   
-  --accent: #d9bb98;          /* Segundo color extra */
-  --background: #F4ECE0;      /* Color del Header - como fondo principal */
-  --surface: #ffffff;         /* Mantenemos el blanco para superficies */
+  --accent: #d9bb98;         
+  --background: #F4ECE0;      
+  --surface: #ffffff;         
   
-  --text: #5d554d;           /* Tercer color extra - para texto principal */
-  --text-light: #8a817a;     /* Versión más clara del color de texto */
+  --text: #5d554d;           
+  --text-light: #8a817a;     
   
-  --border: #e8d6c0;         /* Usando el primer extra para bordes */
-  --shadow: rgba(118, 72, 54, 0.1); /* Sombra basada en el color primary */
+  --border: #e8d6c0;         
+  --shadow: rgba(118, 72, 54, 0.1); 
 }
 
-/* Estilos base del contenedor */
+
 .display-container {
+  font-family: 'Poppins', sans-serif;
   padding: 2rem;
   background-color: var(--background);
   min-height: 100vh;
 }
 
-/* Estilos para los filtros de categoría */
 .category-filters {
   margin-bottom: 2rem;
   background: var(--surface);

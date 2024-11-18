@@ -32,11 +32,11 @@ export default {
         const shippingQueue = ref<Invoice[]>([]);
         const isProcessing = ref(false);
 
-        // Crear una pila para las facturas
+        // Create a stack for invoices
         const stack: InvoiceStack = {
             items: invoiceStack.value,
             push: (invoice: Invoice) => {
-                // Verificar si la factura ya ha sido procesada
+                // Check if the invoice has already been processed
                 const history = JSON.parse(localStorage.getItem('shippingHistory') || '[]');
                 const isProcessed = history.some((inv: Invoice) => inv.id === invoice.id);
                 
@@ -52,7 +52,7 @@ export default {
             peek: () => invoiceStack.value[invoiceStack.value.length - 1]
         };
 
-        // Cargar facturas existentes al inicio
+        // Load existing invoices at startup
         const loadExistingInvoices = () => {
             const existingInvoices = localStorage.getItem('pendingInvoices');
             if (existingInvoices) {
@@ -60,17 +60,17 @@ export default {
             }
         };
 
-        // Guardar facturas pendientes
+        // Save pending invoices
         const savePendingInvoices = () => {
             localStorage.setItem('pendingInvoices', JSON.stringify(invoiceStack.value));
         };
 
-        // Observar cambios en la pila de facturas
+        // Watch for changes in the invoice stack
         watch(invoiceStack, () => {
             savePendingInvoices();
         }, { deep: true });
 
-        // Observar cambios en localStorage para nuevas facturas
+        // Watch for changes in localStorage for new invoices
         watch(
             () => localStorage.getItem('lastOrder'),
             (newOrder) => {
@@ -92,7 +92,7 @@ export default {
             { immediate: true }
         );
 
-        // Mover factura de la pila a la cola de envíos
+        // Move invoice from stack to shipping queue
         const moveToShippingQueue = () => {
             if (invoiceStack.value.length === 0) return;
 
@@ -105,7 +105,7 @@ export default {
             }
         };
 
-        // Procesar la cola de envíos
+        // Process the shipping queue
         const processShippingQueue = async () => {
             if (isProcessing.value || shippingQueue.value.length === 0) return;
 
@@ -118,7 +118,7 @@ export default {
                 saveToShippingHistory(invoice);
                 shippingQueue.value.shift();
                 
-                // Remover la factura procesada de pendingInvoices
+                // Remove the processed invoice from pending Invoices
                 const pendingInvoices = JSON.parse(localStorage.getItem('pendingInvoices') || '[]');
                 const updatedPendingInvoices = pendingInvoices.filter(
                     (inv: Invoice) => inv.id !== invoice.id
@@ -131,7 +131,7 @@ export default {
             }
         };
 
-        // Guardar facturas procesadas en el historial
+        // Save processed invoices in history
         const saveToShippingHistory = (invoice: Invoice) => {
             try {
                 const history = JSON.parse(localStorage.getItem('shippingHistory') || '[]');
@@ -145,7 +145,7 @@ export default {
             }
         };
 
-        // Cargar facturas existentes al montar el componente
+        // Load existing invoices when mounting the component
         loadExistingInvoices();
 
         const stats = computed(() => ({
@@ -187,9 +187,9 @@ export default {
             </div>
         </header>
 
-        <!-- Contenido Principal -->
+        <!-- Main Content -->
         <div class="manager-content">
-            <!-- Pila de Facturas -->
+            <!-- Stack of Invoices -->
             <div class="invoice-stack">
                 <h3>Pila de Facturas</h3>
                 <div class="stack-container">
@@ -225,7 +225,7 @@ export default {
                 </button>
             </div>
 
-            <!-- Cola de Envíos -->
+           <!-- Shipping Queue -->
             <div class="shipping-queue">
                 <h3>Cola de Envíos</h3>
                 <div class="queue-container">
@@ -490,14 +490,14 @@ export default {
     }
 }
 
-/* Animaciones suaves para interacciones */
+/* Smooth animations for interactions */
 .invoice-card,
 .action-button,
 .status-badge {
     transition: all 0.3s ease;
 }
 
-/* Efecto hover para las tarjetas */
+/* Hover effect for cards */
 .invoice-card:hover {
     box-shadow: 0 4px 8px rgba(93, 85, 77, 0.2);
 }

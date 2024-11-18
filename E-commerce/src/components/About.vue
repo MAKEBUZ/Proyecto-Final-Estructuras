@@ -122,10 +122,10 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      // Iniciar animaciones cuando el componente se monta
+      // Start animations when component is mounted
       animateCount();
       
-      // Observador para animaciones al hacer scroll
+      // Observer for scroll animations
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -150,14 +150,14 @@ export default defineComponent({
 <style lang="css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* Reset y estilos base */
+/* Reset and base styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Contenedor principal */
+/* Main container */
 .about-container {
   font-family: 'Poppins', sans-serif;
   width: 100%;
@@ -167,7 +167,7 @@ export default defineComponent({
   background-color: #ffffff;
 }
 
-/* Estilos generales de secciones */
+/* General section styles */
 section {
   width: 100%;
   position: relative;
@@ -431,7 +431,7 @@ section {
   line-height: 1.6;
 }
 
-/* Animaciones */
+/* Animations */
 .animate-fade-in {
   opacity: 0;
   transition: opacity 1s ease;
@@ -584,13 +584,13 @@ section {
   margin-right: auto;
 }
 
-/* Fix para el scroll horizontal */
+/* Fix for horizontal scroll */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
 
-/* Fix para los containers */
+/* Fix for containers */
 .container {
   width: 100%;
   padding-right: 1rem;
@@ -623,7 +623,7 @@ html, body {
   }
 }
 
-/* Fix para z-index y posicionamiento */
+/* Fix for z-index and positioning */
 .relative {
   position: relative;
 }

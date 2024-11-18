@@ -193,7 +193,7 @@ export default defineComponent({
   font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
-  gap: 0;  /* Eliminamos el gap para que no haya espacio entre el botón y la flecha */
+  gap: 0;  /* We remove the gap so that there is no space between the button and the arrow */
   min-width: 120px;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -208,7 +208,7 @@ export default defineComponent({
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.2s ease;
-  border-radius: 4px 0 0 4px; /* Redondear solo las esquinas izquierdas */
+  border-radius: 4px 0 0 4px; /* Round left corners only */
   flex-grow: 1;
   text-align: left;
   display: flex;
@@ -227,7 +227,7 @@ export default defineComponent({
   justify-content: center;
   flex-shrink: 0;
   width: 32px;
-  border-radius: 0 4px 4px 0; /* Redondear solo las esquinas derechas */
+  border-radius: 0 4px 4px 0; /* Round only right corners */
   transition: all 0.2s ease;
 }
 
@@ -257,7 +257,7 @@ export default defineComponent({
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 1.5rem; /* Reducido el gap para dar más espacio */
+  gap: 1.5rem; 
   width: 100%;
   justify-content: center;
 }
@@ -271,7 +271,7 @@ export default defineComponent({
 .arrow {
   font-size: 0.7rem;
   transition: transform 0.3s ease;
-  opacity: 0.7; /* Aumentado la opacidad para mejor visibilidad */
+  opacity: 0.7; 
 }
 
 .arrow-down {
@@ -428,7 +428,7 @@ export default defineComponent({
 
 @media (max-width: 768px) {
   .category-container {
-    min-width: 100%; /* En móvil ocupará todo el ancho */
+    min-width: 100%; /* On mobile it will take up the entire width */
   }
 
   .categories-nav {

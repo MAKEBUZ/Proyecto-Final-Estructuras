@@ -1,6 +1,6 @@
 <template>
   <div class="display-container">
-    <!-- Filtros de categoría principal -->
+    
     <div class="category-filters">
       <div class="main-category-filters">
         <button 
@@ -19,7 +19,7 @@
         </button>
       </div>
 
-      <!-- Filtros de subcategoría -->
+      <!-- Subcategory filters -->
       <div class="sub-category-filters" v-if="selectedMainCategory">
         <button 
           v-for="category in availableSubCategories" 
@@ -145,7 +145,7 @@ interface Category {
 export default defineComponent({
   name: 'CommentDisplay',
   setup() {
-    // Definición de categorías
+    // Definition of categories
     const mainCategories: Category[] = [
       { id: 'hombres', name: 'Hombres' },
       { id: 'mujeres', name: 'Mujeres' },
@@ -168,7 +168,7 @@ export default defineComponent({
       unisex: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias']
     };
 
-    // Estado
+    // State
     const comments = ref<Comment[]>([]);
     const selectedMainCategory = ref('');
     const selectedSubCategory = ref('');
@@ -232,7 +232,7 @@ export default defineComponent({
       return `${mainCatName} - ${subCatName}`;
     });
 
-    // Métodos
+    // Methods
     const selectMainCategory = (category: string) => {
       selectedMainCategory.value = category;
       selectedSubCategory.value = '';  // Reset subcategory when main category changes
@@ -416,7 +416,7 @@ export default defineComponent({
   border-color: var(--secondary-light);
 }
 
-/* Sección de estadísticas */
+/* Statistics section */
 .stats-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -449,7 +449,7 @@ export default defineComponent({
   margin: 0;
 }
 
-/* Grid de comentarios */
+/* Comments grid */
 .comments-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -489,7 +489,7 @@ export default defineComponent({
   align-items: center;
 }
 
-/* Badges para categorías */
+
 .main-category-badge,
 .sub-category-badge {
   padding: 0.25rem 0.75rem;
@@ -508,7 +508,7 @@ export default defineComponent({
   color: var(--surface);
 }
 
-/* Botones de eliminación */
+/* Delete buttons */
 .delete-button,
 .delete-button-small {
   background: var(--accent);
@@ -531,7 +531,7 @@ export default defineComponent({
   transform: scale(1.1);
 }
 
-/* Sección de respuestas */
+/* Answer section */
 .replies-section {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
@@ -551,7 +551,7 @@ export default defineComponent({
   animation: slideIn 0.3s ease-out;
 }
 
-/* Modal de confirmación */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -601,7 +601,7 @@ export default defineComponent({
   color: var(--text);
 }
 
-/* Animaciones */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -633,7 +633,7 @@ export default defineComponent({
   }
 }
 
-/* Media Queries para responsividad */
+/* Media Queries for responsiveness */
 @media (max-width: 768px) {
   .display-container {
     padding: 1rem;

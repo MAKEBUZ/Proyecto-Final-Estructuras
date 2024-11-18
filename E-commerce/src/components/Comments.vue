@@ -189,9 +189,9 @@ export default defineComponent({
 <template>
   <div class="page-wrapper">
     <div class="comment-container">
-      <!-- Formulario de comentarios -->
+      <!-- Comment form -->
       <div class="comment-form" :class="{ 'replying': newComment.parentId }">
-        <!-- Indicador de respuesta -->
+        <!-- Response indicator -->
         <div v-if="newComment.parentId" class="reply-indicator">
           Respondiendo a un comentario
           <button @click="resetForm" class="cancel-reply-button">
@@ -199,14 +199,14 @@ export default defineComponent({
           </button>
         </div>
 
-        <!-- Campos del formulario -->
+        <!-- Form fields -->
         <input 
           v-model="newComment.username" 
           placeholder="Tu nombre" 
           class="input-field"
         />
 
-        <!-- Selector de categoría principal -->
+        <!-- Parent Category Selector -->
         <select 
           v-model="newComment.mainCategory"
           class="select-field"
@@ -222,7 +222,7 @@ export default defineComponent({
           </option>
         </select>
 
-        <!-- Selector de subcategoría -->
+       <!-- Subcategory selector -->
         <select 
           v-model="newComment.subCategory"
           class="select-field"
@@ -238,14 +238,14 @@ export default defineComponent({
           </option>
         </select>
 
-        <!-- Área de texto para el comentario -->
+        <!-- Text area for the comment -->
         <textarea 
           v-model="newComment.content" 
           placeholder="Escribe tu comentario..." 
           class="textarea-field"
         ></textarea>
 
-        <!-- Botón de envío -->
+        <!-- Submit button -->
         <button 
           @click="addComment" 
           class="submit-button"
@@ -255,7 +255,7 @@ export default defineComponent({
         </button>
       </div>
 
-      <!-- Sección de filtros -->
+      <!-- Filters section -->
       <div class="filter-section">
         <div class="filter-group">
           <select 
@@ -289,7 +289,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <!-- Lista de comentarios -->
+      <!-- List of comments -->
       <div class="comments-graph">
         <div 
           v-for="comment in filteredComments" 
@@ -297,7 +297,7 @@ export default defineComponent({
           class="comment-CommentNode"
         >
           <div class="comment-content">
-            <!-- Etiquetas de categoría -->
+            <!-- Category Tags -->
             <div class="category-tags">
               <span class="category-tag main-category" :class="comment.comment.mainCategory">
                 {{ mainCategories.find(c => c.id === comment.comment.mainCategory)?.name }}
@@ -307,7 +307,7 @@ export default defineComponent({
               </span>
             </div>
 
-            <!-- Contenido del comentario -->
+            <!-- Comment content -->
             <h4>{{ comment.comment.username }}</h4>
             <p>{{ comment.comment.content }}</p>
             <small>{{ formatDate(comment.comment.timestamp) }}</small>
@@ -320,7 +320,7 @@ export default defineComponent({
             </button>
           </div>
 
-          <!-- Comentarios anidados -->
+          <!-- Nested Comments -->
           <div class="nested-comments">
             <div 
               v-for="childComment in getChildComments(comment.id)"
@@ -447,13 +447,13 @@ export default defineComponent({
   opacity: 0.9;
 }
 
-/* Estilos para categorías principales */
+/* Styles for main categories */
 .category-tag.main-category.hombres { background-color: #2C3E50; }
 .category-tag.main-category.mujeres { background-color: #8E44AD; }
 .category-tag.main-category.ninos { background-color: #27AE60; }
 .category-tag.main-category.unisex { background-color: #D35400; }
 
-/* Estilos para subcategorías */
+/* Styles for subcategories */
 .category-tag.sub-category.moda { background-color: #BE8151; }
 .category-tag.sub-category.colecciones { background-color: #764836; }
 .category-tag.sub-category.ofertas { background-color: #B06D46; }
@@ -514,7 +514,7 @@ export default defineComponent({
   color: #BE8151;
 }
 
-/* Animaciones */
+/* Animations */
 .comment-CommentNode {
   transition: all 0.3s ease;
 }
@@ -528,7 +528,7 @@ export default defineComponent({
   padding-left: 16px;
 }
 
-/* Mejoras de accesibilidad */
+/* Accessibility improvements */
 .input-field:focus,
 .textarea-field:focus,
 .select-field:focus,
@@ -583,7 +583,7 @@ export default defineComponent({
   border: 2px solid #f4ece0;
 }
 
-/* Efectos de hover para botones */
+
 .submit-button:hover:not(:disabled),
 .reply-button:hover {
   background-color: #a66d42;
@@ -591,7 +591,7 @@ export default defineComponent({
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para mensajes de error */
+/* Styles for error messages */
 .error-message {
   color: #dc3545;
   font-size: 0.875rem;
@@ -599,13 +599,13 @@ export default defineComponent({
   margin-bottom: 8px;
 }
 
-/* Estilos para el loading state */
+/* Styles for the loading state */
 .loading {
   opacity: 0.7;
   pointer-events: none;
 }
 
-/* Transiciones suaves */
+/* Smooth transitions */
 .input-field,
 .textarea-field,
 .select-field,
@@ -615,7 +615,7 @@ export default defineComponent({
   transition: all 0.2s ease-in-out;
 }
 
-/* Media Queries para responsividad */
+/* Media Queries for responsiveness */
 @media (max-width: 640px) {
   .filter-group {
     flex-direction: column;

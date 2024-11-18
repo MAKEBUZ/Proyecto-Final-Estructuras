@@ -69,7 +69,7 @@ export default defineComponent({
     }
     ]);
 
-    // Funciones del slider
+    // Slider functions
     const nextSlide = () => {
       currentSlide.value = (currentSlide.value + 1) % offers.value.length;
     };
@@ -96,7 +96,7 @@ export default defineComponent({
       }
     };
 
-    // Manejo de eventos táctiles
+    // Handling touch events
     const handleTouchStart = (e: TouchEvent) => {
       touchStart.value = e.touches[0].clientX;
     };
@@ -116,7 +116,7 @@ export default defineComponent({
       }
     };
 
-    // Funciones del carrito
+    // Cart Functions
     const addToCart = async (offer: Offer) => {
       if (isAdding.value) return;
 
@@ -297,7 +297,7 @@ export default defineComponent({
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 40px; /* Espacio para los dots */
+  padding-bottom: 40px;
 }
 
 .offer-image {
@@ -392,7 +392,7 @@ export default defineComponent({
   top: 0;
   left: 0;
   right: 0;
-  bottom: 40px; /* Ajustado para no interferir con los dots */
+  bottom: 40px; 
   pointer-events: none;
 }
 

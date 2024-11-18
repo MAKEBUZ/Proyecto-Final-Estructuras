@@ -5,7 +5,7 @@
         Cola de Mensajes
       </h2>
       
-      <!-- Filtros y Búsqueda -->
+     <!-- Filters and Search -->
       <div class="filters">
         <input 
           type="text" 
@@ -22,13 +22,13 @@
   
       <div class="queue-content">
         <div class="queue-list">
-          <!-- Estado vacío -->
+          <!-- Empty state -->
           <div v-if="filteredContacts.length === 0" class="empty-state">
             <Inbox :size="48" class="empty-icon" />
             <p>No hay mensajes pendientes</p>
           </div>
   
-          <!-- Lista de contactos -->
+          <!-- Contact list -->
           <TransitionGroup name="list">
             <div 
               v-for="contact in filteredContacts" 
@@ -69,7 +69,7 @@
           </TransitionGroup>
         </div>
   
-        <!-- Vista previa del mensaje -->
+        
         <Transition name="fade">
           <div v-if="selectedContact" class="message-preview">
             <div class="preview-header">
@@ -90,7 +90,7 @@
         </Transition>
       </div>
   
-      <!-- Paginación -->
+      <!-- Pagination -->
       <div class="pagination" v-if="totalPages > 1">
         <button 
           class="page-button"
@@ -165,7 +165,7 @@
       const filteredContacts = computed(() => {
         let filtered = contacts.value;
   
-        // Aplicar búsqueda
+        // Apply search
         if (searchTerm.value) {
           const search = searchTerm.value.toLowerCase();
           filtered = filtered.filter(contact => 
@@ -175,14 +175,14 @@
           );
         }
   
-        // Aplicar filtro de estado
+        // Apply state filter
         if (filterStatus.value !== 'all') {
           filtered = filtered.filter(contact => 
             filterStatus.value === 'unread' ? !contact.read : contact.read
           );
         }
   
-        // Aplicar paginación
+        // Apply pagination
         const start = (currentPage.value - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         return filtered.slice(start, end);
@@ -215,7 +215,7 @@
         localStorage.setItem('contacts', JSON.stringify(contacts.value));
       };
   
-      // Cargar contactos al montar el componente
+      // Load contacts when mounting the component
       onMounted(() => {
         loadContacts();
       });
@@ -294,7 +294,7 @@
     transition: all 0.3s ease;
   }
   
-  /* Contenido principal */
+  /* Main content */
   .queue-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -309,7 +309,7 @@
     overflow: hidden;
   }
   
-  /* Items de contacto */
+  
   .contact-item {
     display: flex;
     justify-content: space-between;
@@ -385,7 +385,7 @@
     color: white;
   }
   
-  /* Botones de acción */
+  /* Action buttons */
   .contact-actions {
     display: flex;
     gap: 0.5rem;
@@ -413,7 +413,7 @@
     animation: wiggle 0.3s ease-in-out;
   }
   
-  /* Vista previa del mensaje */
+  /* Preview message */
   .message-preview {
     background: white;
     border-radius: 12px;
@@ -477,7 +477,7 @@
     transform: translateY(-2px);
   }
   
-  /* Paginación */
+  /* Pagination */
   .pagination {
     display: flex;
     justify-content: center;
@@ -510,7 +510,7 @@
     cursor: not-allowed;
   }
   
-  /* Animaciones */
+  /* Animations */
   @keyframes wiggle {
     0%, 100% { transform: rotate(0); }
     25% { transform: rotate(15deg); }
@@ -543,7 +543,7 @@
   transform: translateY(20px);
 }
 
-/* Estado vacío */
+/* Empty state */
 .empty-state {
   padding: 3rem;
   text-align: center;
@@ -559,7 +559,7 @@
   opacity: 0.5;
 }
 
-/* Estados de carga y error */
+/* Load and error states */
 .loading-state {
   display: flex;
   align-items: center;
@@ -609,7 +609,7 @@
   }
 }
 
-/* Modo oscuro */
+
 @media (prefers-color-scheme: dark) {
   .queue-container {
     background: #5d554d;
@@ -674,7 +674,7 @@
   }
 }
 
-/* Animaciones adicionales */
+/* Additional animations */
 .contact-item.deleting {
   animation: slideOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

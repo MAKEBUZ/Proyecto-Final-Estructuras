@@ -23,7 +23,7 @@ export default defineComponent({
     const currentPage = ref(1);
     const itemsPerPage = 6;
 
-    // Reemplazar la definición local de productos por el catálogo importado
+    // Replace the local product definition with the imported catalog
     const products = computed(() => {
       return productCatalog.filter(product => {
         const categoryMatch = product.category.toLowerCase() === props.category.toLowerCase();
@@ -37,7 +37,7 @@ export default defineComponent({
     const filteredProducts = computed(() => {
       let result = [...products.value];
       
-      // Aplicar búsqueda
+      // Apply search
       if (searchQuery.value) {
         const query = searchQuery.value.toLowerCase();
         result = result.filter(product => 
@@ -46,7 +46,7 @@ export default defineComponent({
         );
       }
 
-      // Aplicar ordenamiento
+      // Apply sorting
       result.sort((a, b) => {
         if (sortBy.value === 'price') {
           return a.price - b.price;
@@ -108,7 +108,7 @@ export default defineComponent({
       }
     };
 
-    // Reset página cuando cambian los filtros
+    // Reset page when filters change
     watch([searchQuery, sortBy], () => {
       currentPage.value = 1;
     });
@@ -147,7 +147,7 @@ export default defineComponent({
         </select>
       </div>
 
-      <!-- Grid de Productos -->
+      <!-- Product Grid -->
       <div class="products-grid">
         <div v-for="product in displayedProducts" :key="product.id" class="product-card">
           <img :src="product.image" :alt="product.name" class="product-image">
@@ -182,7 +182,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <!-- Paginación -->
+      <!-- Pagination -->
       <div class="pagination" v-if="totalPages > 1">
         <button 
           @click="currentPage--" 

@@ -8,16 +8,16 @@ import TShirtKid7 from '../assets/Products/Kids/TShirt/TShirtKid7.jpg';
 import TShirtKid8 from '../assets/Products/Kids/TShirt/TShirtKid8.jpg';
 import TShirtKid9 from '../assets/Products/Kids/TShirt/TShirtKid9.jpg';
 import TShirtKid10 from '../assets/Products/Kids/TShirt/TShirtKid10.jpg';
-import ShoesKids1 from '../assets/Products/kids/Shoes/ShoesKids1.jpg';
-import ShoesKids2 from '../assets/Products/kids/Shoes/ShoesKids2.jpg';
-import ShoesKids3 from '../assets/Products/kids/Shoes/ShoesKids3.jpg';
-import ShoesKids4 from '../assets/Products/kids/Shoes/ShoesKids4.jpg';
-import ShoesKids5 from '../assets/Products/kids/Shoes/ShoesKids5.jpg';
-import ShoesKids6 from '../assets/Products/kids/Shoes/ShoesKids6.jpg';
-import ShoesKids7 from '../assets/Products/kids/Shoes/ShoesKids7.jpg';
-import ShoesKids8 from '../assets/Products/kids/Shoes/ShoesKids8.jpg';
-import ShoesKids9 from '../assets/Products/kids/Shoes/ShoesKids9.jpg';
-import ShoesKids10 from '../assets/Products/kids/Shoes/ShoesKids10.jpg';
+import ShoesKids1 from '../assets/Products/Kids/Shoes/ShoesKids1.jpg';
+import ShoesKids2 from '../assets/Products/Kids/Shoes/ShoesKids2.jpg';
+import ShoesKids3 from '../assets/Products/Kids/Shoes/ShoesKids3.jpg';
+import ShoesKids4 from '../assets/Products/Kids/Shoes/ShoesKids4.jpg';
+import ShoesKids5 from '../assets/Products/Kids/Shoes/ShoesKids5.jpg';
+import ShoesKids6 from '../assets/Products/Kids/Shoes/ShoesKids6.jpg';
+import ShoesKids7 from '../assets/Products/Kids/Shoes/ShoesKids7.jpg';
+import ShoesKids8 from '../assets/Products/Kids/Shoes/ShoesKids8.jpg';
+import ShoesKids9 from '../assets/Products/Kids/Shoes/ShoesKids9.jpg';
+import ShoesKids10 from '../assets/Products/Kids/Shoes/ShoesKids10.jpg';
 import PantsKids1 from '../assets/Products/Kids/Pants/PantsKids1.jpg';
 import PantsKids2 from '../assets/Products/Kids/Pants/PantsKids2.jpg';
 import PantsKids3 from '../assets/Products/Kids/Pants/PantsKids3.jpg';
@@ -38,16 +38,16 @@ import ColoniesKids7 from '../assets/Products/Kids/Colonies/ColoniesKids7.jpg';
 import ColoniesKids8 from '../assets/Products/Kids/Colonies/ColoniesKids8.jpg';
 import ColoniesKids9 from '../assets/Products/Kids/Colonies/ColoniesKids9.jpg';
 import ColoniesKids10 from '../assets/Products/Kids/Colonies/ColoniesKids10.jpg';
-import CoatsKids1 from '../assets/Products/kids/Coats/CoatsKids1.jpg';
-import CoatsKids2 from '../assets/Products/kids/Coats/CoatsKids2.jpg';
-import CoatsKids3 from '../assets/Products/kids/Coats/CoatsKids3.jpg';
-import CoatsKids4 from '../assets/Products/kids/Coats/CoatsKids4.jpg';
-import CoatsKids5 from '../assets/Products/kids/Coats/CoatsKids5.jpg';
-import CoatsKids6 from '../assets/Products/kids/Coats/CoatsKids6.jpg';
-import CoatsKids7 from '../assets/Products/kids/Coats/CoatsKids7.jpg';
-import CoatsKids8 from '../assets/Products/kids/Coats/CoatsKids8.jpg';
-import CoatsKids9 from '../assets/Products/kids/Coats/CoatsKids9.jpg';
-import CoatsKids10 from '../assets/Products/kids/Coats/CoatsKids10.jpg';
+import CoatsKids1 from '../assets/Products/Kids/Coats/CoatsKids1.jpg';
+import CoatsKids2 from '../assets/Products/Kids/Coats/CoatsKids2.jpg';
+import CoatsKids3 from '../assets/Products/Kids/Coats/CoatsKids3.jpg';
+import CoatsKids4 from '../assets/Products/Kids/Coats/CoatsKids4.jpg';
+import CoatsKids5 from '../assets/Products/Kids/Coats/CoatsKids5.jpg';
+import CoatsKids6 from '../assets/Products/Kids/Coats/CoatsKids6.jpg';
+import CoatsKids7 from '../assets/Products/Kids/Coats/CoatsKids7.jpg';
+import CoatsKids8 from '../assets/Products/Kids/Coats/CoatsKids8.jpg';
+import CoatsKids9 from '../assets/Products/Kids/Coats/CoatsKids9.jpg';
+import CoatsKids10 from '../assets/Products/Kids/Coats/CoatsKids10.jpg';
 import TShirtMen1 from '../assets/Products/Mens/T-Shirt/TShirtMen1.jpg';
 import TShirtMen2 from '../assets/Products/Mens/T-Shirt/TShirtMen2.jpg';
 import TShirtMen3 from '../assets/Products/Mens/T-Shirt/TShirtMen3.jpg';
@@ -240,7 +240,7 @@ export const productCatalog: Product[] = [
     //T-Shirt
     {
       id: 1,
-      name: "classic white t-shirt kids",
+      name: "classic white t-shirt Kids",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
       image: TShirtKid1,
@@ -249,7 +249,7 @@ export const productCatalog: Product[] = [
     },
     {
       id: 2,
-      name: "classic black t-shirt for kidst",
+      name: "classic black t-shirt for Kidst",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
       image: TShirtKid2,
@@ -258,7 +258,7 @@ export const productCatalog: Product[] = [
     },
     {
       id: 3,
-      name: "green t-shirt kids",
+      name: "green t-shirt Kids",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
       image: TShirtKid3,
@@ -358,7 +358,7 @@ export const productCatalog: Product[] = [
     },
     {
       id: 14,
-      name: "sports kids cord",
+      name: "sports Kids cord",
       price: 59.99,
       description: "Kids core blue leather shoes",
       image: ShoesKids4,
@@ -424,7 +424,7 @@ export const productCatalog: Product[] = [
       id: 21,
       name: "Kid's Jeans",
       price: 29.99,
-      description: "Durable denim jeans for active kids",
+      description: "Durable denim jeans for active Kids",
       image: PantsKids1,
       category: "Kids",
       subcategory: "Pants"
@@ -460,16 +460,16 @@ export const productCatalog: Product[] = [
       id: 25,
       name: "sleep pants",
       price: 29.99,
-      description: "blue sleep pants for kids",
+      description: "blue sleep pants for Kids",
       image: PantsKids5,
       category: "Kids",
       subcategory: "Pants"
     },
     {
       id: 26,
-      name: "kids leggings",
+      name: "Kids leggings",
       price: 39.99,
-      description: "green kids leggings",
+      description: "green Kids leggings",
       image: PantsKids6,
       category: "Kids",
       subcategory: "Pants"
@@ -478,7 +478,7 @@ export const productCatalog: Product[] = [
       id: 27,
       name: "Drill pants",
       price: 49.99,
-      description: "Brown drill pants for kids",
+      description: "Brown drill pants for Kids",
       image: PantsKids7,
       category: "Kids",
       subcategory: "Pants"
@@ -496,7 +496,7 @@ export const productCatalog: Product[] = [
       id: 29,
       name: "jean for boy",
       price: 59.99,
-      description: "blue jeans for kids",
+      description: "blue jeans for Kids",
       image: PantsKids9,
       category: "Kids",
       subcategory: "Pants"
@@ -560,7 +560,7 @@ export const productCatalog: Product[] = [
       id: 36,
       name: "chicco cologne",
       price: 69.99,
-      description: "chicco cologne for kids",
+      description: "chicco cologne for Kids",
       image: ColoniesKids6,
       category: "Kids",
       subcategory: "Colonies"
@@ -594,9 +594,9 @@ export const productCatalog: Product[] = [
     },
     {
       id: 40,
-      name: "blue fragrances for kids",
+      name: "blue fragrances for Kids",
       price: 29.99,
-      description: "blue fragrances for kids",
+      description: "blue fragrances for Kids",
       image: ColoniesKids10,
       category: "Kids",
       subcategory: "Colonies"
@@ -669,7 +669,7 @@ export const productCatalog: Product[] = [
       id: 48,
       name: "children's wool coat",
       price: 29.99,
-      description: "Dark green long wool coat for kids",
+      description: "Dark green long wool coat for Kids",
       image: CoatsKids8,
       category: "Kids",
       subcategory: "Coat"

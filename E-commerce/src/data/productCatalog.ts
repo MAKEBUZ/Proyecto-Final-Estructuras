@@ -246,12 +246,6 @@ export interface CartItem {
 
 const getProductById = (id: number): Product | undefined => {
   return productCatalog.find(product => product.id === id);
-};
-
-export interface CartItem {
-    id: number;
-    name: string;
-    quantity: number;
 }
 
 export const productCatalog: Product[] = [

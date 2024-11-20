@@ -32,17 +32,13 @@ export default {
         const shippingQueue = ref<Invoice[]>([]);
         const isProcessing = ref(false);
 
-        // Create a stack for invoices
+        // Crear una pila para las facturas
         const stack: InvoiceStack = {
             get items() {
                 return invoiceStack.value;
             },
             push: (invoice: Invoice) => {
-<<<<<<< HEAD
-                // Check if the invoice has already been processed
-=======
-                // Check if the invoice already exists in any state
->>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
+                // Verificar si la factura ya existe en cualquier estado
                 const history = JSON.parse(localStorage.getItem('shippingHistory') || '[]');
                 const isProcessed = history.some((inv: Invoice) => inv.id === invoice.id);
                 const isInQueue = shippingQueue.value.some(inv => inv.id === invoice.id);
@@ -68,7 +64,7 @@ export default {
             peek: () => invoiceStack.value[invoiceStack.value.length - 1]
         };
 
-        // Load existing invoices at startup
+        // Cargar facturas existentes al inicio
         const loadExistingInvoices = () => {
             const existingInvoices = localStorage.getItem('pendingInvoices');
             if (existingInvoices) {
@@ -80,41 +76,17 @@ export default {
             }
         };
 
-        // Save pending invoices
+        // Guardar facturas pendientes
         const savePendingInvoices = () => {
             localStorage.setItem('pendingInvoices', JSON.stringify(invoiceStack.value));
         };
 
-<<<<<<< HEAD
-        // Watch for changes in the invoice stack
-        watch(invoiceStack, () => {
-            savePendingInvoices();
-        }, { deep: true });
-
-        // Watch for changes in localStorage for new invoices
-        watch(
-            () => localStorage.getItem('lastOrder'),
-            (newOrder) => {
-                if (newOrder) {
-                    try {
-                        const orderDetails = JSON.parse(newOrder);
-                        const newInvoice: Invoice = {
-                            id: `INV-${orderDetails.orderId}`,
-                            status: 'stacked',
-                            timestamp: new Date(),
-                            orderDetails
-                        };
-                        stack.push(newInvoice);
-                    } catch (error) {
-                        console.error('Error processing new invoice:', error);
-                    }
-=======
-        // Save sending queue
+        // Guardar cola de envíos
         const saveShippingQueue = () => {
             localStorage.setItem('shippingQueue', JSON.stringify(shippingQueue.value));
         };
 
-        // Watch for changes in localStorage for new invoices
+        // Observar cambios en localStorage para nuevas facturas
         const watchLastOrder = () => {
             const lastOrder = localStorage.getItem('lastOrder');
             if (lastOrder) {
@@ -127,28 +99,27 @@ export default {
                         orderDetails
                     };
                     stack.push(newInvoice);
-                    localStorage.removeItem('lastOrder'); // Clean up after processing
+                    localStorage.removeItem('lastOrder'); // Limpiar después de procesar
                 } catch (error) {
                     console.error('Error processing new invoice:', error);
->>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
                 }
             }
         };
 
-        // Use onMounted to initialize and configure the watcher
+        // Usar onMounted para inicializar y configurar el watcher
         onMounted(() => {
             loadExistingInvoices();
             loadShippingQueue();
-            watchLastOrder(); // Check for existing orders when mounting
+            watchLastOrder(); // Verificar órdenes existentes al montar
             
-            // Set an interval to check for new orders
+            // Configurar un intervalo para verificar nuevas órdenes
             const interval = setInterval(watchLastOrder, 1000);
             
-            // Clear the interval when the component is unmounted
+            // Limpiar el intervalo cuando el componente se desmonte
             return () => clearInterval(interval);
         });
 
-        // Move invoice from stack to shipping queue
+        // Mover factura de la pila a la cola de envíos
         const moveToShippingQueue = () => {
             if (invoiceStack.value.length === 0) return;
 
@@ -163,7 +134,7 @@ export default {
             }
         };
 
-        // Process the shipping queue
+        // Procesar la cola de envíos
         const processShippingQueue = async () => {
             if (isProcessing.value || shippingQueue.value.length === 0) return;
 
@@ -175,18 +146,9 @@ export default {
                 invoice.status = 'shipped';
                 saveToShippingHistory(invoice);
                 
-<<<<<<< HEAD
-                // Remove the processed invoice from pending Invoices
-                const pendingInvoices = JSON.parse(localStorage.getItem('pendingInvoices') || '[]');
-                const updatedPendingInvoices = pendingInvoices.filter(
-                    (inv: Invoice) => inv.id !== invoice.id
-                );
-                localStorage.setItem('pendingInvoices', JSON.stringify(updatedPendingInvoices));
-=======
-                // Remove the processed invoice from the queue
+                // Eliminar la factura procesada de la cola
                 shippingQueue.value = shippingQueue.value.slice(1);
                 saveShippingQueue();
->>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
             } catch (error) {
                 console.error('Error processing invoice:', error);
             } finally {
@@ -194,7 +156,7 @@ export default {
             }
         };
 
-        // Save processed invoices in history
+        // Guardar facturas procesadas en el historial
         const saveToShippingHistory = (invoice: Invoice) => {
             try {
                 const history = JSON.parse(localStorage.getItem('shippingHistory') || '[]');
@@ -208,18 +170,13 @@ export default {
             }
         };
 
-<<<<<<< HEAD
-        // Load existing invoices when mounting the component
-        loadExistingInvoices();
-=======
-        // Load shipping queue on startup
+        // Cargar cola de envíos al iniciar
         const loadShippingQueue = () => {
             const savedQueue = localStorage.getItem('shippingQueue');
             if (savedQueue) {
                 shippingQueue.value = JSON.parse(savedQueue);
             }
         };
->>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
 
         const stats = computed(() => ({
             stackedInvoices: invoiceStack.value.length,
@@ -260,9 +217,9 @@ export default {
             </div>
         </header>
 
-        <!-- Main Content -->
+        <!-- Contenido Principal -->
         <div class="manager-content">
-            <!-- Stack of Invoices -->
+            <!-- Pila de Facturas -->
             <div class="invoice-stack">
                 <h3>Pila de Facturas</h3>
                 <div class="stack-container">
@@ -298,7 +255,7 @@ export default {
                 </button>
             </div>
 
-           <!-- Shipping Queue -->
+            <!-- Cola de Envíos -->
             <div class="shipping-queue">
                 <h3>Cola de Envíos</h3>
                 <div class="queue-container">
@@ -563,14 +520,14 @@ export default {
     }
 }
 
-/* Smooth animations for interactions */
+/* Animaciones suaves para interacciones */
 .invoice-card,
 .action-button,
 .status-badge {
     transition: all 0.3s ease;
 }
 
-/* Hover effect for cards */
+/* Efecto hover para las tarjetas */
 .invoice-card:hover {
     box-shadow: 0 4px 8px rgba(93, 85, 77, 0.2);
 }

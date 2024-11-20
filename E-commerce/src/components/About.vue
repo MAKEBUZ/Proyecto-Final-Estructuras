@@ -1,81 +1,3 @@
-
-<script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
-
-export default defineComponent({
-  name: 'About',
-  setup() {
-    const stats = ref([
-      { value: 0, target: 10000, suffix: '+', label: 'Clientes Satisfechos' },
-      { value: 0, target: 50000, suffix: '+', label: 'Productos Vendidos' },
-      { value: 0, target: 99, suffix: '%', label: 'Satisfacción' }
-    ]);
-
-    const values = ref([
-      {
-        title: 'Innovación',
-        description: 'Buscamos constantemente nuevas formas de mejorar tu experiencia de compra.'
-      },
-      {
-        title: 'Calidad',
-        description: 'Garantizamos la mejor calidad en todos nuestros productos.'
-      },
-      {
-        title: 'Compromiso',
-        description: 'Estamos comprometidos con la satisfacción total de nuestros clientes.'
-      },
-      {
-        title: 'Sostenibilidad',
-        description: 'Trabajamos por un futuro más sostenible y responsable.'
-      }
-    ]);
-
-    const animateCount = () => {
-      stats.value.forEach(stat => {
-        let current = 0;
-        const increment = stat.target / 100;
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= stat.target) {
-            stat.value = stat.target;
-            clearInterval(timer);
-          } else {
-            stat.value = Math.round(current);
-          }
-        }, 20);
-      });
-    };
-
-    const scrollToFeatures = () => {
-      const featuresSection = document.querySelector('.features-section');
-      featuresSection?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    onMounted(() => {
-      // Start animations when component is mounted
-      animateCount();
-      
-      // Observer for scroll animations
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.animate-slide-left, .animate-slide-right, .animate-slide-up, .animate-fade-in, .animate-scale')
-        .forEach(el => observer.observe(el));
-    });
-
-    return {
-      stats,
-      values,
-      scrollToFeatures
-    };
-  }
-});
-</script>
 <template>
   <div class="about-container">
     <!-- Hero Section -->
@@ -147,17 +69,95 @@ export default defineComponent({
   </div>
 </template>
 
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue';
+
+export default defineComponent({
+  name: 'About',
+  setup() {
+    const stats = ref([
+      { value: 0, target: 10000, suffix: '+', label: 'Clientes Satisfechos' },
+      { value: 0, target: 50000, suffix: '+', label: 'Productos Vendidos' },
+      { value: 0, target: 99, suffix: '%', label: 'Satisfacción' }
+    ]);
+
+    const values = ref([
+      {
+        title: 'Innovación',
+        description: 'Buscamos constantemente nuevas formas de mejorar tu experiencia de compra.'
+      },
+      {
+        title: 'Calidad',
+        description: 'Garantizamos la mejor calidad en todos nuestros productos.'
+      },
+      {
+        title: 'Compromiso',
+        description: 'Estamos comprometidos con la satisfacción total de nuestros clientes.'
+      },
+      {
+        title: 'Sostenibilidad',
+        description: 'Trabajamos por un futuro más sostenible y responsable.'
+      }
+    ]);
+
+    const animateCount = () => {
+      stats.value.forEach(stat => {
+        let current = 0;
+        const increment = stat.target / 100;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= stat.target) {
+            stat.value = stat.target;
+            clearInterval(timer);
+          } else {
+            stat.value = Math.round(current);
+          }
+        }, 20);
+      });
+    };
+
+    const scrollToFeatures = () => {
+      const featuresSection = document.querySelector('.features-section');
+      featuresSection?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    onMounted(() => {
+      // Iniciar animaciones cuando el componente se monta
+      animateCount();
+      
+      // Observador para animaciones al hacer scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.animate-slide-left, .animate-slide-right, .animate-slide-up, .animate-fade-in, .animate-scale')
+        .forEach(el => observer.observe(el));
+    });
+
+    return {
+      stats,
+      values,
+      scrollToFeatures
+    };
+  }
+});
+</script>
+
 <style lang="css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* Reset and base styles */
+/* Reset y estilos base */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Main container */
+/* Contenedor principal */
 .about-container {
   font-family: 'Poppins', sans-serif;
   width: 100%;
@@ -167,7 +167,7 @@ export default defineComponent({
   background-color: #ffffff;
 }
 
-/* General section styles */
+/* Estilos generales de secciones */
 section {
   width: 100%;
   position: relative;
@@ -431,7 +431,7 @@ section {
   line-height: 1.6;
 }
 
-/* Animations */
+/* Animaciones */
 .animate-fade-in {
   opacity: 0;
   transition: opacity 1s ease;
@@ -584,13 +584,13 @@ section {
   margin-right: auto;
 }
 
-/* Fix for horizontal scroll */
+/* Fix para el scroll horizontal */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
 
-/* Fix for containers */
+/* Fix para los containers */
 .container {
   width: 100%;
   padding-right: 1rem;
@@ -623,7 +623,7 @@ html, body {
   }
 }
 
-/* Fix for z-index and positioning */
+/* Fix para z-index y posicionamiento */
 .relative {
   position: relative;
 }

@@ -1,3 +1,123 @@
+<template>
+    <div class="queue-container">
+      <h2 class="title">
+        <Inbox class="icon" />
+        Cola de Mensajes
+      </h2>
+      
+      <!-- Filtros y Búsqueda -->
+      <div class="filters">
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Buscar mensajes..."
+          v-model="searchTerm"
+        />
+        <select v-model="filterStatus" class="filter-select">
+          <option value="all">Todos los mensajes</option>
+          <option value="unread">No leídos</option>
+          <option value="read">Leídos</option>
+        </select>
+      </div>
+  
+      <div class="queue-content">
+        <div class="queue-list">
+          <!-- Estado vacío -->
+          <div v-if="filteredContacts.length === 0" class="empty-state">
+            <Inbox :size="48" class="empty-icon" />
+            <p>No hay mensajes pendientes</p>
+          </div>
+  
+          <!-- Lista de contactos -->
+          <TransitionGroup name="list">
+            <div 
+              v-for="contact in filteredContacts" 
+              :key="contact.id" 
+              class="contact-item"
+              :class="{
+                'selected': selectedContact?.id === contact.id,
+                'deleting': deletingId === contact.id,
+                'unread': !contact.read
+              }"
+              @click="viewMessage(contact)"
+            >
+              <div class="notification-dot" v-if="!contact.read"></div>
+              <div class="contact-info">
+                <strong>{{ contact.name }}</strong>
+                <span>{{ contact.email }}</span>
+                <small>{{ formatDate(contact.date) }}</small>
+              </div>
+              <div class="contact-actions">
+                <button 
+                  @click.stop="markAsRead(contact)"
+                  class="action-btn"
+                  v-if="!contact.read"
+                  title="Marcar como leído"
+                >
+                  <MessageSquare :size="18" />
+                </button>
+                <button 
+                  @click.stop="deleteContact(contact.id)"
+                  class="delete-btn"
+                  :class="{ 'deleting': deletingId === contact.id }"
+                  title="Eliminar mensaje"
+                >
+                  <Trash2 :size="18" />
+                </button>
+              </div>
+            </div>
+          </TransitionGroup>
+        </div>
+  
+        <!-- Vista previa del mensaje -->
+        <Transition name="fade">
+          <div v-if="selectedContact" class="message-preview">
+            <div class="preview-header">
+              <h3>Mensaje de {{ selectedContact.name }}</h3>
+              <span class="date">{{ formatDate(selectedContact.date) }}</span>
+            </div>
+            <div class="message-content">
+              <MessageSquare class="message-icon" />
+              {{ selectedContact.message }}
+            </div>
+            <div class="preview-actions">
+              <button class="reply-btn">
+                <MessageSquare :size="18" />
+                Responder
+              </button>
+            </div>
+          </div>
+        </Transition>
+      </div>
+  
+      <!-- Paginación -->
+      <div class="pagination" v-if="totalPages > 1">
+        <button 
+          class="page-button"
+          :disabled="currentPage === 1"
+          @click="currentPage--"
+        >
+          Anterior
+        </button>
+        <button 
+          v-for="page in totalPages" 
+          :key="page"
+          class="page-button"
+          :class="{ active: currentPage === page }"
+          @click="currentPage = page"
+        >
+          {{ page }}
+        </button>
+        <button 
+          class="page-button"
+          :disabled="currentPage === totalPages"
+          @click="currentPage++"
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+  </template>
   
   <script lang="ts">
   import { defineComponent, ref, computed, onMounted } from 'vue';
@@ -45,7 +165,7 @@
       const filteredContacts = computed(() => {
         let filtered = contacts.value;
   
-        // Apply search
+        // Aplicar búsqueda
         if (searchTerm.value) {
           const search = searchTerm.value.toLowerCase();
           filtered = filtered.filter(contact => 
@@ -55,14 +175,14 @@
           );
         }
   
-        // Apply state filter
+        // Aplicar filtro de estado
         if (filterStatus.value !== 'all') {
           filtered = filtered.filter(contact => 
             filterStatus.value === 'unread' ? !contact.read : contact.read
           );
         }
   
-        // Apply pagination
+        // Aplicar paginación
         const start = (currentPage.value - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         return filtered.slice(start, end);
@@ -95,7 +215,7 @@
         localStorage.setItem('contacts', JSON.stringify(contacts.value));
       };
   
-      // Load contacts when mounting the component
+      // Cargar contactos al montar el componente
       onMounted(() => {
         loadContacts();
       });
@@ -117,126 +237,6 @@
     }
   });
   </script>
-  <template>
-    <div class="queue-container">
-      <h2 class="title">
-        <Inbox class="icon" />
-        Cola de Mensajes
-      </h2>
-      
-     <!-- Filters and Search -->
-      <div class="filters">
-        <input 
-          type="text" 
-          class="search-input" 
-          placeholder="Buscar mensajes..."
-          v-model="searchTerm"
-        />
-        <select v-model="filterStatus" class="filter-select">
-          <option value="all">Todos los mensajes</option>
-          <option value="unread">No leídos</option>
-          <option value="read">Leídos</option>
-        </select>
-      </div>
-  
-      <div class="queue-content">
-        <div class="queue-list">
-          <!-- Empty state -->
-          <div v-if="filteredContacts.length === 0" class="empty-state">
-            <Inbox :size="48" class="empty-icon" />
-            <p>No hay mensajes pendientes</p>
-          </div>
-  
-          <!-- Contact list -->
-          <TransitionGroup name="list">
-            <div 
-              v-for="contact in filteredContacts" 
-              :key="contact.id" 
-              class="contact-item"
-              :class="{
-                'selected': selectedContact?.id === contact.id,
-                'deleting': deletingId === contact.id,
-                'unread': !contact.read
-              }"
-              @click="viewMessage(contact)"
-            >
-              <div class="notification-dot" v-if="!contact.read"></div>
-              <div class="contact-info">
-                <strong>{{ contact.name }}</strong>
-                <span>{{ contact.email }}</span>
-                <small>{{ formatDate(contact.date) }}</small>
-              </div>
-              <div class="contact-actions">
-                <button 
-                  @click.stop="markAsRead(contact)"
-                  class="action-btn"
-                  v-if="!contact.read"
-                  title="Marcar como leído"
-                >
-                  <MessageSquare :size="18" />
-                </button>
-                <button 
-                  @click.stop="deleteContact(contact.id)"
-                  class="delete-btn"
-                  :class="{ 'deleting': deletingId === contact.id }"
-                  title="Eliminar mensaje"
-                >
-                  <Trash2 :size="18" />
-                </button>
-              </div>
-            </div>
-          </TransitionGroup>
-        </div>
-  
-        
-        <Transition name="fade">
-          <div v-if="selectedContact" class="message-preview">
-            <div class="preview-header">
-              <h3>Mensaje de {{ selectedContact.name }}</h3>
-              <span class="date">{{ formatDate(selectedContact.date) }}</span>
-            </div>
-            <div class="message-content">
-              <MessageSquare class="message-icon" />
-              {{ selectedContact.message }}
-            </div>
-            <div class="preview-actions">
-              <button class="reply-btn">
-                <MessageSquare :size="18" />
-                Responder
-              </button>
-            </div>
-          </div>
-        </Transition>
-      </div>
-  
-      <!-- Pagination -->
-      <div class="pagination" v-if="totalPages > 1">
-        <button 
-          class="page-button"
-          :disabled="currentPage === 1"
-          @click="currentPage--"
-        >
-          Anterior
-        </button>
-        <button 
-          v-for="page in totalPages" 
-          :key="page"
-          class="page-button"
-          :class="{ active: currentPage === page }"
-          @click="currentPage = page"
-        >
-          {{ page }}
-        </button>
-        <button 
-          class="page-button"
-          :disabled="currentPage === totalPages"
-          @click="currentPage++"
-        >
-          Siguiente
-        </button>
-      </div>
-    </div>
-  </template>
   
   <style scoped>
   .queue-container {
@@ -261,7 +261,7 @@
     color: #BE8151;
   }
   
- /* Filters */
+  /* Filtros */
   .filters {
     display: flex;
     gap: 1rem;
@@ -294,7 +294,7 @@
     transition: all 0.3s ease;
   }
   
-  /* Main content */
+  /* Contenido principal */
   .queue-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -309,7 +309,7 @@
     overflow: hidden;
   }
   
-  
+  /* Items de contacto */
   .contact-item {
     display: flex;
     justify-content: space-between;
@@ -385,7 +385,7 @@
     color: white;
   }
   
-  /* Action buttons */
+  /* Botones de acción */
   .contact-actions {
     display: flex;
     gap: 0.5rem;
@@ -413,7 +413,7 @@
     animation: wiggle 0.3s ease-in-out;
   }
   
-  /* Preview message */
+  /* Vista previa del mensaje */
   .message-preview {
     background: white;
     border-radius: 12px;
@@ -477,7 +477,7 @@
     transform: translateY(-2px);
   }
   
-  /* Pagination */
+  /* Paginación */
   .pagination {
     display: flex;
     justify-content: center;
@@ -510,7 +510,7 @@
     cursor: not-allowed;
   }
   
-  /* Animations */
+  /* Animaciones */
   @keyframes wiggle {
     0%, 100% { transform: rotate(0); }
     25% { transform: rotate(15deg); }
@@ -543,7 +543,7 @@
   transform: translateY(20px);
 }
 
-/* Empty state */
+/* Estado vacío */
 .empty-state {
   padding: 3rem;
   text-align: center;
@@ -559,7 +559,7 @@
   opacity: 0.5;
 }
 
-/* Load and error states */
+/* Estados de carga y error */
 .loading-state {
   display: flex;
   align-items: center;
@@ -609,7 +609,7 @@
   }
 }
 
-
+/* Modo oscuro */
 @media (prefers-color-scheme: dark) {
   .queue-container {
     background: #5d554d;
@@ -674,7 +674,7 @@
   }
 }
 
-/* Additional animations */
+/* Animaciones adicionales */
 .contact-item.deleting {
   animation: slideOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

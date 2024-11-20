@@ -187,9 +187,9 @@ input {
   font-size: 1rem;
   transition: all 0.2s ease;
   background-color: rgba(255, 255, 255, 0.9);
-  cursor: text !important; 
-  display: block; /* Ensure input is block */
-  box-sizing: border-box; 
+  cursor: text !important; /* Forzar el cursor de texto */
+  display: block; /* Asegurar que el input es block */
+  box-sizing: border-box; /* Incluir padding y border en el ancho */
 }
 
 input:hover {
@@ -221,8 +221,8 @@ button {
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
-  display: block; 
-  box-sizing: border-box;/* Include padding and border in the width */
+  display: block; /* Asegurar que el botón es block */
+  box-sizing: border-box; /* Incluir padding y border en el ancho */
 }
 
 .button-content {
@@ -274,7 +274,7 @@ button:disabled {
   width: 100%;
 }
 
-/* Animations */
+/* Animaciones */
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;

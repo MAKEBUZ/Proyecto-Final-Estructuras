@@ -1,112 +1,14 @@
+<template>
+  <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
+    <div class="invoice-content" ref="invoiceRef">
+      <!-- Cabecera de la factura -->
+      <div class="invoice-header">
+        <div class="invoice-title">
+          <h2>Factura #{{ orderDetails.orderId }}</h2>
+          <p class="date">Fecha: {{ formatDate(orderDetails.date) }}</p>
+        </div>
+      </div>
 
-<script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
-import html2pdf from 'html2pdf.js';
-import getProductById from '../data/productCatalog';
-
-interface OrderDetails {
-  orderId: string;
-  items: any[];
-  total: number;
-  date: string;
-  paymentDetails: {
-    cardNumber: string;
-    cardHolder: string;
-  };
-}
-
-interface EnrichedCartItem {
-  id: number;
-  name: string;
-  quantity: number;
-  price: number;
-  image: string;
-}
-
-const router = useRouter();
-const invoiceRef = ref<HTMLElement | null>(null);
-const isProcessing = ref(false);
-const orderDetails = ref<OrderDetails | null>(null);
-
-// Check if a paid order exists and get its details
-onMounted(() => {
-  const lastOrder = localStorage.getItem('lastOrder');
-  
-  if (!lastOrder) {
-    // If there is no order, redirect to cart
-    router.replace('/cart');
-    return;
-  }
-
-  try {
-    orderDetails.value = JSON.parse(lastOrder);
-  } catch (error) {
-    console.error('Error parsing order details:', error);
-    router.replace('/cart');
-  }
-});
-
-// Enrich items with product information
-const enrichedItems = computed(() => {
-  if (!orderDetails.value) return [];
-  
-  return orderDetails.value.items.map(item => {
-    const product = getProductById(item.id);
-    return {
-      ...item,
-      price: product?.price || 0,
-      image: product?.image || '/api/placeholder/200/200',
-      name: product?.name || 'Producto no encontrado'
-    };
-  });
-});
-
-// Calculations
-const subtotal = computed(() => {
-  return enrichedItems.value.reduce((total: number, item: EnrichedCartItem) => {
-    return total + (item.price * item.quantity);
-  }, 0);
-});
-
-const shipping = computed(() => subtotal.value > 100 ? 0 : 10);
-const discount = computed(() => subtotal.value > 200 ? subtotal.value * 0.1 : 0);
-
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString();
-};
-
-const generatePDF = async () => {
-  if (!invoiceRef.value) return;
-  
-  isProcessing.value = true;
-  
-  const options = {
-    margin: 1,
-    filename: `factura-${orderDetails.value?.orderId}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
-
-  try {
-    await html2pdf().from(invoiceRef.value).set(options).save();
-  } catch (error) {
-    console.error('Error generando PDF:', error);
-  } finally {
-    isProcessing.value = false;
-  }
-};
-
-// Cleanup function
-onUnmounted(() => {
-  // Don't remove lastOrder here so that BillManager can process it
-});
-</script>
-
-
-<<<<<<< HEAD
-=======
       
       <!-- Detalles del cliente -->
       <div class="customer-details">
@@ -178,90 +80,111 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
->>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
 
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
+import html2pdf from 'html2pdf.js';
+import getProductById from '../data/productCatalog';
 
-<template>
-  <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
-    <div class="invoice-content" ref="invoiceRef">
-      <!-- Invoice header -->
-      <div class="invoice-header">
-        <div class="invoice-title">
-          <h2>Factura #{{ orderDetails.orderId }}</h2>
-          <p class="date">Fecha: {{ formatDate(orderDetails.date) }}</p>
-        </div>
-      </div>
+interface OrderDetails {
+  orderId: string;
+  items: any[];
+  total: number;
+  date: string;
+  paymentDetails: {
+    cardNumber: string;
+    cardHolder: string;
+  };
+}
 
-      <!-- Customer details -->
-      <div class="customer-details">
-        <h3>Detalles del Pago</h3>
-        <p>Tarjeta terminada en: **** **** **** {{ orderDetails.paymentDetails.cardNumber }}</p>
-        <p>Titular: {{ orderDetails.paymentDetails.cardHolder }}</p>
-      </div>
+interface EnrichedCartItem {
+  id: number;
+  name: string;
+  quantity: number;
+  price: number;
+  image: string;
+}
 
-      <!-- List of products -->
-      <div class="invoice-items">
-        <table>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Precio Unitario</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in enrichedItems" :key="item.id">
-              <td>
-                <div class="product-info">
-                  <img :src="item.image" :alt="item.name" class="product-thumbnail">
-                  <span>{{ item.name }}</span>
-                </div>
-              </td>
-              <td>{{ item.quantity }}</td>
-              <td>${{ item.price.toFixed(2) }}</td>
-              <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+const router = useRouter();
+const invoiceRef = ref<HTMLElement | null>(null);
+const isProcessing = ref(false);
+const orderDetails = ref<OrderDetails | null>(null);
 
-      <!-- Cost summary -->
-      <div class="invoice-summary">
-        <div class="summary-line">
-          <span>Subtotal</span>
-          <span>${{ subtotal.toFixed(2) }}</span>
-        </div>
-        <div class="summary-line">
-          <span>Envío</span>
-          <span>${{ shipping.toFixed(2) }}</span>
-        </div>
-        <div v-if="discount > 0" class="summary-line discount">
-          <span>Descuento</span>
-          <span>-${{ discount.toFixed(2) }}</span>
-        </div>
-        <div class="summary-total">
-          <span>Total</span>
-          <span>${{ orderDetails.total.toFixed(2) }}</span>
-        </div>
-      </div>
-    </div>
+// Verificar si existe una orden pagada y obtener sus detalles
+onMounted(() => {
+  const lastOrder = localStorage.getItem('lastOrder');
+  
+  if (!lastOrder) {
+    // Si no hay orden, redirigir al carrito
+    router.replace('/cart');
+    return;
+  }
 
-    <!-- Download button -->
-    <div class="invoice-actions">
-      <button 
-        @click="generatePDF" 
-        :disabled="isProcessing"
-        class="btn-primary"
-      >
-        {{ isProcessing ? 'Generando PDF...' : 'Descargar PDF' }}
-      </button>
-      <router-link to="/" class="btn-secondary">
-        Volver al inicio
-      </router-link>
-    </div>
-  </div>
-</template>
+  try {
+    orderDetails.value = JSON.parse(lastOrder);
+  } catch (error) {
+    console.error('Error parsing order details:', error);
+    router.replace('/cart');
+  }
+});
+
+// Enriquecer items con información del producto
+const enrichedItems = computed(() => {
+  if (!orderDetails.value) return [];
+  
+  return orderDetails.value.items.map(item => {
+    const product = getProductById(item.id);
+    return {
+      ...item,
+      price: product?.price || 0,
+      image: product?.image || '/api/placeholder/200/200',
+      name: product?.name || 'Producto no encontrado'
+    };
+  });
+});
+
+// Cálculos
+const subtotal = computed(() => {
+  return enrichedItems.value.reduce((total: number, item: EnrichedCartItem) => {
+    return total + (item.price * item.quantity);
+  }, 0);
+});
+
+const shipping = computed(() => subtotal.value > 100 ? 0 : 10);
+const discount = computed(() => subtotal.value > 200 ? subtotal.value * 0.1 : 0);
+
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString();
+};
+
+const generatePDF = async () => {
+  if (!invoiceRef.value) return;
+  
+  isProcessing.value = true;
+  
+  const options = {
+    margin: 1,
+    filename: `factura-${orderDetails.value?.orderId}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  try {
+    await html2pdf().from(invoiceRef.value).set(options).save();
+  } catch (error) {
+    console.error('Error generando PDF:', error);
+  } finally {
+    isProcessing.value = false;
+  }
+};
+
+// Cleanup function
+onUnmounted(() => {
+  // No eliminar lastOrder aquí para que BillManager pueda procesarlo
+});
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

@@ -1,210 +1,6 @@
-
-<script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue';
-
-interface Comment {
-  id: string;
-  username: string;
-  content: string;
-  timestamp: number;
-  parentId: string | null;
-  mainCategory: string;
-  subCategory: string;
-}
-
-interface Category {
-  id: string;
-  name: string;
-}
-
-export default defineComponent({
-  name: 'CommentDisplay',
-  setup() {
-    // Definition of categories
-    const mainCategories: Category[] = [
-      { id: 'hombres', name: 'Hombres' },
-      { id: 'mujeres', name: 'Mujeres' },
-      { id: 'ninos', name: 'Niños' },
-      { id: 'unisex', name: 'Unisex' }
-    ];
-
-    const subCategories: Category[] = [
-      { id: 'moda', name: 'Moda' },
-      { id: 'colecciones', name: 'Colecciones' },
-      { id: 'ofertas', name: 'Ofertas' },
-      { id: 'preguntas', name: 'Preguntas' },
-      { id: 'sugerencias', name: 'Sugerencias' }
-    ];
-
-    const categorySubcategories: Record<string, string[]> = {
-      hombres: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias'],
-      mujeres: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias'],
-      ninos: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias'],
-      unisex: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias']
-    };
-
-    // State
-    const comments = ref<Comment[]>([]);
-    const selectedMainCategory = ref('');
-    const selectedSubCategory = ref('');
-    const showDeleteModal = ref(false);
-    const commentToDelete = ref<string | null>(null);
-    const parentCommentId = ref<string | null>(null);
-
-    // Computed properties
-    const availableSubCategories = computed(() => {
-      if (!selectedMainCategory.value) return [];
-      const availableIds = categorySubcategories[selectedMainCategory.value] || [];
-      return subCategories.filter(cat => availableIds.includes(cat.id));
-    });
-
-    const filteredRootComments = computed(() => {
-      let filtered = comments.value.filter(comment => !comment.parentId);
-      
-      if (selectedMainCategory.value) {
-        filtered = filtered.filter(comment => 
-          comment.mainCategory === selectedMainCategory.value
-        );
-        
-        if (selectedSubCategory.value) {
-          filtered = filtered.filter(comment => 
-            comment.subCategory === selectedSubCategory.value
-          );
-        }
-      }
-      
-      return filtered;
-    });
-
-    const totalComments = computed(() => comments.value.length);
-
-    const currentCategoryComments = computed(() => {
-      let filtered = comments.value;
-      
-      if (selectedMainCategory.value) {
-        filtered = filtered.filter(comment => 
-          comment.mainCategory === selectedMainCategory.value
-        );
-        
-        if (selectedSubCategory.value) {
-          filtered = filtered.filter(comment => 
-            comment.subCategory === selectedSubCategory.value
-          );
-        }
-      }
-      
-      return filtered.length;
-    });
-
-    const currentCategoryDisplay = computed(() => {
-      if (!selectedMainCategory.value) return 'todas las categorías';
-      
-      const mainCatName = mainCategories.find(c => c.id === selectedMainCategory.value)?.name;
-      
-      if (!selectedSubCategory.value) return mainCatName;
-      
-      const subCatName = subCategories.find(c => c.id === selectedSubCategory.value)?.name;
-      return `${mainCatName} - ${subCatName}`;
-    });
-
-    // Methods
-    const selectMainCategory = (category: string) => {
-      selectedMainCategory.value = category;
-      selectedSubCategory.value = '';  // Reset subcategory when main category changes
-    };
-
-    const selectSubCategory = (category: string) => {
-      selectedSubCategory.value = category;
-    };
-
-    const getCategoryName = (categoryId: string, isMain: boolean): string => {
-      const categories = isMain ? mainCategories : subCategories;
-      return categories.find(c => c.id === categoryId)?.name || categoryId;
-    };
-
-    const loadComments = () => {
-      const savedComments = localStorage.getItem('comments');
-      if (savedComments) {
-        comments.value = JSON.parse(savedComments);
-      }
-    };
-
-    const saveComments = () => {
-      localStorage.setItem('comments', JSON.stringify(comments.value));
-    };
-
-    const confirmDelete = (commentId: string, parentId: string | null) => {
-      commentToDelete.value = commentId;
-      parentCommentId.value = parentId;
-      showDeleteModal.value = true;
-    };
-
-    const deleteComment = () => {
-      if (!commentToDelete.value) return;
-
-      if (parentCommentId.value) {
-        comments.value = comments.value.filter(c => c.id !== commentToDelete.value);
-      } else {
-        comments.value = comments.value.filter(c => 
-          c.id !== commentToDelete.value && c.parentId !== commentToDelete.value
-        );
-      }
-
-      saveComments();
-      showDeleteModal.value = false;
-      commentToDelete.value = null;
-      parentCommentId.value = null;
-    };
-
-    const cancelDelete = () => {
-      showDeleteModal.value = false;
-      commentToDelete.value = null;
-      parentCommentId.value = null;
-    };
-
-    const getChildComments = (parentId: string): Comment[] => {
-      return comments.value.filter(comment => comment.parentId === parentId);
-    };
-
-    const formatDate = (timestamp: number): string => {
-      return new Date(timestamp).toLocaleString();
-    };
-
-    const isReply = computed(() => !!parentCommentId.value);
-
-    onMounted(() => {
-      loadComments();
-      setInterval(loadComments, 30000);
-    });
-
-    return {
-      mainCategories,
-      subCategories,
-      selectedMainCategory,
-      selectedSubCategory,
-      availableSubCategories,
-      filteredRootComments,
-      totalComments,
-      currentCategoryComments,
-      currentCategoryDisplay,
-      selectMainCategory,
-      selectSubCategory,
-      getCategoryName,
-      getChildComments,
-      formatDate,
-      confirmDelete,
-      deleteComment,
-      cancelDelete,
-      showDeleteModal,
-      isReply
-    };
-  }
-});
-</script>
-
 <template>
   <div class="display-container">
-    
+    <!-- Filtros de categoría principal -->
     <div class="category-filters">
       <div class="main-category-filters">
         <button 
@@ -223,7 +19,7 @@ export default defineComponent({
         </button>
       </div>
 
-      <!-- Subcategory filters -->
+      <!-- Filtros de subcategoría -->
       <div class="sub-category-filters" v-if="selectedMainCategory">
         <button 
           v-for="category in availableSubCategories" 
@@ -328,6 +124,209 @@ export default defineComponent({
   </div>
 </template>
 
+<script lang="ts">
+import { defineComponent, ref, computed, onMounted } from 'vue';
+
+interface Comment {
+  id: string;
+  username: string;
+  content: string;
+  timestamp: number;
+  parentId: string | null;
+  mainCategory: string;
+  subCategory: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+}
+
+export default defineComponent({
+  name: 'CommentDisplay',
+  setup() {
+    // Definición de categorías
+    const mainCategories: Category[] = [
+      { id: 'hombres', name: 'Hombres' },
+      { id: 'mujeres', name: 'Mujeres' },
+      { id: 'ninos', name: 'Niños' },
+      { id: 'unisex', name: 'Unisex' }
+    ];
+
+    const subCategories: Category[] = [
+      { id: 'moda', name: 'Moda' },
+      { id: 'colecciones', name: 'Colecciones' },
+      { id: 'ofertas', name: 'Ofertas' },
+      { id: 'preguntas', name: 'Preguntas' },
+      { id: 'sugerencias', name: 'Sugerencias' }
+    ];
+
+    const categorySubcategories: Record<string, string[]> = {
+      hombres: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias'],
+      mujeres: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias'],
+      ninos: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias'],
+      unisex: ['moda', 'colecciones', 'ofertas', 'preguntas', 'sugerencias']
+    };
+
+    // Estado
+    const comments = ref<Comment[]>([]);
+    const selectedMainCategory = ref('');
+    const selectedSubCategory = ref('');
+    const showDeleteModal = ref(false);
+    const commentToDelete = ref<string | null>(null);
+    const parentCommentId = ref<string | null>(null);
+
+    // Computed properties
+    const availableSubCategories = computed(() => {
+      if (!selectedMainCategory.value) return [];
+      const availableIds = categorySubcategories[selectedMainCategory.value] || [];
+      return subCategories.filter(cat => availableIds.includes(cat.id));
+    });
+
+    const filteredRootComments = computed(() => {
+      let filtered = comments.value.filter(comment => !comment.parentId);
+      
+      if (selectedMainCategory.value) {
+        filtered = filtered.filter(comment => 
+          comment.mainCategory === selectedMainCategory.value
+        );
+        
+        if (selectedSubCategory.value) {
+          filtered = filtered.filter(comment => 
+            comment.subCategory === selectedSubCategory.value
+          );
+        }
+      }
+      
+      return filtered;
+    });
+
+    const totalComments = computed(() => comments.value.length);
+
+    const currentCategoryComments = computed(() => {
+      let filtered = comments.value;
+      
+      if (selectedMainCategory.value) {
+        filtered = filtered.filter(comment => 
+          comment.mainCategory === selectedMainCategory.value
+        );
+        
+        if (selectedSubCategory.value) {
+          filtered = filtered.filter(comment => 
+            comment.subCategory === selectedSubCategory.value
+          );
+        }
+      }
+      
+      return filtered.length;
+    });
+
+    const currentCategoryDisplay = computed(() => {
+      if (!selectedMainCategory.value) return 'todas las categorías';
+      
+      const mainCatName = mainCategories.find(c => c.id === selectedMainCategory.value)?.name;
+      
+      if (!selectedSubCategory.value) return mainCatName;
+      
+      const subCatName = subCategories.find(c => c.id === selectedSubCategory.value)?.name;
+      return `${mainCatName} - ${subCatName}`;
+    });
+
+    // Métodos
+    const selectMainCategory = (category: string) => {
+      selectedMainCategory.value = category;
+      selectedSubCategory.value = '';  // Reset subcategory when main category changes
+    };
+
+    const selectSubCategory = (category: string) => {
+      selectedSubCategory.value = category;
+    };
+
+    const getCategoryName = (categoryId: string, isMain: boolean): string => {
+      const categories = isMain ? mainCategories : subCategories;
+      return categories.find(c => c.id === categoryId)?.name || categoryId;
+    };
+
+    const loadComments = () => {
+      const savedComments = localStorage.getItem('comments');
+      if (savedComments) {
+        comments.value = JSON.parse(savedComments);
+      }
+    };
+
+    const saveComments = () => {
+      localStorage.setItem('comments', JSON.stringify(comments.value));
+    };
+
+    const confirmDelete = (commentId: string, parentId: string | null) => {
+      commentToDelete.value = commentId;
+      parentCommentId.value = parentId;
+      showDeleteModal.value = true;
+    };
+
+    const deleteComment = () => {
+      if (!commentToDelete.value) return;
+
+      if (parentCommentId.value) {
+        comments.value = comments.value.filter(c => c.id !== commentToDelete.value);
+      } else {
+        comments.value = comments.value.filter(c => 
+          c.id !== commentToDelete.value && c.parentId !== commentToDelete.value
+        );
+      }
+
+      saveComments();
+      showDeleteModal.value = false;
+      commentToDelete.value = null;
+      parentCommentId.value = null;
+    };
+
+    const cancelDelete = () => {
+      showDeleteModal.value = false;
+      commentToDelete.value = null;
+      parentCommentId.value = null;
+    };
+
+    const getChildComments = (parentId: string): Comment[] => {
+      return comments.value.filter(comment => comment.parentId === parentId);
+    };
+
+    const formatDate = (timestamp: number): string => {
+      return new Date(timestamp).toLocaleString();
+    };
+
+    const isReply = computed(() => !!parentCommentId.value);
+
+    onMounted(() => {
+      loadComments();
+      setInterval(loadComments, 30000);
+    });
+
+    return {
+      mainCategories,
+      subCategories,
+      selectedMainCategory,
+      selectedSubCategory,
+      availableSubCategories,
+      filteredRootComments,
+      totalComments,
+      currentCategoryComments,
+      currentCategoryDisplay,
+      selectMainCategory,
+      selectSubCategory,
+      getCategoryName,
+      getChildComments,
+      formatDate,
+      confirmDelete,
+      deleteComment,
+      cancelDelete,
+      showDeleteModal,
+      isReply
+    };
+  }
+});
+</script>
+
 <style lang="css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -417,7 +416,7 @@ export default defineComponent({
   border-color: var(--secondary-light);
 }
 
-/* Statistics section */
+/* Sección de estadísticas */
 .stats-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -450,7 +449,7 @@ export default defineComponent({
   margin: 0;
 }
 
-/* Comments grid */
+/* Grid de comentarios */
 .comments-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -490,7 +489,7 @@ export default defineComponent({
   align-items: center;
 }
 
-
+/* Badges para categorías */
 .main-category-badge,
 .sub-category-badge {
   padding: 0.25rem 0.75rem;
@@ -509,7 +508,7 @@ export default defineComponent({
   color: var(--surface);
 }
 
-/* Delete buttons */
+/* Botones de eliminación */
 .delete-button,
 .delete-button-small {
   background: var(--accent);
@@ -532,7 +531,7 @@ export default defineComponent({
   transform: scale(1.1);
 }
 
-/* Answer section */
+/* Sección de respuestas */
 .replies-section {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
@@ -552,7 +551,7 @@ export default defineComponent({
   animation: slideIn 0.3s ease-out;
 }
 
-
+/* Modal de confirmación */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -602,7 +601,7 @@ export default defineComponent({
   color: var(--text);
 }
 
-/* Animations */
+/* Animaciones */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -634,7 +633,7 @@ export default defineComponent({
   }
 }
 
-/* Media Queries for responsiveness */
+/* Media Queries para responsividad */
 @media (max-width: 768px) {
   .display-container {
     padding: 1rem;

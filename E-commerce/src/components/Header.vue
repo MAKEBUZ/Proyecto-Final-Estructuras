@@ -122,7 +122,7 @@ export default defineComponent({
 
             <nav class="nav" :class="{ 'nav-open': isMobileMenuOpen }">
                 <ul class="nav-list">
-                    
+                    <!-- Elementos de navegación normales -->
                     <li v-for="(item, index) in navItems" :key="index" class="nav-item">
                         <a 
                             :href="item === 'Home' ? '/' : `/${item.toLowerCase()}`"
@@ -134,7 +134,7 @@ export default defineComponent({
                         </a>
                     </li>
                     
-                    <!-- Administrator options when logged in -->
+                    <!-- Opciones de administrador cuando está logueado -->
                     <template v-if="isLoggedIn">
                         <li class="nav-item">
                             <a 

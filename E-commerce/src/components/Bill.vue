@@ -100,7 +100,7 @@ const generatePDF = async () => {
 
 // Cleanup function
 onUnmounted(() => {
-  // No eliminar lastOrder aquí para que BillManager pueda procesarlo
+  // Don't remove lastOrder here so that BillManager can process it
 });
 </script>
 

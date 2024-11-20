@@ -9,7 +9,7 @@ export default defineComponent({
     components: {
         ShowComments,
         BillManager,
-        ContactManager,
+        ContactManager
     },
 });
 </script>

@@ -1,13 +1,12 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
 import OfferSlider from '../components/Offer.vue';
 
-export default defineComponent({
-  name: 'HomePage',
+export default {
+  name: 'HomeView',
   components: {
     OfferSlider,
   },
-});
+};
 </script>
 
 <template>

@@ -1,203 +1,222 @@
-import TShirtKid1 from '../assets/Prodcuts/Kids/TShirt/TShirtKid1.jpg';
-import TShirtKid2 from '../assets/Prodcuts/Kids/TShirt/TShirtKid2.jpg';
-import TShirtKid3 from '../assets/Prodcuts/Kids/TShirt/TShirtKid3.jpg';
-import TShirtKid4 from '../assets/Prodcuts/Kids/TShirt/TShirtKid4.jpg';
-import TShirtKid5 from '../assets/Prodcuts/Kids/TShirt/TShirtKid5.jpg';
-import TShirtKid6 from '../assets/Prodcuts/Kids/TShirt/TShirtKid6.jpg';
-import TShirtKid7 from '../assets/Prodcuts/Kids/TShirt/TShirtKid7.jpg';
-import TShirtKid8 from '../assets/Prodcuts/Kids/TShirt/TShirtKid8.jpg';
-import TShirtKid9 from '../assets/Prodcuts/Kids/TShirt/TShirtKid9.jpg';
-import TShirtKid10 from '../assets/Prodcuts/Kids/TShirt/TShirtKid10.jpg';
-import ShoesKids1 from '../assets/Prodcuts/kids/Shoes/ShoesKids1.jpg';
-import ShoesKids2 from '../assets/Prodcuts/kids/Shoes/ShoesKids2.jpg';
-import ShoesKids3 from '../assets/Prodcuts/kids/Shoes/ShoesKids3.jpg';
-import ShoesKids4 from '../assets/Prodcuts/kids/Shoes/ShoesKids4.jpg';
-import ShoesKids5 from '../assets/Prodcuts/kids/Shoes/ShoesKids5.jpg';
-import ShoesKids6 from '../assets/Prodcuts/kids/Shoes/ShoesKids6.jpg';
-import ShoesKids7 from '../assets/Prodcuts/kids/Shoes/ShoesKids7.jpg';
-import ShoesKids8 from '../assets/Prodcuts/kids/Shoes/ShoesKids8.jpg';
-import ShoesKids9 from '../assets/Prodcuts/kids/Shoes/ShoesKids9.jpg';
-import ShoesKids10 from '../assets/Prodcuts/kids/Shoes/ShoesKids10.jpg';
-import PantsKids1 from '../assets/Prodcuts/Kids/Pants/PantsKids1.jpg';
-import PantsKids2 from '../assets/Prodcuts/Kids/Pants/PantsKids2.jpg';
-import PantsKids3 from '../assets/Prodcuts/Kids/Pants/PantsKids3.jpg';
-import PantsKids4 from '../assets/Prodcuts/Kids/Pants/PantsKids4.jpg';
-import PantsKids5 from '../assets/Prodcuts/Kids/Pants/PantsKids5.jpg';
-import PantsKids6 from '../assets/Prodcuts/Kids/Pants/PantsKids6.jpg';
-import PantsKids7 from '../assets/Prodcuts/Kids/Pants/PantsKids7.jpg';
-import PantsKids8 from '../assets/Prodcuts/Kids/Pants/PantsKids8.jpg';
-import PantsKids9 from '../assets/Prodcuts/Kids/Pants/PantsKids9.jpg';
-import PantsKids10 from '../assets/Prodcuts/Kids/Pants/PantsKids10.jpg';
-import ColoniesKids1 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids1.jpg';
-import ColoniesKids2 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids2.jpg';
-import ColoniesKids3 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids3.jpg';
-import ColoniesKids4 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids4.jpg';
-import ColoniesKids5 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids5.jpg';
-import ColoniesKids6 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids6.jpg';
-import ColoniesKids7 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids7.jpg';
-import ColoniesKids8 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids8.jpg';
-import ColoniesKids9 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids9.jpg';
-import ColoniesKids10 from '../assets/Prodcuts/Kids/Colonies/ColoniesKids10.jpg';
-import CoatsKids1 from '../assets/Prodcuts/kids/Coats/CoatsKids1.jpg';
-import CoatsKids2 from '../assets/Prodcuts/kids/Coats/CoatsKids2.jpg';
-import CoatsKids3 from '../assets/Prodcuts/kids/Coats/CoatsKids3.jpg';
-import CoatsKids4 from '../assets/Prodcuts/kids/Coats/CoatsKids4.jpg';
-import CoatsKids5 from '../assets/Prodcuts/kids/Coats/CoatsKids5.jpg';
-import CoatsKids6 from '../assets/Prodcuts/kids/Coats/CoatsKids6.jpg';
-import CoatsKids7 from '../assets/Prodcuts/kids/Coats/CoatsKids7.jpg';
-import CoatsKids8 from '../assets/Prodcuts/kids/Coats/CoatsKids8.jpg';
-import CoatsKids9 from '../assets/Prodcuts/kids/Coats/CoatsKids9.jpg';
-import CoatsKids10 from '../assets/Prodcuts/kids/Coats/CoatsKids10.jpg';
-import TShirtMen1 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen1.jpg';
-import TShirtMen2 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen2.jpg';
-import TShirtMen3 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen3.jpg';
-import TShirtMen4 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen4.jpg';
-import TShirtMen5 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen5.jpg';
-import TShirtMen6 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen6.jpg';
-import TShirtMen7 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen7.jpg';
-import TShirtMen8 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen8.jpg';
-import TShirtMen9 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen9.jpg';
-import TShirtMen10 from '../assets/Prodcuts/Mens/T-Shirt/TShirtMen10.jpg';
-import ShoesMen1 from '../assets/Prodcuts/Mens/Shoes/ShoesMens1.jpg';
-import ShoesMen2 from '../assets/Prodcuts/Mens/Shoes/ShoesMens2.jpg';
-import ShoesMen3 from '../assets/Prodcuts/Mens/Shoes/ShoesMens3.jpg';
-import ShoesMen4 from '../assets/Prodcuts/Mens/Shoes/ShoesMens4.jpg';
-import ShoesMen5 from '../assets/Prodcuts/Mens/Shoes/ShoesMens5.jpg';
-import ShoesMen6 from '../assets/Prodcuts/Mens/Shoes/ShoesMens6.jpg';
-import ShoesMen7 from '../assets/Prodcuts/Mens/Shoes/ShoesMens7.jpg';
-import ShoesMen8 from '../assets/Prodcuts/Mens/Shoes/ShoesMens8.jpg';
-import ShoesMen9 from '../assets/Prodcuts/Mens/Shoes/ShoesMens9.jpg';
-import ShoesMen10 from '../assets/Prodcuts/Mens/Shoes/ShoesMens10.jpg';
-import PantsMen1 from '../assets/Prodcuts/Mens/Pants/PantsMens1.jpg';
-import PantsMen2 from '../assets/Prodcuts/Mens/Pants/PantsMens2.jpg';
-import PantsMen3 from '../assets/Prodcuts/Mens/Pants/PantsMens3.jpg';
-import PantsMen4 from '../assets/Prodcuts/Mens/Pants/PantsMens4.jpg';
-import PantsMen5 from '../assets/Prodcuts/Mens/Pants/PantsMens5.jpg';
-import PantsMen6 from '../assets/Prodcuts/Mens/Pants/PantsMens6.jpg';
-import PantsMen7 from '../assets/Prodcuts/Mens/Pants/PantsMens7.jpg';
-import PantsMen8 from '../assets/Prodcuts/Mens/Pants/PantsMens8.jpg';
-import PantsMen9 from '../assets/Prodcuts/Mens/Pants/PantsMens9.jpg';
-import PantsMen10 from '../assets/Prodcuts/Mens/Pants/PantsMens10.jpg';
-import ColoniesMen1 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens1.jpg';
-import ColoniesMen2 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens2.jpg';
-import ColoniesMen3 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens3.jpg';
-import ColoniesMen4 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens4.jpg';
-import ColoniesMen5 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens5.jpg';
-import ColoniesMen6 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens6.jpg';
-import ColoniesMen7 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens7.jpg';
-import ColoniesMen8 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens8.jpg';
-import ColoniesMen9 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens9.jpg';
-import ColoniesMen10 from '../assets/Prodcuts/Mens/Colonies/ColoniesMens10.jpg';
-import CoatsMen1 from '../assets/Prodcuts/Mens/Coats/CoatsMens1.jpg';
-import CoatsMen2 from '../assets/Prodcuts/Mens/Coats/CoatsMens2.jpg';
-import CoatsMen3 from '../assets/Prodcuts/Mens/Coats/CoatsMens3.jpg';
-import CoatsMen4 from '../assets/Prodcuts/Mens/Coats/CoatsMens4.jpg';
-import CoatsMen5 from '../assets/Prodcuts/Mens/Coats/CoatsMens5.jpg';
-import CoatsMen6 from '../assets/Prodcuts/Mens/Coats/CoatsMens6.jpg';
-import CoatsMen7 from '../assets/Prodcuts/Mens/Coats/CoatsMens7.jpg';
-import CoatsMen8 from '../assets/Prodcuts/Mens/Coats/CoatsMens8.jpg';
-import CoatsMen9 from '../assets/Prodcuts/Mens/Coats/CoatsMens9.jpg';
-import CoatsMen10 from '../assets/Prodcuts/Mens/Coats/CoatsMens10.jpg';
-import TShirtUnisex1 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex1.jpg';
-import TShirtUnisex2 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex2.jpg';
-import TShirtUnisex3 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex3.jpg';
-import TShirtUnisex4 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex4.jpg';
-import TShirtUnisex5 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex5.jpg';
-import TShirtUnisex6 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex6.jpg';
-import TShirtUnisex7 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex7.jpg';
-import TShirtUnisex8 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex8.jpg';
-import TShirtUnisex9 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex9.jpg';
-import TShirtUnisex10 from '../assets/Prodcuts/Unisex/T-Shirt/TShirtUnisex10.jpg';
-import ShoesUnisex1 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex1.jpg';
-import ShoesUnisex2 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex2.jpg';
-import ShoesUnisex3 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex3.jpg';
-import ShoesUnisex4 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex4.jpg';
-import ShoesUnisex5 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex5.jpg';
-import ShoesUnisex6 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex6.jpg';
-import ShoesUnisex7 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex7.jpg';
-import ShoesUnisex8 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex8.jpg';
-import ShoesUnisex9 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex9.jpg';
-import ShoesUnisex10 from '../assets/Prodcuts/Unisex/Shoes/ShoesUnisex10.jpg';
-import PantsUnisex1 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex1.jpg';
-import PantsUnisex2 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex2.jpg';
-import PantsUnisex3 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex3.jpg';
-import PantsUnisex4 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex4.jpg';
-import PantsUnisex5 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex5.jpg';
-import PantsUnisex6 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex6.jpg';
-import PantsUnisex7 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex7.jpg';
-import PantsUnisex8 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex8.jpg';
-import PantsUnisex9 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex9.jpg';
-import PantsUnisex10 from '../assets/Prodcuts/Unisex/Pants/PantsUnisex10.jpg';
-import ColoniesUnisex1 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex1.jpg';
-import ColoniesUnisex2 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex2.jpg';
-import ColoniesUnisex3 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex3.jpg';
-import ColoniesUnisex4 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex4.jpg';
-import ColoniesUnisex5 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex5.jpg';
-import ColoniesUnisex6 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex6.jpg';
-import ColoniesUnisex7 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex7.jpg';
-import ColoniesUnisex8 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex8.jpg';
-import ColoniesUnisex9 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex9.jpg';
-import ColoniesUnisex10 from '../assets/Prodcuts/Unisex/Colonies/ColoniesUnisex10.jpg';
-import CoatsUnisex1 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex1.jpg';
-import CoatsUnisex2 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex2.jpg';
-import CoatsUnisex3 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex3.jpg';
-import CoatsUnisex4 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex4.jpg';
-import CoatsUnisex5 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex5.jpg';
-import CoatsUnisex6 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex6.jpg';
-import CoatsUnisex7 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex7.jpg';
-import CoatsUnisex8 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex8.jpg';
-import CoatsUnisex9 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex9.jpg';
-import CoatsUnisex10 from '../assets/Prodcuts/Unisex/Coats/CoatsUnisex10.jpg';
-import TShirtWomen1 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen1.jpg';
-import TShirtWomen2 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen2.jpg';
-import TShirtWomen3 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen3.jpg';
-import TShirtWomen4 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen4.jpg';
-import TShirtWomen5 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen5.jpg';
-import TShirtWomen6 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen6.jpg';
-import TShirtWomen7 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen7.jpg';
-import TShirtWomen8 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen8.jpg';
-import TShirtWomen9 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen9.jpg';
-import TShirtWomen10 from '../assets/Prodcuts/Women/T-Shirt/TShirtWomen10.jpg';
-import ShoesWomen1 from '../assets/Prodcuts/Women/Shoes/ShoesWomen1.jpg';
-import ShoesWomen2 from '../assets/Prodcuts/Women/Shoes/ShoesWomen2.jpg';
-import ShoesWomen3 from '../assets/Prodcuts/Women/Shoes/ShoesWomen3.jpg';
-import ShoesWomen4 from '../assets/Prodcuts/Women/Shoes/ShoesWomen4.jpg';
-import ShoesWomen5 from '../assets/Prodcuts/Women/Shoes/ShoesWomen5.jpg';
-import ShoesWomen6 from '../assets/Prodcuts/Women/Shoes/ShoesWomen6.jpg';
-import ShoesWomen7 from '../assets/Prodcuts/Women/Shoes/ShoesWomen7.jpg';
-import ShoesWomen8 from '../assets/Prodcuts/Women/Shoes/ShoesWomen8.jpg';
-import ShoesWomen9 from '../assets/Prodcuts/Women/Shoes/ShoesWomen9.jpg';
-import ShoesWomen10 from '../assets/Prodcuts/Women/Shoes/ShoesWomen10.jpg';
-import PantsWomen1 from '../assets/Prodcuts/Women/Pants/PantsWomen1.jpg';
-import PantsWomen2 from '../assets/Prodcuts/Women/Pants/PantsWomen2.jpg';
-import PantsWomen3 from '../assets/Prodcuts/Women/Pants/PantsWomen3.jpg';
-import PantsWomen4 from '../assets/Prodcuts/Women/Pants/PantsWomen4.jpg';
-import PantsWomen5 from '../assets/Prodcuts/Women/Pants/PantsWomen5.jpg';
-import PantsWomen6 from '../assets/Prodcuts/Women/Pants/PantsWomen6.jpg';
-import PantsWomen7 from '../assets/Prodcuts/Women/Pants/PantsWomen7.jpg';
-import PantsWomen8 from '../assets/Prodcuts/Women/Pants/PantsWomen8.jpg';
-import PantsWomen9 from '../assets/Prodcuts/Women/Pants/PantsWomen9.jpg';
-import PantsWomen10 from '../assets/Prodcuts/Women/Pants/PantsWomen10.jpg';
-import ColoniesWomen1 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen1.jpg';
-import ColoniesWomen2 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen2.jpg';
-import ColoniesWomen3 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen3.jpg';
-import ColoniesWomen4 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen4.jpg';
-import ColoniesWomen5 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen5.jpg';
-import ColoniesWomen6 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen6.jpg';
-import ColoniesWomen7 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen7.jpg';
-import ColoniesWomen8 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen8.jpg';
-import ColoniesWomen9 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen9.jpg';
-import ColoniesWomen10 from '../assets/Prodcuts/Women/Colonies/ColoniesWomen10.jpg';
-import CoatsWomen1 from '../assets/Prodcuts/Women/Coats/CoatsWomen1.jpg';
-import CoatsWomen2 from '../assets/Prodcuts/Women/Coats/CoatsWomen2.jpg';
-import CoatsWomen3 from '../assets/Prodcuts/Women/Coats/CoatsWomen3.jpg';
-import CoatsWomen4 from '../assets/Prodcuts/Women/Coats/CoatsWomen4.jpg';
-import CoatsWomen5 from '../assets/Prodcuts/Women/Coats/CoatsWomen5.jpg';
-import CoatsWomen6 from '../assets/Prodcuts/Women/Coats/CoatsWomen6.jpg';
-import CoatsWomen7 from '../assets/Prodcuts/Women/Coats/CoatsWomen7.jpg';
-import CoatsWomen8 from '../assets/Prodcuts/Women/Coats/CoatsWomen8.jpg';
-import CoatsWomen9 from '../assets/Prodcuts/Women/Coats/CoatsWomen9.jpg';
-import CoatsWomen10 from '../assets/Prodcuts/Women/Coats/CoatsWomen10.jpg';
+import TShirtKid1 from '../assets/Products/Kids/TShirt/TShirtKid1.jpg';
+import TShirtKid2 from '../assets/Products/Kids/TShirt/TShirtKid2.jpg';
+import TShirtKid3 from '../assets/Products/Kids/TShirt/TShirtKid3.jpg';
+import TShirtKid4 from '../assets/Products/Kids/TShirt/TShirtKid4.jpg';
+import TShirtKid5 from '../assets/Products/Kids/TShirt/TShirtKid5.jpg';
+import TShirtKid6 from '../assets/Products/Kids/TShirt/TShirtKid6.jpg';
+import TShirtKid7 from '../assets/Products/Kids/TShirt/TShirtKid7.jpg';
+import TShirtKid8 from '../assets/Products/Kids/TShirt/TShirtKid8.jpg';
+import TShirtKid9 from '../assets/Products/Kids/TShirt/TShirtKid9.jpg';
+import TShirtKid10 from '../assets/Products/Kids/TShirt/TShirtKid10.jpg';
+
+import ShoesKids1 from '../assets/Products/Kids/Shoes/ShoesKids1.jpg';
+import ShoesKids2 from '../assets/Products/Kids/Shoes/ShoesKids2.jpg';
+import ShoesKids3 from '../assets/Products/Kids/Shoes/ShoesKids3.jpg';
+import ShoesKids4 from '../assets/Products/Kids/Shoes/ShoesKids4.jpg';
+import ShoesKids5 from '../assets/Products/Kids/Shoes/ShoesKids5.jpg';
+import ShoesKids6 from '../assets/Products/Kids/Shoes/ShoesKids6.jpg';
+import ShoesKids7 from '../assets/Products/Kids/Shoes/ShoesKids7.jpg';
+import ShoesKids8 from '../assets/Products/Kids/Shoes/ShoesKids8.jpg';
+import ShoesKids9 from '../assets/Products/Kids/Shoes/ShoesKids9.jpg';
+import ShoesKids10 from '../assets/Products/Kids/Shoes/ShoesKids10.jpg';
+
+import PantsKids1 from '../assets/Products/Kids/Pants/PantsKids1.jpg';
+import PantsKids2 from '../assets/Products/Kids/Pants/PantsKids2.jpg';
+import PantsKids3 from '../assets/Products/Kids/Pants/PantsKids3.jpg';
+import PantsKids4 from '../assets/Products/Kids/Pants/PantsKids4.jpg';
+import PantsKids5 from '../assets/Products/Kids/Pants/PantsKids5.jpg';
+import PantsKids6 from '../assets/Products/Kids/Pants/PantsKids6.jpg';
+import PantsKids7 from '../assets/Products/Kids/Pants/PantsKids7.jpg';
+import PantsKids8 from '../assets/Products/Kids/Pants/PantsKids8.jpg';
+import PantsKids9 from '../assets/Products/Kids/Pants/PantsKids9.jpg';
+import PantsKids10 from '../assets/Products/Kids/Pants/PantsKids10.jpg';
+
+import ColoniesKids1 from '../assets/Products/Kids/Colonies/ColoniesKids1.jpg';
+import ColoniesKids2 from '../assets/Products/Kids/Colonies/ColoniesKids2.jpg';
+import ColoniesKids3 from '../assets/Products/Kids/Colonies/ColoniesKids3.jpg';
+import ColoniesKids4 from '../assets/Products/Kids/Colonies/ColoniesKids4.jpg';
+import ColoniesKids5 from '../assets/Products/Kids/Colonies/ColoniesKids5.jpg';
+import ColoniesKids6 from '../assets/Products/Kids/Colonies/ColoniesKids6.jpg';
+import ColoniesKids7 from '../assets/Products/Kids/Colonies/ColoniesKids7.jpg';
+import ColoniesKids8 from '../assets/Products/Kids/Colonies/ColoniesKids8.jpg';
+import ColoniesKids9 from '../assets/Products/Kids/Colonies/ColoniesKids9.jpg';
+import ColoniesKids10 from '../assets/Products/Kids/Colonies/ColoniesKids10.jpg';
+
+import CoatsKids1 from '../assets/Products/Kids/Coats/CoatsKids1.jpg';
+import CoatsKids2 from '../assets/Products/Kids/Coats/CoatsKids2.jpg';
+import CoatsKids3 from '../assets/Products/Kids/Coats/CoatsKids3.jpg';
+import CoatsKids4 from '../assets/Products/Kids/Coats/CoatsKids4.jpg';
+import CoatsKids5 from '../assets/Products/Kids/Coats/CoatsKids5.jpg';
+import CoatsKids6 from '../assets/Products/Kids/Coats/CoatsKids6.jpg';
+import CoatsKids7 from '../assets/Products/Kids/Coats/CoatsKids7.jpg';
+import CoatsKids8 from '../assets/Products/Kids/Coats/CoatsKids8.jpg';
+import CoatsKids9 from '../assets/Products/Kids/Coats/CoatsKids9.jpg';
+import CoatsKids10 from '../assets/Products/Kids/Coats/CoatsKids10.jpg';
+
+import TShirtMen1 from '../assets/Products/Mens/T-Shirt/TShirtMen1.jpg';
+import TShirtMen2 from '../assets/Products/Mens/T-Shirt/TShirtMen2.jpg';
+import TShirtMen3 from '../assets/Products/Mens/T-Shirt/TShirtMen3.jpg';
+import TShirtMen4 from '../assets/Products/Mens/T-Shirt/TShirtMen4.jpg';
+import TShirtMen5 from '../assets/Products/Mens/T-Shirt/TShirtMen5.jpg';
+import TShirtMen6 from '../assets/Products/Mens/T-Shirt/TShirtMen6.jpg';
+import TShirtMen7 from '../assets/Products/Mens/T-Shirt/TShirtMen7.jpg';
+import TShirtMen8 from '../assets/Products/Mens/T-Shirt/TShirtMen8.jpg';
+import TShirtMen9 from '../assets/Products/Mens/T-Shirt/TShirtMen9.jpg';
+import TShirtMen10 from '../assets/Products/Mens/T-Shirt/TShirtMen10.jpg';
+
+import ShoesMen1 from '../assets/Products/Mens/Shoes/ShoesMens1.jpg';
+import ShoesMen2 from '../assets/Products/Mens/Shoes/ShoesMens2.jpg';
+import ShoesMen3 from '../assets/Products/Mens/Shoes/ShoesMens3.jpg';
+import ShoesMen4 from '../assets/Products/Mens/Shoes/ShoesMens4.jpg';
+import ShoesMen5 from '../assets/Products/Mens/Shoes/ShoesMens5.jpg';
+import ShoesMen6 from '../assets/Products/Mens/Shoes/ShoesMens6.jpg';
+import ShoesMen7 from '../assets/Products/Mens/Shoes/ShoesMens7.jpg';
+import ShoesMen8 from '../assets/Products/Mens/Shoes/ShoesMens8.jpg';
+import ShoesMen9 from '../assets/Products/Mens/Shoes/ShoesMens9.jpg';
+import ShoesMen10 from '../assets/Products/Mens/Shoes/ShoesMens10.jpg';
+
+import PantsMen1 from '../assets/Products/Mens/Pants/PantsMens1.jpg';
+import PantsMen2 from '../assets/Products/Mens/Pants/PantsMens2.jpg';
+import PantsMen3 from '../assets/Products/Mens/Pants/PantsMens3.jpg';
+import PantsMen4 from '../assets/Products/Mens/Pants/PantsMens4.jpg';
+import PantsMen5 from '../assets/Products/Mens/Pants/PantsMens5.jpg';
+import PantsMen6 from '../assets/Products/Mens/Pants/PantsMens6.jpg';
+import PantsMen7 from '../assets/Products/Mens/Pants/PantsMens7.jpg';
+import PantsMen8 from '../assets/Products/Mens/Pants/PantsMens8.jpg';
+import PantsMen9 from '../assets/Products/Mens/Pants/PantsMens9.jpg';
+import PantsMen10 from '../assets/Products/Mens/Pants/PantsMens10.jpg';
+
+import ColoniesMen1 from '../assets/Products/Mens/Colonies/ColoniesMens1.jpg';
+import ColoniesMen2 from '../assets/Products/Mens/Colonies/ColoniesMens2.jpg';
+import ColoniesMen3 from '../assets/Products/Mens/Colonies/ColoniesMens3.jpg';
+import ColoniesMen4 from '../assets/Products/Mens/Colonies/ColoniesMens4.jpg';
+import ColoniesMen5 from '../assets/Products/Mens/Colonies/ColoniesMens5.jpg';
+import ColoniesMen6 from '../assets/Products/Mens/Colonies/ColoniesMens6.jpg';
+import ColoniesMen7 from '../assets/Products/Mens/Colonies/ColoniesMens7.jpg';
+import ColoniesMen8 from '../assets/Products/Mens/Colonies/ColoniesMens8.jpg';
+import ColoniesMen9 from '../assets/Products/Mens/Colonies/ColoniesMens9.jpg';
+import ColoniesMen10 from '../assets/Products/Mens/Colonies/ColoniesMens10.jpg';
+
+import CoatsMen1 from '../assets/Products/Mens/Coats/CoatsMens1.jpg';
+import CoatsMen2 from '../assets/Products/Mens/Coats/CoatsMens2.jpg';
+import CoatsMen3 from '../assets/Products/Mens/Coats/CoatsMens3.jpg';
+import CoatsMen4 from '../assets/Products/Mens/Coats/CoatsMens4.jpg';
+import CoatsMen5 from '../assets/Products/Mens/Coats/CoatsMens5.jpg';
+import CoatsMen6 from '../assets/Products/Mens/Coats/CoatsMens6.jpg';
+import CoatsMen7 from '../assets/Products/Mens/Coats/CoatsMens7.jpg';
+import CoatsMen8 from '../assets/Products/Mens/Coats/CoatsMens8.jpg';
+import CoatsMen9 from '../assets/Products/Mens/Coats/CoatsMens9.jpg';
+import CoatsMen10 from '../assets/Products/Mens/Coats/CoatsMens10.jpg';
+
+import TShirtUnisex1 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex1.jpg';
+import TShirtUnisex2 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex2.jpg';
+import TShirtUnisex3 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex3.jpg';
+import TShirtUnisex4 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex4.jpg';
+import TShirtUnisex5 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex5.jpg';
+import TShirtUnisex6 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex6.jpg';
+import TShirtUnisex7 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex7.jpg';
+import TShirtUnisex8 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex8.jpg';
+import TShirtUnisex9 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex9.jpg';
+import TShirtUnisex10 from '../assets/Products/Unisex/T-Shirt/TShirtUnisex10.jpg';
+
+import ShoesUnisex1 from '../assets/Products/Unisex/Shoes/ShoesUnisex1.jpg';
+import ShoesUnisex2 from '../assets/Products/Unisex/Shoes/ShoesUnisex2.jpg';
+import ShoesUnisex3 from '../assets/Products/Unisex/Shoes/ShoesUnisex3.jpg';
+import ShoesUnisex4 from '../assets/Products/Unisex/Shoes/ShoesUnisex4.jpg';
+import ShoesUnisex5 from '../assets/Products/Unisex/Shoes/ShoesUnisex5.jpg';
+import ShoesUnisex6 from '../assets/Products/Unisex/Shoes/ShoesUnisex6.jpg';
+import ShoesUnisex7 from '../assets/Products/Unisex/Shoes/ShoesUnisex7.jpg';
+import ShoesUnisex8 from '../assets/Products/Unisex/Shoes/ShoesUnisex8.jpg';
+import ShoesUnisex9 from '../assets/Products/Unisex/Shoes/ShoesUnisex9.jpg';
+import ShoesUnisex10 from '../assets/Products/Unisex/Shoes/ShoesUnisex10.jpg';
+
+import PantsUnisex1 from '../assets/Products/Unisex/Pants/PantsUnisex1.jpg';
+import PantsUnisex2 from '../assets/Products/Unisex/Pants/PantsUnisex2.jpg';
+import PantsUnisex3 from '../assets/Products/Unisex/Pants/PantsUnisex3.jpg';
+import PantsUnisex4 from '../assets/Products/Unisex/Pants/PantsUnisex4.jpg';
+import PantsUnisex5 from '../assets/Products/Unisex/Pants/PantsUnisex5.jpg';
+import PantsUnisex6 from '../assets/Products/Unisex/Pants/PantsUnisex6.jpg';
+import PantsUnisex7 from '../assets/Products/Unisex/Pants/PantsUnisex7.jpg';
+import PantsUnisex8 from '../assets/Products/Unisex/Pants/PantsUnisex8.jpg';
+import PantsUnisex9 from '../assets/Products/Unisex/Pants/PantsUnisex9.jpg';
+import PantsUnisex10 from '../assets/Products/Unisex/Pants/PantsUnisex10.jpg';
+
+import ColoniesUnisex1 from '../assets/Products/Unisex/Colonies/ColoniesUnisex1.jpg';
+import ColoniesUnisex2 from '../assets/Products/Unisex/Colonies/ColoniesUnisex2.jpg';
+import ColoniesUnisex3 from '../assets/Products/Unisex/Colonies/ColoniesUnisex3.jpg';
+import ColoniesUnisex4 from '../assets/Products/Unisex/Colonies/ColoniesUnisex4.jpg';
+import ColoniesUnisex5 from '../assets/Products/Unisex/Colonies/ColoniesUnisex5.jpg';
+import ColoniesUnisex6 from '../assets/Products/Unisex/Colonies/ColoniesUnisex6.jpg';
+import ColoniesUnisex7 from '../assets/Products/Unisex/Colonies/ColoniesUnisex7.jpg';
+import ColoniesUnisex8 from '../assets/Products/Unisex/Colonies/ColoniesUnisex8.jpg';
+import ColoniesUnisex9 from '../assets/Products/Unisex/Colonies/ColoniesUnisex9.jpg';
+import ColoniesUnisex10 from '../assets/Products/Unisex/Colonies/ColoniesUnisex10.jpg';
+
+import CoatsUnisex1 from '../assets/Products/Unisex/Coats/CoatsUnisex1.jpg';
+import CoatsUnisex2 from '../assets/Products/Unisex/Coats/CoatsUnisex2.jpg';
+import CoatsUnisex3 from '../assets/Products/Unisex/Coats/CoatsUnisex3.jpg';
+import CoatsUnisex4 from '../assets/Products/Unisex/Coats/CoatsUnisex4.jpg';
+import CoatsUnisex5 from '../assets/Products/Unisex/Coats/CoatsUnisex5.jpg';
+import CoatsUnisex6 from '../assets/Products/Unisex/Coats/CoatsUnisex6.jpg';
+import CoatsUnisex7 from '../assets/Products/Unisex/Coats/CoatsUnisex7.jpg';
+import CoatsUnisex8 from '../assets/Products/Unisex/Coats/CoatsUnisex8.jpg';
+import CoatsUnisex9 from '../assets/Products/Unisex/Coats/CoatsUnisex9.jpg';
+import CoatsUnisex10 from '../assets/Products/Unisex/Coats/CoatsUnisex10.jpg';
+
+import TShirtWomen1 from '../assets/Products/Women/T-Shirt/TShirtWomen1.jpg';
+import TShirtWomen2 from '../assets/Products/Women/T-Shirt/TShirtWomen2.jpg';
+import TShirtWomen3 from '../assets/Products/Women/T-Shirt/TShirtWomen3.jpg';
+import TShirtWomen4 from '../assets/Products/Women/T-Shirt/TShirtWomen4.jpg';
+import TShirtWomen5 from '../assets/Products/Women/T-Shirt/TShirtWomen5.jpg';
+import TShirtWomen6 from '../assets/Products/Women/T-Shirt/TShirtWomen6.jpg';
+import TShirtWomen7 from '../assets/Products/Women/T-Shirt/TShirtWomen7.jpg';
+import TShirtWomen8 from '../assets/Products/Women/T-Shirt/TShirtWomen8.jpg';
+import TShirtWomen9 from '../assets/Products/Women/T-Shirt/TShirtWomen9.jpg';
+import TShirtWomen10 from '../assets/Products/Women/T-Shirt/TShirtWomen10.jpg';
+
+import ShoesWomen1 from '../assets/Products/Women/Shoes/ShoesWomen1.jpg';
+import ShoesWomen2 from '../assets/Products/Women/Shoes/ShoesWomen2.jpg';
+import ShoesWomen3 from '../assets/Products/Women/Shoes/ShoesWomen3.jpg';
+import ShoesWomen4 from '../assets/Products/Women/Shoes/ShoesWomen4.jpg';
+import ShoesWomen5 from '../assets/Products/Women/Shoes/ShoesWomen5.jpg';
+import ShoesWomen6 from '../assets/Products/Women/Shoes/ShoesWomen6.jpg';
+import ShoesWomen7 from '../assets/Products/Women/Shoes/ShoesWomen7.jpg';
+import ShoesWomen8 from '../assets/Products/Women/Shoes/ShoesWomen8.jpg';
+import ShoesWomen9 from '../assets/Products/Women/Shoes/ShoesWomen9.jpg';
+import ShoesWomen10 from '../assets/Products/Women/Shoes/ShoesWomen10.jpg';
+
+import PantsWomen1 from '../assets/Products/Women/Pants/PantsWomen1.jpg';
+import PantsWomen2 from '../assets/Products/Women/Pants/PantsWomen2.jpg';
+import PantsWomen3 from '../assets/Products/Women/Pants/PantsWomen3.jpg';
+import PantsWomen4 from '../assets/Products/Women/Pants/PantsWomen4.jpg';
+import PantsWomen5 from '../assets/Products/Women/Pants/PantsWomen5.jpg';
+import PantsWomen6 from '../assets/Products/Women/Pants/PantsWomen6.jpg';
+import PantsWomen7 from '../assets/Products/Women/Pants/PantsWomen7.jpg';
+import PantsWomen8 from '../assets/Products/Women/Pants/PantsWomen8.jpg';
+import PantsWomen9 from '../assets/Products/Women/Pants/PantsWomen9.jpg';
+import PantsWomen10 from '../assets/Products/Women/Pants/PantsWomen10.jpg';
+
+import ColoniesWomen1 from '../assets/Products/Women/Colonies/ColoniesWomen1.jpg';
+import ColoniesWomen2 from '../assets/Products/Women/Colonies/ColoniesWomen2.jpg';
+import ColoniesWomen3 from '../assets/Products/Women/Colonies/ColoniesWomen3.jpg';
+import ColoniesWomen4 from '../assets/Products/Women/Colonies/ColoniesWomen4.jpg';
+import ColoniesWomen5 from '../assets/Products/Women/Colonies/ColoniesWomen5.jpg';
+import ColoniesWomen6 from '../assets/Products/Women/Colonies/ColoniesWomen6.jpg';
+import ColoniesWomen7 from '../assets/Products/Women/Colonies/ColoniesWomen7.jpg';
+import ColoniesWomen8 from '../assets/Products/Women/Colonies/ColoniesWomen8.jpg';
+import ColoniesWomen9 from '../assets/Products/Women/Colonies/ColoniesWomen9.jpg';
+import ColoniesWomen10 from '../assets/Products/Women/Colonies/ColoniesWomen10.jpg';
+
+import CoatsWomen1 from '../assets/Products/Women/Coats/CoatsWomen1.jpg';
+import CoatsWomen2 from '../assets/Products/Women/Coats/CoatsWomen2.jpg';
+import CoatsWomen3 from '../assets/Products/Women/Coats/CoatsWomen3.jpg';
+import CoatsWomen4 from '../assets/Products/Women/Coats/CoatsWomen4.jpg';
+import CoatsWomen5 from '../assets/Products/Women/Coats/CoatsWomen5.jpg';
+import CoatsWomen6 from '../assets/Products/Women/Coats/CoatsWomen6.jpg';
+import CoatsWomen7 from '../assets/Products/Women/Coats/CoatsWomen7.jpg';
+import CoatsWomen8 from '../assets/Products/Women/Coats/CoatsWomen8.jpg';
+import CoatsWomen9 from '../assets/Products/Women/Coats/CoatsWomen9.jpg';
+import CoatsWomen10 from '../assets/Products/Women/Coats/CoatsWomen10.jpg';
 
 
 import Offer1 from '@/assets/Offer/offer1.jpg';
@@ -227,12 +246,6 @@ export interface CartItem {
 
 const getProductById = (id: number): Product | undefined => {
   return productCatalog.find(product => product.id === id);
-};
-
-export interface CartItem {
-    id: number;
-    name: string;
-    quantity: number;
 }
 
 export const productCatalog: Product[] = [
@@ -240,7 +253,7 @@ export const productCatalog: Product[] = [
     //T-Shirt
     {
       id: 1,
-      name: "classic white t-shirt kids",
+      name: "classic white t-shirt Kids",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
       image: TShirtKid1,
@@ -249,7 +262,7 @@ export const productCatalog: Product[] = [
     },
     {
       id: 2,
-      name: "classic black t-shirt for kidst",
+      name: "classic black t-shirt for Kidst",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
       image: TShirtKid2,
@@ -258,7 +271,7 @@ export const productCatalog: Product[] = [
     },
     {
       id: 3,
-      name: "green t-shirt kids",
+      name: "green t-shirt Kids",
       price: 19.99,
       description: "Comfortable cotton t-shirt for children",
       image: TShirtKid3,
@@ -358,7 +371,7 @@ export const productCatalog: Product[] = [
     },
     {
       id: 14,
-      name: "sports kids cord",
+      name: "sports Kids cord",
       price: 59.99,
       description: "Kids core blue leather shoes",
       image: ShoesKids4,
@@ -424,7 +437,7 @@ export const productCatalog: Product[] = [
       id: 21,
       name: "Kid's Jeans",
       price: 29.99,
-      description: "Durable denim jeans for active kids",
+      description: "Durable denim jeans for active Kids",
       image: PantsKids1,
       category: "Kids",
       subcategory: "Pants"
@@ -460,16 +473,16 @@ export const productCatalog: Product[] = [
       id: 25,
       name: "sleep pants",
       price: 29.99,
-      description: "blue sleep pants for kids",
+      description: "blue sleep pants for Kids",
       image: PantsKids5,
       category: "Kids",
       subcategory: "Pants"
     },
     {
       id: 26,
-      name: "kids leggings",
+      name: "Kids leggings",
       price: 39.99,
-      description: "green kids leggings",
+      description: "green Kids leggings",
       image: PantsKids6,
       category: "Kids",
       subcategory: "Pants"
@@ -478,7 +491,7 @@ export const productCatalog: Product[] = [
       id: 27,
       name: "Drill pants",
       price: 49.99,
-      description: "Brown drill pants for kids",
+      description: "Brown drill pants for Kids",
       image: PantsKids7,
       category: "Kids",
       subcategory: "Pants"
@@ -496,7 +509,7 @@ export const productCatalog: Product[] = [
       id: 29,
       name: "jean for boy",
       price: 59.99,
-      description: "blue jeans for kids",
+      description: "blue jeans for Kids",
       image: PantsKids9,
       category: "Kids",
       subcategory: "Pants"
@@ -560,7 +573,7 @@ export const productCatalog: Product[] = [
       id: 36,
       name: "chicco cologne",
       price: 69.99,
-      description: "chicco cologne for kids",
+      description: "chicco cologne for Kids",
       image: ColoniesKids6,
       category: "Kids",
       subcategory: "Colonies"
@@ -594,9 +607,9 @@ export const productCatalog: Product[] = [
     },
     {
       id: 40,
-      name: "blue fragrances for kids",
+      name: "blue fragrances for Kids",
       price: 29.99,
-      description: "blue fragrances for kids",
+      description: "blue fragrances for Kids",
       image: ColoniesKids10,
       category: "Kids",
       subcategory: "Colonies"
@@ -669,7 +682,7 @@ export const productCatalog: Product[] = [
       id: 48,
       name: "children's wool coat",
       price: 29.99,
-      description: "Dark green long wool coat for kids",
+      description: "Dark green long wool coat for Kids",
       image: CoatsKids8,
       category: "Kids",
       subcategory: "Coat"
@@ -701,7 +714,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Men's short-sleeved plain t-shirt",
       image: TShirtMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -710,7 +723,7 @@ export const productCatalog: Product[] = [
       price: 19.99,
       description: "white basic t-shirt",
       image: TShirtMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -719,7 +732,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "plain textured t-shirt",
       image: TShirtMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -728,7 +741,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Classic polo shirt",
       image: TShirtMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -737,7 +750,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "elegant men's t-shirt",
       image: TShirtMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -746,7 +759,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Short sleeve cotton t-shirt",
       image: TShirtMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -755,7 +768,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "v neck t-shirt",
       image: TShirtMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -764,7 +777,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "black polo shirt",
       image: TShirtMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -773,7 +786,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Skull grey t-shirt",
       image: TShirtMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -782,7 +795,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Classic fit cotton t-shirt for men",
       image: TShirtMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     //Pants
@@ -792,7 +805,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "black pants men",
       image: PantsMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -801,7 +814,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "duo jean man",
       image:PantsMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -810,7 +823,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "basic pants for men",
       image: PantsMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -819,7 +832,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "men's sports pants",
       image: PantsMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -828,7 +841,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "green sports pants",
       image: PantsMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -837,7 +850,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "black north face pants",
       image: PantsMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -846,7 +859,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "grey fleece lined sports pants",
       image:PantsMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -855,7 +868,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "blue wander pants",
       image: PantsMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -864,7 +877,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "box ns north face sports pants",
       image: PantsMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -873,7 +886,7 @@ export const productCatalog: Product[] = [
       price: 74.99,
       description: "means jeans",
       image: PantsMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     //Shoes
@@ -883,7 +896,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "Men's leather shoes",
       image:  ShoesMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -892,7 +905,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "sand-colored leather shoes",
       image:  ShoesMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -901,7 +914,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "white adidas sneakers",
       image:  ShoesMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -910,7 +923,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "adidas men's shoes yeezy",
       image:  ShoesMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -919,7 +932,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "brown brahma boots",
       image:  ShoesMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -928,7 +941,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "retro boots 1",
       image:  ShoesMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -937,7 +950,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "nike jordan 4 boots",
       image:  ShoesMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -946,7 +959,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "black and white jordan boots",
       image:  ShoesMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -955,7 +968,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "Jordan sneakers",
       image:  ShoesMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -964,7 +977,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "nike jordan 1 mid retro milan shoes",
       image:  ShoesMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     //Colonies
@@ -974,7 +987,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "blue intense perfume",
       image: ColoniesMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -983,7 +996,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Guio water cologne",
       image: ColoniesMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -992,7 +1005,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Chanel Blue Perfume",
       image: ColoniesMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1001,7 +1014,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Wild perfume",
       image: ColoniesMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1010,7 +1023,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Parma water perfume",
       image: ColoniesMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1019,7 +1032,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Fine and exclusive srn perfume",
       image: ColoniesMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1028,7 +1041,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "perfume Stronger with you intensely",
       image: ColoniesMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1037,7 +1050,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "vintage heroes perfume",
       image: ColoniesMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1046,7 +1059,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "perfume nature mood green",
       image: ColoniesMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1055,7 +1068,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "signature perfume L'bel",
       image: ColoniesMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     //Coats
@@ -1065,7 +1078,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "gray coat",
       image:  CoatsMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1074,7 +1087,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "long sand coat",
       image:  CoatsMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1083,7 +1096,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "green hooded coat",
       image:  CoatsMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1092,7 +1105,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "long grey coat",
       image:  CoatsMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1101,7 +1114,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "blue jacket",
       image:  CoatsMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1110,7 +1123,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "long white coat",
       image:  CoatsMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1119,7 +1132,7 @@ export const productCatalog: Product[] = [
       price: 59.99,
       description: "green rain jacket",
       image:  CoatsMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1128,7 +1141,7 @@ export const productCatalog: Product[] = [
       price: 89.99,
       description: "formal plaid coat",
       image:  CoatsMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1137,7 +1150,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "delicate cotton coats",
       image:  CoatsMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1146,7 +1159,7 @@ export const productCatalog: Product[] = [
       price: 99.99,
       description: "black coat",
       image:  CoatsMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     // Women

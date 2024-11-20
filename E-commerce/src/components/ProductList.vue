@@ -239,7 +239,7 @@ export default defineComponent({
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -247,9 +247,13 @@ export default defineComponent({
 .product-card {
   background: #ffffff;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 400px; /* Altura fija */
+  display: grid;
+  grid-template-rows: 200px 1fr; /* División exacta entre imagen y contenido */
   overflow: hidden;
   transition: transform 0.3s;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .product-card:hover {
@@ -260,38 +264,54 @@ export default defineComponent({
   width: 100%;
   height: 200px;
   object-fit: cover;
+  display: block;
 }
 
 .product-info {
   padding: 1rem;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.5rem;
+  overflow: hidden;
 }
 
 .product-info h3 {
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   color: #333333;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  max-height: 2.4em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .price {
   color: #BE8151;
   font-weight: bold;
   font-size: 1.2rem;
-  margin: 0.5rem 0;
+  margin: 0;
+  line-height: 1;
 }
 
 .description {
   color: #5d554d;
-  margin: 0.5rem 0;
-  height: 3em;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-height: 3em;
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  line-clamp: 2;
   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .product-actions {
-  margin-top: 1rem;
+  width: 100%;
+  margin-top: auto;
 }
 
 .add-to-cart-btn {
@@ -304,11 +324,14 @@ export default defineComponent({
   color: #ffffff;
   font-weight: 500;
   transition: all 0.3s ease-in-out;
+  height: 36px; /* Altura fija para el botón */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-to-cart-btn:hover {
   background-color: #B06D46;
-  transform: translateY(-2px);
 }
 
 .add-to-cart-btn.adding {
@@ -321,6 +344,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  height: 36px; /* Misma altura que el botón de agregar al carrito */
 }
 
 .quantity-btn {
@@ -334,8 +358,9 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  transition: background-color 0.3s;
   color: #ffffff;
+  padding: 0;
+  line-height: 1;
 }
 
 .quantity-btn:hover {
@@ -384,13 +409,13 @@ export default defineComponent({
 
 @media (max-width: 1024px) {
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
   .products-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .filters {

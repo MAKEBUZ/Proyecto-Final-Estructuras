@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 
 // Interfaces
 export interface Invoice {
@@ -34,21 +34,37 @@ export default {
 
         // Create a stack for invoices
         const stack: InvoiceStack = {
-            items: invoiceStack.value,
+            get items() {
+                return invoiceStack.value;
+            },
             push: (invoice: Invoice) => {
+<<<<<<< HEAD
                 // Check if the invoice has already been processed
+=======
+                // Check if the invoice already exists in any state
+>>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
                 const history = JSON.parse(localStorage.getItem('shippingHistory') || '[]');
                 const isProcessed = history.some((inv: Invoice) => inv.id === invoice.id);
+                const isInQueue = shippingQueue.value.some(inv => inv.id === invoice.id);
+                const isInStack = invoiceStack.value.some(inv => inv.id === invoice.id);
                 
-                if (!isProcessed) {
-                    invoiceStack.value.push({
+                if (!isProcessed && !isInQueue && !isInStack) {
+                    const newInvoice: Invoice = {
                         ...invoice,
                         status: 'stacked',
                         timestamp: new Date()
-                    });
+                    };
+                    invoiceStack.value = [...invoiceStack.value, newInvoice];
+                    savePendingInvoices();
                 }
             },
-            pop: () => invoiceStack.value.pop(),
+            pop: () => {
+                if (invoiceStack.value.length === 0) return undefined;
+                const invoice = invoiceStack.value[invoiceStack.value.length - 1];
+                invoiceStack.value = invoiceStack.value.slice(0, -1);
+                savePendingInvoices();
+                return invoice;
+            },
             peek: () => invoiceStack.value[invoiceStack.value.length - 1]
         };
 
@@ -56,7 +72,11 @@ export default {
         const loadExistingInvoices = () => {
             const existingInvoices = localStorage.getItem('pendingInvoices');
             if (existingInvoices) {
-                invoiceStack.value = JSON.parse(existingInvoices);
+                const parsedInvoices = JSON.parse(existingInvoices);
+                invoiceStack.value = parsedInvoices.map((invoice: Invoice) => ({
+                    ...invoice,
+                    timestamp: new Date(invoice.timestamp)
+                }));
             }
         };
 
@@ -65,6 +85,7 @@ export default {
             localStorage.setItem('pendingInvoices', JSON.stringify(invoiceStack.value));
         };
 
+<<<<<<< HEAD
         // Watch for changes in the invoice stack
         watch(invoiceStack, () => {
             savePendingInvoices();
@@ -87,10 +108,45 @@ export default {
                     } catch (error) {
                         console.error('Error processing new invoice:', error);
                     }
+=======
+        // Save sending queue
+        const saveShippingQueue = () => {
+            localStorage.setItem('shippingQueue', JSON.stringify(shippingQueue.value));
+        };
+
+        // Watch for changes in localStorage for new invoices
+        const watchLastOrder = () => {
+            const lastOrder = localStorage.getItem('lastOrder');
+            if (lastOrder) {
+                try {
+                    const orderDetails = JSON.parse(lastOrder);
+                    const newInvoice: Invoice = {
+                        id: `INV-${orderDetails.orderId}`,
+                        status: 'stacked',
+                        timestamp: new Date(),
+                        orderDetails
+                    };
+                    stack.push(newInvoice);
+                    localStorage.removeItem('lastOrder'); // Clean up after processing
+                } catch (error) {
+                    console.error('Error processing new invoice:', error);
+>>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
                 }
-            },
-            { immediate: true }
-        );
+            }
+        };
+
+        // Use onMounted to initialize and configure the watcher
+        onMounted(() => {
+            loadExistingInvoices();
+            loadShippingQueue();
+            watchLastOrder(); // Check for existing orders when mounting
+            
+            // Set an interval to check for new orders
+            const interval = setInterval(watchLastOrder, 1000);
+            
+            // Clear the interval when the component is unmounted
+            return () => clearInterval(interval);
+        });
 
         // Move invoice from stack to shipping queue
         const moveToShippingQueue = () => {
@@ -98,10 +154,12 @@ export default {
 
             const invoice = stack.pop();
             if (invoice) {
-                shippingQueue.value.push({
+                const queuedInvoice = {
                     ...invoice,
                     status: 'queued'
-                });
+                };
+                shippingQueue.value = [...shippingQueue.value, { ...queuedInvoice, status: 'queued' }];
+                saveShippingQueue();
             }
         };
 
@@ -116,14 +174,19 @@ export default {
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 invoice.status = 'shipped';
                 saveToShippingHistory(invoice);
-                shippingQueue.value.shift();
                 
+<<<<<<< HEAD
                 // Remove the processed invoice from pending Invoices
                 const pendingInvoices = JSON.parse(localStorage.getItem('pendingInvoices') || '[]');
                 const updatedPendingInvoices = pendingInvoices.filter(
                     (inv: Invoice) => inv.id !== invoice.id
                 );
                 localStorage.setItem('pendingInvoices', JSON.stringify(updatedPendingInvoices));
+=======
+                // Remove the processed invoice from the queue
+                shippingQueue.value = shippingQueue.value.slice(1);
+                saveShippingQueue();
+>>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
             } catch (error) {
                 console.error('Error processing invoice:', error);
             } finally {
@@ -145,8 +208,18 @@ export default {
             }
         };
 
+<<<<<<< HEAD
         // Load existing invoices when mounting the component
         loadExistingInvoices();
+=======
+        // Load shipping queue on startup
+        const loadShippingQueue = () => {
+            const savedQueue = localStorage.getItem('shippingQueue');
+            if (savedQueue) {
+                shippingQueue.value = JSON.parse(savedQueue);
+            }
+        };
+>>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
 
         const stats = computed(() => ({
             stackedInvoices: invoiceStack.value.length,

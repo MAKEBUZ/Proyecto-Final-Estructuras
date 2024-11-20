@@ -261,7 +261,7 @@
     color: #BE8151;
   }
   
-  /* Filtros */
+ /* Filters */
   .filters {
     display: flex;
     gap: 1rem;

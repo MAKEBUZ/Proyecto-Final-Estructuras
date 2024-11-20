@@ -1,7 +1,6 @@
 
-
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import html2pdf from 'html2pdf.js';
 import getProductById from '../data/productCatalog';
@@ -98,7 +97,89 @@ const generatePDF = async () => {
     isProcessing.value = false;
   }
 };
+
+// Cleanup function
+onUnmounted(() => {
+  // No eliminar lastOrder aquí para que BillManager pueda procesarlo
+});
 </script>
+
+
+<<<<<<< HEAD
+=======
+      
+      <!-- Detalles del cliente -->
+      <div class="customer-details">
+        <h3>Detalles del Pago</h3>
+        <p>Tarjeta terminada en: **** **** **** {{ orderDetails.paymentDetails.cardNumber }}</p>
+        <p>Titular: {{ orderDetails.paymentDetails.cardHolder }}</p>
+      </div>
+
+      <!-- Lista de productos -->
+      <div class="invoice-items">
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in enrichedItems" :key="item.id">
+              <td>
+                <div class="product-info">
+                  <img :src="item.image" :alt="item.name" class="product-thumbnail">
+                  <span>{{ item.name }}</span>
+                </div>
+              </td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.price.toFixed(2) }}</td>
+              <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Resumen de costos -->
+      <div class="invoice-summary">
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span>${{ subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-line">
+          <span>Envío</span>
+          <span>${{ shipping.toFixed(2) }}</span>
+        </div>
+        <div v-if="discount > 0" class="summary-line discount">
+          <span>Descuento</span>
+          <span>-${{ discount.toFixed(2) }}</span>
+        </div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span>${{ orderDetails.total.toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de descarga -->
+    <div class="invoice-actions">
+      <button 
+        @click="generatePDF" 
+        :disabled="isProcessing"
+        class="btn-primary"
+      >
+        {{ isProcessing ? 'Generando PDF...' : 'Descargar PDF' }}
+      </button>
+      <router-link to="/" class="btn-secondary">
+        Volver al inicio
+      </router-link>
+    </div>
+  </div>
+</template>
+>>>>>>> b06f06e0d4acf8430b2f713f8241d194db6474c3
+
 
 <template>
   <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
@@ -337,6 +418,24 @@ const generatePDF = async () => {
 
 .btn-secondary:hover {
   background-color: #fdf6f0;
+}
+
+.invoice-selector {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f4ed;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.invoice-selector select {
+  padding: 0.5rem;
+  border: 1px solid #be8151;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
 }
 
 @media (max-width: 768px) {

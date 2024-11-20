@@ -714,7 +714,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Men's short-sleeved plain t-shirt",
       image: TShirtMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -723,7 +723,7 @@ export const productCatalog: Product[] = [
       price: 19.99,
       description: "white basic t-shirt",
       image: TShirtMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -732,7 +732,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "plain textured t-shirt",
       image: TShirtMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -741,7 +741,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Classic polo shirt",
       image: TShirtMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -750,7 +750,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "elegant men's t-shirt",
       image: TShirtMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -759,7 +759,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Short sleeve cotton t-shirt",
       image: TShirtMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -768,7 +768,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "v neck t-shirt",
       image: TShirtMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -777,7 +777,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "black polo shirt",
       image: TShirtMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -786,7 +786,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Skull grey t-shirt",
       image: TShirtMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     {
@@ -795,7 +795,7 @@ export const productCatalog: Product[] = [
       price: 24.99,
       description: "Classic fit cotton t-shirt for men",
       image: TShirtMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "T-Shirt"
     },
     //Pants
@@ -805,7 +805,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "black pants men",
       image: PantsMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -814,7 +814,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "duo jean man",
       image:PantsMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -823,7 +823,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "basic pants for men",
       image: PantsMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -832,7 +832,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "men's sports pants",
       image: PantsMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -841,7 +841,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "green sports pants",
       image: PantsMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -850,7 +850,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "black north face pants",
       image: PantsMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -859,7 +859,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "grey fleece lined sports pants",
       image:PantsMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -868,7 +868,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "blue wander pants",
       image: PantsMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -877,7 +877,7 @@ export const productCatalog: Product[] = [
       price: 64.99,
       description: "box ns north face sports pants",
       image: PantsMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     {
@@ -886,7 +886,7 @@ export const productCatalog: Product[] = [
       price: 74.99,
       description: "means jeans",
       image: PantsMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Pants"
     },
     //Shoes
@@ -896,7 +896,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "Men's leather shoes",
       image:  ShoesMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -905,7 +905,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "sand-colored leather shoes",
       image:  ShoesMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -914,7 +914,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "white adidas sneakers",
       image:  ShoesMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -923,7 +923,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "adidas men's shoes yeezy",
       image:  ShoesMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -932,7 +932,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "brown brahma boots",
       image:  ShoesMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -941,7 +941,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "retro boots 1",
       image:  ShoesMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -950,7 +950,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "nike jordan 4 boots",
       image:  ShoesMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -959,7 +959,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "black and white jordan boots",
       image:  ShoesMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -968,7 +968,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "Jordan sneakers",
       image:  ShoesMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     {
@@ -977,7 +977,7 @@ export const productCatalog: Product[] = [
       price: 54.99,
       description: "nike jordan 1 mid retro milan shoes",
       image:  ShoesMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Shoes"
     },
     //Colonies
@@ -987,7 +987,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "blue intense perfume",
       image: ColoniesMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -996,7 +996,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Guio water cologne",
       image: ColoniesMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1005,7 +1005,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Chanel Blue Perfume",
       image: ColoniesMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1014,7 +1014,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Wild perfume",
       image: ColoniesMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1023,7 +1023,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Parma water perfume",
       image: ColoniesMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1032,7 +1032,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "Fine and exclusive srn perfume",
       image: ColoniesMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1041,7 +1041,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "perfume Stronger with you intensely",
       image: ColoniesMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1050,7 +1050,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "vintage heroes perfume",
       image: ColoniesMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1059,7 +1059,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "perfume nature mood green",
       image: ColoniesMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     {
@@ -1068,7 +1068,7 @@ export const productCatalog: Product[] = [
       price: 39.99,
       description: "signature perfume L'bel",
       image: ColoniesMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Colonies"
     },
     //Coats
@@ -1078,7 +1078,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "gray coat",
       image:  CoatsMen1,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1087,7 +1087,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "long sand coat",
       image:  CoatsMen2,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1096,7 +1096,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "green hooded coat",
       image:  CoatsMen3,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1105,7 +1105,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "long grey coat",
       image:  CoatsMen4,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1114,7 +1114,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "blue jacket",
       image:  CoatsMen5,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1123,7 +1123,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "long white coat",
       image:  CoatsMen6,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1132,7 +1132,7 @@ export const productCatalog: Product[] = [
       price: 59.99,
       description: "green rain jacket",
       image:  CoatsMen7,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1141,7 +1141,7 @@ export const productCatalog: Product[] = [
       price: 89.99,
       description: "formal plaid coat",
       image:  CoatsMen8,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1150,7 +1150,7 @@ export const productCatalog: Product[] = [
       price: 79.99,
       description: "delicate cotton coats",
       image:  CoatsMen9,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     {
@@ -1159,7 +1159,7 @@ export const productCatalog: Product[] = [
       price: 99.99,
       description: "black coat",
       image:  CoatsMen10,
-      category: "Mens",
+      category: "Men",
       subcategory: "Coats"
     },
     // Women

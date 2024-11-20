@@ -1,123 +1,3 @@
-<template>
-    <div class="queue-container">
-      <h2 class="title">
-        <Inbox class="icon" />
-        Cola de Mensajes
-      </h2>
-      
-     <!-- Filters and Search -->
-      <div class="filters">
-        <input 
-          type="text" 
-          class="search-input" 
-          placeholder="Buscar mensajes..."
-          v-model="searchTerm"
-        />
-        <select v-model="filterStatus" class="filter-select">
-          <option value="all">Todos los mensajes</option>
-          <option value="unread">No leídos</option>
-          <option value="read">Leídos</option>
-        </select>
-      </div>
-  
-      <div class="queue-content">
-        <div class="queue-list">
-          <!-- Empty state -->
-          <div v-if="filteredContacts.length === 0" class="empty-state">
-            <Inbox :size="48" class="empty-icon" />
-            <p>No hay mensajes pendientes</p>
-          </div>
-  
-          <!-- Contact list -->
-          <TransitionGroup name="list">
-            <div 
-              v-for="contact in filteredContacts" 
-              :key="contact.id" 
-              class="contact-item"
-              :class="{
-                'selected': selectedContact?.id === contact.id,
-                'deleting': deletingId === contact.id,
-                'unread': !contact.read
-              }"
-              @click="viewMessage(contact)"
-            >
-              <div class="notification-dot" v-if="!contact.read"></div>
-              <div class="contact-info">
-                <strong>{{ contact.name }}</strong>
-                <span>{{ contact.email }}</span>
-                <small>{{ formatDate(contact.date) }}</small>
-              </div>
-              <div class="contact-actions">
-                <button 
-                  @click.stop="markAsRead(contact)"
-                  class="action-btn"
-                  v-if="!contact.read"
-                  title="Marcar como leído"
-                >
-                  <MessageSquare :size="18" />
-                </button>
-                <button 
-                  @click.stop="deleteContact(contact.id)"
-                  class="delete-btn"
-                  :class="{ 'deleting': deletingId === contact.id }"
-                  title="Eliminar mensaje"
-                >
-                  <Trash2 :size="18" />
-                </button>
-              </div>
-            </div>
-          </TransitionGroup>
-        </div>
-  
-        
-        <Transition name="fade">
-          <div v-if="selectedContact" class="message-preview">
-            <div class="preview-header">
-              <h3>Mensaje de {{ selectedContact.name }}</h3>
-              <span class="date">{{ formatDate(selectedContact.date) }}</span>
-            </div>
-            <div class="message-content">
-              <MessageSquare class="message-icon" />
-              {{ selectedContact.message }}
-            </div>
-            <div class="preview-actions">
-              <button class="reply-btn">
-                <MessageSquare :size="18" />
-                Responder
-              </button>
-            </div>
-          </div>
-        </Transition>
-      </div>
-  
-      <!-- Pagination -->
-      <div class="pagination" v-if="totalPages > 1">
-        <button 
-          class="page-button"
-          :disabled="currentPage === 1"
-          @click="currentPage--"
-        >
-          Anterior
-        </button>
-        <button 
-          v-for="page in totalPages" 
-          :key="page"
-          class="page-button"
-          :class="{ active: currentPage === page }"
-          @click="currentPage = page"
-        >
-          {{ page }}
-        </button>
-        <button 
-          class="page-button"
-          :disabled="currentPage === totalPages"
-          @click="currentPage++"
-        >
-          Siguiente
-        </button>
-      </div>
-    </div>
-  </template>
   
   <script lang="ts">
   import { defineComponent, ref, computed, onMounted } from 'vue';
@@ -237,6 +117,126 @@
     }
   });
   </script>
+  <template>
+    <div class="queue-container">
+      <h2 class="title">
+        <Inbox class="icon" />
+        Cola de Mensajes
+      </h2>
+      
+     <!-- Filters and Search -->
+      <div class="filters">
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Buscar mensajes..."
+          v-model="searchTerm"
+        />
+        <select v-model="filterStatus" class="filter-select">
+          <option value="all">Todos los mensajes</option>
+          <option value="unread">No leídos</option>
+          <option value="read">Leídos</option>
+        </select>
+      </div>
+  
+      <div class="queue-content">
+        <div class="queue-list">
+          <!-- Empty state -->
+          <div v-if="filteredContacts.length === 0" class="empty-state">
+            <Inbox :size="48" class="empty-icon" />
+            <p>No hay mensajes pendientes</p>
+          </div>
+  
+          <!-- Contact list -->
+          <TransitionGroup name="list">
+            <div 
+              v-for="contact in filteredContacts" 
+              :key="contact.id" 
+              class="contact-item"
+              :class="{
+                'selected': selectedContact?.id === contact.id,
+                'deleting': deletingId === contact.id,
+                'unread': !contact.read
+              }"
+              @click="viewMessage(contact)"
+            >
+              <div class="notification-dot" v-if="!contact.read"></div>
+              <div class="contact-info">
+                <strong>{{ contact.name }}</strong>
+                <span>{{ contact.email }}</span>
+                <small>{{ formatDate(contact.date) }}</small>
+              </div>
+              <div class="contact-actions">
+                <button 
+                  @click.stop="markAsRead(contact)"
+                  class="action-btn"
+                  v-if="!contact.read"
+                  title="Marcar como leído"
+                >
+                  <MessageSquare :size="18" />
+                </button>
+                <button 
+                  @click.stop="deleteContact(contact.id)"
+                  class="delete-btn"
+                  :class="{ 'deleting': deletingId === contact.id }"
+                  title="Eliminar mensaje"
+                >
+                  <Trash2 :size="18" />
+                </button>
+              </div>
+            </div>
+          </TransitionGroup>
+        </div>
+  
+        
+        <Transition name="fade">
+          <div v-if="selectedContact" class="message-preview">
+            <div class="preview-header">
+              <h3>Mensaje de {{ selectedContact.name }}</h3>
+              <span class="date">{{ formatDate(selectedContact.date) }}</span>
+            </div>
+            <div class="message-content">
+              <MessageSquare class="message-icon" />
+              {{ selectedContact.message }}
+            </div>
+            <div class="preview-actions">
+              <button class="reply-btn">
+                <MessageSquare :size="18" />
+                Responder
+              </button>
+            </div>
+          </div>
+        </Transition>
+      </div>
+  
+      <!-- Pagination -->
+      <div class="pagination" v-if="totalPages > 1">
+        <button 
+          class="page-button"
+          :disabled="currentPage === 1"
+          @click="currentPage--"
+        >
+          Anterior
+        </button>
+        <button 
+          v-for="page in totalPages" 
+          :key="page"
+          class="page-button"
+          :class="{ active: currentPage === page }"
+          @click="currentPage = page"
+        >
+          {{ page }}
+        </button>
+        <button 
+          class="page-button"
+          :disabled="currentPage === totalPages"
+          @click="currentPage++"
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+  </template>
   
   <style scoped>
   .queue-container {

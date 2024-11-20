@@ -1,128 +1,3 @@
-<template>
-  <div class="display-container">
-    
-    <div class="category-filters">
-      <div class="main-category-filters">
-        <button 
-          v-for="category in mainCategories" 
-          :key="category.id"
-          @click="selectMainCategory(category.id)"
-          :class="['category-button', { active: selectedMainCategory === category.id }]"
-        >
-          {{ category.name }}
-        </button>
-        <button 
-          @click="selectMainCategory('')"
-          :class="['category-button', { active: selectedMainCategory === '' }]"
-        >
-          Todos
-        </button>
-      </div>
-
-      <!-- Subcategory filters -->
-      <div class="sub-category-filters" v-if="selectedMainCategory">
-        <button 
-          v-for="category in availableSubCategories" 
-          :key="category.id"
-          @click="selectSubCategory(category.id)"
-          :class="['sub-category-button', { active: selectedSubCategory === category.id }]"
-        >
-          {{ category.name }}
-        </button>
-        <button 
-          @click="selectSubCategory('')"
-          :class="['sub-category-button', { active: selectedSubCategory === '' }]"
-        >
-          Todas
-        </button>
-      </div>
-    </div>
-
-    <div class="stats-section">
-      <div class="stat-card">
-        <h3>Total de comentarios</h3>
-        <p>{{ totalComments }}</p>
-      </div>
-      <div class="stat-card">
-        <h3>Comentarios en {{ currentCategoryDisplay }}</h3>
-        <p>{{ currentCategoryComments }}</p>
-      </div>
-    </div>
-
-    <div class="comments-grid">
-      <div 
-        v-for="comment in filteredRootComments" 
-        :key="comment.id"
-        class="comment-card"
-        :class="[comment.mainCategory, comment.subCategory]"
-      >
-        <div class="comment-header">
-          <h4>{{ comment.username }}</h4>
-          <div class="comment-header-right">
-            <span class="main-category-badge">
-              {{ getCategoryName(comment.mainCategory, true) }}
-            </span>
-            <span class="sub-category-badge">
-              {{ getCategoryName(comment.subCategory, false) }}
-            </span>
-            <button 
-              @click="confirmDelete(comment.id, null)" 
-              class="delete-button"
-              title="Eliminar comentario"
-            >
-              <span>×</span>
-            </button>
-          </div>
-        </div>
-        <p class="comment-text">{{ comment.content }}</p>
-        <div class="comment-footer">
-          <small>{{ formatDate(comment.timestamp) }}</small>
-        </div>
-
-        <div class="replies-section" v-if="getChildComments(comment.id).length > 0">
-          <h5 class="replies-title">Respuestas:</h5>
-          <div 
-            v-for="reply in getChildComments(comment.id)" 
-            :key="reply.id"
-            class="reply-card"
-          >
-            <div class="reply-header">
-              <h6>{{ reply.username }}</h6>
-              <div class="reply-header-right">
-                <span class="main-category-badge-small">
-                  {{ getCategoryName(reply.mainCategory, true) }}
-                </span>
-                <span class="sub-category-badge-small">
-                  {{ getCategoryName(reply.subCategory, false) }}
-                </span>
-                <button 
-                  @click="confirmDelete(reply.id, comment.id)" 
-                  class="delete-button-small"
-                  title="Eliminar respuesta"
-                >
-                  <span>×</span>
-                </button>
-              </div>
-            </div>
-            <p class="reply-text">{{ reply.content }}</p>
-            <small class="reply-date">{{ formatDate(reply.timestamp) }}</small>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="showDeleteModal" class="modal-overlay">
-      <div class="modal-content">
-        <h3>Confirmar eliminación</h3>
-        <p>¿Estás seguro de que deseas eliminar este {{ isReply ? 'respuesta' : 'comentario' }}?</p>
-        <div class="modal-buttons">
-          <button @click="deleteComment" class="confirm-delete-button">Eliminar</button>
-          <button @click="cancelDelete" class="cancel-button">Cancelar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
 
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
@@ -326,6 +201,132 @@ export default defineComponent({
   }
 });
 </script>
+
+<template>
+  <div class="display-container">
+    
+    <div class="category-filters">
+      <div class="main-category-filters">
+        <button 
+          v-for="category in mainCategories" 
+          :key="category.id"
+          @click="selectMainCategory(category.id)"
+          :class="['category-button', { active: selectedMainCategory === category.id }]"
+        >
+          {{ category.name }}
+        </button>
+        <button 
+          @click="selectMainCategory('')"
+          :class="['category-button', { active: selectedMainCategory === '' }]"
+        >
+          Todos
+        </button>
+      </div>
+
+      <!-- Subcategory filters -->
+      <div class="sub-category-filters" v-if="selectedMainCategory">
+        <button 
+          v-for="category in availableSubCategories" 
+          :key="category.id"
+          @click="selectSubCategory(category.id)"
+          :class="['sub-category-button', { active: selectedSubCategory === category.id }]"
+        >
+          {{ category.name }}
+        </button>
+        <button 
+          @click="selectSubCategory('')"
+          :class="['sub-category-button', { active: selectedSubCategory === '' }]"
+        >
+          Todas
+        </button>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="stat-card">
+        <h3>Total de comentarios</h3>
+        <p>{{ totalComments }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Comentarios en {{ currentCategoryDisplay }}</h3>
+        <p>{{ currentCategoryComments }}</p>
+      </div>
+    </div>
+
+    <div class="comments-grid">
+      <div 
+        v-for="comment in filteredRootComments" 
+        :key="comment.id"
+        class="comment-card"
+        :class="[comment.mainCategory, comment.subCategory]"
+      >
+        <div class="comment-header">
+          <h4>{{ comment.username }}</h4>
+          <div class="comment-header-right">
+            <span class="main-category-badge">
+              {{ getCategoryName(comment.mainCategory, true) }}
+            </span>
+            <span class="sub-category-badge">
+              {{ getCategoryName(comment.subCategory, false) }}
+            </span>
+            <button 
+              @click="confirmDelete(comment.id, null)" 
+              class="delete-button"
+              title="Eliminar comentario"
+            >
+              <span>×</span>
+            </button>
+          </div>
+        </div>
+        <p class="comment-text">{{ comment.content }}</p>
+        <div class="comment-footer">
+          <small>{{ formatDate(comment.timestamp) }}</small>
+        </div>
+
+        <div class="replies-section" v-if="getChildComments(comment.id).length > 0">
+          <h5 class="replies-title">Respuestas:</h5>
+          <div 
+            v-for="reply in getChildComments(comment.id)" 
+            :key="reply.id"
+            class="reply-card"
+          >
+            <div class="reply-header">
+              <h6>{{ reply.username }}</h6>
+              <div class="reply-header-right">
+                <span class="main-category-badge-small">
+                  {{ getCategoryName(reply.mainCategory, true) }}
+                </span>
+                <span class="sub-category-badge-small">
+                  {{ getCategoryName(reply.subCategory, false) }}
+                </span>
+                <button 
+                  @click="confirmDelete(reply.id, comment.id)" 
+                  class="delete-button-small"
+                  title="Eliminar respuesta"
+                >
+                  <span>×</span>
+                </button>
+              </div>
+            </div>
+            <p class="reply-text">{{ reply.content }}</p>
+            <small class="reply-date">{{ formatDate(reply.timestamp) }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="showDeleteModal" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Confirmar eliminación</h3>
+        <p>¿Estás seguro de que deseas eliminar este {{ isReply ? 'respuesta' : 'comentario' }}?</p>
+        <div class="modal-buttons">
+          <button @click="deleteComment" class="confirm-delete-button">Eliminar</button>
+          <button @click="cancelDelete" class="cancel-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style lang="css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

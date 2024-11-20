@@ -1,84 +1,4 @@
-<template>
-  <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
-    <div class="invoice-content" ref="invoiceRef">
-      <!-- Invoice header -->
-      <div class="invoice-header">
-        <div class="invoice-title">
-          <h2>Factura #{{ orderDetails.orderId }}</h2>
-          <p class="date">Fecha: {{ formatDate(orderDetails.date) }}</p>
-        </div>
-      </div>
 
-      <!-- Customer details -->
-      <div class="customer-details">
-        <h3>Detalles del Pago</h3>
-        <p>Tarjeta terminada en: **** **** **** {{ orderDetails.paymentDetails.cardNumber }}</p>
-        <p>Titular: {{ orderDetails.paymentDetails.cardHolder }}</p>
-      </div>
-
-      <!-- List of products -->
-      <div class="invoice-items">
-        <table>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Precio Unitario</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in enrichedItems" :key="item.id">
-              <td>
-                <div class="product-info">
-                  <img :src="item.image" :alt="item.name" class="product-thumbnail">
-                  <span>{{ item.name }}</span>
-                </div>
-              </td>
-              <td>{{ item.quantity }}</td>
-              <td>${{ item.price.toFixed(2) }}</td>
-              <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Cost summary -->
-      <div class="invoice-summary">
-        <div class="summary-line">
-          <span>Subtotal</span>
-          <span>${{ subtotal.toFixed(2) }}</span>
-        </div>
-        <div class="summary-line">
-          <span>Envío</span>
-          <span>${{ shipping.toFixed(2) }}</span>
-        </div>
-        <div v-if="discount > 0" class="summary-line discount">
-          <span>Descuento</span>
-          <span>-${{ discount.toFixed(2) }}</span>
-        </div>
-        <div class="summary-total">
-          <span>Total</span>
-          <span>${{ orderDetails.total.toFixed(2) }}</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Download button -->
-    <div class="invoice-actions">
-      <button 
-        @click="generatePDF" 
-        :disabled="isProcessing"
-        class="btn-primary"
-      >
-        {{ isProcessing ? 'Generando PDF...' : 'Descargar PDF' }}
-      </button>
-      <router-link to="/" class="btn-secondary">
-        Volver al inicio
-      </router-link>
-    </div>
-  </div>
-</template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
@@ -179,6 +99,88 @@ const generatePDF = async () => {
   }
 };
 </script>
+
+<template>
+  <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
+    <div class="invoice-content" ref="invoiceRef">
+      <!-- Invoice header -->
+      <div class="invoice-header">
+        <div class="invoice-title">
+          <h2>Factura #{{ orderDetails.orderId }}</h2>
+          <p class="date">Fecha: {{ formatDate(orderDetails.date) }}</p>
+        </div>
+      </div>
+
+      <!-- Customer details -->
+      <div class="customer-details">
+        <h3>Detalles del Pago</h3>
+        <p>Tarjeta terminada en: **** **** **** {{ orderDetails.paymentDetails.cardNumber }}</p>
+        <p>Titular: {{ orderDetails.paymentDetails.cardHolder }}</p>
+      </div>
+
+      <!-- List of products -->
+      <div class="invoice-items">
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in enrichedItems" :key="item.id">
+              <td>
+                <div class="product-info">
+                  <img :src="item.image" :alt="item.name" class="product-thumbnail">
+                  <span>{{ item.name }}</span>
+                </div>
+              </td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.price.toFixed(2) }}</td>
+              <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cost summary -->
+      <div class="invoice-summary">
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span>${{ subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-line">
+          <span>Envío</span>
+          <span>${{ shipping.toFixed(2) }}</span>
+        </div>
+        <div v-if="discount > 0" class="summary-line discount">
+          <span>Descuento</span>
+          <span>-${{ discount.toFixed(2) }}</span>
+        </div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span>${{ orderDetails.total.toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download button -->
+    <div class="invoice-actions">
+      <button 
+        @click="generatePDF" 
+        :disabled="isProcessing"
+        class="btn-primary"
+      >
+        {{ isProcessing ? 'Generando PDF...' : 'Descargar PDF' }}
+      </button>
+      <router-link to="/" class="btn-secondary">
+        Volver al inicio
+      </router-link>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

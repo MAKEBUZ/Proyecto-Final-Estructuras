@@ -1,73 +1,3 @@
-<template>
-  <div class="about-container">
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <h1 class="title animate-fade-in">Bienvenido a nuestra tienda</h1>
-      <p class="subtitle animate-slide-up">Descubre una nueva forma de comprar online</p>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-      <div class="feature-card animate-slide-left">
-        <div class="icon-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <h2>Entrega Rápida</h2>
-        <p>Garantizamos entregas en tiempo récord para que disfrutes de tus compras lo antes posible.</p>
-      </div>
-
-      <div class="feature-card animate-slide-up">
-        <div class="icon-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-        </div>
-        <h2>Compra Segura</h2>
-        <p>Tu seguridad es nuestra prioridad. Todas las transacciones están protegidas.</p>
-      </div>
-
-      <div class="feature-card animate-slide-right">
-        <div class="icon-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-          </svg>
-        </div>
-        <h2>Soporte 24/7</h2>
-        <p>Nuestro equipo de soporte está disponible las 24 horas para ayudarte.</p>
-      </div>
-    </section>
-
-    <!-- Story Section -->
-    <section class="story-section animate-fade-in">
-      <h2>Nuestra Historia</h2>
-      <div class="story-content">
-        <div class="story-text">
-          <p>Desde nuestros inicios, nos hemos comprometido a ofrecer la mejor experiencia de compra online. Nuestra pasión por la excelencia y el servicio al cliente nos ha convertido en líderes del mercado.</p>
-          <button class="learn-more-btn" @click="scrollToFeatures">Conoce más</button>
-        </div>
-        <div class="stats-container">
-          <div class="stat-item animate-count" v-for="stat in stats" :key="stat.label">
-            <h3>{{ stat.value }}{{ stat.suffix }}</h3>
-            <p>{{ stat.label }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Values Section -->
-    <section class="values-section">
-      <h2 class="animate-fade-in">Nuestros Valores</h2>
-      <div class="values-grid">
-        <div v-for="value in values" :key="value.title" class="value-card animate-scale">
-          <h3>{{ value.title }}</h3>
-          <p>{{ value.description }}</p>
-        </div>
-      </div>
-    </section>
-  </div>
-</template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
@@ -146,6 +76,76 @@ export default defineComponent({
   }
 });
 </script>
+<template>
+  <div class="about-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1 class="title animate-fade-in">Bienvenido a nuestra tienda</h1>
+      <p class="subtitle animate-slide-up">Descubre una nueva forma de comprar online</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="feature-card animate-slide-left">
+        <div class="icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h2>Entrega Rápida</h2>
+        <p>Garantizamos entregas en tiempo récord para que disfrutes de tus compras lo antes posible.</p>
+      </div>
+
+      <div class="feature-card animate-slide-up">
+        <div class="icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h2>Compra Segura</h2>
+        <p>Tu seguridad es nuestra prioridad. Todas las transacciones están protegidas.</p>
+      </div>
+
+      <div class="feature-card animate-slide-right">
+        <div class="icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+          </svg>
+        </div>
+        <h2>Soporte 24/7</h2>
+        <p>Nuestro equipo de soporte está disponible las 24 horas para ayudarte.</p>
+      </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section animate-fade-in">
+      <h2>Nuestra Historia</h2>
+      <div class="story-content">
+        <div class="story-text">
+          <p>Desde nuestros inicios, nos hemos comprometido a ofrecer la mejor experiencia de compra online. Nuestra pasión por la excelencia y el servicio al cliente nos ha convertido en líderes del mercado.</p>
+          <button class="learn-more-btn" @click="scrollToFeatures">Conoce más</button>
+        </div>
+        <div class="stats-container">
+          <div class="stat-item animate-count" v-for="stat in stats" :key="stat.label">
+            <h3>{{ stat.value }}{{ stat.suffix }}</h3>
+            <p>{{ stat.label }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+      <h2 class="animate-fade-in">Nuestros Valores</h2>
+      <div class="values-grid">
+        <div v-for="value in values" :key="value.title" class="value-card animate-scale">
+          <h3>{{ value.title }}</h3>
+          <p>{{ value.description }}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
 
 <style lang="css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

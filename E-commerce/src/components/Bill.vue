@@ -9,6 +9,7 @@
         </div>
       </div>
 
+      
       <!-- Detalles del cliente -->
       <div class="customer-details">
         <h3>Detalles del Pago</h3>
@@ -81,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import html2pdf from 'html2pdf.js';
 import getProductById from '../data/productCatalog';
@@ -178,6 +179,11 @@ const generatePDF = async () => {
     isProcessing.value = false;
   }
 };
+
+// Cleanup function
+onUnmounted(() => {
+  // No eliminar lastOrder aquí para que BillManager pueda procesarlo
+});
 </script>
 
 <style scoped>
@@ -335,6 +341,24 @@ const generatePDF = async () => {
 
 .btn-secondary:hover {
   background-color: #fdf6f0;
+}
+
+.invoice-selector {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f4ed;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.invoice-selector select {
+  padding: 0.5rem;
+  border: 1px solid #be8151;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
 }
 
 @media (max-width: 768px) {

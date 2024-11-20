@@ -96,6 +96,7 @@ const actions = {
   initializeStore({ commit }: any) {
     commit('resetState');
   }
+  
 };
 
 const getters = {

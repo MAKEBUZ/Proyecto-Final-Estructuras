@@ -12,7 +12,7 @@ export default defineComponent({
 });
 </script>
 <template>
-    <ProductList category="Mens"/>
+    <ProductList category="Men"/>
     <APanel />
 </template>
 <style lang="css">

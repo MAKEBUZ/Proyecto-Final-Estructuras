@@ -105,7 +105,7 @@ export default defineComponent({
       date: new Date().toISOString()
     };
     
-    // Guardar la orden y la fecha
+    // Save the order and date
     localStorage.setItem('lastOrder', JSON.stringify(orderDetails));
     localStorage.setItem('lastOrderDate', new Date().toISOString());
     
@@ -141,7 +141,7 @@ export default defineComponent({
 <template>
   <div class="checkout-container">
     <div class="checkout-content">
-      <!-- Formulario de pago -->
+      <!-- Payment form -->
       <div class="payment-form">
         <h2>Detalles del pago</h2>
         
@@ -193,7 +193,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <!-- Resumen del pedido -->
+      <!-- Order Summary -->
       <div class="order-summary">
         <h2>Resumen del pedido</h2>
         

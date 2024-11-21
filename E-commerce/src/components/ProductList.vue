@@ -23,7 +23,7 @@ export default defineComponent({
     const currentPage = ref(1);
     const itemsPerPage = 6;
 
-    // Reemplazar la definición local de productos por el catálogo importado
+    // Replace the local product definition with the imported catalog
     const products = computed(() => {
       return productCatalog.filter(product => {
         const categoryMatch = product.category.toLowerCase() === props.category.toLowerCase();
@@ -37,7 +37,7 @@ export default defineComponent({
     const filteredProducts = computed(() => {
       let result = [...products.value];
       
-      // Aplicar búsqueda
+      // Apply search
       if (searchQuery.value) {
         const query = searchQuery.value.toLowerCase();
         result = result.filter(product => 
@@ -46,7 +46,7 @@ export default defineComponent({
         );
       }
 
-      // Aplicar ordenamiento
+      // Apply sorting
       result.sort((a, b) => {
         if (sortBy.value === 'price') {
           return a.price - b.price;
@@ -108,7 +108,7 @@ export default defineComponent({
       }
     };
 
-    // Reset página cuando cambian los filtros
+    // Reset page when filters change
     watch([searchQuery, sortBy], () => {
       currentPage.value = 1;
     });
@@ -147,7 +147,7 @@ export default defineComponent({
         </select>
       </div>
 
-      <!-- Grid de Productos -->
+      <!-- Product Grid -->
       <div class="products-grid">
         <div v-for="product in displayedProducts" :key="product.id" class="product-card">
           <img :src="product.image" :alt="product.name" class="product-image">
@@ -182,7 +182,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <!-- Paginación -->
+      <!-- Pagination -->
       <div class="pagination" v-if="totalPages > 1">
         <button 
           @click="currentPage--" 
@@ -249,9 +249,9 @@ export default defineComponent({
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   width: 100%;
-  height: 400px; /* Altura fija */
+  height: 400px; 
   display: grid;
-  grid-template-rows: 200px 1fr; /* División exacta entre imagen y contenido */
+  grid-template-rows: 200px 1fr; /* Exact division between image and content */
   overflow: hidden;
   transition: transform 0.3s;
 }
@@ -324,7 +324,7 @@ export default defineComponent({
   color: #ffffff;
   font-weight: 500;
   transition: all 0.3s ease-in-out;
-  height: 36px; /* Altura fija para el botón */
+  height: 36px; /* Fixed height for the button */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -344,7 +344,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  height: 36px; /* Misma altura que el botón de agregar al carrito */
+  height: 36px; /* Same height as the add to cart button */
 }
 
 .quantity-btn {

@@ -1,86 +1,3 @@
-<template>
-  <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
-    <div class="invoice-content" ref="invoiceRef">
-      <!-- Cabecera de la factura -->
-      <div class="invoice-header">
-        <div class="invoice-title">
-          <h2>Factura #{{ orderDetails.orderId }}</h2>
-          <p class="date">Fecha: {{ formatDate(orderDetails.date) }}</p>
-        </div>
-      </div>
-
-      
-      <!-- Detalles del cliente -->
-      <div class="customer-details">
-        <h3>Detalles del Pago</h3>
-        <p>Tarjeta terminada en: **** **** **** {{ orderDetails.paymentDetails.cardNumber }}</p>
-        <p>Titular: {{ orderDetails.paymentDetails.cardHolder }}</p>
-      </div>
-
-      <!-- Lista de productos -->
-      <div class="invoice-items">
-        <table>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Precio Unitario</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in enrichedItems" :key="item.id">
-              <td>
-                <div class="product-info">
-                  <img :src="item.image" :alt="item.name" class="product-thumbnail">
-                  <span>{{ item.name }}</span>
-                </div>
-              </td>
-              <td>{{ item.quantity }}</td>
-              <td>${{ item.price.toFixed(2) }}</td>
-              <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Resumen de costos -->
-      <div class="invoice-summary">
-        <div class="summary-line">
-          <span>Subtotal</span>
-          <span>${{ subtotal.toFixed(2) }}</span>
-        </div>
-        <div class="summary-line">
-          <span>Envío</span>
-          <span>${{ shipping.toFixed(2) }}</span>
-        </div>
-        <div v-if="discount > 0" class="summary-line discount">
-          <span>Descuento</span>
-          <span>-${{ discount.toFixed(2) }}</span>
-        </div>
-        <div class="summary-total">
-          <span>Total</span>
-          <span>${{ orderDetails.total.toFixed(2) }}</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Botón de descarga -->
-    <div class="invoice-actions">
-      <button 
-        @click="generatePDF" 
-        :disabled="isProcessing"
-        class="btn-primary"
-      >
-        {{ isProcessing ? 'Generando PDF...' : 'Descargar PDF' }}
-      </button>
-      <router-link to="/" class="btn-secondary">
-        Volver al inicio
-      </router-link>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -111,12 +28,12 @@ const invoiceRef = ref<HTMLElement | null>(null);
 const isProcessing = ref(false);
 const orderDetails = ref<OrderDetails | null>(null);
 
-// Verificar si existe una orden pagada y obtener sus detalles
+// Check if a paid order exists and get its details
 onMounted(() => {
   const lastOrder = localStorage.getItem('lastOrder');
   
   if (!lastOrder) {
-    // Si no hay orden, redirigir al carrito
+    // If there is no order, redirect to cart
     router.replace('/cart');
     return;
   }
@@ -129,7 +46,7 @@ onMounted(() => {
   }
 });
 
-// Enriquecer items con información del producto
+// Enrich items with product information
 const enrichedItems = computed(() => {
   if (!orderDetails.value) return [];
   
@@ -144,7 +61,7 @@ const enrichedItems = computed(() => {
   });
 });
 
-// Cálculos
+// Calculations
 const subtotal = computed(() => {
   return enrichedItems.value.reduce((total: number, item: EnrichedCartItem) => {
     return total + (item.price * item.quantity);
@@ -182,9 +99,93 @@ const generatePDF = async () => {
 
 // Cleanup function
 onUnmounted(() => {
-  // No eliminar lastOrder aquí para que BillManager pueda procesarlo
+  // Do not remove lastOrder here so that BillManager can process it
 });
 </script>
+<template>
+  <div v-if="orderDetails" class="invoice-container" :class="{ 'processing': isProcessing }">
+    <div class="invoice-content" ref="invoiceRef">
+      <!-- Invoice header -->
+      <div class="invoice-header">
+        <div class="invoice-title">
+          <h2>Factura #{{ orderDetails.orderId }}</h2>
+          <p class="date">Fecha: {{ formatDate(orderDetails.date) }}</p>
+        </div>
+      </div>
+
+      
+      <!-- Customer details -->
+      <div class="customer-details">
+        <h3>Detalles del Pago</h3>
+        <p>Tarjeta terminada en: **** **** **** {{ orderDetails.paymentDetails.cardNumber }}</p>
+        <p>Titular: {{ orderDetails.paymentDetails.cardHolder }}</p>
+      </div>
+
+      <!-- List of products -->
+      <div class="invoice-items">
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in enrichedItems" :key="item.id">
+              <td>
+                <div class="product-info">
+                  <img :src="item.image" :alt="item.name" class="product-thumbnail">
+                  <span>{{ item.name }}</span>
+                </div>
+              </td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.price.toFixed(2) }}</td>
+              <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cost summary -->
+      <div class="invoice-summary">
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span>${{ subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-line">
+          <span>Envío</span>
+          <span>${{ shipping.toFixed(2) }}</span>
+        </div>
+        <div v-if="discount > 0" class="summary-line discount">
+          <span>Descuento</span>
+          <span>-${{ discount.toFixed(2) }}</span>
+        </div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span>${{ orderDetails.total.toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download button -->
+    <div class="invoice-actions">
+      <button 
+        @click="generatePDF" 
+        :disabled="isProcessing"
+        class="btn-primary"
+      >
+        {{ isProcessing ? 'Generando PDF...' : 'Descargar PDF' }}
+      </button>
+      <router-link to="/" class="btn-secondary">
+        Volver al inicio
+      </router-link>
+    </div>
+  </div>
+</template>
+
+
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

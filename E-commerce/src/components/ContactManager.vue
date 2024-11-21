@@ -1,3 +1,121 @@
+<script lang="ts">
+import { defineComponent, ref, computed, onMounted } from 'vue';
+import { Trash2, Inbox, MessageSquare } from 'lucide-vue-next';
+
+interface ContactForm {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  date: string;
+  read: boolean;
+}
+
+export default defineComponent({
+  name: 'ContactQueue',
+  components: {
+    Trash2,
+    Inbox,
+    MessageSquare
+  },
+  
+  setup() {
+    const contacts = ref<ContactForm[]>([]);
+    const selectedContact = ref<ContactForm | null>(null);
+    const deletingId = ref<string | null>(null);
+    const searchTerm = ref('');
+    const filterStatus = ref('all');
+    const currentPage = ref(1);
+    const itemsPerPage = 5;
+
+    const loadContacts = () => {
+      contacts.value = JSON.parse(localStorage.getItem('contacts') || '[]');
+    };
+
+    const formatDate = (dateString: string) => {
+      return new Date(dateString).toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    };
+
+    const filteredContacts = computed(() => {
+      let filtered = contacts.value;
+
+      // Apply search
+      if (searchTerm.value) {
+        const search = searchTerm.value.toLowerCase();
+        filtered = filtered.filter(contact => 
+          contact.name.toLowerCase().includes(search) ||
+          contact.email.toLowerCase().includes(search) ||
+          contact.message.toLowerCase().includes(search)
+        );
+      }
+
+      // Apply state filter
+      if (filterStatus.value !== 'all') {
+        filtered = filtered.filter(contact => 
+          filterStatus.value === 'unread' ? !contact.read : contact.read
+        );
+      }
+
+      // Apply pagination
+      const start = (currentPage.value - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      return filtered.slice(start, end);
+    });
+
+    const totalPages = computed(() => 
+      Math.ceil(contacts.value.length / itemsPerPage)
+    );
+
+    const deleteContact = async (id: string) => {
+      deletingId.value = id;
+      await new Promise(resolve => setTimeout(resolve, 500));
+      contacts.value = contacts.value.filter(contact => contact.id !== id);
+      localStorage.setItem('contacts', JSON.stringify(contacts.value));
+      if (selectedContact.value?.id === id) {
+        selectedContact.value = null;
+      }
+      deletingId.value = null;
+    };
+
+    const viewMessage = (contact: ContactForm) => {
+      selectedContact.value = contact;
+      if (!contact.read) {
+        markAsRead(contact);
+      }
+    };
+
+    const markAsRead = (contact: ContactForm) => {
+      contact.read = true;
+      localStorage.setItem('contacts', JSON.stringify(contacts.value));
+    };
+
+    // Load contacts when mounting the component
+    onMounted(() => {
+      loadContacts();
+    });
+
+    return {
+      contacts,
+      deleteContact,
+      selectedContact,
+      viewMessage,
+      deletingId,
+      searchTerm,
+      filterStatus,
+      currentPage,
+      filteredContacts,
+      totalPages,
+      formatDate,
+      markAsRead
+    };
+  }
+});
+</script>
 <template>
     <div class="queue-container">
       <h2 class="title">
@@ -5,7 +123,7 @@
         Cola de Mensajes
       </h2>
       
-      <!-- Filtros y Búsqueda -->
+      <!-- Filters and Search -->
       <div class="filters">
         <input 
           type="text" 
@@ -22,13 +140,13 @@
   
       <div class="queue-content">
         <div class="queue-list">
-          <!-- Estado vacío -->
+          <!-- Empty state -->
           <div v-if="filteredContacts.length === 0" class="empty-state">
             <Inbox :size="48" class="empty-icon" />
             <p>No hay mensajes pendientes</p>
           </div>
   
-          <!-- Lista de contactos -->
+          <!-- Contact list -->
           <TransitionGroup name="list">
             <div 
               v-for="contact in filteredContacts" 
@@ -69,7 +187,7 @@
           </TransitionGroup>
         </div>
   
-        <!-- Vista previa del mensaje -->
+        <!-- Message preview -->
         <Transition name="fade">
           <div v-if="selectedContact" class="message-preview">
             <div class="preview-header">
@@ -90,7 +208,7 @@
         </Transition>
       </div>
   
-      <!-- Paginación -->
+      <!-- Pagination -->
       <div class="pagination" v-if="totalPages > 1">
         <button 
           class="page-button"
@@ -119,124 +237,7 @@
     </div>
   </template>
   
-  <script lang="ts">
-  import { defineComponent, ref, computed, onMounted } from 'vue';
-  import { Trash2, Inbox, MessageSquare } from 'lucide-vue-next';
-  
-  interface ContactForm {
-    id: string;
-    name: string;
-    email: string;
-    message: string;
-    date: string;
-    read: boolean;
-  }
-  
-  export default defineComponent({
-    name: 'ContactQueue',
-    components: {
-      Trash2,
-      Inbox,
-      MessageSquare
-    },
-    
-    setup() {
-      const contacts = ref<ContactForm[]>([]);
-      const selectedContact = ref<ContactForm | null>(null);
-      const deletingId = ref<string | null>(null);
-      const searchTerm = ref('');
-      const filterStatus = ref('all');
-      const currentPage = ref(1);
-      const itemsPerPage = 5;
-  
-      const loadContacts = () => {
-        contacts.value = JSON.parse(localStorage.getItem('contacts') || '[]');
-      };
-  
-      const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('es-ES', {
-          day: '2-digit',
-          month: 'short',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-      };
-  
-      const filteredContacts = computed(() => {
-        let filtered = contacts.value;
-  
-        // Aplicar búsqueda
-        if (searchTerm.value) {
-          const search = searchTerm.value.toLowerCase();
-          filtered = filtered.filter(contact => 
-            contact.name.toLowerCase().includes(search) ||
-            contact.email.toLowerCase().includes(search) ||
-            contact.message.toLowerCase().includes(search)
-          );
-        }
-  
-        // Aplicar filtro de estado
-        if (filterStatus.value !== 'all') {
-          filtered = filtered.filter(contact => 
-            filterStatus.value === 'unread' ? !contact.read : contact.read
-          );
-        }
-  
-        // Aplicar paginación
-        const start = (currentPage.value - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        return filtered.slice(start, end);
-      });
-  
-      const totalPages = computed(() => 
-        Math.ceil(contacts.value.length / itemsPerPage)
-      );
-  
-      const deleteContact = async (id: string) => {
-        deletingId.value = id;
-        await new Promise(resolve => setTimeout(resolve, 500));
-        contacts.value = contacts.value.filter(contact => contact.id !== id);
-        localStorage.setItem('contacts', JSON.stringify(contacts.value));
-        if (selectedContact.value?.id === id) {
-          selectedContact.value = null;
-        }
-        deletingId.value = null;
-      };
-  
-      const viewMessage = (contact: ContactForm) => {
-        selectedContact.value = contact;
-        if (!contact.read) {
-          markAsRead(contact);
-        }
-      };
-  
-      const markAsRead = (contact: ContactForm) => {
-        contact.read = true;
-        localStorage.setItem('contacts', JSON.stringify(contacts.value));
-      };
-  
-      // Cargar contactos al montar el componente
-      onMounted(() => {
-        loadContacts();
-      });
-  
-      return {
-        contacts,
-        deleteContact,
-        selectedContact,
-        viewMessage,
-        deletingId,
-        searchTerm,
-        filterStatus,
-        currentPage,
-        filteredContacts,
-        totalPages,
-        formatDate,
-        markAsRead
-      };
-    }
-  });
-  </script>
+
   
   <style scoped>
   .queue-container {
@@ -261,7 +262,7 @@
     color: #BE8151;
   }
   
-  /* Filtros */
+  /* Filters */
   .filters {
     display: flex;
     gap: 1rem;
@@ -294,7 +295,7 @@
     transition: all 0.3s ease;
   }
   
-  /* Contenido principal */
+  /* Main content */
   .queue-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -309,7 +310,7 @@
     overflow: hidden;
   }
   
-  /* Items de contacto */
+  /* Contact items */
   .contact-item {
     display: flex;
     justify-content: space-between;
@@ -385,7 +386,7 @@
     color: white;
   }
   
-  /* Botones de acción */
+  /* Action buttons */
   .contact-actions {
     display: flex;
     gap: 0.5rem;
@@ -413,7 +414,7 @@
     animation: wiggle 0.3s ease-in-out;
   }
   
-  /* Vista previa del mensaje */
+  /* Preview message */
   .message-preview {
     background: white;
     border-radius: 12px;
@@ -477,7 +478,7 @@
     transform: translateY(-2px);
   }
   
-  /* Paginación */
+  /* Pagination */
   .pagination {
     display: flex;
     justify-content: center;
@@ -510,7 +511,7 @@
     cursor: not-allowed;
   }
   
-  /* Animaciones */
+  /* Animations */
   @keyframes wiggle {
     0%, 100% { transform: rotate(0); }
     25% { transform: rotate(15deg); }
@@ -543,7 +544,7 @@
   transform: translateY(20px);
 }
 
-/* Estado vacío */
+/* Empty state */
 .empty-state {
   padding: 3rem;
   text-align: center;
@@ -559,7 +560,7 @@
   opacity: 0.5;
 }
 
-/* Estados de carga y error */
+/* Load and error states */
 .loading-state {
   display: flex;
   align-items: center;
@@ -609,7 +610,7 @@
   }
 }
 
-/* Modo oscuro */
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   .queue-container {
     background: #5d554d;
@@ -674,7 +675,7 @@
   }
 }
 
-/* Animaciones adicionales */
+
 .contact-item.deleting {
   animation: slideOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

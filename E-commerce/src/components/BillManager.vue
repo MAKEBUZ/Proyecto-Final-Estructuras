@@ -32,13 +32,13 @@ export default {
         const shippingQueue = ref<Invoice[]>([]);
         const isProcessing = ref(false);
 
-        // Crear una pila para las facturas
+        // Create a stack for invoices
         const stack: InvoiceStack = {
             get items() {
                 return invoiceStack.value;
             },
             push: (invoice: Invoice) => {
-                // Verificar si la factura ya existe en cualquier estado
+                // Check if the invoice already exists in any state
                 const history = JSON.parse(localStorage.getItem('shippingHistory') || '[]');
                 const isProcessed = history.some((inv: Invoice) => inv.id === invoice.id);
                 const isInQueue = shippingQueue.value.some(inv => inv.id === invoice.id);
@@ -64,7 +64,7 @@ export default {
             peek: () => invoiceStack.value[invoiceStack.value.length - 1]
         };
 
-        // Cargar facturas existentes al inicio
+        // Load existing invoices at startup
         const loadExistingInvoices = () => {
             const existingInvoices = localStorage.getItem('pendingInvoices');
             if (existingInvoices) {
@@ -76,17 +76,17 @@ export default {
             }
         };
 
-        // Guardar facturas pendientes
+        // Save pending invoices
         const savePendingInvoices = () => {
             localStorage.setItem('pendingInvoices', JSON.stringify(invoiceStack.value));
         };
 
-        // Guardar cola de envíos
+        // Save sending queue
         const saveShippingQueue = () => {
             localStorage.setItem('shippingQueue', JSON.stringify(shippingQueue.value));
         };
 
-        // Observar cambios en localStorage para nuevas facturas
+        // Watch for changes in localStorage for new invoices
         const watchLastOrder = () => {
             const lastOrder = localStorage.getItem('lastOrder');
             if (lastOrder) {
@@ -99,27 +99,27 @@ export default {
                         orderDetails
                     };
                     stack.push(newInvoice);
-                    localStorage.removeItem('lastOrder'); // Limpiar después de procesar
+                    localStorage.removeItem('lastOrder'); // Clean up after processing
                 } catch (error) {
                     console.error('Error processing new invoice:', error);
                 }
             }
         };
 
-        // Usar onMounted para inicializar y configurar el watcher
+        // Use onMounted to initialize and configure the watcher
         onMounted(() => {
             loadExistingInvoices();
             loadShippingQueue();
-            watchLastOrder(); // Verificar órdenes existentes al montar
+            watchLastOrder(); // Check for existing orders when mounting
             
-            // Configurar un intervalo para verificar nuevas órdenes
+            // Set an interval to check for new orders
             const interval = setInterval(watchLastOrder, 1000);
             
-            // Limpiar el intervalo cuando el componente se desmonte
+            // Clear the interval when the component is unmounted
             return () => clearInterval(interval);
         });
 
-        // Mover factura de la pila a la cola de envíos
+        // Move invoice from stack to shipping queue
         const moveToShippingQueue = () => {
             if (invoiceStack.value.length === 0) return;
 
@@ -134,7 +134,7 @@ export default {
             }
         };
 
-        // Procesar la cola de envíos
+        // Process the shipping queue
         const processShippingQueue = async () => {
             if (isProcessing.value || shippingQueue.value.length === 0) return;
 
@@ -146,7 +146,7 @@ export default {
                 invoice.status = 'shipped';
                 saveToShippingHistory(invoice);
                 
-                // Eliminar la factura procesada de la cola
+                // Remove the processed invoice from the queue
                 shippingQueue.value = shippingQueue.value.slice(1);
                 saveShippingQueue();
             } catch (error) {
@@ -156,7 +156,7 @@ export default {
             }
         };
 
-        // Guardar facturas procesadas en el historial
+        // Save processed invoices in history
         const saveToShippingHistory = (invoice: Invoice) => {
             try {
                 const history = JSON.parse(localStorage.getItem('shippingHistory') || '[]');
@@ -170,7 +170,7 @@ export default {
             }
         };
 
-        // Cargar cola de envíos al iniciar
+        // Load shipping queue on startup
         const loadShippingQueue = () => {
             const savedQueue = localStorage.getItem('shippingQueue');
             if (savedQueue) {
@@ -217,9 +217,9 @@ export default {
             </div>
         </header>
 
-        <!-- Contenido Principal -->
+        <!-- Main Content -->
         <div class="manager-content">
-            <!-- Pila de Facturas -->
+            <!-- Stack of Invoices -->
             <div class="invoice-stack">
                 <h3>Pila de Facturas</h3>
                 <div class="stack-container">
@@ -255,7 +255,7 @@ export default {
                 </button>
             </div>
 
-            <!-- Cola de Envíos -->
+            <!-- Shipping Queue -->
             <div class="shipping-queue">
                 <h3>Cola de Envíos</h3>
                 <div class="queue-container">
@@ -520,14 +520,14 @@ export default {
     }
 }
 
-/* Animaciones suaves para interacciones */
+/* Smooth animations for interactions */
 .invoice-card,
 .action-button,
 .status-badge {
     transition: all 0.3s ease;
 }
 
-/* Efecto hover para las tarjetas */
+/* Hover effect for cards */
 .invoice-card:hover {
     box-shadow: 0 4px 8px rgba(93, 85, 77, 0.2);
 }

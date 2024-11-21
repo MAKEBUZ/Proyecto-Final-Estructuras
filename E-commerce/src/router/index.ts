@@ -230,9 +230,9 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-// Guard global para rutas protegidas
+// Global guard for protected routes
 router.beforeEach((to, from, next) => {
-  // Puedes agregar lógica adicional aquí si es necesario
+  // You can add additional logic here if needed
   next();
 });
 

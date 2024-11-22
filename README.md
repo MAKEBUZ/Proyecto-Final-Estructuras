@@ -19,6 +19,7 @@ una vez dentro de la carpeta del proyecto ejecutamos el siguiente comando tambie
 npm run dev
 ```
 
-("https://www.canva.com/design/DAGWxQcVLdY/R690EVsBM_eksM3WVB0yjQ/edit?utm_content=DAGWxQcVLdY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton")Canva
+
+[Presentacion](https://www.canva.com/design/DAGWxQcVLdY/R690EVsBM_eksM3WVB0yjQ/edit?utm_content=DAGWxQcVLdY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 

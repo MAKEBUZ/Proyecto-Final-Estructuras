@@ -1,5 +1,9 @@
 # Cuaso
-EL proyecto se desarrollo en en vue.js junto con typescript.
+
+# Made BY:
+ Diego Alejandro Ocampo Madroñero
+ Yuly Tatiana Bastidas
+El proyecto se desarrollo en en vue.js junto con typescript.
 
 Especialmente utilizamos locastorage, por lo tanto la pagina no tiene un backend.
 

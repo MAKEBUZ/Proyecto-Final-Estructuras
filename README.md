@@ -1,8 +1,4 @@
 # Cuaso
-
-## Made BY:
- Diego Alejandro Ocampo Madroñero
- Yuly Tatiana Bastidas
 El proyecto se desarrollo en en vue.js junto con typescript.
 
 Especialmente utilizamos locastorage, por lo tanto la pagina no tiene un backend.
@@ -11,6 +7,11 @@ De la misma manera cabe mencionar que la pagina no esta subida en un vercel grac
 
 Cosas a tener en cuenta.
  -Tener instalado Node.js
+
+## Made BY:
+ Diego Alejandro Ocampo Madroñero
+ Yuly Tatiana Bastidas
+
 
 
 

@@ -9,8 +9,8 @@ Cosas a tener en cuenta.
  -Tener instalado Node.js
 
 ## Made BY:
- Diego Alejandro Ocampo Madroñero
- Yuly Tatiana Bastidas
+ - Diego Alejandro Ocampo Madroñero
+ - Yuly Tatiana Bastidas
 
 
 

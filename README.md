@@ -1,6 +1,6 @@
 # Cuaso
 
-# Made BY:
+## Made BY:
  Diego Alejandro Ocampo Madroñero
  Yuly Tatiana Bastidas
 El proyecto se desarrollo en en vue.js junto con typescript.
